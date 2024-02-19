@@ -119,7 +119,7 @@
                 this.$inertia.post(
                     route("admin.subjects.store"),
                     this.subject, {
-                        onError: () => console.log("An error has occurred"),
+                        onError: () => console.log("An errors has occurred"),
                         onSuccess: () =>
                             console.log("The new contact has been saved"),
                     }
