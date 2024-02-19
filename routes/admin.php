@@ -2,14 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\Olimpiada\OlimpiadaBagytController;
-use App\Http\Controllers\Admin\Olimpiada\OlimpiadaTizimController;
-use App\Http\Controllers\Admin\Olimpiada\Suraktar\OlimpiadaSurakController;
-use App\Http\Controllers\Admin\Olimpiada\Option\OlimpiadaOptionController;
-use App\Http\Controllers\Admin\Olimpiada\OlimpiadaAppealsController;
-use App\Http\Controllers\Admin\Olimpiada\OblysController;
-use App\Http\Controllers\Admin\Olimpiada\AudanController;
-use App\Http\Controllers\Admin\Olimpiada\MektepController;
+use App\Http\Controllers\Admin\FilialController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\TrainTypeController;
+use App\Http\Controllers\Admin\CourseTypeController;
+use App\Http\Controllers\Admin\EduOrderController;
 use Inertia\Inertia;
 
 /*
@@ -28,22 +26,18 @@ Route::get('/', function () {
 })->name('index');
 
 Route::resource('roles', RoleController::class)->except(['show'])->names('roles');
-Route::resource('olimpiada-bagyty', OlimpiadaBagytController::class)->except(['show'])->names('olimpiadaBagyty');
-Route::resource('olimpiada-bagyty/{bagyt}/options', OlimpiadaOptionController::class)->except(['show'])->names('olimpiadaOption');
-Route::resource('olimpiada-bagyty/{bagyt}/option/{option}/suraktar', OlimpiadaSurakController::class)->except(['show'])->names('olimpiadaSuraktar');
-Route::resource('olimpiada-tizim', OlimpiadaTizimController::class)->except(['show'])->names('olimpiadaTizim');
+Route::resource('filials', FilialController::class)->except(['show'])->names('filials');
+Route::resource('users', UserController::class)->except(['show'])->names('users');
+Route::resource('users/{id}/edu_orders', EduOrderController::class)->except(['show'])->names('eduOrders');
+Route::resource('subjects', SubjectController::class)->except(['show'])->names('subjects');
+Route::resource('train-types', TrainTypeController::class)->except(['show'])->names('trainTypes');
+Route::resource('course-types', CourseTypeController::class)->except(['show'])->names('courseTypes');
 
-Route::resource('oblys', OblysController::class)->except(['show'])->names('oblys');
-Route::resource('oblys/{oblysId}/audan', AudanController::class)->except(['show'])->names('audan');
-Route::resource('oblys/{oblysId}/audan/{audanId}/mektep', MektepController::class)->except(['show'])->names('mektep');
 
-Route::get('olimpiada-tizim/{id}/getCertificate', [OlimpiadaTizimController::class, 'getCertificate'])->name('olimpiadaTizim.getCertificate');
-Route::get('olimpiada-tizim/{id}/getAlgys', [OlimpiadaTizimController::class, 'getAlgys'])->name('olimpiadaTizim.getAlgys');
-Route::get('olimpiada-tizim/{id}/zh_algys', [OlimpiadaTizimController::class, 'zh_algys'])->name('olimpiadaTizim.zh_algys');
-Route::get('olimpiada-tizim/{id}/saveCategory', [OlimpiadaTizimController::class, 'saveCategory'])->name('olimpiadaTizim.saveCategory');
-Route::get('olimpiada-tizim/{id}/saveBagyt', [OlimpiadaTizimController::class, 'saveBagyt'])->name('olimpiadaTizim.saveBagyt');
-Route::get('olimpiada-tizim/{id}/saveClass', [OlimpiadaTizimController::class, 'saveClass'])->name('olimpiadaTizim.saveClass');
-Route::resource('olimpiada-appeals', OlimpiadaAppealsController::class)->except(['show','create','store'])->names('olimpiadaAppeals');
 
+
+
+Route::get('/users/is_deleted', [UserController::class, 'is_deleted'])->name('users.deleted');
+Route::delete('/users/{user_id}/activate', [UserController::class, 'activate'])->name('users.activate');
 //Route::middleware('adminAuth')->group(function () {
 //});

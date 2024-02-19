@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\FullTestController;
 use Inertia\Inertia;
 
 /*

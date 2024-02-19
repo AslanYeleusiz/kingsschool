@@ -172,13 +172,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/admin/olimpiada-bagyty' => 
+      '/admin/filials' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaBagyty.index',
+            '_route' => 'admin.filials.index',
           ),
           1 => NULL,
           2 => 
@@ -195,7 +195,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaBagyty.store',
+            '_route' => 'admin.filials.store',
           ),
           1 => NULL,
           2 => 
@@ -208,13 +208,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/admin/olimpiada-bagyty/create' => 
+      '/admin/filials/create' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaBagyty.create',
+            '_route' => 'admin.filials.create',
           ),
           1 => NULL,
           2 => 
@@ -228,13 +228,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/admin/olimpiada-tizim' => 
+      '/admin/users' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaTizim.index',
+            '_route' => 'admin.users.index',
           ),
           1 => NULL,
           2 => 
@@ -251,7 +251,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaTizim.store',
+            '_route' => 'admin.users.store',
           ),
           1 => NULL,
           2 => 
@@ -264,13 +264,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/admin/olimpiada-tizim/create' => 
+      '/admin/users/create' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaTizim.create',
+            '_route' => 'admin.users.create',
           ),
           1 => NULL,
           2 => 
@@ -284,13 +284,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/admin/oblys' => 
+      '/admin/subjects' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.oblys.index',
+            '_route' => 'admin.subjects.index',
           ),
           1 => NULL,
           2 => 
@@ -307,7 +307,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.oblys.store',
+            '_route' => 'admin.subjects.store',
           ),
           1 => NULL,
           2 => 
@@ -320,13 +320,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/admin/oblys/create' => 
+      '/admin/subjects/create' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.oblys.create',
+            '_route' => 'admin.subjects.create',
           ),
           1 => NULL,
           2 => 
@@ -340,13 +340,105 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/admin/olimpiada-appeals' => 
+      '/admin/train-types' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaAppeals.index',
+            '_route' => 'admin.trainTypes.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.trainTypes.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin/train-types/create' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.trainTypes.create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin/course-types' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.courseTypes.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.courseTypes.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin/course-types/create' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.courseTypes.create',
           ),
           1 => NULL,
           2 => 
@@ -366,7 +458,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::vZTSH7TbSxBFHDqb',
+            '_route' => 'generated::vLDnBZf6rwdezNc7',
           ),
           1 => NULL,
           2 => 
@@ -385,7 +477,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::nQYrIKPf5BjCjk7S',
+            '_route' => 'generated::5ZC38qSyyT67uFLg',
           ),
           1 => NULL,
           2 => 
@@ -405,7 +497,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::HVcPYBwhBs5IWpQA',
+            '_route' => 'generated::tuEpfP52qwDlYv0J',
           ),
           1 => NULL,
           2 => 
@@ -424,7 +516,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::V0rVBrSxr3L1xAR9',
+            '_route' => 'generated::WRLf4UMQLj2hB0nJ',
           ),
           1 => NULL,
           2 => 
@@ -496,7 +588,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/admin/(?|roles/([^/]++)(?|/edit(*:39)|(*:46))|o(?|limpiada\\-(?|bagyty/([^/]++)(?|/(?|edit(*:97)|option(?|s(?|(*:117)|/(?|create(*:135)|([^/]++)(?|/edit(*:159)|(*:167)))|(*:177))|/([^/]++)/suraktar(?|(*:207)|/(?|create(*:225)|([^/]++)(?|/edit(*:249)|(*:257)))|(*:267))))|(*:278))|tizim/([^/]++)(?|/(?|edit(*:312)|get(?|Certificate(*:337)|Algys(*:350))|zh_algys(*:367)|save(?|C(?|ategory(*:393)|lass(*:405))|Bagyt(*:419)))|(*:429))|appeals/([^/]++)(?|/edit(*:462)|(*:470)))|blys/([^/]++)(?|/(?|edit(*:504)|audan(?|(*:520)|/(?|create(*:538)|([^/]++)(?|/(?|edit(*:565)|mektep(?|(*:582)|/(?|create(*:600)|([^/]++)(?|/edit(*:624)|(*:632)))|(*:642)))|(*:652)))|(*:662)))|(*:672)))))/?$}sDu',
+      0 => '{^(?|/admin/(?|roles/([^/]++)(?|/edit(*:39)|(*:46))|filials/([^/]++)(?|/edit(*:78)|(*:85))|users/(?|([^/]++)(?|/ed(?|it(*:121)|u_orders(?|(*:140)|/(?|create(*:158)|([^/]++)(?|/edit(*:182)|(*:190)))|(*:200)))|(*:210))|is_deleted(*:229)|([^/]++)/activate(*:254))|subjects/([^/]++)(?|/edit(*:288)|(*:296))|train\\-types/([^/]++)(?|/edit(*:334)|(*:342))|course\\-types/([^/]++)(?|/edit(*:381)|(*:389))))/?$}sDu',
     ),
     3 => 
     array (
@@ -565,17 +657,17 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      97 => 
+      78 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaBagyty.edit',
+            '_route' => 'admin.filials.edit',
           ),
           1 => 
           array (
-            0 => 'olimpiada_bagyty',
+            0 => 'filial',
           ),
           2 => 
           array (
@@ -588,88 +680,17 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      117 => 
+      85 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaOption.index',
+            '_route' => 'admin.filials.update',
           ),
           1 => 
           array (
-            0 => 'bagyt',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      135 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaOption.create',
-          ),
-          1 => 
-          array (
-            0 => 'bagyt',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      159 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaOption.edit',
-          ),
-          1 => 
-          array (
-            0 => 'bagyt',
-            1 => 'option',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      167 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaOption.update',
-          ),
-          1 => 
-          array (
-            0 => 'bagyt',
-            1 => 'option',
+            0 => 'filial',
           ),
           2 => 
           array (
@@ -685,12 +706,11 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaOption.destroy',
+            '_route' => 'admin.filials.destroy',
           ),
           1 => 
           array (
-            0 => 'bagyt',
-            1 => 'option',
+            0 => 'filial',
           ),
           2 => 
           array (
@@ -702,17 +722,154 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      177 => 
+      121 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaOption.store',
+            '_route' => 'admin.users.edit',
           ),
           1 => 
           array (
-            0 => 'bagyt',
+            0 => 'user',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      140 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.eduOrders.index',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      158 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.eduOrders.create',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      182 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.eduOrders.edit',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+            1 => 'edu_order',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      190 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.eduOrders.update',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+            1 => 'edu_order',
+          ),
+          2 => 
+          array (
+            'PUT' => 0,
+            'PATCH' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.eduOrders.destroy',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+            1 => 'edu_order',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      200 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.eduOrders.store',
+          ),
+          1 => 
+          array (
+            0 => 'id',
           ),
           2 => 
           array (
@@ -724,92 +881,17 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      207 => 
+      210 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaSuraktar.index',
+            '_route' => 'admin.users.update',
           ),
           1 => 
           array (
-            0 => 'bagyt',
-            1 => 'option',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      225 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaSuraktar.create',
-          ),
-          1 => 
-          array (
-            0 => 'bagyt',
-            1 => 'option',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      249 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaSuraktar.edit',
-          ),
-          1 => 
-          array (
-            0 => 'bagyt',
-            1 => 'option',
-            2 => 'suraktar',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      257 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaSuraktar.update',
-          ),
-          1 => 
-          array (
-            0 => 'bagyt',
-            1 => 'option',
-            2 => 'suraktar',
+            0 => 'user',
           ),
           2 => 
           array (
@@ -825,13 +907,11 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaSuraktar.destroy',
+            '_route' => 'admin.users.destroy',
           ),
           1 => 
           array (
-            0 => 'bagyt',
-            1 => 'option',
-            2 => 'suraktar',
+            0 => 'user',
           ),
           2 => 
           array (
@@ -843,22 +923,21 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      267 => 
+      229 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaSuraktar.store',
+            '_route' => 'admin.users.deleted',
           ),
           1 => 
           array (
-            0 => 'bagyt',
-            1 => 'option',
           ),
           2 => 
           array (
-            'POST' => 0,
+            'GET' => 0,
+            'HEAD' => 1,
           ),
           3 => NULL,
           4 => false,
@@ -866,17 +945,62 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      278 => 
+      254 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaBagyty.update',
+            '_route' => 'admin.users.activate',
           ),
           1 => 
           array (
-            0 => 'olimpiada_bagyty',
+            0 => 'user_id',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      288 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.subjects.edit',
+          ),
+          1 => 
+          array (
+            0 => 'subject',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      296 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.subjects.update',
+          ),
+          1 => 
+          array (
+            0 => 'subject',
           ),
           2 => 
           array (
@@ -892,11 +1016,11 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaBagyty.destroy',
+            '_route' => 'admin.subjects.destroy',
           ),
           1 => 
           array (
-            0 => 'olimpiada_bagyty',
+            0 => 'subject',
           ),
           2 => 
           array (
@@ -908,17 +1032,17 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      312 => 
+      334 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaTizim.edit',
+            '_route' => 'admin.trainTypes.edit',
           ),
           1 => 
           array (
-            0 => 'olimpiada_tizim',
+            0 => 'train_type',
           ),
           2 => 
           array (
@@ -931,155 +1055,17 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      337 => 
+      342 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaTizim.getCertificate',
+            '_route' => 'admin.trainTypes.update',
           ),
           1 => 
           array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      350 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaTizim.getAlgys',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      367 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaTizim.zh_algys',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      393 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaTizim.saveCategory',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      405 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaTizim.saveClass',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      419 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaTizim.saveBagyt',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      429 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.olimpiadaTizim.update',
-          ),
-          1 => 
-          array (
-            0 => 'olimpiada_tizim',
+            0 => 'train_type',
           ),
           2 => 
           array (
@@ -1095,11 +1081,11 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaTizim.destroy',
+            '_route' => 'admin.trainTypes.destroy',
           ),
           1 => 
           array (
-            0 => 'olimpiada_tizim',
+            0 => 'train_type',
           ),
           2 => 
           array (
@@ -1111,17 +1097,17 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      462 => 
+      381 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaAppeals.edit',
+            '_route' => 'admin.courseTypes.edit',
           ),
           1 => 
           array (
-            0 => 'olimpiada_appeal',
+            0 => 'course_type',
           ),
           2 => 
           array (
@@ -1134,17 +1120,17 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      470 => 
+      389 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaAppeals.update',
+            '_route' => 'admin.courseTypes.update',
           ),
           1 => 
           array (
-            0 => 'olimpiada_appeal',
+            0 => 'course_type',
           ),
           2 => 
           array (
@@ -1160,354 +1146,11 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.olimpiadaAppeals.destroy',
+            '_route' => 'admin.courseTypes.destroy',
           ),
           1 => 
           array (
-            0 => 'olimpiada_appeal',
-          ),
-          2 => 
-          array (
-            'DELETE' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      504 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.oblys.edit',
-          ),
-          1 => 
-          array (
-            0 => 'obly',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      520 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.audan.index',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      538 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.audan.create',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      565 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.audan.edit',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-            1 => 'audan',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      582 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.mektep.index',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-            1 => 'audanId',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      600 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.mektep.create',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-            1 => 'audanId',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      624 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.mektep.edit',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-            1 => 'audanId',
-            2 => 'mektep',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      632 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.mektep.update',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-            1 => 'audanId',
-            2 => 'mektep',
-          ),
-          2 => 
-          array (
-            'PUT' => 0,
-            'PATCH' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.mektep.destroy',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-            1 => 'audanId',
-            2 => 'mektep',
-          ),
-          2 => 
-          array (
-            'DELETE' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      642 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.mektep.store',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-            1 => 'audanId',
-          ),
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      652 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.audan.update',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-            1 => 'audan',
-          ),
-          2 => 
-          array (
-            'PUT' => 0,
-            'PATCH' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.audan.destroy',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-            1 => 'audan',
-          ),
-          2 => 
-          array (
-            'DELETE' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      662 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.audan.store',
-          ),
-          1 => 
-          array (
-            0 => 'oblysId',
-          ),
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      672 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.oblys.update',
-          ),
-          1 => 
-          array (
-            0 => 'obly',
-          ),
-          2 => 
-          array (
-            'PUT' => 0,
-            'PATCH' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.oblys.destroy',
-          ),
-          1 => 
-          array (
-            0 => 'obly',
+            0 => 'course_type',
           ),
           2 => 
           array (
@@ -1696,7 +1339,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:286:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:68:"function () {
     return \\Inertia\\Inertia::render(\'Admin/home\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000477ca8c20000000017c45fd4";}";s:4:"hash";s:44:"CGIGw5+8eW5R4Xy6BM+lS40x7tKLsrmVyMoqk3UMJgM=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000175cebbc000000002bed69e8";}";s:4:"hash";s:44:"7cDGGZbgod273sZfodr/FP1BtHacBtueWOxlk2DrtlQ=";}}',
         'as' => 'admin.index',
         'namespace' => NULL,
         'prefix' => 'admin',
@@ -1938,23 +1581,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaBagyty.index' => 
+    'admin.filials.index' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-bagyty',
+      'uri' => 'admin/filials',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaBagyty.index',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@index',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@index',
+        'as' => 'admin.filials.index',
+        'uses' => 'App\\Http\\Controllers\\Admin\\FilialController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\FilialController@index',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -1975,23 +1618,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaBagyty.create' => 
+    'admin.filials.create' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-bagyty/create',
+      'uri' => 'admin/filials/create',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaBagyty.create',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@create',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@create',
+        'as' => 'admin.filials.create',
+        'uses' => 'App\\Http\\Controllers\\Admin\\FilialController@create',
+        'controller' => 'App\\Http\\Controllers\\Admin\\FilialController@create',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2012,22 +1655,22 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaBagyty.store' => 
+    'admin.filials.store' => 
     array (
       'methods' => 
       array (
         0 => 'POST',
       ),
-      'uri' => 'admin/olimpiada-bagyty',
+      'uri' => 'admin/filials',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaBagyty.store',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@store',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@store',
+        'as' => 'admin.filials.store',
+        'uses' => 'App\\Http\\Controllers\\Admin\\FilialController@store',
+        'controller' => 'App\\Http\\Controllers\\Admin\\FilialController@store',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2048,23 +1691,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaBagyty.edit' => 
+    'admin.filials.edit' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{olimpiada_bagyty}/edit',
+      'uri' => 'admin/filials/{filial}/edit',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaBagyty.edit',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@edit',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@edit',
+        'as' => 'admin.filials.edit',
+        'uses' => 'App\\Http\\Controllers\\Admin\\FilialController@edit',
+        'controller' => 'App\\Http\\Controllers\\Admin\\FilialController@edit',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2085,23 +1728,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaBagyty.update' => 
+    'admin.filials.update' => 
     array (
       'methods' => 
       array (
         0 => 'PUT',
         1 => 'PATCH',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{olimpiada_bagyty}',
+      'uri' => 'admin/filials/{filial}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaBagyty.update',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@update',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@update',
+        'as' => 'admin.filials.update',
+        'uses' => 'App\\Http\\Controllers\\Admin\\FilialController@update',
+        'controller' => 'App\\Http\\Controllers\\Admin\\FilialController@update',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2122,22 +1765,22 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaBagyty.destroy' => 
+    'admin.filials.destroy' => 
     array (
       'methods' => 
       array (
         0 => 'DELETE',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{olimpiada_bagyty}',
+      'uri' => 'admin/filials/{filial}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaBagyty.destroy',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@destroy',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaBagytController@destroy',
+        'as' => 'admin.filials.destroy',
+        'uses' => 'App\\Http\\Controllers\\Admin\\FilialController@destroy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\FilialController@destroy',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2158,25 +1801,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaOption.index' => 
+    'admin.users.index' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/options',
+      'uri' => 'admin/users',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaOption.index',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@index',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@index',
+        'as' => 'admin.users.index',
+        'uses' => 'App\\Http\\Controllers\\Admin\\UserController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\UserController@index',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -2195,25 +1838,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaOption.create' => 
+    'admin.users.create' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/options/create',
+      'uri' => 'admin/users/create',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaOption.create',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@create',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@create',
+        'as' => 'admin.users.create',
+        'uses' => 'App\\Http\\Controllers\\Admin\\UserController@create',
+        'controller' => 'App\\Http\\Controllers\\Admin\\UserController@create',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -2232,24 +1875,24 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaOption.store' => 
+    'admin.users.store' => 
     array (
       'methods' => 
       array (
         0 => 'POST',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/options',
+      'uri' => 'admin/users',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaOption.store',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@store',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@store',
+        'as' => 'admin.users.store',
+        'uses' => 'App\\Http\\Controllers\\Admin\\UserController@store',
+        'controller' => 'App\\Http\\Controllers\\Admin\\UserController@store',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -2268,25 +1911,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaOption.edit' => 
+    'admin.users.edit' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/options/{option}/edit',
+      'uri' => 'admin/users/{user}/edit',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaOption.edit',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@edit',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@edit',
+        'as' => 'admin.users.edit',
+        'uses' => 'App\\Http\\Controllers\\Admin\\UserController@edit',
+        'controller' => 'App\\Http\\Controllers\\Admin\\UserController@edit',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -2305,25 +1948,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaOption.update' => 
+    'admin.users.update' => 
     array (
       'methods' => 
       array (
         0 => 'PUT',
         1 => 'PATCH',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/options/{option}',
+      'uri' => 'admin/users/{user}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaOption.update',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@update',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@update',
+        'as' => 'admin.users.update',
+        'uses' => 'App\\Http\\Controllers\\Admin\\UserController@update',
+        'controller' => 'App\\Http\\Controllers\\Admin\\UserController@update',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -2342,24 +1985,24 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaOption.destroy' => 
+    'admin.users.destroy' => 
     array (
       'methods' => 
       array (
         0 => 'DELETE',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/options/{option}',
+      'uri' => 'admin/users/{user}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaOption.destroy',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@destroy',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Option\\OlimpiadaOptionController@destroy',
+        'as' => 'admin.users.destroy',
+        'uses' => 'App\\Http\\Controllers\\Admin\\UserController@destroy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\UserController@destroy',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -2378,25 +2021,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaSuraktar.index' => 
+    'admin.eduOrders.index' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}/suraktar',
+      'uri' => 'admin/users/{id}/edu_orders',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaSuraktar.index',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@index',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@index',
+        'as' => 'admin.eduOrders.index',
+        'uses' => 'App\\Http\\Controllers\\Admin\\EduOrderController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\EduOrderController@index',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}',
+        'prefix' => 'admin/users/{id}',
         'where' => 
         array (
         ),
@@ -2415,25 +2058,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaSuraktar.create' => 
+    'admin.eduOrders.create' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}/suraktar/create',
+      'uri' => 'admin/users/{id}/edu_orders/create',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaSuraktar.create',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@create',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@create',
+        'as' => 'admin.eduOrders.create',
+        'uses' => 'App\\Http\\Controllers\\Admin\\EduOrderController@create',
+        'controller' => 'App\\Http\\Controllers\\Admin\\EduOrderController@create',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}',
+        'prefix' => 'admin/users/{id}',
         'where' => 
         array (
         ),
@@ -2452,24 +2095,24 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaSuraktar.store' => 
+    'admin.eduOrders.store' => 
     array (
       'methods' => 
       array (
         0 => 'POST',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}/suraktar',
+      'uri' => 'admin/users/{id}/edu_orders',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaSuraktar.store',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@store',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@store',
+        'as' => 'admin.eduOrders.store',
+        'uses' => 'App\\Http\\Controllers\\Admin\\EduOrderController@store',
+        'controller' => 'App\\Http\\Controllers\\Admin\\EduOrderController@store',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}',
+        'prefix' => 'admin/users/{id}',
         'where' => 
         array (
         ),
@@ -2488,25 +2131,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaSuraktar.edit' => 
+    'admin.eduOrders.edit' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}/suraktar/{suraktar}/edit',
+      'uri' => 'admin/users/{id}/edu_orders/{edu_order}/edit',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaSuraktar.edit',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@edit',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@edit',
+        'as' => 'admin.eduOrders.edit',
+        'uses' => 'App\\Http\\Controllers\\Admin\\EduOrderController@edit',
+        'controller' => 'App\\Http\\Controllers\\Admin\\EduOrderController@edit',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}',
+        'prefix' => 'admin/users/{id}',
         'where' => 
         array (
         ),
@@ -2525,25 +2168,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaSuraktar.update' => 
+    'admin.eduOrders.update' => 
     array (
       'methods' => 
       array (
         0 => 'PUT',
         1 => 'PATCH',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}/suraktar/{suraktar}',
+      'uri' => 'admin/users/{id}/edu_orders/{edu_order}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaSuraktar.update',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@update',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@update',
+        'as' => 'admin.eduOrders.update',
+        'uses' => 'App\\Http\\Controllers\\Admin\\EduOrderController@update',
+        'controller' => 'App\\Http\\Controllers\\Admin\\EduOrderController@update',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}',
+        'prefix' => 'admin/users/{id}',
         'where' => 
         array (
         ),
@@ -2562,24 +2205,24 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaSuraktar.destroy' => 
+    'admin.eduOrders.destroy' => 
     array (
       'methods' => 
       array (
         0 => 'DELETE',
       ),
-      'uri' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}/suraktar/{suraktar}',
+      'uri' => 'admin/users/{id}/edu_orders/{edu_order}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaSuraktar.destroy',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@destroy',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\Suraktar\\OlimpiadaSurakController@destroy',
+        'as' => 'admin.eduOrders.destroy',
+        'uses' => 'App\\Http\\Controllers\\Admin\\EduOrderController@destroy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\EduOrderController@destroy',
         'namespace' => NULL,
-        'prefix' => 'admin/olimpiada-bagyty/{bagyt}/option/{option}',
+        'prefix' => 'admin/users/{id}',
         'where' => 
         array (
         ),
@@ -2598,23 +2241,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaTizim.index' => 
+    'admin.subjects.index' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-tizim',
+      'uri' => 'admin/subjects',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaTizim.index',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@index',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@index',
+        'as' => 'admin.subjects.index',
+        'uses' => 'App\\Http\\Controllers\\Admin\\SubjectController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\SubjectController@index',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2635,23 +2278,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaTizim.create' => 
+    'admin.subjects.create' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-tizim/create',
+      'uri' => 'admin/subjects/create',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaTizim.create',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@create',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@create',
+        'as' => 'admin.subjects.create',
+        'uses' => 'App\\Http\\Controllers\\Admin\\SubjectController@create',
+        'controller' => 'App\\Http\\Controllers\\Admin\\SubjectController@create',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2672,22 +2315,22 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaTizim.store' => 
+    'admin.subjects.store' => 
     array (
       'methods' => 
       array (
         0 => 'POST',
       ),
-      'uri' => 'admin/olimpiada-tizim',
+      'uri' => 'admin/subjects',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaTizim.store',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@store',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@store',
+        'as' => 'admin.subjects.store',
+        'uses' => 'App\\Http\\Controllers\\Admin\\SubjectController@store',
+        'controller' => 'App\\Http\\Controllers\\Admin\\SubjectController@store',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2708,23 +2351,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaTizim.edit' => 
+    'admin.subjects.edit' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/olimpiada-tizim/{olimpiada_tizim}/edit',
+      'uri' => 'admin/subjects/{subject}/edit',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaTizim.edit',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@edit',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@edit',
+        'as' => 'admin.subjects.edit',
+        'uses' => 'App\\Http\\Controllers\\Admin\\SubjectController@edit',
+        'controller' => 'App\\Http\\Controllers\\Admin\\SubjectController@edit',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2745,23 +2388,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaTizim.update' => 
+    'admin.subjects.update' => 
     array (
       'methods' => 
       array (
         0 => 'PUT',
         1 => 'PATCH',
       ),
-      'uri' => 'admin/olimpiada-tizim/{olimpiada_tizim}',
+      'uri' => 'admin/subjects/{subject}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaTizim.update',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@update',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@update',
+        'as' => 'admin.subjects.update',
+        'uses' => 'App\\Http\\Controllers\\Admin\\SubjectController@update',
+        'controller' => 'App\\Http\\Controllers\\Admin\\SubjectController@update',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2782,22 +2425,22 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaTizim.destroy' => 
+    'admin.subjects.destroy' => 
     array (
       'methods' => 
       array (
         0 => 'DELETE',
       ),
-      'uri' => 'admin/olimpiada-tizim/{olimpiada_tizim}',
+      'uri' => 'admin/subjects/{subject}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.olimpiadaTizim.destroy',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@destroy',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@destroy',
+        'as' => 'admin.subjects.destroy',
+        'uses' => 'App\\Http\\Controllers\\Admin\\SubjectController@destroy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\SubjectController@destroy',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2818,23 +2461,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.oblys.index' => 
+    'admin.trainTypes.index' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/oblys',
+      'uri' => 'admin/train-types',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.oblys.index',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@index',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@index',
+        'as' => 'admin.trainTypes.index',
+        'uses' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@index',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2855,23 +2498,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.oblys.create' => 
+    'admin.trainTypes.create' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/oblys/create',
+      'uri' => 'admin/train-types/create',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.oblys.create',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@create',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@create',
+        'as' => 'admin.trainTypes.create',
+        'uses' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@create',
+        'controller' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@create',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2892,22 +2535,22 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.oblys.store' => 
+    'admin.trainTypes.store' => 
     array (
       'methods' => 
       array (
         0 => 'POST',
       ),
-      'uri' => 'admin/oblys',
+      'uri' => 'admin/train-types',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.oblys.store',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@store',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@store',
+        'as' => 'admin.trainTypes.store',
+        'uses' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@store',
+        'controller' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@store',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2928,23 +2571,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.oblys.edit' => 
+    'admin.trainTypes.edit' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/oblys/{obly}/edit',
+      'uri' => 'admin/train-types/{train_type}/edit',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.oblys.edit',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@edit',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@edit',
+        'as' => 'admin.trainTypes.edit',
+        'uses' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@edit',
+        'controller' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@edit',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -2965,23 +2608,23 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.oblys.update' => 
+    'admin.trainTypes.update' => 
     array (
       'methods' => 
       array (
         0 => 'PUT',
         1 => 'PATCH',
       ),
-      'uri' => 'admin/oblys/{obly}',
+      'uri' => 'admin/train-types/{train_type}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.oblys.update',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@update',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@update',
+        'as' => 'admin.trainTypes.update',
+        'uses' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@update',
+        'controller' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@update',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -3002,22 +2645,22 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.oblys.destroy' => 
+    'admin.trainTypes.destroy' => 
     array (
       'methods' => 
       array (
         0 => 'DELETE',
       ),
-      'uri' => 'admin/oblys/{obly}',
+      'uri' => 'admin/train-types/{train_type}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.oblys.destroy',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@destroy',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OblysController@destroy',
+        'as' => 'admin.trainTypes.destroy',
+        'uses' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@destroy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\TrainTypeController@destroy',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -3038,25 +2681,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.audan.index' => 
+    'admin.courseTypes.index' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/oblys/{oblysId}/audan',
+      'uri' => 'admin/course-types',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.audan.index',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@index',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@index',
+        'as' => 'admin.courseTypes.index',
+        'uses' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@index',
         'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -3075,25 +2718,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.audan.create' => 
+    'admin.courseTypes.create' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/oblys/{oblysId}/audan/create',
+      'uri' => 'admin/course-types/create',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.audan.create',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@create',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@create',
+        'as' => 'admin.courseTypes.create',
+        'uses' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@create',
+        'controller' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@create',
         'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -3112,24 +2755,24 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.audan.store' => 
+    'admin.courseTypes.store' => 
     array (
       'methods' => 
       array (
         0 => 'POST',
       ),
-      'uri' => 'admin/oblys/{oblysId}/audan',
+      'uri' => 'admin/course-types',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.audan.store',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@store',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@store',
+        'as' => 'admin.courseTypes.store',
+        'uses' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@store',
+        'controller' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@store',
         'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -3148,25 +2791,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.audan.edit' => 
+    'admin.courseTypes.edit' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/oblys/{oblysId}/audan/{audan}/edit',
+      'uri' => 'admin/course-types/{course_type}/edit',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.audan.edit',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@edit',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@edit',
+        'as' => 'admin.courseTypes.edit',
+        'uses' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@edit',
+        'controller' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@edit',
         'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -3185,25 +2828,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.audan.update' => 
+    'admin.courseTypes.update' => 
     array (
       'methods' => 
       array (
         0 => 'PUT',
         1 => 'PATCH',
       ),
-      'uri' => 'admin/oblys/{oblysId}/audan/{audan}',
+      'uri' => 'admin/course-types/{course_type}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.audan.update',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@update',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@update',
+        'as' => 'admin.courseTypes.update',
+        'uses' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@update',
+        'controller' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@update',
         'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -3222,24 +2865,24 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.audan.destroy' => 
+    'admin.courseTypes.destroy' => 
     array (
       'methods' => 
       array (
         0 => 'DELETE',
       ),
-      'uri' => 'admin/oblys/{oblysId}/audan/{audan}',
+      'uri' => 'admin/course-types/{course_type}',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.audan.destroy',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@destroy',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\AudanController@destroy',
+        'as' => 'admin.courseTypes.destroy',
+        'uses' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@destroy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\CourseTypeController@destroy',
         'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -3258,25 +2901,25 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.mektep.index' => 
+    'admin.users.deleted' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'admin/oblys/{oblysId}/audan/{audanId}/mektep',
+      'uri' => 'admin/users/is_deleted',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.mektep.index',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@index',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@index',
+        'uses' => 'App\\Http\\Controllers\\Admin\\UserController@is_deleted',
+        'controller' => 'App\\Http\\Controllers\\Admin\\UserController@is_deleted',
+        'as' => 'admin.users.deleted',
         'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}/audan/{audanId}',
+        'prefix' => 'admin',
         'where' => 
         array (
         ),
@@ -3295,206 +2938,22 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.mektep.create' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/oblys/{oblysId}/audan/{audanId}/mektep/create',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'as' => 'admin.mektep.create',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@create',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@create',
-        'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}/audan/{audanId}',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.mektep.store' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'admin/oblys/{oblysId}/audan/{audanId}/mektep',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'as' => 'admin.mektep.store',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@store',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@store',
-        'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}/audan/{audanId}',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.mektep.edit' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/oblys/{oblysId}/audan/{audanId}/mektep/{mektep}/edit',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'as' => 'admin.mektep.edit',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@edit',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@edit',
-        'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}/audan/{audanId}',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.mektep.update' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'PUT',
-        1 => 'PATCH',
-      ),
-      'uri' => 'admin/oblys/{oblysId}/audan/{audanId}/mektep/{mektep}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'as' => 'admin.mektep.update',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@update',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@update',
-        'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}/audan/{audanId}',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.mektep.destroy' => 
+    'admin.users.activate' => 
     array (
       'methods' => 
       array (
         0 => 'DELETE',
       ),
-      'uri' => 'admin/oblys/{oblysId}/audan/{audanId}/mektep/{mektep}',
+      'uri' => 'admin/users/{user_id}/activate',
       'action' => 
       array (
         'middleware' => 
         array (
           0 => 'web',
         ),
-        'as' => 'admin.mektep.destroy',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@destroy',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\MektepController@destroy',
-        'namespace' => NULL,
-        'prefix' => 'admin/oblys/{oblysId}/audan/{audanId}',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.olimpiadaTizim.getCertificate' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/olimpiada-tizim/{id}/getCertificate',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@getCertificate',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@getCertificate',
-        'as' => 'admin.olimpiadaTizim.getCertificate',
+        'uses' => 'App\\Http\\Controllers\\Admin\\UserController@activate',
+        'controller' => 'App\\Http\\Controllers\\Admin\\UserController@activate',
+        'as' => 'admin.users.activate',
         'namespace' => NULL,
         'prefix' => 'admin',
         'where' => 
@@ -3515,339 +2974,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.olimpiadaTizim.getAlgys' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/olimpiada-tizim/{id}/getAlgys',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@getAlgys',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@getAlgys',
-        'as' => 'admin.olimpiadaTizim.getAlgys',
-        'namespace' => NULL,
-        'prefix' => 'admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.olimpiadaTizim.zh_algys' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/olimpiada-tizim/{id}/zh_algys',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@zh_algys',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@zh_algys',
-        'as' => 'admin.olimpiadaTizim.zh_algys',
-        'namespace' => NULL,
-        'prefix' => 'admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.olimpiadaTizim.saveCategory' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/olimpiada-tizim/{id}/saveCategory',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@saveCategory',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@saveCategory',
-        'as' => 'admin.olimpiadaTizim.saveCategory',
-        'namespace' => NULL,
-        'prefix' => 'admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.olimpiadaTizim.saveBagyt' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/olimpiada-tizim/{id}/saveBagyt',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@saveBagyt',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@saveBagyt',
-        'as' => 'admin.olimpiadaTizim.saveBagyt',
-        'namespace' => NULL,
-        'prefix' => 'admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.olimpiadaTizim.saveClass' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/olimpiada-tizim/{id}/saveClass',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@saveClass',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaTizimController@saveClass',
-        'as' => 'admin.olimpiadaTizim.saveClass',
-        'namespace' => NULL,
-        'prefix' => 'admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.olimpiadaAppeals.index' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/olimpiada-appeals',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'as' => 'admin.olimpiadaAppeals.index',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaAppealsController@index',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaAppealsController@index',
-        'namespace' => NULL,
-        'prefix' => 'admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.olimpiadaAppeals.edit' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/olimpiada-appeals/{olimpiada_appeal}/edit',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'as' => 'admin.olimpiadaAppeals.edit',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaAppealsController@edit',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaAppealsController@edit',
-        'namespace' => NULL,
-        'prefix' => 'admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.olimpiadaAppeals.update' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'PUT',
-        1 => 'PATCH',
-      ),
-      'uri' => 'admin/olimpiada-appeals/{olimpiada_appeal}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'as' => 'admin.olimpiadaAppeals.update',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaAppealsController@update',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaAppealsController@update',
-        'namespace' => NULL,
-        'prefix' => 'admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.olimpiadaAppeals.destroy' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'DELETE',
-      ),
-      'uri' => 'admin/olimpiada-appeals/{olimpiada_appeal}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'as' => 'admin.olimpiadaAppeals.destroy',
-        'uses' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaAppealsController@destroy',
-        'controller' => 'App\\Http\\Controllers\\Admin\\Olimpiada\\OlimpiadaAppealsController@destroy',
-        'namespace' => NULL,
-        'prefix' => 'admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'generated::vZTSH7TbSxBFHDqb' => 
+    'generated::vLDnBZf6rwdezNc7' => 
     array (
       'methods' => 
       array (
@@ -3868,7 +2995,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::vZTSH7TbSxBFHDqb',
+        'as' => 'generated::vLDnBZf6rwdezNc7',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3884,7 +3011,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::nQYrIKPf5BjCjk7S' => 
+    'generated::5ZC38qSyyT67uFLg' => 
     array (
       'methods' => 
       array (
@@ -3906,7 +3033,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::nQYrIKPf5BjCjk7S',
+        'as' => 'generated::5ZC38qSyyT67uFLg',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3922,7 +3049,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::HVcPYBwhBs5IWpQA' => 
+    'generated::tuEpfP52qwDlYv0J' => 
     array (
       'methods' => 
       array (
@@ -3943,7 +3070,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::HVcPYBwhBs5IWpQA',
+        'as' => 'generated::tuEpfP52qwDlYv0J',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3959,7 +3086,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::V0rVBrSxr3L1xAR9' => 
+    'generated::WRLf4UMQLj2hB0nJ' => 
     array (
       'methods' => 
       array (
@@ -3980,7 +3107,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::V0rVBrSxr3L1xAR9',
+        'as' => 'generated::WRLf4UMQLj2hB0nJ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4012,7 +3139,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:284:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:66:"function () {
     return \\Inertia\\Inertia::render(\'Admin/home\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000477ca8880000000017c45fd4";}";s:4:"hash";s:44:"rzqNZelvLtNsk824lUThStfQkcsT+3bv+mQ0aYUZi7s=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000175cebec000000002bed69e8";}";s:4:"hash";s:44:"+BI0XukR8LNktzAWt0nLMGwXrzetOltctoP3LckRVv4=";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 

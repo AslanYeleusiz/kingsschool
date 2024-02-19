@@ -13,7 +13,25 @@ class User extends Authenticatable implements JWTSubject
     use HasApiTokens, HasFactory, Notifiable;
     protected $guarded=[];
     public $table='users';
+    public $timestamps = false;
+    const IMAGE_PATH = "avatars/";
 
+    public function filial(){
+        return $this->belongsTo(Filial::class, 'filial_id');
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function scopeIsNotDeleted($request){
+        return $request->where('is_deleted', 0);
+    }
+    public function scopeIsDeleted($request){
+        return $request->where('is_deleted', 1);
+    }
+    
+    
     // Rest omitted for brevity
 
     /**

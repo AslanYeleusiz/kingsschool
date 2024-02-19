@@ -1,21 +1,21 @@
 <template>
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014- <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-        All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.2.0
-        </div>
+        <strong>Авторлық құқық &copy; {{ currentDate.getFullYear() }}
+            <Link href="/">kingsschool.kz</Link>.</strong>
+            Барлық құқықтар қорғалған.
     </footer>
 </template>
 
-
 <script>
+import {Link} from '@inertiajs/inertia-vue3'
     export default {
+        components: {
+            Link
+        },
         data() {
             return {
-                currentDate: new Date
+                currentDate: new Date,
             }
-        },
-
+        }
     }
 </script>

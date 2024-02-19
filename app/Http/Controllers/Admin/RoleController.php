@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Http\Requests\Admin\RoleSaveRequest;
 
 class RoleController extends Controller
 {
@@ -17,9 +16,7 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $name = $request->name;
-        $roles = Role::when($name, fn($q)=>$q->where('name', 'like', "%$name%"))
-            ->paginate($request->input('per_page', 20))
+        $roles = Role::paginate($request->input('per_page', 20))
                     ->appends($request->except('page'));
         return Inertia::render('Admin/Role/Index', [
             'roles' => $roles
@@ -42,12 +39,13 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleSaveRequest $request)
+    public function store(Request $request)
     {
         Role::create([
-            'name' => $request->name,
+            'name' => $request->name
         ]);
         return redirect()->route('admin.roles.index')->with('success','Успешно добавлено');
+        
     }
 
     /**
@@ -72,6 +70,7 @@ class RoleController extends Controller
         return Inertia::render('Admin/Role/Edit', [
             'role' => $role
         ]);
+        
     }
 
     /**
@@ -81,12 +80,13 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleSaveRequest $request, Role $role)
+    public function update(Request $request, Role $role)
     {
         $role->update([
-            'name' => $request->name,
+            'name' => $request->name
         ]);
         return redirect()->back()->withSuccess('Успешно сохранено');
+        
     }
 
     /**

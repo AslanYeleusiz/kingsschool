@@ -28,13 +28,6 @@
                 <Link class="btn btn-primary mr-2" :href="route('admin.roles.create')">
                     <i class="fa fa-plus"></i> Қосу
                 </Link>
-
-                <Link class="btn btn-danger" :href="route('admin.roles.index')">
-                    <i class="fa fa-trash"></i> Фильтрді тазалау
-                </Link>
-                <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
             </div>
         </template>
         <div class="container-fluid">
@@ -47,21 +40,9 @@
                             >
                                 <thead>
                                     <tr role="row">
-                                        <th>№</th>
+                                        <th>ID</th>
                                         <th>Аты</th>
                                         <th>Әрекет</th>
-                                    </tr>
-                                    <tr class="filters">
-                                        <td></td>
-                                        <td>
-                                            <input
-                                                v-model="filter.name"
-                                                class="form-control"
-                                                placeholder="Аты"
-                                                @keyup.enter="search"
-                                            />
-                                        </td>
-                                        <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,9 +53,7 @@
                                     >
                                         <td>
                                             {{
-                                                roles.from
-                                                    ? roles.from + index
-                                                    : index + 1
+                                                role.id
                                             }}
                                         </td>
                                         <td>{{ role.name }}</td>

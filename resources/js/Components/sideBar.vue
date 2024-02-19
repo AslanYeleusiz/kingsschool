@@ -4,7 +4,7 @@
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
             <img src="../../../public/adminlte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Yassawi</span>
+            <span class="brand-text font-weight-light">King`s School</span>
         </a>
 
         <!-- Sidebar -->
@@ -103,48 +103,37 @@
                         menu_active: ["admin.roles"],
                     },
                     {
-                        name: "Олимпиада",
-                        font: "fas fa-star",
-                        menu_active: [
-                            "admin.olimpiadaBagyty",
-                            "admin.olimpiadaTizim",
-                            "admin.olimpiadaSuraktar",
-                            "admin.olimpiadaOption",
-                            "admin.olimpiadaAppeals",
-                            "admin.oblys",
-                        ],
-                        route_name: "",
-                        childs_items: [{
-                                name: "Бағыт",
-                                font: "fa-list",
-                                route_name: "admin.olimpiadaBagyty.index",
-                                menu_active: [
-                                    "admin.olimpiadaBagyty",
-                                    "admin.olimpiadaSuraktar",
-                                    "admin.olimpiadaOption",
-                                ],
-                            },
-                            {
-                                name: "Қатысушылар",
-                                font: "fa-users",
-                                route_name: "admin.olimpiadaTizim.index",
-                                menu_active: ["admin.olimpiadaTizim"],
-                            },
-                            {
-                                name: "Аппеляция",
-                                font: "fa-comment-medical",
-                                route_name: "admin.olimpiadaAppeals.index",
-                                menu_active: ["admin.olimpiadaAppeals"],
-                            },
-                            {
-                                name: "Облыстар",
-                                font: "fa-comment-medical",
-                                route_name: "admin.oblys.index",
-                                menu_active: ["admin.oblys"],
-                            },
-                            
-                        ],
+                        name: "Филиал",
+                        font: "fa-cogs",
+                        route_name: "admin.filials.index",
+                        menu_active: ["admin.filials"],
                     },
+                    {
+                        name: "Қолданушылар",
+                        font: "fa-cogs",
+                        route_name: "admin.users.index",
+                        menu_active: ["admin.users","admin.eduOrders"],
+                    },
+                    {
+                        name: "Пәндер",
+                        font: "fa-cogs",
+                        route_name: "admin.subjects.index",
+                        menu_active: ["admin.subjects"],
+                    },
+                    {
+                        name: "Типы обучения",
+                        font: "fa-cogs",
+                        route_name: "admin.trainTypes.index",
+                        menu_active: ["admin.trainTypes"],
+                    },
+                    {
+                        name: "Типы Курсов",
+                        font: "fa-cogs",
+                        route_name: "admin.courseTypes.index",
+                        menu_active: ["admin.courseTypes"],
+                    },
+                    
+                    
                 ],
             }
         },
