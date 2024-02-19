@@ -7,96 +7,42 @@
     "file": "assets/user2-160x160.680f6c82.jpg",
     "src": "public/adminlte/dist/img/user2-160x160.jpg"
   },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/warn_icon.svg": {
-    "file": "assets/warn_icon.30c1a079.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/warn_icon.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/close_icon.svg": {
-    "file": "assets/close_icon.6c293038.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/close_icon.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/fulls_icon.svg": {
-    "file": "assets/fulls_icon.cad691e3.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/fulls_icon.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/close_icon_h.svg": {
-    "file": "assets/close_icon_h.5594af63.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/close_icon_h.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/fulls_icon_h.svg": {
-    "file": "assets/fulls_icon_h.a13b9c25.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/fulls_icon_h.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/min_icon.svg": {
-    "file": "assets/min_icon.770d388a.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/min_icon.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/min_icon_h.svg": {
-    "file": "assets/min_icon_h.7ea449b0.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/min_icon_h.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/mins_icon.svg": {
-    "file": "assets/mins_icon.c249159a.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/mins_icon.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/mins_icon_h.svg": {
-    "file": "assets/mins_icon_h.73b934d5.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/mins_icon_h.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/max_icon.svg": {
-    "file": "assets/max_icon.50fa1d69.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/general/max_icon.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/max_icon_h.svg": {
-    "file": "assets/max_icon_h.eecdaee0.svg",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/styles/icons/hover/max_icon_h.svg"
-  },
-  "node_modules/@wiris/mathtype-html-integration-devkit/telemeter-wasm/telemeter_wasm_bg.wasm": {
-    "file": "assets/telemeter_wasm_bg.fee682c1.wasm",
-    "src": "node_modules/@wiris/mathtype-html-integration-devkit/telemeter-wasm/telemeter_wasm_bg.wasm"
-  },
   "resources/sass/app.scss": {
     "file": "assets/app.7c3c19f8.js",
     "src": "resources/sass/app.scss",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app.35591d43.js",
+    "file": "assets/app.582c0194.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
       "resources/js/Pages/home.vue",
       "resources/js/Pages/Admin/home.vue",
-      "resources/js/Pages/Admin/OlimpBagyty/Create.vue",
-      "resources/js/Pages/Admin/OlimpBagyty/Edit.vue",
-      "resources/js/Pages/Admin/OlimpBagyty/Index.vue",
-      "resources/js/Pages/Admin/OlimpiadaAppeals/Edit.vue",
-      "resources/js/Pages/Admin/OlimpiadaAppeals/Index.vue",
-      "resources/js/Pages/Admin/OlimpiadaAudan/Create.vue",
-      "resources/js/Pages/Admin/OlimpiadaAudan/Edit.vue",
-      "resources/js/Pages/Admin/OlimpiadaAudan/Index.vue",
-      "resources/js/Pages/Admin/OlimpiadaMektep/Create.vue",
-      "resources/js/Pages/Admin/OlimpiadaMektep/Edit.vue",
-      "resources/js/Pages/Admin/OlimpiadaMektep/Index.vue",
-      "resources/js/Pages/Admin/OlimpiadaOblys/Create.vue",
-      "resources/js/Pages/Admin/OlimpiadaOblys/Edit.vue",
-      "resources/js/Pages/Admin/OlimpiadaOblys/Index.vue",
-      "resources/js/Pages/Admin/OlimpiadaTizim/Create.vue",
-      "resources/js/Pages/Admin/OlimpiadaTizim/Edit.vue",
-      "resources/js/Pages/Admin/OlimpiadaTizim/Index.vue",
+      "resources/js/Pages/Admin/CourseType/Create.vue",
+      "resources/js/Pages/Admin/CourseType/Edit.vue",
+      "resources/js/Pages/Admin/CourseType/Index.vue",
+      "resources/js/Pages/Admin/Filial/Create.vue",
+      "resources/js/Pages/Admin/Filial/Edit.vue",
+      "resources/js/Pages/Admin/Filial/Index.vue",
       "resources/js/Pages/Admin/Role/Create.vue",
       "resources/js/Pages/Admin/Role/Edit.vue",
       "resources/js/Pages/Admin/Role/Index.vue",
-      "resources/js/Pages/Admin/OlimpBagyty/Options/Create.vue",
-      "resources/js/Pages/Admin/OlimpBagyty/Options/Edit.vue",
-      "resources/js/Pages/Admin/OlimpBagyty/Options/Index.vue",
-      "resources/js/Pages/Admin/OlimpBagyty/Suraktar/Create.vue",
-      "resources/js/Pages/Admin/OlimpBagyty/Suraktar/Edit.vue",
-      "resources/js/Pages/Admin/OlimpBagyty/Suraktar/Index.vue"
+      "resources/js/Pages/Admin/Subject/Create.vue",
+      "resources/js/Pages/Admin/Subject/Edit.vue",
+      "resources/js/Pages/Admin/Subject/Index.vue",
+      "resources/js/Pages/Admin/TrainType/Create.vue",
+      "resources/js/Pages/Admin/TrainType/Edit.vue",
+      "resources/js/Pages/Admin/TrainType/Index.vue",
+      "resources/js/Pages/Admin/Users/Create.vue",
+      "resources/js/Pages/Admin/Users/Deleted.vue",
+      "resources/js/Pages/Admin/Users/Edit.vue",
+      "resources/js/Pages/Admin/Users/Index.vue",
+      "resources/js/Pages/Admin/Users/EduOrders/Index.vue"
     ]
   },
   "resources/js/Pages/home.vue": {
-    "file": "assets/home.fac1f675.js",
+    "file": "assets/home.683b90f5.js",
     "src": "resources/js/Pages/home.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -108,20 +54,20 @@
     "file": "assets/_plugin-vue_export-helper.cdc0426e.js"
   },
   "resources/js/Pages/Admin/home.vue": {
-    "file": "assets/home.da6aa93e.js",
+    "file": "assets/home.20768501.js",
     "src": "resources/js/Pages/Admin/home.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "__plugin-vue_export-helper.cdc0426e.js",
       "resources/js/app.js"
     ]
   },
-  "_AdminLayout.aeeba96b.js": {
-    "file": "assets/AdminLayout.aeeba96b.js",
+  "_AdminLayout.7f820933.js": {
+    "file": "assets/AdminLayout.7f820933.js",
     "imports": [
-      "__plugin-vue_export-helper.cdc0426e.js",
-      "resources/js/app.js"
+      "resources/js/app.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
     ],
     "css": [
       "assets/AdminLayout.e4829579.css"
@@ -131,30 +77,27 @@
       "assets/user2-160x160.680f6c82.jpg"
     ]
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Create.vue": {
-    "file": "assets/Create.eba18a18.js",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Create.vue",
+  "resources/js/Pages/Admin/CourseType/Create.vue": {
+    "file": "assets/Create.39ef22a5.js",
+    "src": "resources/js/Pages/Admin/CourseType/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
-    ],
-    "css": [
-      "assets/Create.3b8eab95.css"
     ]
   },
-  "_Pagination.884e38bb.js": {
-    "file": "assets/Pagination.884e38bb.js",
+  "_Pagination.c50e6533.js": {
+    "file": "assets/Pagination.c50e6533.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "_ValidationError.dc3d0002.js": {
-    "file": "assets/ValidationError.dc3d0002.js",
+  "_ValidationError.8a56aa3c.js": {
+    "file": "assets/ValidationError.8a56aa3c.js",
     "imports": [
       "__plugin-vue_export-helper.cdc0426e.js",
       "resources/js/app.js"
@@ -163,317 +106,235 @@
       "assets/ValidationError.d2b8f0ed.css"
     ]
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Edit.vue": {
-    "file": "assets/Edit.b91efebb.js",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Edit.vue",
+  "resources/js/Pages/Admin/CourseType/Edit.vue": {
+    "file": "assets/Edit.449a2b63.js",
+    "src": "resources/js/Pages/Admin/CourseType/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Index.vue": {
-    "file": "assets/Index.21b4eece.js",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Index.vue",
+  "resources/js/Pages/Admin/CourseType/Index.vue": {
+    "file": "assets/Index.4b747b54.js",
+    "src": "resources/js/Pages/Admin/CourseType/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
+      "_Pagination.c50e6533.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "resources/js/Pages/Admin/OlimpiadaAppeals/Edit.vue": {
-    "file": "assets/Edit.23632eb7.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaAppeals/Edit.vue",
+  "resources/js/Pages/Admin/Filial/Create.vue": {
+    "file": "assets/Create.13bde0f4.js",
+    "src": "resources/js/Pages/Admin/Filial/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "_ckeditor.343d27cd.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "_ckeditor.343d27cd.js": {
-    "file": "assets/ckeditor.343d27cd.js",
-    "css": [
-      "assets/ckeditor.921c92fb.css"
-    ],
-    "assets": [
-      "assets/telemeter_wasm_bg.fee682c1.wasm",
-      "assets/close_icon.6c293038.svg",
-      "assets/close_icon_h.5594af63.svg",
-      "assets/fulls_icon.cad691e3.svg",
-      "assets/fulls_icon_h.a13b9c25.svg",
-      "assets/min_icon.770d388a.svg",
-      "assets/min_icon_h.7ea449b0.svg",
-      "assets/mins_icon.c249159a.svg",
-      "assets/mins_icon_h.73b934d5.svg",
-      "assets/max_icon.50fa1d69.svg",
-      "assets/max_icon_h.eecdaee0.svg",
-      "assets/warn_icon.30c1a079.svg"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaAppeals/Index.vue": {
-    "file": "assets/Index.19b8dfbb.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaAppeals/Index.vue",
+  "resources/js/Pages/Admin/Filial/Edit.vue": {
+    "file": "assets/Edit.c0aaee3e.js",
+    "src": "resources/js/Pages/Admin/Filial/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "resources/js/Pages/Admin/OlimpiadaAudan/Create.vue": {
-    "file": "assets/Create.1a074557.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaAudan/Create.vue",
+  "resources/js/Pages/Admin/Filial/Index.vue": {
+    "file": "assets/Index.9ffc74af.js",
+    "src": "resources/js/Pages/Admin/Filial/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaAudan/Edit.vue": {
-    "file": "assets/Edit.2e45d703.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaAudan/Edit.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaAudan/Index.vue": {
-    "file": "assets/Index.c004d2bc.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaAudan/Index.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaMektep/Create.vue": {
-    "file": "assets/Create.ff901e43.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaMektep/Create.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaMektep/Edit.vue": {
-    "file": "assets/Edit.1c748088.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaMektep/Edit.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaMektep/Index.vue": {
-    "file": "assets/Index.6889b866.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaMektep/Index.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaOblys/Create.vue": {
-    "file": "assets/Create.316c137f.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaOblys/Create.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaOblys/Edit.vue": {
-    "file": "assets/Edit.c3e56899.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaOblys/Edit.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaOblys/Index.vue": {
-    "file": "assets/Index.ac4ce927.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaOblys/Index.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaTizim/Create.vue": {
-    "file": "assets/Create.a62d6cba.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaTizim/Create.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaTizim/Edit.vue": {
-    "file": "assets/Edit.acf7f071.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaTizim/Edit.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "__plugin-vue_export-helper.cdc0426e.js"
-    ]
-  },
-  "resources/js/Pages/Admin/OlimpiadaTizim/Index.vue": {
-    "file": "assets/Index.dc4120c7.js",
-    "src": "resources/js/Pages/Admin/OlimpiadaTizim/Index.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_AdminLayout.aeeba96b.js",
-      "resources/js/app.js",
-      "_Pagination.884e38bb.js",
+      "_Pagination.c50e6533.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Role/Create.vue": {
-    "file": "assets/Create.56f0b173.js",
+    "file": "assets/Create.e57078cd.js",
     "src": "resources/js/Pages/Admin/Role/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Role/Edit.vue": {
-    "file": "assets/Edit.ac8e5474.js",
+    "file": "assets/Edit.6017d752.js",
     "src": "resources/js/Pages/Admin/Role/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Role/Index.vue": {
-    "file": "assets/Index.2968c9d5.js",
+    "file": "assets/Index.ff450697.js",
     "src": "resources/js/Pages/Admin/Role/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
+      "_Pagination.c50e6533.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Options/Create.vue": {
-    "file": "assets/Create.33bb4097.js",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Options/Create.vue",
+  "resources/js/Pages/Admin/Subject/Create.vue": {
+    "file": "assets/Create.b3e1f7fa.js",
+    "src": "resources/js/Pages/Admin/Subject/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Options/Edit.vue": {
-    "file": "assets/Edit.aa8e2cf5.js",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Options/Edit.vue",
+  "resources/js/Pages/Admin/Subject/Edit.vue": {
+    "file": "assets/Edit.cebfc050.js",
+    "src": "resources/js/Pages/Admin/Subject/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Options/Index.vue": {
-    "file": "assets/Index.33bea138.js",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Options/Index.vue",
+  "resources/js/Pages/Admin/Subject/Index.vue": {
+    "file": "assets/Index.c2052fc9.js",
+    "src": "resources/js/Pages/Admin/Subject/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
+      "_Pagination.c50e6533.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Suraktar/Create.vue": {
-    "file": "assets/Create.a506fe22.js",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Suraktar/Create.vue",
+  "resources/js/Pages/Admin/TrainType/Create.vue": {
+    "file": "assets/Create.0a816ee9.js",
+    "src": "resources/js/Pages/Admin/TrainType/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "_ckeditor.343d27cd.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Suraktar/Edit.vue": {
-    "file": "assets/Edit.d2bcc194.js",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Suraktar/Edit.vue",
+  "resources/js/Pages/Admin/TrainType/Edit.vue": {
+    "file": "assets/Edit.ddb8cfec.js",
+    "src": "resources/js/Pages/Admin/TrainType/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
-      "_ValidationError.dc3d0002.js",
-      "_ckeditor.343d27cd.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Suraktar/Index.vue": {
-    "file": "assets/Index.f8263895.js",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Suraktar/Index.vue",
+  "resources/js/Pages/Admin/TrainType/Index.vue": {
+    "file": "assets/Index.dec956e4.js",
+    "src": "resources/js/Pages/Admin/TrainType/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.aeeba96b.js",
+      "_AdminLayout.7f820933.js",
       "resources/js/app.js",
-      "_Pagination.884e38bb.js",
+      "_Pagination.c50e6533.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Users/Create.vue": {
+    "file": "assets/Create.108b2e83.js",
+    "src": "resources/js/Pages/Admin/Users/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AdminLayout.7f820933.js",
+      "resources/js/app.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ],
+    "css": [
+      "assets/Create.85c043aa.css"
+    ]
+  },
+  "resources/js/Pages/Admin/Users/Deleted.vue": {
+    "file": "assets/Deleted.3c81b49c.js",
+    "src": "resources/js/Pages/Admin/Users/Deleted.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AdminLayout.7f820933.js",
+      "resources/js/app.js",
+      "_Pagination.c50e6533.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ],
+    "css": [
+      "assets/Deleted.edf2f80b.css"
+    ]
+  },
+  "resources/js/Pages/Admin/Users/Edit.vue": {
+    "file": "assets/Edit.0f62a790.js",
+    "src": "resources/js/Pages/Admin/Users/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AdminLayout.7f820933.js",
+      "resources/js/app.js",
+      "_Pagination.c50e6533.js",
+      "_ValidationError.8a56aa3c.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ],
+    "css": [
+      "assets/Edit.85c043aa.css"
+    ]
+  },
+  "resources/js/Pages/Admin/Users/Index.vue": {
+    "file": "assets/Index.b8dd24ec.js",
+    "src": "resources/js/Pages/Admin/Users/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AdminLayout.7f820933.js",
+      "resources/js/app.js",
+      "_Pagination.c50e6533.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ],
+    "css": [
+      "assets/Index.edf2f80b.css"
+    ]
+  },
+  "resources/js/Pages/Admin/Users/EduOrders/Index.vue": {
+    "file": "assets/Index.dd319572.js",
+    "src": "resources/js/Pages/Admin/Users/EduOrders/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AdminLayout.7f820933.js",
+      "resources/js/app.js",
+      "_Pagination.c50e6533.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
@@ -481,16 +342,24 @@
     "file": "assets/AdminLayout.e4829579.css",
     "src": "AdminLayout.css"
   },
+  "resources/js/Pages/Admin/Users/Index.css": {
+    "file": "assets/Index.edf2f80b.css",
+    "src": "resources/js/Pages/Admin/Users/Index.css"
+  },
+  "resources/js/Pages/Admin/Users/Deleted.css": {
+    "file": "assets/Deleted.edf2f80b.css",
+    "src": "resources/js/Pages/Admin/Users/Deleted.css"
+  },
+  "resources/js/Pages/Admin/Users/Create.css": {
+    "file": "assets/Create.85c043aa.css",
+    "src": "resources/js/Pages/Admin/Users/Create.css"
+  },
   "ValidationError.css": {
     "file": "assets/ValidationError.d2b8f0ed.css",
     "src": "ValidationError.css"
   },
-  "resources/js/Pages/Admin/OlimpBagyty/Create.css": {
-    "file": "assets/Create.3b8eab95.css",
-    "src": "resources/js/Pages/Admin/OlimpBagyty/Create.css"
-  },
-  "ckeditor.css": {
-    "file": "assets/ckeditor.921c92fb.css",
-    "src": "ckeditor.css"
+  "resources/js/Pages/Admin/Users/Edit.css": {
+    "file": "assets/Edit.85c043aa.css",
+    "src": "resources/js/Pages/Admin/Users/Edit.css"
   }
 }
