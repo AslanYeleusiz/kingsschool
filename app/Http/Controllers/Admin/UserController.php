@@ -64,6 +64,15 @@ class UserController extends Controller
         $subjects = Subject::get();
         $courseTypes = CourseType::get();
         $trainTypes = TrainType::get();
+        $shifts = [];
+        $shifts[] = [
+            'id' => 1,
+            'name' => 'Дневной'
+        ];
+        $shifts[] = [
+            'id' => 2,
+            'name' => 'Вечерний'
+        ];
         $teachers = User::where('role_id', 3)->get();
         return Inertia::render('Admin/Users/Create', [
             'roles' => $roles,
@@ -72,6 +81,7 @@ class UserController extends Controller
             'courseTypes' => $courseTypes,
             'trainTypes' => $trainTypes,
             'teachers' => $teachers,
+            'shifts' => $shifts,
         ]);
     }
 

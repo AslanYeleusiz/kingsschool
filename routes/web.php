@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\SubjectController;
 use Inertia\Inertia;
 
 /*
@@ -24,3 +25,5 @@ Route::middleware('guest')->group(function () {
     Route::view('/login', 'auth.login')->name('adminLoginShow');
     Route::post('/login', [AdminAuthController::class, 'adminLoginForm'])->name('adminLoginForm');
 });
+
+Route::get('/subject/{id}/get-subject-order', [SubjectController::class, 'getSubjectOrder']);

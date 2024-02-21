@@ -42,12 +42,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Бағасы</label>
-                                    <input type="number" class="form-control" v-model="subject.price" name="price" placeholder="8000" />
-                                    <validation-error :field="'price'" />
+                        <h2 class="mt-3">Цена</h2>
+                        <hr>
+                        <div v-for="(order, oindex) in orders" :key="'order'+order.id" class="ml-4">
+                            <h4>{{order.name}}</h4>
+                            <hr>
+                            <div v-for="(shift, shindex) in order.shifts" :key="'shift'+shift.id" class="ml-4">
+                                <h5>{{shift.name}}</h5>
+                                <hr>
+                                <div class="row ml-4">
+                                    <div v-for="(trainType, trindex) in shift.trainTypes" :key="'trainType'+trainType.id" class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">{{trainType.name}} {{ trainType.price }}</label>
+                                            <input type="number" class="form-control" v-model="trainType.price" placeholder="8000" @change="logme(oindex, shindex, trindex)" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -79,9 +88,16 @@ export default {
         ValidationError,
         Head
     },
-    props: ["subject"],
+    props: ["subject", "courseTypes"],
+    data() {
+        return {
+            orders: this.courseTypes,
+        }
+    },
+    
     methods: {
         submit() {
+            this.subject.orders = this.orders
             this.$inertia.put(
                 route("admin.subjects.update", this.subject.id),
                 this.subject,

@@ -49,7 +49,6 @@
                                     <tr role="row">
                                         <th>№</th>
                                         <th>Аты</th>
-                                        <th>Бағасы</th>
                                         <th>Әрекет</th>
                                     </tr>
                                     <tr class="filters">
@@ -62,7 +61,6 @@
                                                 @keyup.enter="search"
                                             />
                                         </td>
-                                        <td></td>
                                         <td></td>
                                     </tr>
                                 </thead>
@@ -80,7 +78,6 @@
                                             }}
                                         </td>
                                         <td>{{ subject.name }}</td>
-                                        <td>{{ subject.price }} ₸</td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                                 <Link

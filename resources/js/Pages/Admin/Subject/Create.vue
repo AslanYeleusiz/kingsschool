@@ -45,26 +45,22 @@
                         </div>
                         <h2 class="mt-3">Цена</h2>
                         <hr>
-                        <div v-for="(courseType, index) in courseTypes" class="ml-4">
-                            <h4>{{courseType.name}}</h4>
+                        <div v-for="(order, oindex) in orders" :key="'order'+order.id" class="ml-4">
+                            <h4>{{order.name}}</h4>
                             <hr>
-                            <div v-for="(shift, index) in shifts" class="ml-4">
+                            <div v-for="(shift, shindex) in order.shifts" :key="'shift'+shift.id" class="ml-4">
                                 <h5>{{shift.name}}</h5>
                                 <hr>
-                                
-                            </div>
-                        </div>
-<!--
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Бағасы</label>
-                                    <input type="number" class="form-control" v-model="subject.price" name="price" placeholder="8000" />
-                                    <validation-error :field="'price'" />
+                                <div class="row ml-4">
+                                    <div v-for="(trainType, trindex) in shift.trainTypes" :key="'trainType'+trainType.id" class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="">{{trainType.name}} {{ trainType.price }}</label>
+                                            <input type="number" class="form-control" v-model="trainType.price" placeholder="8000" @change="logme(oindex, shindex, trindex)" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
--->
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary mr-1">
@@ -96,26 +92,18 @@
             ValidationError,
             Head
         },
-        props: ['courseTypes', 'trainTypes'],
+        props: ['courseTypes'],
         data() {
             return {
                 subject: {
                     name: null,
                 },
-                shifts: [
-                    {
-                        id: 1,
-                        name: 'Дневной'
-                    },
-                    {
-                        id: 2,
-                        name: 'Вечерний'
-                    },
-                ]
+                orders: this.courseTypes,
             }
         },
         methods: {
             submit() {
+                this.subject.orders = this.orders
                 this.$inertia.post(
                     route("admin.subjects.store"),
                     this.subject, {
@@ -125,6 +113,9 @@
                     }
                 );
             },
+            logme(index, shindex, trindex) {
+                console.log(index + ' ' + shindex + ' ' + trindex)
+            }
         },
     };
 

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Subject;
 use App\Models\CourseType;
 use App\Models\TrainType;
+use App\Models\SubjectOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class SubjectController extends Controller
@@ -38,13 +40,26 @@ class SubjectController extends Controller
     {
         $courses = CourseType::get();
         $trainTypes = TrainType::get();
-        
-        //Создать массив который принимает все допустимые цены для предмета используя типы курсов и типы занятии
-        
+        foreach($trainTypes as $trainType) {
+            $trainType['price'] = 0;
+        }
+        $shifts = [];
+        $shifts[] = [
+            'id' => 1,
+            'name' => 'Дневной',
+            'trainTypes' => $trainTypes
+        ];
+        $shifts[] = [
+            'id' => 2,
+            'name' => 'Вечерний',
+            'trainTypes' => $trainTypes
+        ];
+        foreach($courses as $course){
+            $course['shifts'] = $shifts;
+        }
         
         return Inertia::render('Admin/Subject/Create', [
-            'courseTypes' => $courses,
-            'trainTypes' => $trainTypes,
+            'courseTypes' => $courses
         ]);
     }
 
@@ -56,10 +71,28 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        Subject::create([
-            'name' => $request->name,
-            'price' => $request->price,
+        DB::beginTransaction();
+        $subject = Subject::create([
+            'name' => $request->name
         ]);
+        $orders = $request->orders;
+        foreach($orders as $order) {
+            $shifts = $order['shifts'];
+            foreach($shifts as $shift) {
+                $trainTypes = $shift['trainTypes'];
+                foreach($trainTypes as $trainType) {
+                    SubjectOrder::create([
+                        'subject_id' => $subject['id'],
+                        'course_type_id' => $order['id'],
+                        'shift_id' => $shift['id'],
+                        'train_type_id' => $trainType['id'],
+                        'price' => $trainType['price']
+                    ]);
+                }
+            }
+        }
+        DB::commit();
+        
         return redirect()->route('admin.subjects.index')->with('success','Успешно добавлено');
         
     }
@@ -83,8 +116,36 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
+        $courses = CourseType::get()->toArray();
+        $trainTypes = TrainType::get()->toArray();
+        $subjectOrders = SubjectOrder::where('subject_id', $subject->id)->get();
+        $shifts = [];
+        $shifts[] = [
+            'id' => 1,
+            'name' => 'Дневной'
+        ];
+        $shifts[] = [
+            'id' => 2,
+            'name' => 'Вечерний'
+        ];
+        // return $subjectOrders;
+        foreach($courses as &$order) {
+            $order['shifts'] = $shifts;
+            foreach($order['shifts'] as &$shift) {
+                $shift['trainTypes'] = $trainTypes;
+                foreach($shift['trainTypes'] as &$trainType) {
+                    $trainType['price'] = $subjectOrders->first(function($item) use ($order, $shift, $trainType) {
+                        return $item->course_type_id == $order['id'] && $item->shift_id == $shift['id'] && $item->train_type_id == $trainType['id'];
+                    })->price;
+                }
+            }
+        }
+
+        // return $courses;
+
         return Inertia::render('Admin/Subject/Edit', [
-            'subject' => $subject
+            'subject' => $subject,
+            'courseTypes' => $courses,
         ]);
         
     }
@@ -98,10 +159,27 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
+        DB::beginTransaction();
         $subject->update([
-            'name' => $request->name,
-            'price' => $request->price,
+            'name' => $request->name
         ]);
+        $orders = $request->orders;
+        foreach($orders as $order) {
+            $shifts = $order['shifts'];
+            foreach($shifts as $shift) {
+                $trainTypes = $shift['trainTypes'];
+                foreach($trainTypes as $trainType) {
+                    SubjectOrder::where('subject_id', $subject->id)
+                    ->where('course_type_id', $order['id'])
+                    ->where('shift_id', $shift['id'])
+                    ->where('train_type_id', $trainType['id'])
+                    ->update([
+                        'price' => $trainType['price']
+                    ]);
+                }
+            }
+        }
+        DB::commit();
         return redirect()->back()->withSuccess('Успешно сохранено');
         
     }
@@ -114,8 +192,14 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
+        SubjectOrder::where('subject_id', $subject->id)->delete();
         $subject->delete();
         return redirect()->back()->withSuccess('Успешно удалено');
         
+    }
+
+    public function getSubjectOrder($id) {
+        $SubjectOrder = SubjectOrder::where('subject_id', $id)->get();
+        return response()->json($SubjectOrder);
     }
 }

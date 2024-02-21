@@ -139,7 +139,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">Предмет</label>
-                                        <select class="form-control" @change.prevent="calculatePrice(index)" v-model="eduOrder.subject_id" placeholder="Выбрать" required>
+                                        <select class="form-control" @change.prevent="calculatePrice(index, true)" v-model="eduOrder.subject_id" placeholder="Выбрать" required>
                                             <option value="" hidden>
                                                 Выбрать
                                             </option>
@@ -162,6 +162,20 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Тип посещения</label>
+                                        <select class="form-control" v-model="eduOrder.shift_id" @change.prevent="calculatePrice(index)" placeholder="Выбрать" required>
+                                            <option value="" hidden>
+                                                Выбрать
+                                            </option>
+                                            <option v-for="shift in shifts" :key="'shift' + shift.id" :value="shift.id">
+                                                {{shift.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -279,7 +293,7 @@
             ValidationError,
             Head
         },
-        props: ['roles', 'filials', 'teachers', 'trainTypes', 'courseTypes', 'subjects'],
+        props: ['roles', 'filials', 'teachers', 'trainTypes', 'courseTypes', 'subjects', 'shifts'],
         //Далбаеб осы жерын бытыр
         data() {
             return {
@@ -297,6 +311,7 @@
                 eduOrders: [{
                     subject_id: '',
                     teacher_id: '',
+                    shift_id: 1,
                     course_type_id: 1,
                     train_type_id: 1,
                     price: 0,
@@ -305,7 +320,7 @@
                 }],
 
                 teacherOrders: this.trainTypes,
-
+                subjectOrders: null,
                 iin: '',
             }
         },
@@ -323,16 +338,24 @@
             deleteOrder(index) {
                 this.eduOrders.splice(index, 1);
             },
-            calculatePrice(index) {
+            calculatePrice(index, ne = null) {
                 if (!this.eduOrders[index].subject_id) return this.warningText("Предмет не выбран!", null)
-                let price = this.subjects.find(item => item.id === this.eduOrders[index].subject_id).price
-                if (this.eduOrders[index].course_type_id) {
-                    price += price * this.courseTypes.find(item => item.id === this.eduOrders[index].course_type_id).percent / 100
+                if(!ne) {
+                    this.eduOrders[index].price = this.subjectOrders.find((el)=>{
+                        return el.course_type_id == this.eduOrders[index].course_type_id &&
+                            el.shift_id == this.eduOrders[index].shift_id &&
+                            el.train_type_id == this.eduOrders[index].train_type_id
+                    }).price
+                } else {
+                    axios.get(`/subject/${this.eduOrders[index].subject_id}/get-subject-order`).then((res)=>{
+                        this.subjectOrders = res.data
+                        this.eduOrders[index].price = this.subjectOrders.find((el)=>{
+                            return el.course_type_id == this.eduOrders[index].course_type_id &&
+                                el.shift_id == this.eduOrders[index].shift_id &&
+                                el.train_type_id == this.eduOrders[index].train_type_id
+                        }).price
+                    })
                 }
-                if (this.eduOrders[index].train_type_id) {
-                    price += price * this.trainTypes.find(item => item.id === this.eduOrders[index].train_type_id).percent / 100
-                }
-                return this.eduOrders[index].price = price
             },
             add28Days(index) {
                 if (this.eduOrders[index].start_date) {
