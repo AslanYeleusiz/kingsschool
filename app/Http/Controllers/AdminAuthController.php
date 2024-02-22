@@ -15,16 +15,16 @@ class AdminAuthController extends Controller
 
     public function adminLoginForm(AdminLoginRequest $request)
     {
-        $phone = $request->phone;
+        $iin = $request->iin;
         $password = $request->password;
-        $user = User::query()->where('phone', $phone)->firstOr(function () {
+        $user = User::query()->where('iin', $iin)->firstOr(function () {
             throw ValidationException::withMessages([
-                'phone' => [__('auth.Phone number not found')]
+                'phone' => ['ИИН немесе құпиясөз дұрыс емес']
             ]);
         });
         if (Hash('sha1', $password) !== $user->password) {
             throw ValidationException::withMessages([
-                'password' => [__('auth.Phone or password is incorrect')]
+                'password' => ['ИИН немесе құпиясөз дұрыс емес']
             ]);
         }
         Auth::guard($this->guard)->login($user);

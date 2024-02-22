@@ -19,11 +19,12 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Admin/home');
-})->name('index');
+})->name('index')->middleware('miniAdmin');
 
 Route::middleware('guest')->group(function () {
     Route::view('/login', 'auth.login')->name('adminLoginShow');
     Route::post('/login', [AdminAuthController::class, 'adminLoginForm'])->name('adminLoginForm');
+    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 });
 
 Route::get('/subject/{id}/get-subject-order', [SubjectController::class, 'getSubjectOrder']);

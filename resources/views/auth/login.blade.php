@@ -27,9 +27,9 @@
 
                         @enderror
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Телефон нөмірі') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">ИИН</label>
                             <div class="col-md-6">
-                                <input id="login-phone" type="tel" class="form-control phone_mask" name="phone" required autofocus placeholder="+7(___) ___-__-__">
+                                <input id="login-phone" type="number" class="form-control" name="iin" required autofocus placeholder="02030456789">
                             </div>
                         </div>
 

@@ -21,7 +21,7 @@ class adminAuth
 
         //This will be excecuted if the new authentication fails.
         if ($isAuthenticatedAdmin){
-            if(Auth::guard('web')->user()->role == 1){
+            if(Auth::guard('web')->user()->role_id != 4){
                 return $next($request);
             }
         }

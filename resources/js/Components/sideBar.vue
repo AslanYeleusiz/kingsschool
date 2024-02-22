@@ -69,14 +69,12 @@
                             </Link>
                         </li>
                     </template>
-<!--
                     <li class="nav-item">
                         <a class="nav-link" :href="route('logout')">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             <p>Шығу</p>
                         </a>
                     </li>
--->
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
