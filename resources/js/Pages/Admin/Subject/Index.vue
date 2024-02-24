@@ -80,6 +80,14 @@
                                         <td>{{ subject.name }}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
+                                               <button
+                                                @click.prevent="dublicate(subject.id)"
+                                                    class="btn btn-success"
+                                                    title="Дублировать"
+                                                >
+                                                    <i class="fas fa-check-double"></i>
+                                                </button>
+                                                
                                                 <Link
                                                     :href="
                                                         route(
@@ -102,6 +110,7 @@
                                                         class="fas fa-times"
                                                     ></i>
                                                 </button>
+                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -154,6 +163,24 @@ export default {
 
 
         },
+        dublicate(id) {
+                    Swal.fire({
+                title: "Дубликатқа жасауға сенімдісіз бе?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Иә, жоямын!",
+                cancelButtonText: "Жоқ",
+            }).then((result) => {
+                if (result.isConfirmed) {
+               this.$inertia.get(route('admin.subjects.dublicate', id))
+                }
+            });
+
+
+        },
+        
         search() {
             this.loading = 1
             const params = this.clearParams(this.filter);

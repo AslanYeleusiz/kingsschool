@@ -117,12 +117,22 @@
                                                 <button
                                                 @click.prevent="deleteData(user.id)"
                                                     class="btn btn-danger"
+                                                    title="Қалпына келтіру"
+                                                >
+                                                    <i
+                                                        class="fas fa-undo"
+                                                    ></i>
+                                                </button>
+                                                <button
+                                                @click.prevent="removeData(user.id)"
+                                                    class="btn btn-danger"
                                                     title="Жою"
                                                 >
                                                     <i
                                                         class="fas fa-times"
                                                     ></i>
                                                 </button>
+                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -162,8 +172,8 @@ export default {
     methods: {
         deleteData(id) {
                     Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
+                title: "Қайтаруға сенімдісіз бе?",
+                text: "Қайтып қалпына келеді!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -178,6 +188,25 @@ export default {
 
 
         },
+        removeData(id) {
+                    Swal.fire({
+                title: "Жоюға сенімдісіз бе?",
+                text: "Қайтып қалпына келмеуі мүмкін!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Иә, жоямын!",
+                cancelButtonText: "Жоқ",
+            }).then((result) => {
+                if (result.isConfirmed) {
+               this.$inertia.delete(route('admin.users.remove', id))
+                }
+            });
+
+
+        },
+        
         search() {
             this.loading = 1
             const params = this.clearParams(this.filter);

@@ -202,4 +202,22 @@ class SubjectController extends Controller
         $SubjectOrder = SubjectOrder::where('subject_id', $id)->get();
         return response()->json($SubjectOrder);
     }
+
+    public function dublicate($id) {
+        $subject = Subject::findOrFail($id);
+        
+        DB::beginTransaction();
+        $dsubject = Subject::create([
+            'name' => $subject->name
+        ]);
+        $sorders = SubjectOrder::where('subject_id', $subject->id)->get();
+        foreach ($sorders as $sorder) {
+            $dsorder = $sorder->replicate();
+            $dsorder->subject_id = $dsubject->id;
+            $dsorder->save();
+        }
+        DB::commit();
+        
+        return redirect()->back()->withSuccess('Успешно сдублировано');
+    }
 }

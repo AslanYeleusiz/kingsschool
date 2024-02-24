@@ -47,6 +47,7 @@ class UserController extends Controller
         return Inertia::render('Admin/Users/Index', [
             'users' => $users,
             'roles' => $roles,
+            'filials' => $filials,
             
         ]);
         
@@ -98,8 +99,14 @@ class UserController extends Controller
             $file_path = FileService::saveFile($request->image, User::IMAGE_PATH);
             $file_path = User::IMAGE_PATH.''.$file_path;
         } else {
-            $file_path = $request->image;
+            if($request->image){
+                $file_path = $request->image;
+            } else {
+                $file_path = 'avatars/default.jpg';
+            }
         }
+
+        $real_password = $request->real_password ?? 'password';
         
         DB::beginTransaction();
         $user = User::create([
@@ -110,8 +117,8 @@ class UserController extends Controller
             'birthday' => $request->birthday,
             'tel_num' => $request->tel_num,
             'tel_num_family' => $request->tel_num_family,
-            'real_password' => $request->real_password,
-            'password' => Hash('sha1', $request->real_password),
+            'real_password' => $real_password,
+            'password' => Hash('sha1', $real_password),
             'avatar' => $file_path, 
             'filial_id' => $request->filial_id, 
             'role_id' => $request->role_id, 
@@ -119,17 +126,19 @@ class UserController extends Controller
         
         if($request->role_id == 4) {
             $eduOrders = $request->eduOrders;
-            foreach($eduOrders as $eduOrder) {
-                EduOrder::create([
-                    'user_id' => $user->id,
-                    'subject_id' => $eduOrder['subject_id'],
-                    'teacher_id' => $eduOrder['teacher_id'],
-                    'train_type_id' => $eduOrder['train_type_id'],
-                    'course_type_id' => $eduOrder['course_type_id'],
-                    'price' => $eduOrder['price'],
-                    'start_date' => $eduOrder['start_date'],
-                    'end_date' => $eduOrder['end_date'],
-                ]);
+            if($eduOrders){
+                foreach($eduOrders as $eduOrder) {
+                    EduOrder::create([
+                        'user_id' => $user->id,
+                        'subject_id' => $eduOrder['subject_id'],
+                        'teacher_id' => $eduOrder['teacher_id'],
+                        'train_type_id' => $eduOrder['train_type_id'],
+                        'course_type_id' => $eduOrder['course_type_id'],
+                        'price' => $eduOrder['price'],
+                        'start_date' => $eduOrder['start_date'],
+                        'end_date' => $eduOrder['end_date'],
+                    ]);
+                }
             }
         }
         
@@ -195,6 +204,8 @@ class UserController extends Controller
             $file_path = $request->avatar;
         }
 
+        $real_password = $request->real_password ?? 'password';
+
         $user->update([
             'iin' => $request->iin,
             'name' => $request->name,
@@ -203,8 +214,8 @@ class UserController extends Controller
             'birthday' => $request->birthday,
             'tel_num' => $request->tel_num,
             'tel_num_family' => $request->tel_num_family,
-            'real_password' => $request->real_password,
-            'password' => Hash('sha1', $request->real_password),
+            'real_password' => $real_password,
+            'password' => Hash('sha1', $real_password),
             'avatar' => $file_path, 
             'filial_id' => $request->filial_id, 
             'role_id' => $request->role_id, 
@@ -225,8 +236,18 @@ class UserController extends Controller
         $user->is_deleted = 1;
         $user->save();
         return redirect()->back()->withSuccess('Успешно удалено');
-        
     }
+    
+    public function remove($id)
+    {
+        $user = User
+        ::findOrFail($id);
+        
+        $user->delete();
+        return redirect()->back()->withSuccess('Успешно удалено');
+    }
+    
+    
 
     public function is_deleted(Request $request){
         $roles = Role::get();
@@ -261,5 +282,13 @@ class UserController extends Controller
         ]);
         return redirect()->back()->withSuccess('Успешно обновлено');
         
+    }
+
+    public function checkIin(Request $request){
+        $iin = $request->iin;
+        $user = User::where('iin', $iin)->first();
+        return response()->json([
+            'status' => $user ? true : false
+        ]);
     }
 }
