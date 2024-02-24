@@ -26,7 +26,8 @@
                     <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                     <template v-for="(menu_item, index) in menu_items" :key="'menu_item' + index">
-                        <li class="nav-item " v-if="menu_item.childs_items" :class="{
+                        <template v-if="menu_item.role.includes($page.props.auth.user.role_id)">
+                            <li class="nav-item " v-if="menu_item.childs_items" :class="{
                                 'menu-open':
                                     menu_item.menu_active.includes(
                                         currentRoute
@@ -68,6 +69,7 @@
                             <p>{{ menu_item.name }}</p>
                             </Link>
                         </li>
+                        </template>
                     </template>
                     <li class="nav-item">
                         <a class="nav-link" :href="route('logout')">
@@ -99,39 +101,43 @@
                         font: "fa-cogs",
                         route_name: "admin.roles.index",
                         menu_active: ["admin.roles"],
+                        role: [1],
                     },
                     {
                         name: "Филиал",
                         font: "fa-cogs",
                         route_name: "admin.filials.index",
                         menu_active: ["admin.filials"],
+                        role: [1],
                     },
                     {
                         name: "Қолданушылар",
                         font: "fa-cogs",
                         route_name: "admin.users.index",
                         menu_active: ["admin.users","admin.eduOrders"],
+                        role: [1,2],
                     },
                     {
                         name: "Пәндер",
                         font: "fa-cogs",
                         route_name: "admin.subjects.index",
                         menu_active: ["admin.subjects"],
+                        role: [1,2],
                     },
                     {
                         name: "Типы обучения",
                         font: "fa-cogs",
                         route_name: "admin.trainTypes.index",
                         menu_active: ["admin.trainTypes"],
+                        role: [1],
                     },
                     {
                         name: "Типы Курсов",
                         font: "fa-cogs",
                         route_name: "admin.courseTypes.index",
                         menu_active: ["admin.courseTypes"],
+                        role: [1],
                     },
-                    
-                    
                 ],
             }
         },

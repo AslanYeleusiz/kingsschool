@@ -38,7 +38,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">ИИН</label>
-                                    <input type="text" class="form-control" v-model="iin" name="iin" placeholder="ИИН" />
+                                    <input type="text" class="form-control" v-model="iin" name="iin" placeholder="ИИН" maxlength="12" />
                                     <validation-error :field="'iin'" />
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                     <validation-error :field="'tel_num'" />
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div v-if="user.role_id == 4" class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Телефон родителя</label>
                                     <input type="text" class="form-control" v-model="user.tel_num_family" name="tel_num_family" placeholder="Телефон родителя" />
@@ -169,6 +169,7 @@
                     file: "",
                     preview: "",
                 },
+                check_iin: false,
                 iin: this.user.iin,
             }
         },
@@ -220,13 +221,25 @@
                 }
             },
             checkIin() {
-                this.warningText('Бұндай ИИН бұрын тіркелген', null)
+                this.check_iin = 1
+                axios.get('/admin/check-iin', {
+                    params: {
+                        iin: this.iin
+                    }
+                }).then((res) => {
+                    if(res.data.status == true) {
+                        this.warningText('Бұндай ИИН бұрын тіркелген', null)
+                    }
+                    console.log(res.data)
+                    this.check_iin = 0
+                })
+                
             }
 
         },
         watch: {
             iin(newVal) {
-                if (newVal.length === 12) {
+                if (newVal.length === 12 && this.iin != this.user.iin) {
                     this.checkIin();
                 }
             }

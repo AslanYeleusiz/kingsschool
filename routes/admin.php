@@ -30,14 +30,16 @@ Route::resource('filials', FilialController::class)->except(['show'])->names('fi
 Route::resource('users', UserController::class)->except(['show'])->names('users');
 Route::resource('users/{id}/edu_orders', EduOrderController::class)->except(['show'])->names('eduOrders');
 Route::resource('subjects', SubjectController::class)->except(['show'])->names('subjects');
+Route::get('subjects/{id}/dublicate', [SubjectController::class, 'dublicate'])->name('subjects.dublicate');
 Route::resource('train-types', TrainTypeController::class)->except(['show'])->names('trainTypes');
 Route::resource('course-types', CourseTypeController::class)->except(['show'])->names('courseTypes');
 
-
+Route::get('/check-iin', [UserController::class, 'checkIin']);
 
 
 
 Route::get('/users/is_deleted', [UserController::class, 'is_deleted'])->name('users.deleted');
 Route::delete('/users/{user_id}/activate', [UserController::class, 'activate'])->name('users.activate');
+Route::delete('/users/{user_id}/remove', [UserController::class, 'remove'])->name('users.remove');
 //Route::middleware('adminAuth')->group(function () {
 //});

@@ -63,7 +63,7 @@
                                     <validation-error :field="'filial_id'" />
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div v-if="user.role_id != 4" class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Құпия сөз</label>
                                     <input type="text" class="form-control" v-model="user.real_password" name="real_password" placeholder="Құпия сөз" />
@@ -75,10 +75,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">ИИН</label>
-                                    <input type="text" class="form-control" v-model="iin" name="iin" placeholder="ИИН" required />
+                                    <input type="text" class="form-control" v-model="iin" name="iin" placeholder="ИИН" required maxlength="12" />
                                     <validation-error :field="'iin'" />
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div v-if="check_iin" class="spinner-border text-primary matop" role="status"></div>
+                            </div>
+                            
                         </div>
                         <div class="row">
                             <div class="col-md-4">
@@ -111,7 +115,7 @@
                                     <validation-error :field="'tel_num'" />
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div v-if="user.role_id == 4" class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Телефон родителя</label>
                                     <input type="text" class="form-control" v-model="user.tel_num_family" name="tel_num_family" placeholder="Телефон родителя" />
@@ -228,10 +232,10 @@
                             <div class="d-flex justify-content-end"><button @click.prevent="deleteOrder(index)" class="btn btn-danger mt-4">
                                     <i class="fas fa-times"></i>
                                 </button></div>
-                            <button @click.prevent="addEduOrder()" class="btn btn-primary mt-4">
-                                + Добавить обучения
-                            </button>
                         </template>
+                        <button v-if="user.role_id == 4" @click.prevent="addEduOrder()" class="btn btn-primary mt-4">
+                            + Добавить обучения
+                        </button>
 
 
                         <template v-if="user.role_id == 3">
@@ -322,6 +326,7 @@
                 teacherOrders: this.trainTypes,
                 subjectOrders: null,
                 iin: '',
+                check_iin: false,
             }
         },
         methods: {
@@ -373,6 +378,7 @@
                     teacher_id: '',
                     course_type_id: 1,
                     train_type_id: 1,
+                    shift_id: 1,
                     price: 0,
                     start_date: null,
                     end_date: null,
@@ -425,7 +431,19 @@
                 }
             },
             checkIin() {
-                this.warningText('Бұндай ИИН бұрын тіркелген', null)
+                this.check_iin = 1
+                axios.get('/admin/check-iin', {
+                    params: {
+                        iin: this.iin
+                    }
+                }).then((res) => {
+                    if(res.data.status == true) {
+                        this.warningText('Бұндай ИИН бұрын тіркелген', null)
+                    }
+                    console.log(res.data)
+                    this.check_iin = 0
+                })
+                
             }
 
         },
@@ -466,6 +484,9 @@
         input:focus+label {
             transform: scale(1.02);
         }
+    }
+    .matop {
+        margin-top: 33px;
     }
 
 </style>
