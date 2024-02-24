@@ -1,77 +1,63 @@
-@extends('layouts.auth')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Кіру') }} {{ auth()->user() }}</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-                <div class="card-body">
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li> {{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                    <form method="POST" action="{{ route('adminLoginForm') }}">
-                        @csrf
-                        <input type="hidden" name="endRoute" class="endRoute" value="admin">
-                        @error('login')
-                        <span class="invalid-feedback text-center  mb-2" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+</head>
 
-                        @enderror
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">ИИН</label>
-                            <div class="col-md-6">
-                                <input id="login-phone" type="number" class="form-control" name="iin" required autofocus placeholder="02030456789">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Құпия сөз') }}</label>
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Сақтау') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" id="submit" class="btn btn-primary">
-                                    {{ __('Кіру') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Құпия сөзді ұмыттыңыз ба?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<body>
+    <div class="login_intro">
+        <div class="head">
+            <img src="{{ asset('images/Logo.png') }}" class="logo">
         </div>
+        <form method="POST" action="{{ route('adminLoginForm') }}" class="login_body d-b">
+            @csrf
+            <input type="hidden" name="endRoute" class="endRoute" value="admin">
+            <div class="label ml-20 mb-8">
+                ИИН
+            </div>
+            <input type="number" class="label input mb-20" name="iin" required autofocus placeholder="02030456789"
+                autocomplete="new-password">
+            <div class="label ml-20 mb-8">
+                Пароль
+            </div>
+            <div class="relative mb-8">
+                <input type="password" id="password" class="label input" placeholder="****************" name="password"
+                    required autocomplete="new-password">
+                <img src="{{ asset('svg/open_eye.svg') }}" class="eye c-p" onclick="togglePasswordVisibility()">
+            </div>
+            @if (!$errors->any())
+                <p class="info_txt">
+                    *Регистрация доступно только в администрации учебного центра “King’s school”
+                </p>
+            @else
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li class="info_txt"> {{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <button type="submit" class="login_btn ma-0 d-f a-c j-c c-p">
+                Войти
+            </button>
+        </form>
     </div>
-</div>
+</body>
 <script>
-
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        var eyeIcon = document.querySelector(".eye");
+        passwordInput.type === "password" ? (passwordInput.type = "text", eyeIcon.src =
+            "{{ asset('svg/close_eye.svg') }}") : (passwordInput.type = "password", eyeIcon.src =
+            "{{ asset('svg/open_eye.svg') }}");
+    }
 </script>
-@endsection
+
+</html>

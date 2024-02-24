@@ -19,23 +19,23 @@ class AdminAuthController extends Controller
         $password = $request->password;
         $user = User::query()->where('iin', $iin)->firstOr(function () {
             throw ValidationException::withMessages([
-                'phone' => ['ИИН немесе құпиясөз дұрыс емес']
+                'phone' => ['*Неверное имя пользователя или пароль. Проверьте правильность введенных данных']
             ]);
         });
         if (Hash('sha1', $password) !== $user->password) {
             throw ValidationException::withMessages([
-                'password' => ['ИИН немесе құпиясөз дұрыс емес']
+                'password' => ['*Неверное имя пользователя или пароль. Проверьте правильность введенных данных']
             ]);
         }
         Auth::guard($this->guard)->login($user);
         return redirect()->route('admin.index');
-//        $token = Auth::attempt(['phone' => $phone, 'password' => $password])
-//        if (!$token) {
-//            throw ValidationException::withMessages([
-//                'password' => [__('auth.Phone or password is incorrect')]
-//            ]);
-//        }
-//        $user = Auth::user();
+        //        $token = Auth::attempt(['phone' => $phone, 'password' => $password])
+        //        if (!$token) {
+        //            throw ValidationException::withMessages([
+        //                'password' => [__('auth.Phone or password is incorrect')]
+        //            ]);
+        //        }
+        //        $user = Auth::user();
     }
 
     public function logout()
