@@ -87,7 +87,7 @@
                                             </div>
                                         </td>
                                         <td>{{ order.user.fio }}</td>
-                                        <td>{{ order.subject.name }}</td>
+                                        <td>{{ order.subject ? order.subject.name : 'Нет данных' }}</td>
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="paidBlock">
