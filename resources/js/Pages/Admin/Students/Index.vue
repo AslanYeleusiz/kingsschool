@@ -25,7 +25,8 @@
         </template>
         <template #header>
             <div class="buttons d-flex align-items-center">
-                <Link class="btn btn-primary mr-2" :href="route('admin.users.create')" v-if="user.role_id == 1 || user.role_id == 2">
+                <Link class="btn btn-primary mr-2" :href="route('admin.users.create')"
+                    v-if="user.role_id == 1 || user.role_id == 2">
                 <i class="fa fa-plus"></i> Қосу
                 </Link>
 
@@ -54,7 +55,6 @@
                                         <th>Номер телефона</th>
                                         <th>Цена</th>
                                         <th v-if="groups">Группа</th>
-                                        <th></th>
                                         <th v-show="user.role_id == 1 || user.role_id == 2"></th>
                                     </tr>
                                     <tr class="filters">
@@ -87,7 +87,7 @@
                                             </div>
                                         </td>
                                         <td>{{ order.user.fio }}</td>
-                                        <td>{{ order.subject.name }}</td>
+                                        <td>{{ order.subject ? order.subject.name : 'Нет данных' }}</td>
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="paidBlock">
@@ -110,28 +110,28 @@
                                             </div>
                                         </td>
                                         <td>{{ order.price }}</td>
-                                        <td v-if="groups && order.group_id != 0">
-                                            <select
-                                                class="form-control"
-                                                @change.prevent="setNewGroup(order.id, order.group_id)"
-                                                v-model="order.group_id"
-                                                placeholder="Белсенді"
-                                            >
-                                                <option :value="null" hidden>
-                                                    Выбрать
-                                                </option>
-                                                <option :value="0">
-                                                    + Добавить группу
-                                                </option>
-                                                <option v-for="group in groups" :value="group.id">
-                                                    {{group.name}}
-                                                </option>
-                                            </select>
-                                        </td>
-                                        <td v-else>
-                                            <input type="text" class="form-control" v-model="newGroup" @focusout="setNewGroup(order.id)">
-                                        </td>
-                                        <td v-if="user.role_id == 1 || user.role_id == 2">
+                                        <template v-if="user.role_id == 3">
+                                            <td v-if="groups && order.group_id != 0">
+                                                <select class="form-control"
+                                                    @change.prevent="setNewGroup(order.id, order.group_id)"
+                                                    v-model="order.group_id" placeholder="Белсенді">
+                                                    <option :value="null" hidden>
+                                                        Выбрать
+                                                    </option>
+                                                    <option :value="0">
+                                                        + Добавить группу
+                                                    </option>
+                                                    <option v-for="group in groups" :value="group.id">
+                                                        {{ group.name }}
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td v-else>
+                                                <input type="text" class="form-control" v-model="newGroup"
+                                                    @focusout="setNewGroup(order.id)">
+                                            </td>
+                                        </template>
+                                        <td v-show="user.role_id == 1 || user.role_id == 2">
                                             <div class="btn-group btn-group-sm">
                                                 <Link :href="route(
                                                     'admin.users.edit',
@@ -151,6 +151,59 @@
                 </div>
             </div>
         </div>
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="module" v-for="group in groups" :key="'group' + group.id">
+                                <div class="module-header" data-toggle="collapse"
+                                    :data-target="'#moduleContent_' + group.id">
+                                    <div class="d-flex center">
+                                        <div class="d-flex gap-20">
+                                            <h4 class="mr-3 modul_name">
+                                                {{ group.name }}
+                                            </h4>
+                                            <div class="btn-group btn-group-sm" @click.stop>
+                                                <button @click.prevent="deleteData(group.id, true)" class="btn btn-danger"
+                                                    title="Жою">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <span class="arrow mr-3">&#9660;</span>
+                                    </div>
+                                </div>
+                                <div :id="'moduleContent_' + group.id" class="module-content collapse">
+                                    <table class="table table-hover table-bordered table-striped dataTable dtr-inline">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>№</th>
+                                                <th>Студент</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd" v-for="(student, index) in group.students"
+                                                :key="'modul' + student.id">
+                                                <td>
+                                                    {{
+                                                        student.from
+                                                        ? student.from + index
+                                                        : index + 1
+                                                    }}
+                                                </td>
+                                                <td>{{ student.user.name }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </AdminLayout>
 </template>
 <script>
@@ -164,11 +217,7 @@ export default {
         Pagination,
         Head
     },
-    props: [
-        'orders',
-        'user',
-        'groups'
-    ],
+    props: ["orders", "groups", "user"],
     data() {
         return {
             filter: {
@@ -179,7 +228,7 @@ export default {
         };
     },
     methods: {
-        setNewGroup(id, groupId = null){
+        setNewGroup(id, groupId = null) {
             this.$inertia.put(route('admin.students.update', id), {
                 name: this.newGroup,
                 groupId: groupId
@@ -221,6 +270,22 @@ export default {
             const params = this.clearParams(this.filter);
             this.$inertia.get(route('admin.students.index'), params)
         },
+        deleteData(id) {
+            Swal.fire({
+                title: "Жоюға сенімдісіз бе?",
+                text: "Қайтып қалпына келмеуі мүмкін!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Иә, жоямын!",
+                cancelButtonText: "Жоқ",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$inertia.delete(route('admin.groups.destroy', id))
+                }
+            });
+        },
     }
 };
 </script>
@@ -237,5 +302,43 @@ export default {
     background-repeat: no-repeat;
     background-size: 100%;
     border-radius: 50%;
+}
+
+.module {
+    margin-bottom: 10px;
+}
+
+.module-header {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.module-content {
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    background-color: #fff;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.collapsed .arrow {
+    transform: rotate(-90deg);
+}
+
+.center {
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.gap-20 {
+    gap: 20px;
 }
 </style>

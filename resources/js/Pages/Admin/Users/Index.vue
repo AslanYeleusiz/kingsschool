@@ -201,8 +201,6 @@ export default {
                this.$inertia.delete(route('admin.users.destroy', id))
                 }
             });
-
-
         },
         search() {
             this.loading = 1

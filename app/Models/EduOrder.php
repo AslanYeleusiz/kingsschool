@@ -37,6 +37,7 @@ class EduOrder extends Model
     {
         return $this->hasOne(EduPaidOrder::class, 'edu_order_id')->latest('id');
     }
+
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subject_id');

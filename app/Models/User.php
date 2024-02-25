@@ -11,27 +11,31 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $guarded=[];
-    public $table='users';
+    protected $guarded = [];
+    public $table = 'users';
     public $timestamps = false;
     const IMAGE_PATH = "avatars/";
 
-    public function filial(){
+    public function filial()
+    {
         return $this->belongsTo(Filial::class, 'filial_id');
     }
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class, 'role_id');
     }
 
-    public function scopeIsNotDeleted($request){
+    public function scopeIsNotDeleted($request)
+    {
         return $request->where('is_deleted', 0);
     }
-    public function scopeIsDeleted($request){
+    public function scopeIsDeleted($request)
+    {
         return $request->where('is_deleted', 1);
     }
-    
-    
+
+
     // Rest omitted for brevity
 
     /**
@@ -39,12 +43,12 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return mixed
      */
-    
+
     protected $hidden = [
         'password',
     ];
-    
-    
+
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

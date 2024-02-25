@@ -1,11 +1,11 @@
 {
-  "public/adminlte/dist/img/user2-160x160.jpg": {
-    "file": "assets/user2-160x160.680f6c82.jpg",
-    "src": "public/adminlte/dist/img/user2-160x160.jpg"
-  },
   "public/adminlte/dist/img/AdminLTELogo.png": {
     "file": "assets/AdminLTELogo.b921c343.png",
     "src": "public/adminlte/dist/img/AdminLTELogo.png"
+  },
+  "public/adminlte/dist/img/user2-160x160.jpg": {
+    "file": "assets/user2-160x160.680f6c82.jpg",
+    "src": "public/adminlte/dist/img/user2-160x160.jpg"
   },
   "resources/sass/app.scss": {
     "file": "assets/app.7c3c19f8.js",
@@ -13,7 +13,7 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app.d8511840.js",
+    "file": "assets/app.88ee6f0d.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
@@ -28,11 +28,15 @@
       "resources/js/Pages/Admin/Role/Create.vue",
       "resources/js/Pages/Admin/Role/Edit.vue",
       "resources/js/Pages/Admin/Role/Index.vue",
+      "resources/js/Pages/Admin/Schedule/Create.vue",
       "resources/js/Pages/Admin/Schedule/Index.vue",
       "resources/js/Pages/Admin/Students/Index.vue",
       "resources/js/Pages/Admin/Subject/Create.vue",
       "resources/js/Pages/Admin/Subject/Edit.vue",
       "resources/js/Pages/Admin/Subject/Index.vue",
+      "resources/js/Pages/Admin/Teachers/Create.vue",
+      "resources/js/Pages/Admin/Teachers/Edit.vue",
+      "resources/js/Pages/Admin/Teachers/Index.vue",
       "resources/js/Pages/Admin/TrainType/Create.vue",
       "resources/js/Pages/Admin/TrainType/Edit.vue",
       "resources/js/Pages/Admin/TrainType/Index.vue",
@@ -44,7 +48,7 @@
     ]
   },
   "resources/js/Pages/home.vue": {
-    "file": "assets/home.ba39d192.js",
+    "file": "assets/home.8cecdebb.js",
     "src": "resources/js/Pages/home.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -56,17 +60,17 @@
     "file": "assets/_plugin-vue_export-helper.cdc0426e.js"
   },
   "resources/js/Pages/Admin/home.vue": {
-    "file": "assets/home.4b6dbde6.js",
+    "file": "assets/home.35613b8d.js",
     "src": "resources/js/Pages/Admin/home.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "__plugin-vue_export-helper.cdc0426e.js",
       "resources/js/app.js"
     ]
   },
-  "_AdminLayout.2b8c430b.js": {
-    "file": "assets/AdminLayout.2b8c430b.js",
+  "_AdminLayout.a8bbea2e.js": {
+    "file": "assets/AdminLayout.a8bbea2e.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper.cdc0426e.js"
@@ -80,26 +84,26 @@
     ]
   },
   "resources/js/Pages/Admin/CourseType/Create.vue": {
-    "file": "assets/Create.c5f7cf56.js",
+    "file": "assets/Create.d683a2c7.js",
     "src": "resources/js/Pages/Admin/CourseType/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "_Pagination.eaa29eca.js": {
-    "file": "assets/Pagination.eaa29eca.js",
+  "_Pagination.f28bb70d.js": {
+    "file": "assets/Pagination.f28bb70d.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
-  "_ValidationError.91cf07e1.js": {
-    "file": "assets/ValidationError.91cf07e1.js",
+  "_ValidationError.907eb506.js": {
+    "file": "assets/ValidationError.907eb506.js",
     "imports": [
       "__plugin-vue_export-helper.cdc0426e.js",
       "resources/js/app.js"
@@ -109,116 +113,128 @@
     ]
   },
   "resources/js/Pages/Admin/CourseType/Edit.vue": {
-    "file": "assets/Edit.4c0432e4.js",
+    "file": "assets/Edit.4a7bf5ae.js",
     "src": "resources/js/Pages/Admin/CourseType/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/CourseType/Index.vue": {
-    "file": "assets/Index.ee15af16.js",
+    "file": "assets/Index.3da66623.js",
     "src": "resources/js/Pages/Admin/CourseType/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
+      "_Pagination.f28bb70d.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Filial/Create.vue": {
-    "file": "assets/Create.877c1078.js",
+    "file": "assets/Create.77288db2.js",
     "src": "resources/js/Pages/Admin/Filial/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Filial/Edit.vue": {
-    "file": "assets/Edit.5f30a777.js",
+    "file": "assets/Edit.15a99ab4.js",
     "src": "resources/js/Pages/Admin/Filial/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Filial/Index.vue": {
-    "file": "assets/Index.1b00905b.js",
+    "file": "assets/Index.4536b4f9.js",
     "src": "resources/js/Pages/Admin/Filial/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
+      "_Pagination.f28bb70d.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Role/Create.vue": {
-    "file": "assets/Create.531211a6.js",
+    "file": "assets/Create.0a2f185d.js",
     "src": "resources/js/Pages/Admin/Role/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Role/Edit.vue": {
-    "file": "assets/Edit.3d18a82d.js",
+    "file": "assets/Edit.07c41c89.js",
     "src": "resources/js/Pages/Admin/Role/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Role/Index.vue": {
-    "file": "assets/Index.ef8e8905.js",
+    "file": "assets/Index.f622df1e.js",
     "src": "resources/js/Pages/Admin/Role/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
+      "_Pagination.f28bb70d.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Schedule/Create.vue": {
+    "file": "assets/Create.57a3cbcf.js",
+    "src": "resources/js/Pages/Admin/Schedule/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AdminLayout.a8bbea2e.js",
+      "resources/js/app.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Schedule/Index.vue": {
-    "file": "assets/Index.589fdd95.js",
+    "file": "assets/Index.03c9488a.js",
     "src": "resources/js/Pages/Admin/Schedule/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
-      "__plugin-vue_export-helper.cdc0426e.js",
-      "resources/js/app.js"
+      "_AdminLayout.a8bbea2e.js",
+      "resources/js/app.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Students/Index.vue": {
-    "file": "assets/Index.3476ac47.js",
+    "file": "assets/Index.a5009e19.js",
     "src": "resources/js/Pages/Admin/Students/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
+      "_Pagination.f28bb70d.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ],
     "css": [
@@ -226,84 +242,122 @@
     ]
   },
   "resources/js/Pages/Admin/Subject/Create.vue": {
-    "file": "assets/Create.1fb41a55.js",
+    "file": "assets/Create.406ff344.js",
     "src": "resources/js/Pages/Admin/Subject/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Subject/Edit.vue": {
-    "file": "assets/Edit.57a3bb5f.js",
+    "file": "assets/Edit.337f550b.js",
     "src": "resources/js/Pages/Admin/Subject/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Subject/Index.vue": {
-    "file": "assets/Index.075fe17e.js",
+    "file": "assets/Index.4deb1712.js",
     "src": "resources/js/Pages/Admin/Subject/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
+      "_Pagination.f28bb70d.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
+  "resources/js/Pages/Admin/Teachers/Create.vue": {
+    "file": "assets/Create.dbeba07d.js",
+    "src": "resources/js/Pages/Admin/Teachers/Create.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AdminLayout.a8bbea2e.js",
+      "resources/js/app.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Teachers/Edit.vue": {
+    "file": "assets/Edit.1da0625b.js",
+    "src": "resources/js/Pages/Admin/Teachers/Edit.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AdminLayout.a8bbea2e.js",
+      "resources/js/app.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Teachers/Index.vue": {
+    "file": "assets/Index.5c83e3a8.js",
+    "src": "resources/js/Pages/Admin/Teachers/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AdminLayout.a8bbea2e.js",
+      "resources/js/app.js",
+      "_Pagination.f28bb70d.js",
+      "__plugin-vue_export-helper.cdc0426e.js"
+    ],
+    "css": [
+      "assets/Index.7153ff5d.css"
+    ]
+  },
   "resources/js/Pages/Admin/TrainType/Create.vue": {
-    "file": "assets/Create.4a55fe73.js",
+    "file": "assets/Create.8e33d74b.js",
     "src": "resources/js/Pages/Admin/TrainType/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/TrainType/Edit.vue": {
-    "file": "assets/Edit.85907ee1.js",
+    "file": "assets/Edit.f9ad035f.js",
     "src": "resources/js/Pages/Admin/TrainType/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/TrainType/Index.vue": {
-    "file": "assets/Index.c12df52c.js",
+    "file": "assets/Index.3c6298c1.js",
     "src": "resources/js/Pages/Admin/TrainType/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
+      "_Pagination.f28bb70d.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
   "resources/js/Pages/Admin/Users/Create.vue": {
-    "file": "assets/Create.d06dc6e2.js",
+    "file": "assets/Create.fcde4bd9.js",
     "src": "resources/js/Pages/Admin/Users/Create.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ],
     "css": [
@@ -311,13 +365,13 @@
     ]
   },
   "resources/js/Pages/Admin/Users/Deleted.vue": {
-    "file": "assets/Deleted.c70f6c7e.js",
+    "file": "assets/Deleted.2cc0375f.js",
     "src": "resources/js/Pages/Admin/Users/Deleted.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
+      "_Pagination.f28bb70d.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ],
     "css": [
@@ -325,14 +379,14 @@
     ]
   },
   "resources/js/Pages/Admin/Users/Edit.vue": {
-    "file": "assets/Edit.17e4a33b.js",
+    "file": "assets/Edit.bc6f0309.js",
     "src": "resources/js/Pages/Admin/Users/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
-      "_ValidationError.91cf07e1.js",
+      "_Pagination.f28bb70d.js",
+      "_ValidationError.907eb506.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ],
     "css": [
@@ -340,13 +394,13 @@
     ]
   },
   "resources/js/Pages/Admin/Users/Index.vue": {
-    "file": "assets/Index.fc9100e7.js",
+    "file": "assets/Index.337d5238.js",
     "src": "resources/js/Pages/Admin/Users/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
+      "_Pagination.f28bb70d.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ],
     "css": [
@@ -354,13 +408,13 @@
     ]
   },
   "resources/js/Pages/Admin/Users/EduOrders/Index.vue": {
-    "file": "assets/Index.31c6e197.js",
+    "file": "assets/Index.4a37658c.js",
     "src": "resources/js/Pages/Admin/Users/EduOrders/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AdminLayout.2b8c430b.js",
+      "_AdminLayout.a8bbea2e.js",
       "resources/js/app.js",
-      "_Pagination.eaa29eca.js",
+      "_Pagination.f28bb70d.js",
       "__plugin-vue_export-helper.cdc0426e.js"
     ]
   },
@@ -372,21 +426,25 @@
     "file": "assets/Index.f3697578.css",
     "src": "resources/js/Pages/Admin/Students/Index.css"
   },
-  "resources/js/Pages/Admin/Users/Index.css": {
-    "file": "assets/Index.edf2f80b.css",
-    "src": "resources/js/Pages/Admin/Users/Index.css"
+  "resources/js/Pages/Admin/Teachers/Index.css": {
+    "file": "assets/Index.7153ff5d.css",
+    "src": "resources/js/Pages/Admin/Teachers/Index.css"
   },
   "resources/js/Pages/Admin/Users/Edit.css": {
     "file": "assets/Edit.85c043aa.css",
     "src": "resources/js/Pages/Admin/Users/Edit.css"
   },
-  "resources/js/Pages/Admin/Users/Deleted.css": {
-    "file": "assets/Deleted.edf2f80b.css",
-    "src": "resources/js/Pages/Admin/Users/Deleted.css"
-  },
   "resources/js/Pages/Admin/Users/Create.css": {
     "file": "assets/Create.fd7e67aa.css",
     "src": "resources/js/Pages/Admin/Users/Create.css"
+  },
+  "resources/js/Pages/Admin/Users/Index.css": {
+    "file": "assets/Index.edf2f80b.css",
+    "src": "resources/js/Pages/Admin/Users/Index.css"
+  },
+  "resources/js/Pages/Admin/Users/Deleted.css": {
+    "file": "assets/Deleted.edf2f80b.css",
+    "src": "resources/js/Pages/Admin/Users/Deleted.css"
   },
   "AdminLayout.css": {
     "file": "assets/AdminLayout.ce573c3b.css",

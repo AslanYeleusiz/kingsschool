@@ -39,6 +39,8 @@ Route::resource('course-types', CourseTypeController::class)->except(['show'])->
 Route::resource('students', StudentsController::class)->except(['show'])->names('students');
 Route::post('/students/{id}/paid', [StudentsController::class, 'paid'])->name('students.paid');
 Route::post('/students/{id}/deletePaid', [StudentsController::class, 'deletePaid'])->name('students.deletePaid');
+Route::delete('/groups/{group_id}/destroy', [StudentsController::class, 'destroyGroup'])->name('groups.destroy');
+
 Route::resource('schedule', ScheduleContorller::class)->except(['show'])->names('schedule');
 Route::get('/schedule/getSchedule', [ScheduleContorller::class, 'getSchedule'])->name('schedule.getSchedule');
 Route::resource('teachers', TeacherController::class)->except(['show'])->names('teachers');

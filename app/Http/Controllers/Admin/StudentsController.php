@@ -47,15 +47,14 @@ class StudentsController extends Controller
                 ];
             }
         }
-        $user = auth()->guard('web')->user();
+
         $groups = null;
         if ($user->role_id == 3)
-            $groups = Group::where('teacher_id', $user->id)->get();
+            $groups = Group::with('students.user')->where('teacher_id', $user->id)->get();
 
         return Inertia::render('Admin/Students/Index', [
             'orders' => $orders,
             'groups' => $groups,
-
             'orders' => $orders,
             'user' => $user
         ]);
@@ -184,5 +183,12 @@ class StudentsController extends Controller
             $order->lastEduPaid->delete();
         }
         return redirect()->route('admin.students.index');
+    }
+
+    public function destroyGroup($group_id)
+    {
+        Group::findOrFail($group_id)->delete();
+        EduOrder::where('group_id', $group_id)->update(['group_id' => null]);
+        return redirect()->back()->withSuccess('Успешно удалено');
     }
 }

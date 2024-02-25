@@ -32,25 +32,24 @@ class UserController extends Controller
         $tel_num = $request->tel_num;
         $filial_id = $request->filial_id;
         $role_id = $request->role_id;
-        
+
         $users = User::with(['role', 'filial'])
             ->isNotDeleted()
-            ->when($fio, fn($q)=>$q->where('fio', 'like', "%$fio%"))
-            ->when($tel_num, fn($q)=>$q->where('tel_num', 'like', "%$tel_num%"))
-            ->when($filial_id, fn($q)=>$q->where('filial_id', $filial_id))
-            ->when($role_id, fn($q)=>$q->where('role_id', $role_id))
+            ->when($fio, fn ($q) => $q->where('fio', 'like', "%$fio%"))
+            ->when($tel_num, fn ($q) => $q->where('tel_num', 'like', "%$tel_num%"))
+            ->when($filial_id, fn ($q) => $q->where('filial_id', $filial_id))
+            ->when($role_id, fn ($q) => $q->where('role_id', $role_id))
             ->latest('id')
             ->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));
 
-        
+
         return Inertia::render('Admin/Users/Index', [
             'users' => $users,
             'roles' => $roles,
             'filials' => $filials,
-            
+
         ]);
-        
     }
 
     /**
@@ -94,12 +93,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
-        if($request->hasFile('image')){
+
+        if ($request->hasFile('image')) {
             $file_path = FileService::saveFile($request->image, User::IMAGE_PATH);
-            $file_path = User::IMAGE_PATH.''.$file_path;
+            $file_path = User::IMAGE_PATH . '' . $file_path;
         } else {
-            if($request->image){
+            if ($request->image) {
                 $file_path = $request->image;
             } else {
                 $file_path = 'avatars/default.jpg';
@@ -107,27 +106,27 @@ class UserController extends Controller
         }
 
         $real_password = $request->real_password ?? 'password';
-        
+
         DB::beginTransaction();
         $user = User::create([
             'iin' => $request->iin,
             'name' => $request->name,
             's_name' => $request->s_name,
-            'fio' => $request->s_name .' '. $request->name,
+            'fio' => $request->s_name . ' ' . $request->name,
             'birthday' => $request->birthday,
             'tel_num' => $request->tel_num,
             'tel_num_family' => $request->tel_num_family,
             'real_password' => $real_password,
             'password' => Hash('sha1', $real_password),
-            'avatar' => $file_path, 
-            'filial_id' => $request->filial_id, 
-            'role_id' => $request->role_id, 
+            'avatar' => $file_path,
+            'filial_id' => $request->filial_id,
+            'role_id' => $request->role_id,
         ]);
-        
-        if($request->role_id == 4) {
+
+        if ($request->role_id == 4) {
             $eduOrders = $request->eduOrders;
-            if($eduOrders){
-                foreach($eduOrders as $eduOrder) {
+            if ($eduOrders) {
+                foreach ($eduOrders as $eduOrder) {
                     EduOrder::create([
                         'user_id' => $user->id,
                         'subject_id' => $eduOrder['subject_id'],
@@ -142,10 +141,10 @@ class UserController extends Controller
                 }
             }
         }
-        
-        if($request->role_id == 3) {
+
+        if ($request->role_id == 3) {
             $eduOrders = $request->eduOrders;
-            foreach($eduOrders as $eduOrder) {
+            foreach ($eduOrders as $eduOrder) {
                 TeacherSalaryOrder::create([
                     'user_id' => $user->id,
                     'train_type_id' => $eduOrder['id'],
@@ -154,11 +153,10 @@ class UserController extends Controller
             }
         }
         DB::commit();
-        
-        
-        
-        return redirect()->route('admin.users.index')->with('success','Успешно добавлено');
-        
+
+
+
+        return redirect()->route('admin.users.index')->with('success', 'Успешно добавлено');
     }
 
     /**
@@ -198,9 +196,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $file_path = FileService::saveFile($request->image, User::IMAGE_PATH);
-            $file_path = User::IMAGE_PATH.''.$file_path;
+            $file_path = User::IMAGE_PATH . '' . $file_path;
         } else {
             $file_path = $request->avatar;
         }
@@ -211,19 +209,18 @@ class UserController extends Controller
             'iin' => $request->iin,
             'name' => $request->name,
             's_name' => $request->s_name,
-            'fio' => $request->s_name .' '. $request->name,
+            'fio' => $request->s_name . ' ' . $request->name,
             'birthday' => $request->birthday,
             'tel_num' => $request->tel_num,
             'tel_num_family' => $request->tel_num_family,
             'real_password' => $real_password,
             'password' => Hash('sha1', $real_password),
-            'avatar' => $file_path, 
-            'filial_id' => $request->filial_id, 
-            'role_id' => $request->role_id, 
+            'avatar' => $file_path,
+            'filial_id' => $request->filial_id,
+            'role_id' => $request->role_id,
         ]);
-        
+
         return redirect()->back()->withSuccess('Успешно сохранено');
-        
     }
 
     /**
@@ -238,19 +235,19 @@ class UserController extends Controller
         $user->save();
         return redirect()->back()->withSuccess('Успешно удалено');
     }
-    
+
     public function remove($id)
     {
-        $user = User
-        ::findOrFail($id);
-        
+        $user = User::findOrFail($id);
+
         $user->delete();
         return redirect()->back()->withSuccess('Успешно удалено');
     }
-    
-    
 
-    public function is_deleted(Request $request){
+
+
+    public function is_deleted(Request $request)
+    {
         $roles = Role::get();
         $filials = Filial::get();
 
@@ -258,13 +255,13 @@ class UserController extends Controller
         $tel_num = $request->tel_num;
         $filial_id = $request->filial_id;
         $role_id = $request->role_id;
-        
+
         $users = User::with(['role', 'filial'])
             ->isDeleted()
-            ->when($fio, fn($q)=>$q->where('fio', 'like', "%$fio%"))
-            ->when($tel_num, fn($q)=>$q->where('tel_num', 'like', "%$tel_num%"))
-            ->when($filial_id, fn($q)=>$q->where('filial_id', $filial_id))
-            ->when($role_id, fn($q)=>$q->where('role_id', $role_id))
+            ->when($fio, fn ($q) => $q->where('fio', 'like', "%$fio%"))
+            ->when($tel_num, fn ($q) => $q->where('tel_num', 'like', "%$tel_num%"))
+            ->when($filial_id, fn ($q) => $q->where('filial_id', $filial_id))
+            ->when($role_id, fn ($q) => $q->where('role_id', $role_id))
             ->latest('id')
             ->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));
@@ -274,18 +271,18 @@ class UserController extends Controller
             'roles' => $roles,
             'filials' => $filials,
         ]);
-        
     }
 
-    public function activate($user_id){
+    public function activate($user_id)
+    {
         User::findOrFail($user_id)->update([
             'is_deleted' => 0
         ]);
         return redirect()->back()->withSuccess('Успешно обновлено');
-        
     }
 
-    public function checkIin(Request $request){
+    public function checkIin(Request $request)
+    {
         $iin = $request->iin;
         $user = User::where('iin', $iin)->first();
         return response()->json([
