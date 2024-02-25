@@ -113,7 +113,7 @@
                                         <template v-if="user.role_id == 3">
                                             <td v-if="groups && order.group_id != 0">
                                                 <select class="form-control"
-                                                    @change.prevent="setNewGroup(order.id, order.group_id)"
+                                                    @change.prevent="setGroup(order.id, order.group_id)"
                                                     v-model="order.group_id" placeholder="Белсенді">
                                                     <option :value="null" hidden>
                                                         Выбрать
@@ -234,6 +234,14 @@ export default {
                 groupId: groupId
             })
         },
+        setGroup(id, groupId = null) {
+            if(this.orders.data.find(order=>order.id == id).group_id == 0) {
+                this.newGroup = '';
+            } else {
+                this.setNewGroup(id,groupId);
+            }
+        },
+        
         setPaid(id, e) {
             if (e) {
                 Swal.fire({
