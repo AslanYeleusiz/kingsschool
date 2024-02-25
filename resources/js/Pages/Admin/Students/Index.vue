@@ -164,10 +164,10 @@ export default {
         Pagination,
         Head
     },
-    props: ["orders", "groups"],
     props: [
         'orders',
         'user',
+        'groups'
     ],
     data() {
         return {

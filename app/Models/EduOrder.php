@@ -29,19 +29,16 @@ class EduOrder extends Model
     }
 
 
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'group_id');
+    }
     public function lastEduPaid()
     {
         return $this->hasOne(EduPaidOrder::class, 'edu_order_id')->latest('id');
     }
-<<<<<<< HEAD
-
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subject_id');
-=======
-    
-    public function group(){
-        return $this->belongsTo(Group::class, 'group_id');
->>>>>>> d73679a6dc75d2c79e59b6dd9439b0fe28f30d06
     }
 }
