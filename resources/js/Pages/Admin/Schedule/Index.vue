@@ -16,15 +16,128 @@
             </div>
             <!-- /.card-body -->
         </div>
+        <div v-if="schedules" class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="mb-3">{{startweekdate +'-'+ endweekdate}}</h3>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <template v-for="(day, index) in days">
+                                        <tr data-widget="expandable-table" aria-expanded="true">
+                                            <td>
+                                                <div class="d-flex justify-content-between">
+                                                    {{ day }}
+                                                    <Link :href="
+                                                        route(
+                                                            'admin.schedule.create',
+                                                            {
+                                                                date:
+                                                                    startweekdate,
+                                                                day: index+1
+                                                            }
+                                                        )
+                                                    " class="btn btn-primary" title="Өзгерту">
+                                                        Изменить
+                                                    </Link>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr class="expandable-body">
+                                            <td>
+                                                <div class="p-0" style="">
+                                                    <table class="table mt-2 mb-3 table-hover table-bordered table-striped dataTable dtr-inline">
+                                                        <tbody>
+                                                            <tr class="odd" v-for="schedule in schedules" :key="
+                                                                    'schedule' +
+                                                                    schedule.id
+                                                                ">
+                                                                <template v-if="schedule.day == index+1">
+                                                                    <td>
+                                                                        {{
+                                                                            schedule.start_time
+                                                                        }} - {{
+                                                                            schedule.end_time
+                                                                        }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{
+                                                                            schedule.subject.name
+                                                                        }}
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        {{
+                                                                            schedule.teacher.fio
+                                                                        }}
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="btn-group btn-group-sm">
+
+                                                                            <Link :href="
+                                                                                route(
+                                                                                    'admin.schedule.edit',
+                                                                                    {
+                                                                                        schedule:
+                                                                                            schedule.id,
+                                                                                    }
+                                                                                )
+                                                                            " class="btn btn-primary" title="Өзгерту">
+                                                                            <i class="fas fa-edit"></i>
+                                                                            </Link>
+
+
+
+                                                                            <button @click.prevent="
+                                                                                deleteData(
+                                                                                    schedule.id
+                                                                                )
+                                                                            " class="btn btn-danger" title="Жою">
+                                                                                <i class="fas fa-trash"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                </template>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </AdminLayout>
 </template>
 
 <script>
     import AdminLayout from "../../../Layouts/AdminLayout.vue";
+    import {
+        Link,
+        Head
+    } from "@inertiajs/inertia-vue3";
 
     export default {
         components: {
-            AdminLayout
+            AdminLayout,
+            Link
+        },
+        data() {
+            return {
+                days: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресение'],
+                currentDate: route().params.date ?? '',
+                schedules: null,
+                startweekdate: null,
+                endweekdate: null,
+            }
         },
 
         mounted() {
@@ -37,18 +150,46 @@
                     format: 'L',
                     inline: true
                 });
-                $calendar.on("change.datetimepicker", function(e) {
-                    console.log(e.date.format('YYYY-MM-DD'))
+                $calendar.on("change.datetimepicker", (e) => {
+                    this.toggleCollapse(e.date.format('YYYY-MM-DD'))
                 });
             });
         },
         methods: {
-            toggleCollapse() {
-                // Your collapse logic here
+            toggleCollapse(e) {
+                console.log(e)
+                this.currentDate = e
+                axios.get(route("admin.schedule.getSchedule"), {
+                    params: {
+                        date: this.currentDate
+                    }
+                }).then((res) => {
+                    this.schedules = res.data.schedules
+                    this.startweekdate = res.data.startweekdate
+                    this.endweekdate = res.data.endweekdate
+                });
             },
-            removeCard() {
-                // Your remove card logic here
-            }
+            deleteData(id) {
+                Swal.fire({
+                    title: "Жоюға сенімдісіз бе",
+                    text: "Қайтып қалпына келмеуі мүмкін!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Иә, жоямын!",
+                    cancelButtonText: "Болдырмау",
+                }).then((result) => {
+                    if (result.isConfirmed && !length) {
+                        this.$inertia.delete(
+                            route("admin.test.subjectPreparations.destroy", {
+                                subject: this.subject.id,
+                                preparation: id,
+                            })
+                        );
+                    }
+                });
+            },
         }
     }
 

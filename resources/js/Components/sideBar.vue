@@ -122,7 +122,7 @@
                         font: "fa-cogs",
                         route_name: "admin.students.index",
                         menu_active: ["admin.students"],
-                        role: [1],
+                        role: [1,2,3],
                     },
                     {
                         name: "Пәндер",
