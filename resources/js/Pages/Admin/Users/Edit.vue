@@ -1,13 +1,13 @@
 <template>
 
     <head>
-        <title>Админ панель | Қолданушы қосу</title>
+        <title>Админ панель | Қолданушыны өзгерту</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Қолданушы қосу</h1>
+                    <h1 class="m-0">Қолданушыны өзгерту</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -20,11 +20,11 @@
                         <li class="breadcrumb-item">
                             <a :href="route('admin.users.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Қолданушы тізімі
+                                Қолданушылар тізімі
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Қолданушы қосу
+                            Қолданушыны өзгерту
                         </li>
                     </ol>
                 </div>

@@ -20,7 +20,8 @@ class StudentsController extends Controller
      */
     public function index(Request $request)
     {
-        $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid']);
+        $user = auth()->guard('web')->user();
+        $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'subject']);
 
         $query->when($request->has('teacher_id'), function ($query) use ($request) {
             return $query->whereHas('teacher', function ($teacherQuery) use ($request) {
@@ -47,7 +48,8 @@ class StudentsController extends Controller
             }
         }
         return Inertia::render('Admin/Students/Index', [
-            'orders' => $orders
+            'orders' => $orders,
+            'user' => $user
         ]);
     }
 

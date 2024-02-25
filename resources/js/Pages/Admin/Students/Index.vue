@@ -1,5 +1,5 @@
 <template>
-  <head>
+    <head>
         <title>Админ панель | Студенты</title>
     </head>
     <AdminLayout>
@@ -25,15 +25,15 @@
         </template>
         <template #header>
             <div class="buttons d-flex align-items-center">
-                <Link class="btn btn-primary mr-2" :href="route('admin.students.create')">
-                    <i class="fa fa-plus"></i> Қосу
+                <Link class="btn btn-primary mr-2" :href="route('admin.users.create')" v-show="user.role_id == 1 || user.role_id == 2">
+                <i class="fa fa-plus"></i> Қосу
                 </Link>
 
                 <Link class="btn btn-danger" :href="route('admin.students.index')">
-                    <i class="fa fa-trash"></i> Фильтрді тазалау
+                <i class="fa fa-trash"></i> Фильтрді тазалау
                 </Link>
                 <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
-                  <span class="sr-only">Loading...</span>
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </template>
@@ -42,30 +42,25 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table
-                                class="table table-hover table-bordered table-striped dataTable dtr-inline"
-                            >
+                            <table class="table table-hover table-bordered table-striped dataTable dtr-inline">
                                 <thead>
                                     <tr role="row">
                                         <th>№</th>
                                         <th></th>
                                         <th>ФИО</th>
+                                        <th>Предмет</th>
                                         <th>Статус</th>
                                         <th>Преподаватель</th>
                                         <th>Номер телефона</th>
                                         <th>Цена</th>
-                                        <th></th>
+                                        <th v-show="user.role_id == 1 || user.role_id == 2"></th>
                                     </tr>
                                     <tr class="filters">
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <input
-                                                v-model="filter.fio"
-                                                class="form-control"
-                                                placeholder="ФИО"
-                                                @keyup.enter="search"
-                                            />
+                                            <input v-model="filter.fio" class="form-control" placeholder="ФИО"
+                                                @keyup.enter="search" />
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -75,28 +70,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        class="odd"
-                                        v-for="(order, index) in orders.data"
-                                        :key="'order' + order.id"
-                                    >
+                                    <tr class="odd" v-for="(order, index) in orders.data" :key="'order' + order.id">
                                         <td>
                                             {{
                                                 order.from
-                                                    ? order.from + index
-                                                    : index + 1
+                                                ? order.from + index
+                                                : index + 1
                                             }}
                                         </td>
                                         <td class="d-f aj-c">
-                                            <div class="avatar" :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})`}"></div>
+                                            <div class="avatar"
+                                                :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }">
+                                            </div>
                                         </td>
                                         <td>{{ order.user.fio }}</td>
+                                        <td>{{ order.subject.name }}</td>
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="paidBlock">
-                                                    <div v-if="order.lastEduPaid.status == 1" class="paid success" @click="setPaid(order.id, 0)">Оплачено</div>
-                                                    <div v-else-if="order.lastEduPaid.status == 2" class="paid danger" @click="setPaid(order.id, 1)">Не оплачено</div>
-                                                    <div v-else class="paid black" @click="setPaid(order.id, 1)">Просрочено</div>
+                                                    <div v-if="order.lastEduPaid.status == 1" class="paid success"
+                                                        @click="setPaid(order.id, 0)">Оплачено</div>
+                                                    <div v-else-if="order.lastEduPaid.status == 2" class="paid danger"
+                                                        @click="setPaid(order.id, 1)">Не оплачено</div>
+                                                    <div v-else class="paid black" @click="setPaid(order.id, 1)">Просрочено
+                                                    </div>
                                                     <div class="paid date">{{ order.lastEduPaid.date }}</div>
                                                 </div>
                                             </div>
@@ -105,35 +102,20 @@
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="tablemask" title="Написать по Whatsapp">
-                                                    {{order.user.tel_num}}
+                                                    {{ order.user.tel_num }}
                                                 </div>
                                             </div>
                                         </td>
                                         <td>{{ order.price }}</td>
-                                        <td>
+                                        <td v-show="user.role_id == 1 || user.role_id == 2">
                                             <div class="btn-group btn-group-sm">
-                                                <Link
-                                                    :href="
-                                                        route(
-                                                            'admin.students.edit',
-                                                            order
-                                                        )
-                                                    "
-                                                    class="btn btn-primary"
-                                                    title="Изменить"
-                                                >
-                                                    <i class="fas fa-edit"></i>
+                                                <Link :href="route(
+                                                    'admin.users.edit',
+                                                    order
+                                                )
+                                                    " class="btn btn-primary" title="Изменить">
+                                                <i class="fas fa-edit"></i>
                                                 </Link>
-
-                                                <button
-                                                @click.prevent="deleteData(order.id)"
-                                                    class="btn btn-danger"
-                                                    title="Жою"
-                                                >
-                                                    <i
-                                                        class="fas fa-times"
-                                                    ></i>
-                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -158,18 +140,21 @@ export default {
         Pagination,
         Head
     },
-    props: ["orders"],
+    props: [
+        'orders',
+        'user',
+    ],
     data() {
         return {
             filter: {
-                name: route().params.name ? route().params.name: null,
+                name: route().params.name ? route().params.name : null,
             },
             loading: 0,
         };
     },
     methods: {
         setPaid(id, e) {
-            if(e) {
+            if (e) {
                 Swal.fire({
                     title: "Подтвердите оплату",
                     icon: "success",
@@ -199,42 +184,26 @@ export default {
                 });
             }
         },
-        deleteData(id) {
-                    Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.$inertia.delete(route('admin.students.destroy', id))
-                }
-            });
-
-
-        },
         search() {
             this.loading = 1
             const params = this.clearParams(this.filter);
-            this.$inertia.get(route('admin.students.index'),params)
+            this.$inertia.get(route('admin.students.index'), params)
         },
     }
 };
 </script>
 <style>
-    .table td, .table th {
-        text-align: center;
-    }
-    .avatar {
-        width: 40px;
-        height: 40px;
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        background-size: 100%;
-        border-radius: 50%;
-    }
+.table td,
+.table th {
+    text-align: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 50%;
+}
 </style>
