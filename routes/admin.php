@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TrainTypeController;
 use App\Http\Controllers\Admin\CourseTypeController;
 use App\Http\Controllers\Admin\EduOrderController;
+use App\Http\Controllers\admin\TeacherController;
 use Inertia\Inertia;
 
 /*
@@ -33,6 +34,10 @@ Route::resource('subjects', SubjectController::class)->except(['show'])->names('
 Route::get('subjects/{id}/dublicate', [SubjectController::class, 'dublicate'])->name('subjects.dublicate');
 Route::resource('train-types', TrainTypeController::class)->except(['show'])->names('trainTypes');
 Route::resource('course-types', CourseTypeController::class)->except(['show'])->names('courseTypes');
+
+Route::resource('teachers', TeacherController::class)->except(['show'])->names('teachers');
+
+
 
 Route::get('/check-iin', [UserController::class, 'checkIin']);
 

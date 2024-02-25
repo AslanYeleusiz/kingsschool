@@ -138,6 +138,13 @@
                         menu_active: ["admin.courseTypes"],
                         role: [1],
                     },
+                    {
+                        name: "Преподователи",
+                        font: "fa-cogs",
+                        route_name: "admin.teachers.index",
+                        menu_active: ["admin.teachers"],
+                        role: [1,2],
+                    },
                 ],
             }
         },
