@@ -118,6 +118,13 @@
                         role: [1,2],
                     },
                     {
+                        name: "Студенты",
+                        font: "fa-cogs",
+                        route_name: "admin.students.index",
+                        menu_active: ["admin.students"],
+                        role: [1],
+                    },
+                    {
                         name: "Пәндер",
                         font: "fa-cogs",
                         route_name: "admin.subjects.index",
@@ -138,6 +145,15 @@
                         menu_active: ["admin.courseTypes"],
                         role: [1],
                     },
+                    {
+                        name: "Расписания",
+                        font: "fa-cogs",
+                        route_name: "admin.schedule.index",
+                        menu_active: ["admin.schedule"],
+                        role: [1,2,3],
+                    },
+                    
+                    
                 ],
             }
         },

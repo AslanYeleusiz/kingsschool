@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TrainTypeController;
 use App\Http\Controllers\Admin\CourseTypeController;
 use App\Http\Controllers\Admin\EduOrderController;
+use App\Http\Controllers\Admin\StudentsController;
+use App\Http\Controllers\Admin\ScheduleContorller;
 use Inertia\Inertia;
 
 /*
@@ -33,10 +35,12 @@ Route::resource('subjects', SubjectController::class)->except(['show'])->names('
 Route::get('subjects/{id}/dublicate', [SubjectController::class, 'dublicate'])->name('subjects.dublicate');
 Route::resource('train-types', TrainTypeController::class)->except(['show'])->names('trainTypes');
 Route::resource('course-types', CourseTypeController::class)->except(['show'])->names('courseTypes');
+Route::resource('students', StudentsController::class)->except(['show'])->names('students');
+Route::post('/students/{id}/paid', [StudentsController::class, 'paid'])->name('students.paid');
+Route::post('/students/{id}/deletePaid', [StudentsController::class, 'deletePaid'])->name('students.deletePaid');
+Route::resource('schedule', ScheduleContorller::class)->except(['show'])->names('schedule');
 
 Route::get('/check-iin', [UserController::class, 'checkIin']);
-
-
 
 Route::get('/users/is_deleted', [UserController::class, 'is_deleted'])->name('users.deleted');
 Route::delete('/users/{user_id}/activate', [UserController::class, 'activate'])->name('users.activate');
