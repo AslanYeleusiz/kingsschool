@@ -132,6 +132,7 @@ class UserController extends Controller
                         'user_id' => $user->id,
                         'subject_id' => $eduOrder['subject_id'],
                         'teacher_id' => $eduOrder['teacher_id'],
+                        'shift_id' => $eduOrder['shift_id'],
                         'train_type_id' => $eduOrder['train_type_id'],
                         'course_type_id' => $eduOrder['course_type_id'],
                         'price' => $eduOrder['price'],
