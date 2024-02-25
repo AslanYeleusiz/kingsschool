@@ -30,4 +30,7 @@ class EduOrder extends Model
         return $this->hasOne(EduPaidOrder::class, 'edu_order_id')->latest('id');
     }
     
+    public function group(){
+        return $this->belongsTo(Group::class, 'group_id');
+    }
 }

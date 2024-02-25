@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('group_students', function (Blueprint $table) {
+        Schema::create('group_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('group_id')->on('groups')->cascadeOnDelete();
-            $table->foreignId('student_id')->on('users')->cascadeOnDelete();
+            $table->foreignId('edu_order_id')->on('edu_orders')->cascadeOnDelete();
         });
     }
 
