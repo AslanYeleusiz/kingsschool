@@ -25,7 +25,7 @@
         </template>
         <template #header>
             <div class="buttons d-flex align-items-center">
-                <Link class="btn btn-primary mr-2" :href="route('admin.users.create')" v-show="user.role_id == 1 || user.role_id == 2">
+                <Link class="btn btn-primary mr-2" :href="route('admin.users.create')" v-if="user.role_id == 1 || user.role_id == 2">
                 <i class="fa fa-plus"></i> Қосу
                 </Link>
 
@@ -131,7 +131,7 @@
                                         <td v-else>
                                             <input type="text" class="form-control" v-model="newGroup" @focusout="setNewGroup(order.id)">
                                         </td>
-                                        <td v-show="user.role_id == 1 || user.role_id == 2">
+                                        <td v-if="user.role_id == 1 || user.role_id == 2">
                                             <div class="btn-group btn-group-sm">
                                                 <Link :href="route(
                                                     'admin.users.edit',
