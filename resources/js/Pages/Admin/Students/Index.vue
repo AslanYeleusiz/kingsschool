@@ -53,6 +53,8 @@
                                         <th>Преподаватель</th>
                                         <th>Номер телефона</th>
                                         <th>Цена</th>
+                                        <th v-if="groups">Группа</th>
+                                        <th></th>
                                         <th v-show="user.role_id == 1 || user.role_id == 2"></th>
                                     </tr>
                                     <tr class="filters">
@@ -66,6 +68,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td v-if="groups"></td>
                                         <td></td>
                                     </tr>
                                 </thead>
@@ -107,6 +110,27 @@
                                             </div>
                                         </td>
                                         <td>{{ order.price }}</td>
+                                        <td v-if="groups && order.group_id != 0">
+                                            <select
+                                                class="form-control"
+                                                @change.prevent="setNewGroup(order.id, order.group_id)"
+                                                v-model="order.group_id"
+                                                placeholder="Белсенді"
+                                            >
+                                                <option :value="null" hidden>
+                                                    Выбрать
+                                                </option>
+                                                <option :value="0">
+                                                    + Добавить группу
+                                                </option>
+                                                <option v-for="group in groups" :value="group.id">
+                                                    {{group.name}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td v-else>
+                                            <input type="text" class="form-control" v-model="newGroup" @focusout="setNewGroup(order.id)">
+                                        </td>
                                         <td v-show="user.role_id == 1 || user.role_id == 2">
                                             <div class="btn-group btn-group-sm">
                                                 <Link :href="route(
@@ -140,6 +164,7 @@ export default {
         Pagination,
         Head
     },
+    props: ["orders", "groups"],
     props: [
         'orders',
         'user',
@@ -150,9 +175,16 @@ export default {
                 name: route().params.name ? route().params.name : null,
             },
             loading: 0,
+            newGroup: '',
         };
     },
     methods: {
+        setNewGroup(id, groupId = null){
+            this.$inertia.put(route('admin.students.update', id), {
+                name: this.newGroup,
+                groupId: groupId
+            })
+        },
         setPaid(id, e) {
             if (e) {
                 Swal.fire({

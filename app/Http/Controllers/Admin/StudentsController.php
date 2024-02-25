@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\EduOrder;
 use App\Models\EduPaidOrder;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -21,8 +22,7 @@ class StudentsController extends Controller
     public function index(Request $request)
     {
         $user = auth()->guard('web')->user();
-        $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'subject']);
-
+        $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'group', 'subject']);
         $query->when($request->has('teacher_id'), function ($query) use ($request) {
             return $query->whereHas('teacher', function ($teacherQuery) use ($request) {
                 $teacherQuery->where('id', $request->input('teacher_id'));
@@ -47,7 +47,15 @@ class StudentsController extends Controller
                 ];
             }
         }
+        $user = auth()->guard('web')->user();
+        $groups = null;
+        if ($user->role_id == 3)
+            $groups = Group::where('teacher_id', $user->id)->get();
+
         return Inertia::render('Admin/Students/Index', [
+            'orders' => $orders,
+            'groups' => $groups,
+
             'orders' => $orders,
             'user' => $user
         ]);
@@ -103,9 +111,29 @@ class StudentsController extends Controller
      * @param  \App\Models\EduOrder  $eduOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EduOrder $eduOrder)
+    public function update(Request $request, $id)
     {
         //
+        $eduOrder = EduOrder
+            ::findOrFail($id);
+        $groupId = $request->groupId;
+
+        $user = auth()->guard('web')->user();
+        DB::beginTransaction();
+        if (!$groupId) {
+            $group = Group::create([
+                'name' => $request->name,
+                'teacher_id' => $user->id
+            ]);
+        } else {
+            $group = Group::findOrFail($groupId);
+        }
+
+        $eduOrder->group_id = $group->id;
+        $eduOrder->save();
+
+        DB::commit();
+        return redirect()->back();
     }
 
     /**
