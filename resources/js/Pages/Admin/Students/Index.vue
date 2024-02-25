@@ -54,7 +54,6 @@
                                         <th>Номер телефона</th>
                                         <th>Цена</th>
                                         <th v-if="groups">Группа</th>
-                                        <th></th>
                                         <th v-show="user.role_id == 1 || user.role_id == 2"></th>
                                     </tr>
                                     <tr class="filters">
@@ -110,27 +109,29 @@
                                             </div>
                                         </td>
                                         <td>{{ order.price }}</td>
-                                        <td v-if="groups && order.group_id != 0">
-                                            <select
-                                                class="form-control"
-                                                @change.prevent="setNewGroup(order.id, order.group_id)"
-                                                v-model="order.group_id"
-                                                placeholder="Белсенді"
-                                            >
-                                                <option :value="null" hidden>
-                                                    Выбрать
-                                                </option>
-                                                <option :value="0">
-                                                    + Добавить группу
-                                                </option>
-                                                <option v-for="group in groups" :value="group.id">
-                                                    {{group.name}}
-                                                </option>
-                                            </select>
-                                        </td>
-                                        <td v-else>
-                                            <input type="text" class="form-control" v-model="newGroup" @focusout="setNewGroup(order.id)">
-                                        </td>
+                                        <template v-if="user.role_id == 3">
+                                            <td v-if="groups && order.group_id != 0">
+                                                <select
+                                                    class="form-control"
+                                                    @change.prevent="setNewGroup(order.id, order.group_id)"
+                                                    v-model="order.group_id"
+                                                    placeholder="Белсенді"
+                                                >
+                                                    <option :value="null" hidden>
+                                                        Выбрать
+                                                    </option>
+                                                    <option :value="0">
+                                                        + Добавить группу
+                                                    </option>
+                                                    <option v-for="group in groups" :value="group.id">
+                                                        {{group.name}}
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td v-else>
+                                                <input type="text" class="form-control" v-model="newGroup" @focusout="setNewGroup(order.id)">
+                                            </td>
+                                        </template>
                                         <td v-show="user.role_id == 1 || user.role_id == 2">
                                             <div class="btn-group btn-group-sm">
                                                 <Link :href="route(
