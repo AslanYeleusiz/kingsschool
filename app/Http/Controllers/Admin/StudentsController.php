@@ -20,14 +20,21 @@ class StudentsController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = EduOrder::with(['user:id,avatar,fio,tel_num','teacher:id,fio','lastEduPaid'])
-            ->paginate($request->input('per_page', 20))
+        $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid']);
+
+        $query->when($request->has('teacher_id'), function ($query) use ($request) {
+            return $query->whereHas('teacher', function ($teacherQuery) use ($request) {
+                $teacherQuery->where('id', $request->input('teacher_id'));
+            });
+        });
+
+        $orders = $query->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));
-        
+
         $now = Carbon::now();
-        foreach($orders as $order) {
+        foreach ($orders as $order) {
             $order['lastEduPaid'] = $order->lastEduPaid;
-            if($order['lastEduPaid']) {
+            if ($order['lastEduPaid']) {
                 $order['lastEduPaid']->date = Carbon::parse($order['lastEduPaid']->date)->format('d.m.Y');
             } else {
                 $endDate = Carbon::parse($order->end_date);
@@ -42,7 +49,6 @@ class StudentsController extends Controller
         return Inertia::render('Admin/Students/Index', [
             'orders' => $orders
         ]);
-        
     }
 
     /**
@@ -111,10 +117,11 @@ class StudentsController extends Controller
         //
     }
 
-    public function paid($id) {
+    public function paid($id)
+    {
         $eduOrder = EduOrder::with('lastEduPaid')->findOrFail($id);
         $date = null;
-        if($eduOrder->lastEduPaid) {
+        if ($eduOrder->lastEduPaid) {
             $lastEduPaidDate = $eduOrder->lastEduPaid['date'];
             $diffInDays = $eduOrder->end_date->diffInDays($eduOrder->start_date);
             $date = $lastEduPaidDate->copy()->addDays($diffInDays);
@@ -124,7 +131,7 @@ class StudentsController extends Controller
         $late_days = null;
         $late_date = null;
         $now = Carbon::now();
-        if($now > $date) {
+        if ($now > $date) {
             $late_days = $now->diffInDays($date);
             $late_date = $now->copy()->addDays($late_days);
         }
@@ -140,7 +147,8 @@ class StudentsController extends Controller
         return redirect()->route('admin.students.index');
     }
 
-    public function deletePaid($id) {
+    public function deletePaid($id)
+    {
         $order = EduOrder::with('lastEduPaid')->findOrFail($id);
         if ($order->lastEduPaid) {
             $order->lastEduPaid->delete();

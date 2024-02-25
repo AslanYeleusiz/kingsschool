@@ -44,7 +44,6 @@ Route::resource('schedule', ScheduleContorller::class)->except(['show'])->names(
 Route::resource('teachers', TeacherController::class)->except(['show'])->names('teachers');
 
 
-
 Route::get('/check-iin', [UserController::class, 'checkIin']);
 
 Route::get('/users/is_deleted', [UserController::class, 'is_deleted'])->name('users.deleted');

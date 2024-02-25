@@ -111,7 +111,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Телефон</label>
-                                    <input type="text" class="form-control" v-model="user.tel_num" name="tel_num" placeholder="Имя" required />
+                                    <input type="text" class="form-control" v-model="user.tel_num" name="tel_num" placeholder="Номер телефона" required />
                                     <validation-error :field="'tel_num'" />
                                 </div>
                             </div>

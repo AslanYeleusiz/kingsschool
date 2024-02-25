@@ -87,9 +87,14 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="block">
-                                                Список студентов
-                                            </div>
+                                            <Link :href="route(
+                                                'admin.students.index',
+                                                { teacher_id: teacher.id }
+                                            )
+                                                " class="block" title="Список студентов">
+                                            Список студентов
+                                            </Link>
+
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
@@ -206,5 +211,6 @@ export default {
     justify-content: center;
     height: 30px;
     cursor: pointer;
+    color: #000;
 }
 </style>
