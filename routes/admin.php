@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\CourseTypeController;
 use App\Http\Controllers\Admin\EduOrderController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\ScheduleContorller;
-use App\Http\Controllers\admin\TeacherController;
+use App\Http\Controllers\Admin\TeacherController;
 use Inertia\Inertia;
 
 /*
