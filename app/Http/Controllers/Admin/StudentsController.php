@@ -47,7 +47,7 @@ class StudentsController extends Controller
                 ];
             }
         }
-        $user = auth()->guard('web')->user();
+        
         $groups = null;
         if ($user->role_id == 3)
             $groups = Group::where('teacher_id', $user->id)->get();

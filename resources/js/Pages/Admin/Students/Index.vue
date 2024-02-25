@@ -164,11 +164,7 @@ export default {
         Pagination,
         Head
     },
-    props: ["orders", "groups"],
-    props: [
-        'orders',
-        'user',
-    ],
+    props: ["orders", "groups", "user"],
     data() {
         return {
             filter: {
