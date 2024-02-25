@@ -22,13 +22,14 @@ class StudentsController extends Controller
     public function index(Request $request)
     {
         $user = auth()->guard('web')->user();
+        $teacher_id = $request->teacher_id;
         $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'group', 'subject']);
-        $query->when($request->has('teacher_id'), function ($query) use ($request) {
-            return $query->whereHas('teacher', function ($teacherQuery) use ($request) {
-                $teacherQuery->where('id', $request->input('teacher_id'));
-            });
+        $query->when($user->role_id == 3, function ($query) use ($user) {
+            return $query->where('teacher_id', $user->id);
         });
-
+        $query->when($teacher_id, function ($query) use ($teacher_id) {
+            return $query->whereHas('teacher', fn($q)=>$q->where('id', $teacher_id));
+        });
         $orders = $query->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));
 
@@ -114,16 +115,16 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $eduOrder = EduOrder
-            ::findOrFail($id);
+        $eduOrder = EduOrder::findOrFail($id);
         $groupId = $request->groupId;
-
-        $user = auth()->guard('web')->user();
         DB::beginTransaction();
         if (!$groupId) {
+            if(!$request->name) {
+                return redirect()->back();
+            }
             $group = Group::create([
                 'name' => $request->name,
-                'teacher_id' => $user->id
+                'teacher_id' => $eduOrder->teacher_id
             ]);
         } else {
             $group = Group::findOrFail($groupId);
