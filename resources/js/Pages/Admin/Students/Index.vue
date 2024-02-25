@@ -229,10 +229,12 @@ export default {
     },
     methods: {
         setNewGroup(id, groupId = null) {
-            this.$inertia.put(route('admin.students.update', id), {
-                name: this.newGroup,
-                groupId: groupId
-            })
+            if(this.newGroup != '') {
+                this.$inertia.put(route('admin.students.update', id), {
+                    name: this.newGroup,
+                    groupId: groupId
+                })
+            }
         },
         setPaid(id, e) {
             if (e) {

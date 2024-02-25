@@ -34,24 +34,30 @@
             <div class="card card-primary">
                 <form method="post" @submit.prevent="submit">
                     <div class="card-body">
-                       <table class="table table-hover table-bordered table-striped dataTable dtr-inline">
-                           <thead>
-                               <tr>
-                                   <th>Время</th>
-                                   <th>Предмет</th>
-                                   <th>Учитель</th>
-                                   <th>Курс</th>
-                                   <th>Обучения</th>
-                               </tr>
-                           </thead>
-                           <tbody>
-                               <tr v-for="sch in schedules">
-                                   <td>{{sch.start_time}} - {{sch.end_time}}</td>
-                                   <td>{{sch.subject.name}}</td>
-                                   <td>{{sch.teacher.fio}}</td>
-                               </tr>
-                           </tbody>
-                       </table>
+                        <table class="table table-hover table-bordered table-striped dataTable dtr-inline">
+                            <thead>
+                                <tr>
+                                    <th>Время</th>
+                                    <th>Предмет</th>
+                                    <th>Учитель</th>
+                                    <th>Группа</th>
+                                    <th>Әрекет</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="sch in schedules">
+                                    <td>{{sch.start_time}} - {{sch.end_time}}</td>
+                                    <td>{{sch.subject.name}}</td>
+                                    <td>{{sch.teacher.fio}}</td>
+                                    <td>{{sch.group ? sch.group.name : 'Енгізілмеген'}}</td>
+                                    <td>
+                                        <button @click.prevent="deleteData(sch.id)" class="btn btn-danger" title="Жою">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <div class="row mt-5">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -65,35 +71,12 @@
                                     <input type="time" class="form-control" v-model="schedule.end_time" required />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="">Тип</label>
-                                    <select
-                                        class="form-control"
-                                        @change.prevent="search"
-                                        v-model="schedule.shift_id"
-                                        placeholder="Белсенді"
-                                    >
-                                        <option :value=1>
-                                            Дневной
-                                        </option>
-                                        <option :value=2>
-                                            Вечерный
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Предмет <span class="red">*</span></label>
-                                    <select
-                                        class="form-control"
-                                        @change.prevent="search"
-                                        v-model="schedule.subject_id"
-                                        placeholder="Белсенді"
-                                    >
+                                    <select class="form-control" v-model="schedule.subject_id" placeholder="Белсенді">
                                         <option :value="null" hidden>
                                             Выбрать
                                         </option>
@@ -101,18 +84,13 @@
                                             {{subject.name}}
                                         </option>
                                     </select>
-                                    
+
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Учитель <span class="red">*</span></label>
-                                    <select
-                                        class="form-control"
-                                        @change.prevent="search"
-                                        v-model="schedule.teacher_id"
-                                        placeholder="Белсенді"
-                                    >
+                                    <select class="form-control" @change.prevent="getGroups(schedule.teacher_id)" v-model="schedule.teacher_id" placeholder="Белсенді">
                                         <option :value="null" hidden>
                                             Выбрать
                                         </option>
@@ -120,50 +98,22 @@
                                             {{teacher.fio}}
                                         </option>
                                     </select>
-                                    
+
                                 </div>
                             </div>
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div v-if="groups.length" class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Тип курса</label>
-                                    <select
-                                        class="form-control"
-                                        @change.prevent="search"
-                                        v-model="schedule.course_type_id"
-                                        placeholder="Белсенді"
-                                    >
+                                    <label for="">Группа</label>
+                                    <select class="form-control" @change.prevent="search" v-model="schedule.group_id" placeholder="Белсенді">
                                         <option :value="null" hidden>
                                             Выбрать
                                         </option>
-                                        <option v-for="courseType in courseTypes" :value="courseType.id">
-                                            {{courseType.name}}
+                                        <option v-for="group in groups" :value="group.id">
+                                            {{group.name}}
                                         </option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Тип обучения</label>
-                                    <select
-                                        class="form-control"
-                                        @change.prevent="search"
-                                        v-model="schedule.train_type_id"
-                                        placeholder="Белсенді"
-                                    >
-                                        <option :value="null" hidden>
-                                            Выбрать
-                                        </option>
-                                        <option v-for="trainType in trainTypes" :value="trainType.id">
-                                            {{trainType.name}}
-                                        </option>
-                                    </select>
-                                    
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                     <div class="card-footer">
@@ -196,7 +146,7 @@
             ValidationError,
             Head
         },
-        props: ['schedules', 'date', 'day', 'subjects', 'teachers', 'courseTypes', 'trainTypes', 'shifts'],
+        props: ['schedules', 'date', 'day', 'subjects', 'teachers'],
         data() {
             return {
                 schedule: {
@@ -204,16 +154,20 @@
                     end_time: null,
                     subject_id: null,
                     teacher_id: null,
-                    shift_id: 1,
-                    course_type_id: 1,
-                    train_type_id: 1,
+                    group_id: null,
                     date: this.date,
                     day: route().params.day,
                 },
+                groups: [],
                 days: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресение'],
             }
         },
         methods: {
+            getGroups(id) {
+                axios.get(route('admin.schedule.getGroups', id)).then((res) => {
+                    this.groups = res.data
+                })
+            },
             submit() {
                 this.$inertia.post(
                     route("admin.schedule.store"),
@@ -223,6 +177,24 @@
                             console.log("The new contact has been saved"),
                     }
                 );
+            },
+            deleteData(id) {
+                Swal.fire({
+                    title: "Жоюға сенімдісіз бе",
+                    text: "Қайтып қалпына келмеуі мүмкін!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Иә, жоямын!",
+                    cancelButtonText: "Болдырмау",
+                }).then((result) => {
+                    if (result.isConfirmed && !length) {
+                        this.$inertia.delete(
+                            route("admin.schedule.destroy", id)
+                        );
+                    }
+                });
             },
         },
     };

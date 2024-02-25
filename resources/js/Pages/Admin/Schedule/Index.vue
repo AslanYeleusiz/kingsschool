@@ -75,22 +75,14 @@
                                                                     </td>
                                                                     
                                                                     <td>
+                                                                        {{
+                                                                            schedule.group ? schedule.group.name : 'Вне группы'
+                                                                        }}
+                                                                    </td>
+                                                                    
+                                                                    
+                                                                    <td>
                                                                         <div class="btn-group btn-group-sm">
-
-                                                                            <Link :href="
-                                                                                route(
-                                                                                    'admin.schedule.edit',
-                                                                                    {
-                                                                                        schedule:
-                                                                                            schedule.id,
-                                                                                    }
-                                                                                )
-                                                                            " class="btn btn-primary" title="Өзгерту">
-                                                                            <i class="fas fa-edit"></i>
-                                                                            </Link>
-
-
-
                                                                             <button @click.prevent="
                                                                                 deleteData(
                                                                                     schedule.id
@@ -154,6 +146,15 @@
                     this.toggleCollapse(e.date.format('YYYY-MM-DD'))
                 });
             });
+            var currentDate = new Date();
+            var dayOfWeek = currentDate.getDay();
+
+            // Adjust the representation to start from 1 (1 for Sunday, 2 for Monday, ..., 7 for Saturday)
+            var adjustedDayOfWeek = (dayOfWeek === 0) ? 7 : dayOfWeek;
+            console.log(adjustedDayOfWeek)
+            
+            //Бітіру кк
+            this.toggleCollapse(currentDate.toISOString().slice(0, 10))
         },
         methods: {
             toggleCollapse(e) {
@@ -180,12 +181,9 @@
                     confirmButtonText: "Иә, жоямын!",
                     cancelButtonText: "Болдырмау",
                 }).then((result) => {
-                    if (result.isConfirmed && !length) {
+                    if (result.isConfirmed) {
                         this.$inertia.delete(
-                            route("admin.test.subjectPreparations.destroy", {
-                                subject: this.subject.id,
-                                preparation: id,
-                            })
+                            route("admin.schedule.destroy", id)
                         );
                     }
                 });

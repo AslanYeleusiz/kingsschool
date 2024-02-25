@@ -8,6 +8,7 @@ use App\Models\Subject;
 use App\Models\User;
 use App\Models\CourseType;
 use App\Models\TrainType;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -35,7 +36,7 @@ class ScheduleContorller extends Controller
         $filial_id = $request->filial_id ?? 2;
         $day = $request->day;
         $date = Carbon::parse($request->date)->addDays($day - 1);
-        $schedules = Schedule::with(['subject','teacher:id,fio'])->whereDate('date', $date)->orderBy('start_time')->get();
+        $schedules = Schedule::with(['subject','teacher:id,fio','group'])->whereDate('date', $date)->orderBy('start_time')->get();
         
         $subjects = Subject::get();
         $teachers = User::where('filial_id', $filial_id)->where('role_id', 3)->get();
@@ -84,10 +85,8 @@ class ScheduleContorller extends Controller
            'minutes' => $minutes,
            'subject_id' => $request->subject_id,
            'teacher_id' => $request->teacher_id,
-           'shift_id' => $request->shift_id,
-           'course_type_id' => $request->course_type_id,
-           'train_type_id' => $request->train_type_id,
            'day' => $request->day,
+           'group_id' => $request->group_id,
         ]);
         return redirect()->back()->withSuccess('Успешно сохранено');
     }
@@ -106,7 +105,7 @@ class ScheduleContorller extends Controller
         $startweekdate = $date->copy()->startOfWeek(); 
         // Calculate the end date of the week
         $endweekdate = $date->copy()->endOfWeek(); 
-        $schedules = Schedule::with(['subject','teacher:id,fio'])->whereDate('date', '>=',$startweekdate)->whereDate('date','<=',$endweekdate)->orderBy('date')->get();
+        $schedules = Schedule::with(['subject','teacher:id,fio','group'])->whereDate('date', '>=',$startweekdate)->whereDate('date','<=',$endweekdate)->orderBy('date')->get();
         foreach($schedules as $schedule) {
             $schedule->start_time = Carbon::parse($schedule->start_time)->format('H:i');
             $schedule->end_time = Carbon::parse($schedule->end_time)->format('H:i');
@@ -116,6 +115,11 @@ class ScheduleContorller extends Controller
             'startweekdate' => $startweekdate->copy()->format('d.m.Y'),
             'endweekdate' => $endweekdate->copy()->format('d.m.Y')
         ]);
+    }
+    
+    public function getGroups($id) {
+        $groups = Group::where('teacher_id', $id)->get();
+        return response()->json($groups);
     }
 
     /**
@@ -147,8 +151,11 @@ class ScheduleContorller extends Controller
      * @param  \App\Models\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Schedule $schedule)
+    public function destroy($id)
     {
-        //
+        Schedule
+        ::findOrFail($id)->delete();
+        return redirect()->back();
+        
     }
 }
