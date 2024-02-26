@@ -96,7 +96,15 @@
                                             </div>
                                         </td>
                                         <td>
-
+                                            <div class="d-f j-c">
+                                                <div class="paidBlock">
+                                                    <div v-if="teacher.lastEduPaid.status == 1" class="paid success">Оплачено</div>
+                                                    <div v-else-if="teacher.lastEduPaid.status == 2" class="paid danger">Не оплачено</div>
+                                                    <div v-else class="paid black">Просрочено
+                                                    </div>
+                                                    <div class="paid date">{{ teacher.lastEduPaid.date }}</div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="block">
@@ -211,6 +219,10 @@ export default {
 };
 </script>
 <style>
+    .table td,
+    .table th {
+        text-align: center;
+    }
 .avatar {
     width: 40px;
     height: 40px;

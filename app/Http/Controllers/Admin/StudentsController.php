@@ -53,8 +53,10 @@ class StudentsController extends Controller
 
         $groups = null;
         if ($user->role_id == 3)
-            $groups = Group::with('students.user')->where('teacher_id', $user->id)->get();
-
+            $groups = Group::where('teacher_id', $user->id)->get();
+        if ($teacher_id)
+            $groups = Group::where('teacher_id', $teacher_id)->get();
+        
         return Inertia::render('Admin/Students/Index', [
             'orders' => $orders,
             'groups' => $groups,
@@ -176,7 +178,7 @@ class StudentsController extends Controller
             'late_date' => $late_date
         ]);
 
-        return redirect()->route('admin.students.index');
+        return redirect()->back();
     }
 
     public function deletePaid($id)
@@ -185,7 +187,7 @@ class StudentsController extends Controller
         if ($order->lastEduPaid) {
             $order->lastEduPaid->delete();
         }
-        return redirect()->route('admin.students.index');
+        return redirect()->back();
     }
 
     public function destroyGroup($group_id)
@@ -194,4 +196,14 @@ class StudentsController extends Controller
         EduOrder::where('group_id', $group_id)->update(['group_id' => null]);
         return redirect()->back()->withSuccess('Успешно удалено');
     }
+    
+    public function destroyOrder($order_id)
+    {
+        EduOrder::findOrFail($order_id)->update([
+            'group_id' => null
+        ]);
+        return redirect()->back()->withSuccess('Успешно удалено');
+    }
+    
+    
 }

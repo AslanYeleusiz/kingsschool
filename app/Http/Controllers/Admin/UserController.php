@@ -121,6 +121,7 @@ class UserController extends Controller
             'avatar' => $file_path,
             'filial_id' => $request->filial_id,
             'role_id' => $request->role_id,
+            'start_edu_date' => $request->start_edu_date,
         ]);
 
         if ($request->role_id == 4) {
@@ -218,6 +219,7 @@ class UserController extends Controller
             'avatar' => $file_path,
             'filial_id' => $request->filial_id,
             'role_id' => $request->role_id,
+            'start_edu_date' => $request->start_edu_date,
         ]);
 
         return redirect()->back()->withSuccess('Успешно сохранено');

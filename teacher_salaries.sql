@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 25 2024 г., 21:28
+-- Время создания: Фев 26 2024 г., 18:54
 -- Версия сервера: 10.5.17-MariaDB
 -- Версия PHP: 8.0.22
 
@@ -24,19 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `schedules`
+-- Структура таблицы `teacher_salaries`
 --
 
-CREATE TABLE `schedules` (
+CREATE TABLE `teacher_salaries` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `date` date NOT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
-  `minutes` int(11) NOT NULL,
-  `subject_id` bigint(20) UNSIGNED NOT NULL,
-  `day` int(11) NOT NULL,
   `teacher_id` bigint(20) UNSIGNED NOT NULL,
-  `group_id` bigint(20) UNSIGNED NOT NULL
+  `date` date NOT NULL,
+  `price` int(11) NOT NULL,
+  `late_days` int(11) DEFAULT NULL,
+  `late_date` date DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -44,9 +44,9 @@ CREATE TABLE `schedules` (
 --
 
 --
--- Индексы таблицы `schedules`
+-- Индексы таблицы `teacher_salaries`
 --
-ALTER TABLE `schedules`
+ALTER TABLE `teacher_salaries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54,10 +54,10 @@ ALTER TABLE `schedules`
 --
 
 --
--- AUTO_INCREMENT для таблицы `schedules`
+-- AUTO_INCREMENT для таблицы `teacher_salaries`
 --
-ALTER TABLE `schedules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `teacher_salaries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

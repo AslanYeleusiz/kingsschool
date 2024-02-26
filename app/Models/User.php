@@ -34,6 +34,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $request->where('is_deleted', 1);
     }
+    public function lastEduPaid()
+    {
+        return $this->hasOne(TeacherSalary::class, 'teacher_id')->latest('id');
+    }
 
 
     // Rest omitted for brevity

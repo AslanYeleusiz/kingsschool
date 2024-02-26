@@ -131,6 +131,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Дата начало обучения</label>
+                                    <input type="date" class="form-control" v-model="user.start_edu_date" required />
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary mr-1">
                                 Сақтау
