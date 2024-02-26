@@ -232,18 +232,4 @@ export default {
     border-radius: 50%;
 }
 
-.gap-20 {
-    gap: 20px;
-}
-
-.block {
-    background: #F2F3F4;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    cursor: pointer;
-    color: #000;
-}
 </style>

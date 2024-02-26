@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('paid_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('edu_paid_order_id')->on('users')->cascadeOnDelete();
+            $table->foreignId('edu_paid_order_id')->on('edu_orders')->cascadeOnDelete();
             $table->integer('status')->default(1);
             $table->timestamps();
         });

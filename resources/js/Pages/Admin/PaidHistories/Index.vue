@@ -1,12 +1,12 @@
 <template>
     <head>
-        <title>Админ панель | Студенты</title>
+        <title>Админ панель | История платежей студентов</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Студенты</h1>
+                    <h1 class="m-0">История платежей студентов</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -17,7 +17,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Студенты
+                            История платежей студентов
                         </li>
                     </ol>
                 </div>
@@ -45,15 +45,21 @@
                                         <th></th>
                                         <th>ФИО</th>
                                         <th>Статус</th>
+                                        <th>Преподаватель</th>
+                                        <th>Подтверждение</th>
                                         <th>Номер телефона</th>
+                                        <th>Действие</th>
                                     </tr>
                                     <tr class="filters">
+                                        <td></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td>
                                             <input v-model="filter.fio" class="form-control" placeholder="ФИО"
                                                 @keyup.enter="search" />
                                         </td>
+                                        <td></td>
                                         <td></td>
                                     </tr>
                                 </thead>
@@ -68,28 +74,50 @@
                                         </td>
                                         <td class="d-f aj-c">
                                             <div class="avatar"
-                                                :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }">
+                                                :style="{ backgroundImage: `url(/storage/files/${order.paid_student.user.avatar})` }">
                                             </div>
                                         </td>
-                                        <td>{{ order.user.fio }}</td>
+                                        <td>{{ order.paid_student.user.fio }}</td>
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="paidBlock">
-                                                    <div v-if="order.status == 1" class="paid success"
-                                                        @click="setPaid(order.id, 0)">Оплачено</div>
-                                                    <div v-else-if="order.status == 2" class="paid danger"
-                                                        @click="setPaid(order.id, 1)">Не оплачено</div>
-                                                    <div v-else class="paid black" @click="setPaid(order.id, 1)">Просрочено
-                                                    </div>
+                                                    <div v-if="order.status == 2" class="paid success">Подтверждено</div>
+                                                    <div v-else class="paid danger">Не подтверждено</div>
                                                     <div class="paid date">{{ order.created_at }}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ order.paid_student.teacher.fio }} /
+                                            <Link :href="route(
+                                                'admin.students.index',
+                                                { teacher_id: order.paid_student.teacher_id }
+                                            )
+                                                " class="block" title="Список студентов">
+                                            Список студентов
+                                            </Link>
+                                        </td>
+                                        <td>
+                                            <div class="d-f j-c">
+                                                <div class="paidBlock">
+                                                    <div v-if="order.status == 1" class="paid warning"
+                                                        @click="setPaid(order.id)">Подтвердить</div>
+                                                    <div v-else class="paid success">Подтверждено</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="tablemask" title="Написать по Whatsapp">
-                                                    {{ order.user.tel_num }}
+                                                    {{ order.paid_student.user.tel_num }}
                                                 </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <button @click.prevent="deleteData(order.id, true)" class="btn btn-danger"
+                                                    title="Жою">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -120,48 +148,48 @@ export default {
     data() {
         return {
             filter: {
-                name: route().params.name ? route().params.name : null,
+                fio: route().params.fio ? route().params.fio : null,
             },
             loading: 0,
             newGroup: '',
         };
     },
     methods: {
-        setPaid(id, e) {
-            if (e) {
-                Swal.fire({
-                    title: "Подтвердите оплату",
-                    icon: "success",
-                    showCancelButton: true,
-                    confirmButtonColor: "#71DD37",
-                    cancelButtonColor: "#adb5bd",
-                    confirmButtonText: "Подтвердить",
-                    cancelButtonText: "Отклонить",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.$inertia.post(route('admin.students.paid', id))
-                    }
-                });
-            } else {
-                Swal.fire({
-                    title: "Отменить оплату?",
-                    icon: "error",
-                    showCancelButton: true,
-                    confirmButtonColor: "#71DD37",
-                    cancelButtonColor: "#adb5bd",
-                    confirmButtonText: "Подтвердить",
-                    cancelButtonText: "Отклонить",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.$inertia.post(route('admin.students.deletePaid', id))
-                    }
-                });
-            }
+        setPaid(id) {
+            Swal.fire({
+                title: "Подтвердите оплату",
+                icon: "success",
+                showCancelButton: true,
+                confirmButtonColor: "#71DD37",
+                cancelButtonColor: "#adb5bd",
+                confirmButtonText: "Подтвердить",
+                cancelButtonText: "Отклонить",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$inertia.post(route('admin.paidHistories.paid', id))
+                }
+            });
+        },
+        deleteData(id) {
+            Swal.fire({
+                title: "Жоюға сенімдісіз бе?",
+                text: "Қайтып қалпына келмеуі мүмкін!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Иә, жоямын!",
+                cancelButtonText: "Жоқ",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$inertia.delete(route('admin.paidHistories.delete', id))
+                }
+            });
         },
         search() {
             this.loading = 1
             const params = this.clearParams(this.filter);
-            this.$inertia.get(route('admin.students.index'), params)
+            this.$inertia.get(route('admin.paidHistories.index'), params)
         },
     }
 };

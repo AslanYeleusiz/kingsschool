@@ -10,8 +10,8 @@ class PaidHistory extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function user()
+    public function paidStudent()
     {
-        return $this->belongsTo(User::class, 'edu_paid_order_id');
+        return $this->belongsTo(EduOrder::class, 'edu_paid_order_id');
     }
 }

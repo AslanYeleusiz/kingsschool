@@ -160,7 +160,7 @@
                         role: [1,2,3],
                     },
                     {
-                        name: "Преподователи",
+                        name: "Преподаватели",
                         font: "fa-cogs",
                         route_name: "admin.teachers.index",
                         menu_active: ["admin.teachers"],

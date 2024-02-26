@@ -428,56 +428,89 @@ button {
 .table td {
     vertical-align: inherit;
 }
+
 .tablemask {
-        padding: 8px;
-        background: #fff;
-        width: 100%;
-        max-width: 175px;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-        outline: 1px solid #fff;
-    }
-    
-    .tablemask:hover {
-        box-shadow: rgb(214, 214, 214) 0px 5px 5px 0px;
-    }
-    .tablemask:active {
-        box-shadow: none;
-        outline: 1px solid rgb(214, 214, 214);
-    }
-    
-    
-    .paidBlock {
-        background: #fff;
-        display: flex;
-        border-radius: 10px;
-    }
-    .paidBlock .paid {
-        padding: 8px 20px;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
-        color: #000000;
-    }
-    .paidBlock .success,
-    .paidBlock .danger,
-    .paidBlock .black {
-        cursor: pointer;
-        border-radius: 10px;
-    }
-    .paidBlock .success {
-        background: #B9FF94;
-    }
-    .paidBlock .danger {
-        background: #FF6B6B;
-        padding: 8px;
-    }
-    .paidBlock .black {
-        background: #000000;
-        color: #fff;
-    }
+    padding: 8px;
+    background: #fff;
+    width: 100%;
+    max-width: 175px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    outline: 1px solid #fff;
+}
+
+.tablemask:hover {
+    box-shadow: rgb(214, 214, 214) 0px 5px 5px 0px;
+}
+
+.tablemask:active {
+    box-shadow: none;
+    outline: 1px solid rgb(214, 214, 214);
+}
+
+
+.paidBlock {
+    background: #fff;
+    display: flex;
+    border-radius: 10px;
+}
+
+.paidBlock .paid {
+    padding: 8px 20px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+
+.paidBlock .success,
+.paidBlock .danger,
+.paidBlock .black,
+.paidBlock .warning {
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.paidBlock .success {
+    background: #B9FF94;
+}
+
+.paidBlock .danger {
+    background: #FF6B6B;
+    padding: 8px;
+}
+
+.paidBlock .black {
+    background: #000000;
+    color: #fff;
+}
+
+.paidBlock .warning {
+    background-color: #ffc107;
+}
 
 /*Стили для логин страинцы енд*/
+
+.gap-20 {
+    gap: 20px;
+}
+
+.block {
+    background: #F2F3F4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    cursor: pointer;
+    color: #000;
+    transition: 0.3s all ease;
+}
+
+.block:hover {
+    color: #000;
+    background: #B9FF94;
+}

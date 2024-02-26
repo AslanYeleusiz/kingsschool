@@ -179,7 +179,7 @@ class StudentsController extends Controller
         ]);
 
         PaidHistory::create([
-            'edu_paid_order_id' => $eduOrder->user->id,
+            'edu_paid_order_id' => $eduOrder->id,
         ]);
 
 

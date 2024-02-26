@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 26 2024 г., 18:54
+-- Время создания: Фев 26 2024 г., 21:24
 -- Версия сервера: 10.5.17-MariaDB
 -- Версия PHP: 8.1.9
 
@@ -40,9 +40,9 @@ CREATE TABLE `paid_histories` (
 --
 
 INSERT INTO `paid_histories` (`id`, `edu_paid_order_id`, `status`, `created_at`, `updated_at`) VALUES
-(7, 3, 1, '2024-02-26 18:33:48', '2024-02-26 18:33:48'),
-(8, 11, 1, '2024-02-26 18:33:56', '2024-02-26 18:33:56'),
-(9, 9, 1, '2024-02-26 18:34:04', '2024-02-26 18:34:04');
+(4, 2, 1, '2024-02-26 20:35:50', '2024-02-26 20:35:50'),
+(5, 6, 2, '2024-02-26 20:45:41', '2024-02-26 21:12:44'),
+(6, 5, 1, '2024-02-26 21:12:38', '2024-02-26 21:12:38');
 
 --
 -- Индексы сохранённых таблиц
@@ -62,7 +62,7 @@ ALTER TABLE `paid_histories`
 -- AUTO_INCREMENT для таблицы `paid_histories`
 --
 ALTER TABLE `paid_histories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
