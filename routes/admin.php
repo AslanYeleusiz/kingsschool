@@ -32,6 +32,7 @@ Route::get('/', function () {
 
 Route::resource('roles', RoleController::class)->except(['show'])->names('roles');
 Route::resource('filials', FilialController::class)->except(['show'])->names('filials');
+Route::get('/filials/{id}/getTeachers', [FilialController::class, 'getTeachers'])->name('filials.getTeachers');
 Route::resource('users', UserController::class)->except(['show'])->names('users');
 Route::resource('users/{id}/edu_orders', EduOrderController::class)->except(['show'])->names('eduOrders');
 Route::resource('subjects', SubjectController::class)->except(['show'])->names('subjects');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Filial;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -98,5 +99,10 @@ class FilialController extends Controller
     public function destroy(Filial $filial)
     {
         //
+    }
+
+    public function getTeachers($filial_id) {
+        $teachers = User::where('filial_id', $filial_id)->where('role_id', 3)->get();
+        return response()->json($teachers);
     }
 }

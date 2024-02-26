@@ -73,14 +73,12 @@ class UserController extends Controller
             'id' => 2,
             'name' => 'Вечерний'
         ];
-        $teachers = User::where('role_id', 3)->get();
         return Inertia::render('Admin/Users/Create', [
             'roles' => $roles,
             'filials' => $filials,
             'subjects' => $subjects,
             'courseTypes' => $courseTypes,
             'trainTypes' => $trainTypes,
-            'teachers' => $teachers,
             'shifts' => $shifts,
         ]);
     }

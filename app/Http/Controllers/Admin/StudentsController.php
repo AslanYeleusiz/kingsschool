@@ -39,6 +39,8 @@ class StudentsController extends Controller
         $now = Carbon::now();
         foreach ($orders as $order) {
             $order['lastEduPaid'] = $order->lastEduPaid;
+            $percent = $order->percent;
+            if($percent) $order->newPrice = $order->price / 100 * $percent->percent;
             if ($order['lastEduPaid']) {
                 $order['lastEduPaid']->date = Carbon::parse($order['lastEduPaid']->date)->format('d.m.Y');
             } else {
