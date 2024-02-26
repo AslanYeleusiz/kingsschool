@@ -42,6 +42,7 @@ Route::resource('students', StudentsController::class)->except(['show'])->names(
 Route::post('/students/{id}/paid', [StudentsController::class, 'paid'])->name('students.paid');
 Route::post('/students/{id}/deletePaid', [StudentsController::class, 'deletePaid'])->name('students.deletePaid');
 Route::delete('/groups/{group_id}/destroy', [StudentsController::class, 'destroyGroup'])->name('groups.destroy');
+Route::delete('/groups/{id}/destroyOrder', [StudentsController::class, 'destroyOrder'])->name('groups.destroyOrder');
 Route::resource('paidHistories', PaidController::class)->except(['show'])->names('paidHistories');
 
 
