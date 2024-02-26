@@ -11,7 +11,6 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body pt-0">
-                <!-- The calendar -->
                 <div ref="calendar"></div>
             </div>
             <!-- /.card-body -->
@@ -19,7 +18,7 @@
         <div v-if="schedules" class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="mb-3">{{startweekdate +'-'+ endweekdate}}</h3>
+                    <h3 class="mb-3">{{ startweekdate + '-' + endweekdate }}</h3>
                     <div class="row">
                         <div class="col-sm-12">
                             <table class="table table-hover">
@@ -29,65 +28,59 @@
                                             <td>
                                                 <div class="d-flex justify-content-between">
                                                     {{ day }}
-                                                    <Link :href="
-                                                        route(
-                                                            'admin.schedule.create',
-                                                            {
-                                                                date:
-                                                                    startweekdate,
-                                                                day: index+1
-                                                            }
-                                                        )
-                                                    " class="btn btn-primary" title="Өзгерту">
-                                                        Изменить
+                                                    <Link :href="route(
+                                                        'admin.schedule.create',
+                                                        {
+                                                            date:
+                                                                startweekdate,
+                                                            day: index + 1
+                                                        }
+                                                    )
+                                                        " class="btn btn-primary" title="Өзгерту">
+                                                    Изменить
                                                     </Link>
                                                 </div>
-                                                
+
                                             </td>
                                         </tr>
                                         <tr class="expandable-body">
                                             <td>
                                                 <div class="p-0" style="">
-                                                    <table class="table mt-2 mb-3 table-hover table-bordered table-striped dataTable dtr-inline">
+                                                    <table
+                                                        class="table mt-2 mb-3 table-hover table-bordered table-striped dataTable dtr-inline">
                                                         <tbody>
-                                                            <tr class="odd" v-for="schedule in schedules" :key="
-                                                                    'schedule' +
-                                                                    schedule.id
-                                                                ">
-                                                                <template v-if="schedule.day == index+1">
+                                                            <tr class="odd" v-for="schedule in schedules" :key="'schedule' +
+                                                                schedule.id">
+                                                                <template v-if="schedule.day == index + 1">
                                                                     <td>
-                                                                        {{
-                                                                            schedule.start_time
-                                                                        }} - {{
-                                                                            schedule.end_time
-                                                                        }}
+                                                                        {{ schedule.start_time }} - {{ schedule.end_time }}
                                                                     </td>
                                                                     <td>
                                                                         {{
                                                                             schedule.subject.name
                                                                         }}
                                                                     </td>
-                                                                    
+
                                                                     <td>
                                                                         {{
                                                                             schedule.teacher.fio
                                                                         }}
                                                                     </td>
-                                                                    
+
                                                                     <td>
                                                                         {{
                                                                             schedule.group ? schedule.group.name : 'Вне группы'
                                                                         }}
                                                                     </td>
-                                                                    
-                                                                    
+
+
                                                                     <td>
                                                                         <div class="btn-group btn-group-sm">
                                                                             <button @click.prevent="
-                                                                                deleteData(
-                                                                                    schedule.id
-                                                                                )
-                                                                            " class="btn btn-danger" title="Жою">
+                                                                            deleteData(
+                                                                                schedule.id
+                                                                            )
+                                                                                " class="btn btn-danger" title="Жою">
                                                                                 <i class="fas fa-trash"></i>
                                                                             </button>
                                                                         </div>
@@ -111,84 +104,84 @@
 </template>
 
 <script>
-    import AdminLayout from "../../../Layouts/AdminLayout.vue";
-    import {
-        Link,
-        Head
-    } from "@inertiajs/inertia-vue3";
+import AdminLayout from "../../../Layouts/AdminLayout.vue";
+import {
+    Link,
+    Head
+} from "@inertiajs/inertia-vue3";
 
-    export default {
-        components: {
-            AdminLayout,
-            Link
-        },
-        data() {
-            return {
-                days: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресение'],
-                currentDate: route().params.date ?? '',
-                schedules: null,
-                startweekdate: null,
-                endweekdate: null,
-            }
-        },
-
-        mounted() {
-            // Initialize the calendar
-            this.$nextTick(() => {
-                console.log('Next tick executed');
-                const $calendar = $(this.$refs.calendar);
-
-                $calendar.datetimepicker({
-                    format: 'L',
-                    inline: true
-                });
-                $calendar.on("change.datetimepicker", (e) => {
-                    this.toggleCollapse(e.date.format('YYYY-MM-DD'))
-                });
-            });
-            var currentDate = new Date();
-            var dayOfWeek = currentDate.getDay();
-
-            // Adjust the representation to start from 1 (1 for Sunday, 2 for Monday, ..., 7 for Saturday)
-            var adjustedDayOfWeek = (dayOfWeek === 0) ? 7 : dayOfWeek;
-            console.log(adjustedDayOfWeek)
-            
-            //Бітіру кк
-            this.toggleCollapse(currentDate.toISOString().slice(0, 10))
-        },
-        methods: {
-            toggleCollapse(e) {
-                console.log(e)
-                this.currentDate = e
-                axios.get(route("admin.schedule.getSchedule"), {
-                    params: {
-                        date: this.currentDate
-                    }
-                }).then((res) => {
-                    this.schedules = res.data.schedules
-                    this.startweekdate = res.data.startweekdate
-                    this.endweekdate = res.data.endweekdate
-                });
-            },
-            deleteData(id) {
-                Swal.fire({
-                    title: "Жоюға сенімдісіз бе",
-                    text: "Қайтып қалпына келмеуі мүмкін!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Иә, жоямын!",
-                    cancelButtonText: "Болдырмау",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.$inertia.delete(
-                            route("admin.schedule.destroy", id)
-                        );
-                    }
-                });
-            },
+export default {
+    components: {
+        AdminLayout,
+        Link
+    },
+    data() {
+        return {
+            days: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресение'],
+            currentDate: route().params.date ?? '',
+            schedules: null,
+            startweekdate: null,
+            endweekdate: null,
         }
+    },
+
+    mounted() {
+        // Initialize the calendar
+        this.$nextTick(() => {
+            console.log('Next tick executed');
+            const $calendar = $(this.$refs.calendar);
+
+            $calendar.datetimepicker({
+                format: 'L',
+                inline: true
+            });
+            $calendar.on("change.datetimepicker", (e) => {
+                this.toggleCollapse(e.date.format('YYYY-MM-DD'))
+            });
+        });
+        var currentDate = new Date();
+        var dayOfWeek = currentDate.getDay();
+
+        // Adjust the representation to start from 1 (1 for Sunday, 2 for Monday, ..., 7 for Saturday)
+        var adjustedDayOfWeek = (dayOfWeek === 0) ? 7 : dayOfWeek;
+        console.log(adjustedDayOfWeek)
+
+        //Бітіру кк
+        this.toggleCollapse(currentDate.toISOString().slice(0, 10))
+    },
+    methods: {
+        toggleCollapse(e) {
+            console.log(e)
+            this.currentDate = e
+            axios.get(route("admin.schedule.getSchedule"), {
+                params: {
+                    date: this.currentDate
+                }
+            }).then((res) => {
+                this.schedules = res.data.schedules
+                this.startweekdate = res.data.startweekdate
+                this.endweekdate = res.data.endweekdate
+            });
+        },
+        deleteData(id) {
+            Swal.fire({
+                title: "Жоюға сенімдісіз бе",
+                text: "Қайтып қалпына келмеуі мүмкін!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Иә, жоямын!",
+                cancelButtonText: "Болдырмау",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$inertia.delete(
+                        route("admin.schedule.destroy", id)
+                    );
+                }
+            });
+        },
     }
+}
 
 </script>

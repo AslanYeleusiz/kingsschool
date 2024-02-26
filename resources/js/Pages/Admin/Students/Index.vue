@@ -228,20 +228,20 @@ export default {
         };
     },
     methods: {
-        setNewGroup(id, groupId = null){
+        setNewGroup(id, groupId = null) {
             this.$inertia.put(route('admin.students.update', id), {
                 name: this.newGroup,
                 groupId: groupId
             })
         },
         setGroup(id, groupId = null) {
-            if(this.orders.data.find(order=>order.id == id).group_id == 0) {
+            if (this.orders.data.find(order => order.id == id).group_id == 0) {
                 this.newGroup = '';
             } else {
-                this.setNewGroup(id,groupId);
+                this.setNewGroup(id, groupId);
             }
         },
-        
+
         setPaid(id, e) {
             if (e) {
                 Swal.fire({

@@ -36,8 +36,8 @@ class ScheduleContorller extends Controller
         $filial_id = $request->filial_id ?? 2;
         $day = $request->day;
         $date = Carbon::parse($request->date)->addDays($day - 1);
-        $schedules = Schedule::with(['subject','teacher:id,fio','group'])->whereDate('date', $date)->orderBy('start_time')->get();
-        
+        $schedules = Schedule::with(['subject', 'teacher:id,fio', 'group'])->whereDate('date', $date)->orderBy('start_time')->get();
+
         $subjects = Subject::get();
         $teachers = User::where('filial_id', $filial_id)->where('role_id', 3)->get();
         $courseTypes = CourseType::get();
@@ -51,7 +51,7 @@ class ScheduleContorller extends Controller
             'id' => 2,
             'name' => 'Вечерний'
         ];
-        
+
         return Inertia::render('Admin/Schedule/Create', [
             'schedules' => $schedules,
             'date' => $date->format('d.m.Y'),
@@ -62,7 +62,6 @@ class ScheduleContorller extends Controller
             'trainTypes' => $trainTypes,
             'shifts' => $shifts,
         ]);
-        
     }
 
     /**
@@ -79,14 +78,14 @@ class ScheduleContorller extends Controller
         $minutes = $end_time->diffInMinutes($start_time);
         $date = Carbon::parse($request->date);
         Schedule::create([
-           'start_time' => $start_time,
-           'end_time' => $end_time,
-           'date' => $date,
-           'minutes' => $minutes,
-           'subject_id' => $request->subject_id,
-           'teacher_id' => $request->teacher_id,
-           'day' => $request->day,
-           'group_id' => $request->group_id,
+            'start_time' => $start_time,
+            'end_time' => $end_time,
+            'date' => $date,
+            'minutes' => $minutes,
+            'subject_id' => $request->subject_id,
+            'teacher_id' => $request->teacher_id,
+            'day' => $request->day,
+            'group_id' => $request->group_id,
         ]);
         return redirect()->back()->withSuccess('Успешно сохранено');
     }
@@ -99,14 +98,24 @@ class ScheduleContorller extends Controller
      */
     public function getSchedule(Request $request)
     {
+        $user = auth()->guard('web')->user();
         $filial_id = $request->filial_id ?? 2;
         $date = Carbon::parse($request->date);
-        // Calculate the start date of the week
-        $startweekdate = $date->copy()->startOfWeek(); 
-        // Calculate the end date of the week
-        $endweekdate = $date->copy()->endOfWeek(); 
-        $schedules = Schedule::with(['subject','teacher:id,fio','group'])->whereDate('date', '>=',$startweekdate)->whereDate('date','<=',$endweekdate)->orderBy('date')->get();
-        foreach($schedules as $schedule) {
+        $startweekdate = $date->copy()->startOfWeek();
+        $endweekdate = $date->copy()->endOfWeek();
+        // $schedules = Schedule::with(['subject','teacher:id,fio','group'])->whereDate('date', '>=',$startweekdate)->whereDate('date','<=',$endweekdate)->orderBy('date')->get();
+        $schedules = Schedule::with(['subject', 'teacher:id,fio,filial_id', 'group'])
+            ->whereDate('date', '>=', $startweekdate)
+            ->whereDate('date', '<=', $endweekdate)
+            ->whereHas('teacher', function ($q) use ($user) {
+                $q->where('filial_id', $user->filial_id);
+            })
+            ->when($user->role_id == 3, function($q) use ($user) {
+                return $q->where('teacher_id', $user->id);
+            })
+            ->orderBy('date')
+            ->get();
+        foreach ($schedules as $schedule) {
             $schedule->start_time = Carbon::parse($schedule->start_time)->format('H:i');
             $schedule->end_time = Carbon::parse($schedule->end_time)->format('H:i');
         }
@@ -116,8 +125,9 @@ class ScheduleContorller extends Controller
             'endweekdate' => $endweekdate->copy()->format('d.m.Y')
         ]);
     }
-    
-    public function getGroups($id) {
+
+    public function getGroups($id)
+    {
         $groups = Group::where('teacher_id', $id)->get();
         return response()->json($groups);
     }
@@ -154,8 +164,7 @@ class ScheduleContorller extends Controller
     public function destroy($id)
     {
         Schedule
-        ::findOrFail($id)->delete();
+            ::findOrFail($id)->delete();
         return redirect()->back();
-        
     }
 }
