@@ -24,11 +24,13 @@ class StudentsController extends Controller
         $user = auth()->guard('web')->user();
         $teacher_id = $request->teacher_id;
         $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'group', 'subject']);
-        $query->when($user->role_id == 3, function ($query) use ($user) {
-            return $query->where('teacher_id', $user->id);
+        $query->when($user->role_id == 3 || $user->role_id == 2, function ($query) use ($user) {
+            if($user->role_id == 3)
+                return $query->where('teacher_id', $user->id);
+            else return $query->whereHas('teacher', fn($q)=>$q->where('filial_id',$user->filial_id));
         });
         $query->when($teacher_id, function ($query) use ($teacher_id) {
-            return $query->whereHas('teacher', fn($q)=>$q->where('id', $teacher_id));
+            return $query->where('teacher_id', $teacher_id);
         });
         $orders = $query->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));

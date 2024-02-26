@@ -174,7 +174,7 @@
                                         <span class="arrow mr-3">&#9660;</span>
                                     </div>
                                 </div>
-                                <div :id="'moduleContent_' + group.id" class="module-content collapse">
+                                <div :id="'moduleContent_' + group.id" class="module-content collapse show">
                                     <table class="table table-hover table-bordered table-striped dataTable dtr-inline">
                                         <thead>
                                             <tr role="row">

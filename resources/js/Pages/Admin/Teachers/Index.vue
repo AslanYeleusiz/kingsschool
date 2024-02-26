@@ -25,16 +25,13 @@
         </template>
         <template #header>
             <div class="buttons d-flex align-items-center">
-                <Link class="btn btn-primary mr-2" :href="route('admin.teachers.create')">
+                <Link class="btn btn-primary mr-2" :href="route('admin.users.create')">
                 <i class="fa fa-plus"></i> Қосу
                 </Link>
 
                 <Link class="btn btn-danger" :href="route('admin.teachers.index')">
                 <i class="fa fa-trash"></i> Фильтрді тазалау
                 </Link>
-                <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
             </div>
         </template>
         <div class="container-fluid">
@@ -50,13 +47,33 @@
                                         <th>Зарплата</th>
                                         <th>Режим работы</th>
                                         <th>Отчет</th>
+                                        <th v-if="user.role_id < 3">Филиал</th>
                                         <th>Әрекет</th>
                                     </tr>
                                     <tr class="filters">
                                         <td></td>
                                         <td>
-                                            <input v-model="filter.name" class="form-control" placeholder="Аты"
+                                            <input v-model="filter.fio" class="form-control" placeholder="Поиск..."
                                                 @keyup.enter="search" />
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td v-if="user.role_id < 3">
+                                            <select
+                                                class="form-control"
+                                                @change.prevent="search"
+                                                v-model="filter.filial_id"
+                                                placeholder="Белсенді"
+                                            >
+                                                <option :value="null">
+                                                    Барлығы
+                                                </option>
+                                                <option v-for="filial in filials" :value="filial.id">
+                                                    {{filial.name}}
+                                                </option>
+                                            </select>
+                                            
                                         </td>
                                         <td></td>
                                     </tr>
@@ -95,6 +112,9 @@
                                             Список студентов
                                             </Link>
 
+                                        </td>
+                                        <td v-if="user.role_id < 3">
+                                            {{teacher.filial.name}}
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
@@ -135,11 +155,12 @@ export default {
         Pagination,
         Head
     },
-    props: ["teachers"],
+    props: ["teachers","filials","user"],
     data() {
         return {
             filter: {
-                name: route().params.name ? route().params.name : null,
+                fio: route().params.fio ? route().params.fio : null,
+                filial_id: route().params.filial_id ? route().params.filial_id : null,
             },
             loading: 0,
         };
