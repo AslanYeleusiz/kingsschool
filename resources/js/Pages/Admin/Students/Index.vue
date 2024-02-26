@@ -34,7 +34,7 @@
                 <i class="fa fa-trash"></i> Фильтрді тазалау
                 </Link>
                 
-                <div v-if="checkStudents()" class="ml-2 badge badge-danger"><h3>Ваши студенты не распределены по группам</h3></div>
+                <div v-if="checkStudents()" class="ml-2 badge badge-danger"><h3>{{groups ? 'Ваши' : 'Некоторые'}} студенты не распределены по группам</h3></div>
             </div>
         </template>
         <div class="container-fluid">
@@ -104,7 +104,17 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td v-if="user.role_id < 3">{{ order.price }}</td>
+                                        <td v-if="user.role_id < 3">
+                                            <div class="d-f j-c">
+                                                <div class="paidBlock">
+                                                    <div v-if="order.lastEduPaid.status == 1" class="paid success no-hover">{{order.price.toLocaleString()}}</div>
+                                                    <div v-else-if="order.lastEduPaid.status == 2" class="paid pd danger no-hover" @click="setPaid(order.id, 1)">{{order.price.toLocaleString()}}</div>
+                                                    <div v-else class="paid pd black no-hover" @click="setPaid(order.id, 1)">{{order.price.toLocaleString()}}
+                                                    </div>
+                                                    <div class="paid date no-hover">{{ order.newPrice.toLocaleString() }}</div>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <template v-if="groups">
                                             <td v-if="groups && order.group_id != 0">
                                                 <select class="form-control" @change.prevent="setGroup(order.id, order.group_id)" v-model="order.group_id" placeholder="Белсенді">
@@ -135,6 +145,64 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <tr class="odd">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Оплачено</td>
+                                        <td>
+                                            <div class="d-f j-c">
+                                                <div class="paidBlock">
+                                                    <div class="paid success no-hover">{{calculatePrice(1, 0)}}</div>
+                                                    <div class="paid date no-hover">{{ calculatePrice(1, 1)}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Не оплачено</td>
+                                        <td>
+                                            <div class="d-f j-c">
+                                                <div class="paidBlock">
+                                                    <div class="paid pd danger no-hover">{{calculatePrice(2, 0)}}</div>
+                                                    <div class="paid date no-hover">{{ calculatePrice(2, 1)}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Общее</td>
+                                        <td>
+                                            <div class="d-f j-c">
+                                                <div class="paidBlock">
+                                                    <div class="paid pd danger no-hover">{{calculateAllPrice(0)}}</div>
+                                                    <div class="paid date no-hover">{{calculateAllPrice(1)}}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -247,11 +315,33 @@
                 },
                 loading: 0,
                 newGroup: '',
+                allPrice: 0,
+                newAllPrice: 0,
             };
         },
         methods: {
+            calculatePrice(type, newPriceType){
+                let sum = this.orders.data.reduce((sum, element) => {
+                    if(type == 2 && element.lastEduPaid.status == 3) {
+                        return sum + (newPriceType ? element.newPrice : element.price);
+                    }
+                    else if (element.lastEduPaid && element.lastEduPaid.status == type) {
+                        return sum + (newPriceType ? element.newPrice : element.price);
+                    } else {
+                        return sum;
+                    }
+                }, 0);
+                return sum;
+            },
+            calculateAllPrice(newPriceType){
+                let sum = this.orders.data.reduce((sum, element) => {
+                    return sum + (newPriceType ? element.newPrice : element.price);
+                }, 0);
+                return sum;
+            },
+            
             checkStudents(){
-                return this.orders.data.every(student => student.group_id !== null) == false;
+                return this.user.role_id == 1 ? false : this.orders.data.every(student => student.group_id !== null) == false;
             },
             setNewGroup(id, groupId = null) {
                 this.$inertia.put(route('admin.students.update', id), {

@@ -52,8 +52,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Филлиал</label>
-                                    <select class="form-control" v-model="user.filial_id" placeholder="Белсенді" required>
-                                        <option value="" hidden disabled selected>
+                                    <select class="form-control" v-model="user.filial_id" placeholder="Белсенді" required @change.prevent="getTeachers(user.filial_id)">
+                                        <option :value="null" hidden disabled selected>
                                             Филлиал таңдаңыз
                                         </option>
                                         <option v-for="filial in filials" :key="'filial' + filial.id" :value="filial.id">
@@ -297,14 +297,14 @@
             ValidationError,
             Head
         },
-        props: ['roles', 'filials', 'teachers', 'trainTypes', 'courseTypes', 'subjects', 'shifts'],
+        props: ['roles', 'filials', 'trainTypes', 'courseTypes', 'subjects', 'shifts'],
         //Далбаеб осы жерын бытыр
         data() {
             return {
                 user: {
                     image: '',
                     role_id: '',
-                    filial_id: '',
+                    filial_id: route().params.filial_id ?? null,
                     start_date: null,
                 },
                 image: {
@@ -322,7 +322,7 @@
                     start_date: null,
                     end_date: null,
                 }],
-
+                teachers: [],
                 teacherOrders: this.trainTypes,
                 subjectOrders: null,
                 iin: '',
@@ -330,6 +330,11 @@
             }
         },
         methods: {
+            getTeachers(id){
+                axios.get(route('admin.filials.getTeachers', id)).then((res)=>{
+                    this.teachers = res.data
+                })
+            },
             warningText(text, desc = "Барлық бағандар толтыру қажет!") {
                 Swal.fire({
                     title: text,
