@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Helpers\Date;
+use App\Models\PaidHistory;
 use Inertia\Inertia;
 
 class StudentsController extends Controller
@@ -25,9 +26,9 @@ class StudentsController extends Controller
         $teacher_id = $request->teacher_id;
         $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'group', 'subject']);
         $query->when($user->role_id == 3 || $user->role_id == 2, function ($query) use ($user) {
-            if($user->role_id == 3)
+            if ($user->role_id == 3)
                 return $query->where('teacher_id', $user->id);
-            else return $query->whereHas('teacher', fn($q)=>$q->where('filial_id',$user->filial_id));
+            else return $query->whereHas('teacher', fn ($q) => $q->where('filial_id', $user->filial_id));
         });
         $query->when($teacher_id, function ($query) use ($teacher_id) {
             return $query->where('teacher_id', $teacher_id);
@@ -58,7 +59,6 @@ class StudentsController extends Controller
         return Inertia::render('Admin/Students/Index', [
             'orders' => $orders,
             'groups' => $groups,
-            'orders' => $orders,
             'user' => $user
         ]);
     }
@@ -120,7 +120,7 @@ class StudentsController extends Controller
         $groupId = $request->groupId;
         DB::beginTransaction();
         if (!$groupId) {
-            if(!$request->name) {
+            if (!$request->name) {
                 return redirect()->back();
             }
             $group = Group::create([
@@ -151,7 +151,7 @@ class StudentsController extends Controller
 
     public function paid($id)
     {
-        $eduOrder = EduOrder::with('lastEduPaid')->findOrFail($id);
+        $eduOrder = EduOrder::with('lastEduPaid', 'user')->findOrFail($id);
         $date = null;
         if ($eduOrder->lastEduPaid) {
             $lastEduPaidDate = $eduOrder->lastEduPaid['date'];
@@ -175,6 +175,11 @@ class StudentsController extends Controller
             'late_days' => $late_days,
             'late_date' => $late_date
         ]);
+
+        PaidHistory::create([
+            'edu_paid_order_id' => $eduOrder->user->id,
+        ]);
+
 
         return redirect()->route('admin.students.index');
     }

@@ -125,6 +125,13 @@
                         role: [1,2,3],
                     },
                     {
+                        name: "История платежей",
+                        font: "fa-cogs",
+                        route_name: "admin.paidHistories.index",
+                        menu_active: ["admin.paidHistories"],
+                        role: [1,2],
+                    },
+                    {
                         name: "Пәндер",
                         font: "fa-cogs",
                         route_name: "admin.subjects.index",
@@ -152,8 +159,6 @@
                         menu_active: ["admin.schedule"],
                         role: [1,2,3],
                     },
-                    
-                    
                     {
                         name: "Преподователи",
                         font: "fa-cogs",

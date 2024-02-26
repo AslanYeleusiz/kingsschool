@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TrainTypeController;
 use App\Http\Controllers\Admin\CourseTypeController;
 use App\Http\Controllers\Admin\EduOrderController;
+use App\Http\Controllers\admin\PaidController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\ScheduleContorller;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Models\PaidHistory;
 use Inertia\Inertia;
 
 /*
@@ -40,6 +42,9 @@ Route::resource('students', StudentsController::class)->except(['show'])->names(
 Route::post('/students/{id}/paid', [StudentsController::class, 'paid'])->name('students.paid');
 Route::post('/students/{id}/deletePaid', [StudentsController::class, 'deletePaid'])->name('students.deletePaid');
 Route::delete('/groups/{group_id}/destroy', [StudentsController::class, 'destroyGroup'])->name('groups.destroy');
+Route::resource('paidHistories', PaidController::class)->except(['show'])->names('paidHistories');
+
+
 
 Route::resource('schedule', ScheduleContorller::class)->except(['show'])->names('schedule');
 Route::get('/schedule/getSchedule', [ScheduleContorller::class, 'getSchedule'])->name('schedule.getSchedule');
