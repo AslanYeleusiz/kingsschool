@@ -19,7 +19,7 @@ class PaidController extends Controller
             return $query->whereHas('paidStudent.user', fn ($q) => $q->where('filial_id', $user->filial_id));
         })
             ->when($fio, fn ($q) => $q->whereHas('paidStudent.user', fn ($q) => $q->where('fio', 'like', "%$fio%")));
-        $orders = $query->latest()->paginate($request->input('per_page', 20))
+        $orders = $query->latest('id')->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));
 
         return Inertia::render('Admin/PaidHistories/Index', [
