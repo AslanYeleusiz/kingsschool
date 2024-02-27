@@ -11,14 +11,16 @@ class PaidController extends Controller
 {
     public function index(Request $request)
     {
-        $fio = $request->fio;
+        $studFio = $request->studFio;
+        $prepodFio = $request->prepodFio;
         $user = auth()->guard('web')->user();
         $query = PaidHistory::with(['paidStudent.user:id,avatar,fio,tel_num,filial_id', 'paidStudent.teacher:id,fio']);
-        
+
         $query->when($user->role_id == 2, function ($query) use ($user) {
             return $query->whereHas('paidStudent.user', fn ($q) => $q->where('filial_id', $user->filial_id));
         })
-            ->when($fio, fn ($q) => $q->whereHas('paidStudent.user', fn ($q) => $q->where('fio', 'like', "%$fio%")));
+            ->when($studFio, fn ($q) => $q->whereHas('paidStudent.user', fn ($q) => $q->where('fio', 'like', "%$studFio%")))
+            ->when($prepodFio, fn ($q) => $q->whereHas('paidStudent.teacher', fn ($q) => $q->where('fio', 'like', "%$prepodFio%")));
         $orders = $query->latest()->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));
 

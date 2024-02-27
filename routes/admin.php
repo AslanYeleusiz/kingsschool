@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\EduOrderController;
 use App\Http\Controllers\Admin\PaidController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\ScheduleContorller;
+use App\Http\Controllers\Admin\StudentSubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use Inertia\Inertia;
 
@@ -62,3 +63,5 @@ Route::delete('/users/{user_id}/activate', [UserController::class, 'activate'])-
 Route::delete('/users/{user_id}/remove', [UserController::class, 'remove'])->name('users.remove');
 //Route::middleware('adminAuth')->group(function () {
 //});
+
+Route::resource('student/{student_id}/subjects', StudentSubjectController::class)->except(['show'])->names('studentsSubjects');

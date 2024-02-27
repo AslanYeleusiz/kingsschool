@@ -25,7 +25,7 @@
         </template>
         <template #header>
             <div class="buttons d-flex align-items-center">
-                <Link class="btn btn-danger" :href="route('admin.students.index')">
+                <Link class="btn btn-danger" :href="route('admin.paidHistories.index')">
                 <i class="fa fa-trash"></i> Фильтрді тазалау
                 </Link>
                 <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
@@ -53,10 +53,13 @@
                                     <tr class="filters">
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        <td>
+                                            <input v-model="filter.studFio" class="form-control" placeholder="ФИО студента"
+                                                @keyup.enter="search" />
+                                        </td>
                                         <td></td>
                                         <td>
-                                            <input v-model="filter.fio" class="form-control" placeholder="ФИО"
+                                            <input v-model="filter.prepodFio" class="form-control" placeholder="ФИО преподавателя"
                                                 @keyup.enter="search" />
                                         </td>
                                         <td></td>
@@ -83,7 +86,7 @@
                                                 <div class="paidBlock">
                                                     <div v-if="order.status == 2" class="paid success">Подтверждено</div>
                                                     <div v-else class="paid danger">Не подтверждено</div>
-                                                    <div class="paid date">{{ order.created_at }}</div>
+                                                    <div class="paid date">{{ formatDateTime(order.created_at) }}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -148,13 +151,23 @@ export default {
     data() {
         return {
             filter: {
-                fio: route().params.fio ? route().params.fio : null,
+                studFio: route().params.studFio ? route().params.studFio : null,
+                prepodFio: route().params.prepodFio ? route().params.prepodFio : null,
             },
             loading: 0,
             newGroup: '',
         };
     },
     methods: {
+        formatDateTime(dateTime) {
+            if (!dateTime) return '';
+
+            const date = new Date(dateTime);
+            const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} `;
+            const formattedTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+
+            return `${formattedDate}${formattedTime}`;
+        },
         setPaid(id) {
             Swal.fire({
                 title: "Подтвердите оплату",

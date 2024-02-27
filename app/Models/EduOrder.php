@@ -43,8 +43,19 @@ class EduOrder extends Model
         return $this->belongsTo(Subject::class, 'subject_id');
     }
 
-    public function percent(){
+    public function percent()
+    {
         return $this->hasOne(TeacherSalaryOrder::class, 'user_id', 'teacher_id')
-                    ->where('train_type_id', $this->train_type_id);
+            ->where('train_type_id', $this->train_type_id);
+    }
+
+    public function courseType()
+    {
+        return $this->belongsTo(CourseType::class, 'course_type_id');
+    }
+
+    public function trainType()
+    {
+        return $this->belongsTo(TrainType::class, 'train_type_id');
     }
 }
