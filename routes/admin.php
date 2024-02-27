@@ -54,6 +54,9 @@ Route::resource('schedule', ScheduleContorller::class)->except(['show'])->names(
 Route::get('/schedule/getSchedule', [ScheduleContorller::class, 'getSchedule'])->name('schedule.getSchedule');
 Route::get('/schedule/{id}/getGroups', [ScheduleContorller::class, 'getGroups'])->name('schedule.getGroups');
 Route::resource('teachers', TeacherController::class)->except(['show'])->names('teachers');
+Route::get('/teachers/{id}/reports', [TeacherController::class, 'reports'])->name('teachers.reports');
+Route::get('/teachers/{id}/fullReports', [TeacherController::class, 'fullReports'])->name('teachers.fullReports');
+Route::post('/teachers/{id}/reports/store', [TeacherController::class, 'reportStore'])->name('teachers.reportStore');
 
 
 Route::get('/check-iin', [UserController::class, 'checkIin']);

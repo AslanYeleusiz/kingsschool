@@ -7,7 +7,7 @@
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Студенты</h1>
+                    <h1 class="m-0">Студенты {{teacher?.fio}}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -32,6 +32,14 @@
 
                 <Link class="btn btn-danger" :href="route('admin.students.index')">
                 <i class="fa fa-trash"></i> Фильтрді тазалау
+                </Link>
+                
+                <Link v-if="groups" class="btn btn-success ml-2" :href="route('admin.teachers.reports', route().params.teacher_id)">
+                Отчёт для выдачи зарплаты
+                </Link>
+                
+                <Link v-if="groups" class="btn btn-success ml-2" :href="route('admin.teachers.fullReports', route().params.teacher_id)">
+                Полный отчёт
                 </Link>
                 
                 <div v-if="checkStudents()" class="ml-2 badge badge-danger"><h3>{{groups ? 'Ваши' : 'Некоторые'}} студенты не распределены по группам</h3></div>
@@ -307,7 +315,7 @@
             Pagination,
             Head
         },
-        props: ["orders", "groups", "user"],
+        props: ["orders", "groups", "user", "teacher"],
         data() {
             return {
                 filter: {
@@ -373,6 +381,14 @@
                         }
                     });
                 } else {
+                    let order = this.orders.data.find(el => el.id == id);
+                    if(order.lastEduPaid.is_paid) {
+                        return Swal.fire({
+                            title: "Невозможно!",
+                            text: "Оплата не может быть отменена, так как зарплата была выдана учителю!",
+                            icon: "error",
+                        });
+                    }
                     Swal.fire({
                         title: "Отменить оплату?",
                         icon: "error",

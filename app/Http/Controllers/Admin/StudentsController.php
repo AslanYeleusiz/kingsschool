@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EduOrder;
 use App\Models\EduPaidOrder;
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -42,7 +43,15 @@ class StudentsController extends Controller
             $percent = $order->percent;
             if($percent) $order->newPrice = $order->price / 100 * $percent->percent;
             if ($order['lastEduPaid']) {
-                $order['lastEduPaid']->date = Carbon::parse($order['lastEduPaid']->date)->format('d.m.Y');
+                $orderDate = Carbon::parse($order['lastEduPaid']->date);
+                if($orderDate->month === $now->month) {
+                    $endDate = Carbon::parse($order->end_date);
+                    $startDate = Carbon::parse($order->start_date);
+                    $daysDifference = $endDate->diffInDays($startDate);
+                    $order['lastEduPaid']->date = $orderDate->addDays($daysDifference)->format('d.m.Y');
+                    $order['lastEduPaid']->status = 2;
+                } else $order['lastEduPaid']->date = $orderDate->format('d.m.Y');
+                
             } else {
                 $endDate = Carbon::parse($order->end_date);
                 $status = $endDate->gt($now) ? 2 : 3;
@@ -60,10 +69,14 @@ class StudentsController extends Controller
         if ($teacher_id)
             $groups = Group::where('teacher_id', $teacher_id)->get();
         
+        $teacher = null;
+        if($teacher_id) $teacher = User::findOrFail($teacher_id);
+        
         return Inertia::render('Admin/Students/Index', [
             'orders' => $orders,
             'groups' => $groups,
-            'user' => $user
+            'user' => $user,
+            'teacher' => $teacher
         ]);
     }
 
@@ -158,8 +171,10 @@ class StudentsController extends Controller
         $eduOrder = EduOrder::with('lastEduPaid', 'user')->findOrFail($id);
         $date = null;
         if ($eduOrder->lastEduPaid) {
-            $lastEduPaidDate = $eduOrder->lastEduPaid['date'];
-            $diffInDays = $eduOrder->end_date->diffInDays($eduOrder->start_date);
+            $endDate = Carbon::parse($eduOrder->end_date);
+            $startDate = Carbon::parse($eduOrder->start_date);
+            $lastEduPaidDate = Carbon::parse($eduOrder->lastEduPaid['date']);
+            $diffInDays = $endDate->diffInDays($startDate);
             $date = $lastEduPaidDate->copy()->addDays($diffInDays);
         } else {
             $date = $eduOrder->end_date;

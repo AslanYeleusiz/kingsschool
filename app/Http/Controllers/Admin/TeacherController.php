@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\EduOrder;
 use App\Models\User;
 use App\Models\Filial;
+use App\Models\EduPaidOrder;
+use App\Models\TeacherSalary;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -46,5 +48,38 @@ class TeacherController extends Controller
             'filials' => $filials,
             'user' => $user,
         ]);
+    }
+    
+    public function reports($teacher_id, Request $request){
+        $teacher = User::findOrFail($teacher_id);
+        $eduPaidOrders = EduPaidOrder::with(['eduOrder.user','eduOrder.subject'])->whereHas('eduOrder', fn($q)=>$q->where('teacher_id', $teacher_id))->where('is_paid', 0)->get();
+        foreach($eduPaidOrders as $eduPaidOrder) {
+            $percent = $eduPaidOrder->eduOrder['percent'];
+            if($percent) $eduPaidOrder->newPrice = $eduPaidOrder->price / 100 * $percent->percent;
+        }
+        return Inertia::render('Admin/EduPaidOrder/Index', [
+            'eduPaidOrders' => $eduPaidOrders,
+            'teacher' => $teacher
+        ]);
+    }
+
+    public function fullReports($teacher_id, Request $request) {
+        return 'Идет работа сайта... Не тревожте эту страницу!!!';
+    }
+
+    public function reportStore($teacher_id, Request $request) {
+        $now = Carbon::now();
+        $TeacherSalary = TeacherSalary::create([
+            'teacher_id' => $teacher_id,
+            'date' => $now,
+            'price' => $request->price,
+            'penalty' => $request->penalty ?? 0,
+            'bonus' => $request->bonus ?? 0
+        ]);
+        EduPaidOrder::whereHas('eduOrder', fn($q)=>$q->where('teacher_id', $teacher_id))->where('is_paid', 0)->update([
+            'is_paid' => 1,
+            'teacher_salary_id' => $TeacherSalary->id
+        ]);
+        return redirect()->back()->withSuccess('Успешно сохранено');
     }
 }
