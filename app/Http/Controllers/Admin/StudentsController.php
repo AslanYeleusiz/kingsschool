@@ -25,16 +25,16 @@ class StudentsController extends Controller
     public function index(Request $request)
     {
         $user = auth()->guard('web')->user();
-        $teacher_id = $request->teacher_id;
+
+        $teacher_id = null;
+        if($user->role_id == 3) $teacher_id = $user->id;
         $studFio = $request->studFio;
         $subj = $request->subj;
         $prepodFio = $request->prepodFio;
         $phone = $request->phone;
         $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'group', 'subject']);
-        $query->when($user->role_id == 3 || $user->role_id == 2, function ($query) use ($user) {
-            if ($user->role_id == 3)
-                return $query->where('teacher_id', $user->id);
-            else return $query->whereHas('teacher', fn ($q) => $q->where('filial_id', $user->filial_id));
+        $query->when($user->role_id == 2, function ($query) use ($user) {
+            return $query->whereHas('teacher', fn ($q) => $q->where('filial_id', $user->filial_id));
         });
         $query->when($teacher_id, function ($query) use ($teacher_id) {
             return $query->where('teacher_id', $teacher_id);

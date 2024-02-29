@@ -45,6 +45,7 @@ Route::resource('paidHistories', PaidController::class)->except(['show'])->names
 Route::post('/paidHistories/{id}/paid', [PaidController::class, 'paid'])->name('paidHistories.paid');
 Route::delete('/paidHistories/{id}/delete', [PaidController::class, 'destroy'])->name('paidHistories.delete');
 Route::resource('teachers', TeacherController::class)->except(['show'])->names('teachers');
+Route::get('/teachers/{id}/students', [TeacherController::class, 'students'])->name('teachers.students');
 Route::get('/teachers/{id}/reports', [TeacherController::class, 'reports'])->name('teachers.reports');
 Route::get('/teachers/{id}/fullReports', [TeacherController::class, 'fullReports'])->name('teachers.fullReports');
 Route::get('/teachers/{id}/fullReports/{report_id}/getItem', [TeacherController::class, 'fullReportItem'])->name('teachers.fullReportItem');

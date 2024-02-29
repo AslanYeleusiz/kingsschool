@@ -35,12 +35,12 @@
                 </Link>
 
                 <Link v-if="groups" class="btn btn-success ml-2"
-                    :href="route('admin.teachers.reports', route().params.teacher_id)">
+                    :href="route('admin.teachers.reports', teacher.id)">
                 Отчёт для выдачи зарплаты
                 </Link>
 
                 <Link v-if="groups" class="btn btn-success ml-2"
-                    :href="route('admin.teachers.fullReports', route().params.teacher_id)">
+                    :href="route('admin.teachers.fullReports', teacher.id)">
                 Полный отчёт
                 </Link>
 

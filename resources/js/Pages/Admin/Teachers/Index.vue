@@ -115,8 +115,7 @@
                                         </td>
                                         <td>
                                             <Link :href="route(
-                                                'admin.students.index',
-                                                { teacher_id: teacher.id }
+                                                'admin.teachers.students', teacher.id
                                             )
                                                 " class="block" title="Список студентов">
                                             Список студентов
