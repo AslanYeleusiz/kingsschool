@@ -10,6 +10,7 @@ use App\Models\EduPaidOrder;
 use App\Models\TeacherSalary;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Helpers\Date;
 use Inertia\Inertia;
 
 class TeacherController extends Controller
@@ -64,7 +65,24 @@ class TeacherController extends Controller
     }
 
     public function fullReports($teacher_id, Request $request) {
-        return 'Идет работа сайта... Не тревожте эту страницу!!!';
+        $salaries = TeacherSalary::where('teacher_id', $teacher_id)->get();
+        foreach($salaries as $salary){
+            $salary['date'] = Date::dmYKZ($salary['date']);
+        }
+        $teacher = User::findOrFail($teacher_id);
+        return Inertia::render('Admin/Teachers/FullReports', [
+            'salaries' => $salaries,
+            'teacher' => $teacher
+        ]);
+    }
+
+    public function fullReportItem($id, $report_id) {
+        $salary = TeacherSalary::with(['orders.eduOrder' => fn($q)=>$q->with(['user', 'subject'])])->findOrFail($report_id);
+        foreach($salary['orders'] as $eduPaidOrder) {
+            $percent = $eduPaidOrder->eduOrder['percent'];
+            if($percent) $eduPaidOrder->newPrice = $eduPaidOrder->price / 100 * $percent->percent;
+        }
+        return response()->json($salary);
     }
 
     public function reportStore($teacher_id, Request $request) {

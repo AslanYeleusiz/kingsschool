@@ -22,7 +22,6 @@
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/tempusdominus-bootstrap-4.min.js') }}"></script>
     @vite('resources/sass/app.scss')
-    @routes
     @inertiaHead
 </head>
 
