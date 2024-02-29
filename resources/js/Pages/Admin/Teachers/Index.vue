@@ -127,7 +127,7 @@
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                                 <Link :href="route(
-                                                    'admin.teachers.edit',
+                                                    'admin.users.edit',
                                                     teacher
                                                 )
                                                     " class="btn btn-primary" title="Изменить">

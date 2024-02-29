@@ -77,8 +77,8 @@
                                         <td v-else>Нет группы!</td>
                                         <td>{{ subject.teacher.fio }} /
                                             <Link :href="route(
-                                                'admin.students.index',
-                                                { teacher_id: subject.teacher_id }
+                                                'admin.teachers.students',
+                                                { id: subject.teacher_id }
                                             )
                                                 " class="block" title="Список студентов">
                                             Список студентов

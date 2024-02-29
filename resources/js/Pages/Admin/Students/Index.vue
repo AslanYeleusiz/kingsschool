@@ -170,7 +170,7 @@
                                             <div class="btn-group btn-group-sm">
                                                 <Link :href="route(
                                                     'admin.users.edit',
-                                                    order
+                                                    order.id
                                                 )
                                                     " class="btn btn-primary" title="Изменить">
                                                 <i class="fas fa-edit"></i>

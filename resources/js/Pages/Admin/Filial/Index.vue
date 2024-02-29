@@ -74,6 +74,7 @@
                                                     <i class="fas fa-edit"></i>
                                                 </Link>
 
+<!--
                                                 <button
                                                 @click.prevent="deleteData(filial.id)"
                                                     class="btn btn-danger"
@@ -83,6 +84,7 @@
                                                         class="fas fa-times"
                                                     ></i>
                                                 </button>
+-->
                                             </div>
                                         </td>
                                     </tr>

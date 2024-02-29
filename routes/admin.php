@@ -37,39 +37,48 @@ Route::resource('course-types', CourseTypeController::class)->except(['show'])->
     
 });
 Route::middleware('checkUserRole:1,2')->group(function () {
-Route::resource('users', UserController::class)->except(['show'])->names('users')->middleware('checkUserRole:1,2');
-Route::get('/filials/{id}/getTeachers', [FilialController::class, 'getTeachers'])->name('filials.getTeachers');
-Route::resource('subjects', SubjectController::class)->except(['show'])->names('subjects');
-Route::get('subjects/{id}/dublicate', [SubjectController::class, 'dublicate'])->name('subjects.dublicate');
-Route::resource('paidHistories', PaidController::class)->except(['show'])->names('paidHistories');
-Route::post('/paidHistories/{id}/paid', [PaidController::class, 'paid'])->name('paidHistories.paid');
-Route::delete('/paidHistories/{id}/delete', [PaidController::class, 'destroy'])->name('paidHistories.delete');
-Route::resource('teachers', TeacherController::class)->except(['show'])->names('teachers');
-Route::get('/teachers/{id}/students', [TeacherController::class, 'students'])->name('teachers.students');
-Route::get('/teachers/{id}/reports', [TeacherController::class, 'reports'])->name('teachers.reports');
-Route::get('/teachers/{id}/fullReports', [TeacherController::class, 'fullReports'])->name('teachers.fullReports');
-Route::get('/teachers/{id}/fullReports/{report_id}/getItem', [TeacherController::class, 'fullReportItem'])->name('teachers.fullReportItem');
-Route::post('/teachers/{id}/reports/store', [TeacherController::class, 'reportStore'])->name('teachers.reportStore');
-Route::get('/users/is_deleted', [UserController::class, 'is_deleted'])->name('users.deleted');
-    
-Route::delete('/users/{user_id}/activate', [UserController::class, 'activate'])->name('users.activate');
-Route::delete('/users/{user_id}/remove', [UserController::class, 'remove'])->name('users.remove');
-Route::resource('student/{student_id}/subjects', StudentSubjectController::class)->except(['show'])->names('studentsSubjects');
+    Route::resource('users', UserController::class)->except(['show'])->names('users');
+    Route::group(['prefix' => '/users', 'as' => 'users.'], function () {
+        Route::get('/is_deleted', [UserController::class, 'is_deleted'])->name('deleted');
+        Route::delete('/{user_id}/activate', [UserController::class, 'activate'])->name('activate');
+        Route::delete('/{user_id}/remove', [UserController::class, 'remove'])->name('remove');
+    });
+    Route::get('/filials/{id}/getTeachers', [FilialController::class, 'getTeachers'])->name('filials.getTeachers');
+    Route::resource('subjects', SubjectController::class)->except(['show'])->names('subjects');
+    Route::get('subjects/{id}/dublicate', [SubjectController::class, 'dublicate'])->name('subjects.dublicate');
+    Route::resource('paidHistories', PaidController::class)->only(['index', 'destroy'])->names('paidHistories');
+    Route::group(['prefix' => '/paidHistories', 'as' => 'paidHistories.'], function () {
+        Route::post('/{id}/paid', [PaidController::class, 'paid'])->name('paid');
+        Route::delete('/{id}/delete', [PaidController::class, 'destroy'])->name('delete');
+    });
+    Route::resource('teachers', TeacherController::class)->only(['index'])->names('teachers');
+    Route::group(['prefix' => '/teachers/{id}', 'as' => 'teachers.'], function () {
+        Route::get('/students', [TeacherController::class, 'students'])->name('students');
+        Route::get('/reports', [TeacherController::class, 'reports'])->name('reports');
+        Route::get('/fullReports', [TeacherController::class, 'fullReports'])->name('fullReports');
+        Route::get('/fullReports/{report_id}/getItem', [TeacherController::class, 'fullReportItem'])->name('fullReportItem');
+        Route::post('/reports/store', [TeacherController::class, 'reportStore'])->name('reportStore');
+    });
+    Route::resource('student/{student_id}/subjects', StudentSubjectController::class)->except(['show'])->names('studentsSubjects');
 });
-Route::resource('students', StudentsController::class)->except(['show'])->names('students');
-Route::post('/students/{id}/paid', [StudentsController::class, 'paid'])->name('students.paid');
-Route::post('/students/{id}/deletePaid', [StudentsController::class, 'deletePaid'])->name('students.deletePaid');
+
+Route::resource('students', StudentsController::class)->only(['index', 'update'])->names('students');
+Route::group(['prefix' => '/students/{id}', 'as' => 'students.'], function () {
+    Route::post('/paid', [StudentsController::class, 'paid'])->name('paid');
+    Route::post('/deletePaid', [StudentsController::class, 'deletePaid'])->name('deletePaid');
+});
 
 // Route::resource('users/{id}/edu_orders', EduOrderController::class)->except(['show'])->names('eduOrders');
-Route::delete('/groups/{group_id}/destroy', [StudentsController::class, 'destroyGroup'])->name('groups.destroy');
-Route::delete('/groups/{id}/destroyOrder', [StudentsController::class, 'destroyOrder'])->name('groups.destroyOrder');
+Route::group(['prefix' => '/groups/{id}', 'as' => 'groups.'], function () {
+    Route::delete('/destroy', [StudentsController::class, 'destroyGroup'])->name('destroy');
+    Route::delete('/destroyOrder', [StudentsController::class, 'destroyOrder'])->name('destroyOrder');
+});
 
-
-
-Route::resource('schedule', ScheduleContorller::class)->except(['show'])->names('schedule');
-Route::get('/schedule/getSchedule', [ScheduleContorller::class, 'getSchedule'])->name('schedule.getSchedule');
-Route::get('/schedule/{id}/getGroups', [ScheduleContorller::class, 'getGroups'])->name('schedule.getGroups');
-
+Route::resource('schedule', ScheduleContorller::class)->except(['show', 'edit', 'update'])->names('schedule');
+Route::group(['prefix' => '/schedule', 'as' => 'schedule.'], function () {
+    Route::get('/getSchedule', [ScheduleContorller::class, 'getSchedule'])->name('getSchedule');
+    Route::get('/{id}/getGroups', [ScheduleContorller::class, 'getGroups'])->name('getGroups');
+});
 
 Route::get('/check-iin', [UserController::class, 'checkIin']);
 

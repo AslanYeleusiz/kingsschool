@@ -67,10 +67,12 @@
                                                 <i class="fas fa-edit"></i>
                                                 </Link>
 
+<!--
                                                 <button @click.prevent="deleteData(trainType.id)" class="btn btn-danger"
                                                     title="Жою">
                                                     <i class="fas fa-times"></i>
                                                 </button>
+-->
                                             </div>
                                         </td>
                                     </tr>
