@@ -3,7 +3,8 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
-            <img src="../../../public/images/logo.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <img src="../../../public/images/logo.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                style="opacity: .8">
             <span class="brand-text font-weight-light">King`s School</span>
         </a>
 
@@ -12,10 +13,11 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img :src="'../../../storage/files/' + $page.props.auth.user.avatar" class="img-circle elevation-2" alt="User Image">
+                    <img :src="'../../../storage/files/' + $page.props.auth.user.avatar" class="img-circle elevation-2"
+                        alt="User Image" style="width: 35px; height: 35px">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{$page.props.auth.user.fio}}</a>
+                    <a href="#" class="d-block">{{ $page.props.auth.user.fio }}</a>
                 </div>
             </div>
 
@@ -33,42 +35,42 @@
                                         currentRoute
                                     ),
                             }">
-                            <a href="#" class="nav-link" :class="{
+                                <a href="#" class="nav-link" :class="{
                                     active: menu_item.menu_active.includes(
                                         currentRoute
                                     ),
                                 }">
-                                <i class="nav-icon fas fa-solid" :class="[menu_item.font]"></i>
-                                <p>
-                                    {{ menu_item.name }}
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item ml-2" v-for="(
+                                    <i class="nav-icon fas fa-solid" :class="[menu_item.font]"></i>
+                                    <p>
+                                        {{ menu_item.name }}
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item ml-2" v-for="(
                                         childs_item, child_index
                                     ) in menu_item.childs_items" :key="'child' + child_index">
-                                    <Link :href="route(childs_item.route_name)" class="nav-link" :class="{
+                                        <Link :href="route(childs_item.route_name)" class="nav-link" :class="{
                                             active: childs_item.menu_active.includes(
                                                 currentRoute
                                             ),
                                         }">
-                                    <i class="nav-icon fas" :class="childs_item.font"></i>
-                                    <p>{{ childs_item.name }}</p>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item" v-else>
-                            <Link :href="route(menu_item.route_name)" class="nav-link" :class="{
+                                        <i class="nav-icon fas" :class="childs_item.font"></i>
+                                        <p>{{ childs_item.name }}</p>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item" v-else>
+                                <Link :href="route(menu_item.route_name)" class="nav-link" :class="{
                                     active: menu_item.menu_active.includes(
                                         currentRoute
                                     ),
                                 }">
-                            <i class="nav-icon fas" :class="menu_item.font"></i>
-                            <p>{{ menu_item.name }}</p>
-                            </Link>
-                        </li>
+                                <i class="nav-icon fas" :class="menu_item.font"></i>
+                                <p>{{ menu_item.name }}</p>
+                                </Link>
+                            </li>
                         </template>
                     </template>
                     <li class="nav-item">
@@ -86,106 +88,104 @@
 </template>
 
 <script>
-    import {
+import {
+    Link
+} from "@inertiajs/inertia-vue3";
+export default {
+    components: {
         Link
-    } from "@inertiajs/inertia-vue3";
-    export default {
-        components: {
-            Link
+    },
+    data() {
+        return {
+            menu_items: [
+                {
+                    name: "Қолданушылар",
+                    font: "fa-users",
+                    route_name: "admin.users.index",
+                    menu_active: ["admin.users", "admin.eduOrders"],
+                    role: [1, 2],
+                },
+                {
+                    name: "Студенты",
+                    font: "fa-graduation-cap",
+                    route_name: "admin.students.index",
+                    menu_active: ["admin.students"],
+                    role: [1, 2, 3],
+                },
+                {
+                    name: "Преподаватели",
+                    font: "fa-chalkboard-teacher",
+                    route_name: "admin.teachers.index",
+                    menu_active: ["admin.teachers"],
+                    role: [1, 2],
+                },
+                {
+                    name: "Расписания",
+                    font: "fa-calendar-alt",
+                    route_name: "admin.schedule.index",
+                    menu_active: ["admin.schedule"],
+                    role: [1, 2, 3],
+                },
+                {
+                    name: "История платежей",
+                    font: "fa-file-invoice-dollar",
+                    route_name: "admin.paidHistories.index",
+                    menu_active: ["admin.paidHistories"],
+                    role: [1, 2],
+                },
+                {
+                    name: "Пәндер",
+                    font: "fa-book",
+                    route_name: "admin.subjects.index",
+                    menu_active: ["admin.subjects"],
+                    role: [1, 2],
+                },
+                {
+                    name: "Рөлдер",
+                    font: "fa-dice-four",
+                    route_name: "admin.roles.index",
+                    menu_active: ["admin.roles"],
+                    role: [1],
+                },
+                {
+                    name: "Филиал",
+                    font: "fa-hotel",
+                    route_name: "admin.filials.index",
+                    menu_active: ["admin.filials"],
+                    role: [1],
+                },
+                {
+                    name: "Типы обучения",
+                    font: "fa-university",
+                    route_name: "admin.trainTypes.index",
+                    menu_active: ["admin.trainTypes"],
+                    role: [1],
+                },
+                {
+                    name: "Типы Курсов",
+                    font: "fa-laptop-code",
+                    route_name: "admin.courseTypes.index",
+                    menu_active: ["admin.courseTypes"],
+                    role: [1],
+                },
+            ],
+        }
+    },
+    mounted() {
+        $('[data-widget="treeview"]').each(function () {
+            adminlte.Treeview._jQueryInterface.call($(this), "init");
+        });
+    },
+    computed: {
+        currentRoute() {
+            let currentRoute = route().current().split(".");
+            currentRoute.pop();
+            return currentRoute.join(".");
         },
-        data() {
-            return {
-                menu_items: [
-                    {
-                        name: "Қолданушылар",
-                        font: "fa-users",
-                        route_name: "admin.users.index",
-                        menu_active: ["admin.users","admin.eduOrders"],
-                        role: [1,2],
-                    },
-                    {
-                        name: "Студенты",
-                        font: "fa-graduation-cap",
-                        route_name: "admin.students.index",
-                        menu_active: ["admin.students"],
-                        role: [1,2,3],
-                    },
-                    {
-                        name: "Преподаватели",
-                        font: "fa-chalkboard-teacher",
-                        route_name: "admin.teachers.index",
-                        menu_active: ["admin.teachers"],
-                        role: [1,2],
-                    },
-                    {
-                        name: "Расписания",
-                        font: "fa-calendar-alt",
-                        route_name: "admin.schedule.index",
-                        menu_active: ["admin.schedule"],
-                        role: [1,2,3],
-                    },
-                    {
-                        name: "История платежей",
-                        font: "fa-file-invoice-dollar",
-                        route_name: "admin.paidHistories.index",
-                        menu_active: ["admin.paidHistories"],
-                        role: [1,2],
-                    },
-                    {
-                        name: "Пәндер",
-                        font: "fa-book",
-                        route_name: "admin.subjects.index",
-                        menu_active: ["admin.subjects"],
-                        role: [1,2],
-                    },
-                    {
-                        name: "Рөлдер",
-                        font: "fa-dice-four",
-                        route_name: "admin.roles.index",
-                        menu_active: ["admin.roles"],
-                        role: [1],
-                    },
-                    {
-                        name: "Филиал",
-                        font: "fa-hotel",
-                        route_name: "admin.filials.index",
-                        menu_active: ["admin.filials"],
-                        role: [1],
-                    },
-                    {
-                        name: "Типы обучения",
-                        font: "fa-university",
-                        route_name: "admin.trainTypes.index",
-                        menu_active: ["admin.trainTypes"],
-                        role: [1],
-                    },
-                    {
-                        name: "Типы Курсов",
-                        font: "fa-laptop-code",
-                        route_name: "admin.courseTypes.index",
-                        menu_active: ["admin.courseTypes"],
-                        role: [1],
-                    },
-                ],
-            }
-        },
-        mounted() {
-            $('[data-widget="treeview"]').each(function() {
-                adminlte.Treeview._jQueryInterface.call($(this), "init");
-            });
-        },
-        computed: {
-            currentRoute() {
-                let currentRoute = route().current().split(".");
-                currentRoute.pop();
-                return currentRoute.join(".");
-            },
-        },
-    }
+    },
+}
 
 </script>
 
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,0 +1,1 @@
+import{A as t}from"./AdminLayout-4103f48c.js";import{_ as n}from"./_plugin-vue_export-helper-c27b6911.js";import{a as e,o as r,b as s}from"./app-9ffddd28.js";const a={components:{AdminLayout:t}};function c(m,p,_,i,f,d){const o=e("AdminLayout");return r(),s(o)}const $=n(a,[["render",c]]);export{$ as default};
