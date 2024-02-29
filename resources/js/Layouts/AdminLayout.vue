@@ -1,21 +1,15 @@
 <template>
     <div class="wrapper" style="overflow: auto">
         <Transition name="fade">
-
             <LoadingSpinner v-if="isLoading" />
         </Transition>
         <NavBar />
-
         <SideBar />
         <div class="content-wrapper">
             <ResultMessage></ResultMessage>
             <div class="content-header">
                 <div class="container-fluid">
-                    <!-- <div class="row mb-2"> -->
-                    <!-- <div class="col-sm-6"> -->
                     <slot name="breadcrumbs"></slot>
-                    <!-- </div> -->
-                    <!-- </div> -->
                 </div>
             </div>
             <section class="content">
@@ -48,9 +42,6 @@
     import {
         Inertia
     } from '@inertiajs/inertia';
-    // require('../../../public/js/jquery-36.min.js')
-    // require('../../../public/js/overlayScrollbars.min.js')
-    // require('../../../public/js/adminlte.min.js')
     export default {
         components: {
             Footer,
