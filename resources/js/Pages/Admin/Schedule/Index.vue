@@ -36,7 +36,8 @@
                                                             day: index + 1
                                                         }
                                                     )
-                                                        " class="btn btn-primary" title="Өзгерту">
+                                                        " class="btn btn-primary" title="Өзгерту"
+                                                        v-if="user.role_id == 1 || user.role_id == 2">
                                                     Изменить
                                                     </Link>
                                                 </div>
@@ -111,6 +112,9 @@ import {
 } from "@inertiajs/inertia-vue3";
 
 export default {
+    props: [
+        'user',
+    ],
     components: {
         AdminLayout,
         Link
@@ -153,9 +157,14 @@ export default {
         toggleCollapse(e) {
             console.log(e)
             this.currentDate = e
+            let urlParams = new URLSearchParams(window.location.search);
+
+            let teacher_id = urlParams.get('teacher_id');
+
             axios.get(route("admin.schedule.getSchedule"), {
                 params: {
-                    date: this.currentDate
+                    date: this.currentDate,
+                    teacher_id: teacher_id ?? null,
                 }
             }).then((res) => {
                 this.schedules = res.data.schedules

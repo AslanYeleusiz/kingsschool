@@ -60,20 +60,16 @@
                                         <td></td>
                                         <td></td>
                                         <td v-if="user.role_id < 3">
-                                            <select
-                                                class="form-control"
-                                                @change.prevent="search"
-                                                v-model="filter.filial_id"
-                                                placeholder="Белсенді"
-                                            >
+                                            <select class="form-control" @change.prevent="search" v-model="filter.filial_id"
+                                                placeholder="Белсенді">
                                                 <option :value="null">
                                                     Барлығы
                                                 </option>
                                                 <option v-for="filial in filials" :value="filial.id">
-                                                    {{filial.name}}
+                                                    {{ filial.name }}
                                                 </option>
                                             </select>
-                                            
+
                                         </td>
                                         <td></td>
                                     </tr>
@@ -98,8 +94,10 @@
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="paidBlock">
-                                                    <div v-if="teacher.lastEduPaid.status == 1" class="paid success">Оплачено</div>
-                                                    <div v-else-if="teacher.lastEduPaid.status == 2" class="paid danger">Не оплачено</div>
+                                                    <div v-if="teacher.lastEduPaid.status == 1" class="paid success">
+                                                        Оплачено</div>
+                                                    <div v-else-if="teacher.lastEduPaid.status == 2" class="paid danger">Не
+                                                        оплачено</div>
                                                     <div v-else class="paid black">Просрочено
                                                     </div>
                                                     <div class="paid date">{{ teacher.lastEduPaid.date }}</div>
@@ -107,9 +105,13 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="block">
-                                                Расписание
-                                            </div>
+                                            <Link :href="route(
+                                                'admin.schedule.index',
+                                                { teacher_id: teacher.id }
+                                            )
+                                                " class="block" title="Расписание учителя">
+                                            Расписание
+                                            </Link>
                                         </td>
                                         <td>
                                             <Link :href="route(
@@ -119,10 +121,9 @@
                                                 " class="block" title="Список студентов">
                                             Список студентов
                                             </Link>
-
                                         </td>
                                         <td v-if="user.role_id < 3">
-                                            {{teacher.filial.name}}
+                                            {{ teacher.filial.name }}
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
@@ -157,7 +158,7 @@ export default {
         Pagination,
         Head
     },
-    props: ["teachers","filials","user"],
+    props: ["teachers", "filials", "user"],
     data() {
         return {
             filter: {
@@ -213,10 +214,11 @@ export default {
 };
 </script>
 <style>
-    .table td,
-    .table th {
-        text-align: center;
-    }
+.table td,
+.table th {
+    text-align: center;
+}
+
 .avatar {
     width: 40px;
     height: 40px;
@@ -225,5 +227,4 @@ export default {
     background-size: 100%;
     border-radius: 50%;
 }
-
 </style>

@@ -176,12 +176,14 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $auth_user = auth()->guard('web')->user();
         $roles = Role::get();
         $filials = Filial::get();
         return Inertia::render('Admin/Users/Edit', [
             'roles' => $roles,
             'filials' => $filials,
             'user' => $user,
+            'auth_user' => $auth_user,
         ]);
     }
 

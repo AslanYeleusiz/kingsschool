@@ -1,5 +1,5 @@
 <template>
-  <head>
+    <head>
         <title>Админ панель | Типы обучения</title>
     </head>
     <AdminLayout>
@@ -26,14 +26,10 @@
         <template #header>
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-primary mr-2" :href="route('admin.trainTypes.create')">
-                    <i class="fa fa-plus"></i> Қосу
-                </Link>
-
-                <Link class="btn btn-danger" :href="route('admin.trainTypes.index')">
-                    <i class="fa fa-trash"></i> Фильтрді тазалау
+                <i class="fa fa-plus"></i> Қосу
                 </Link>
                 <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
-                  <span class="sr-only">Loading...</span>
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </template>
@@ -42,65 +38,38 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table
-                                class="table table-hover table-bordered table-striped dataTable dtr-inline"
-                            >
+                            <table class="table table-hover table-bordered table-striped dataTable dtr-inline">
                                 <thead>
                                     <tr role="row">
                                         <th>№</th>
                                         <th>Аты</th>
                                         <th>Әрекет</th>
                                     </tr>
-                                    <tr class="filters">
-                                        <td></td>
-                                        <td>
-                                            <input
-                                                v-model="filter.name"
-                                                class="form-control"
-                                                placeholder="Аты"
-                                                @keyup.enter="search"
-                                            />
-                                        </td>
-                                        <td></td>
-                                    </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        class="odd"
-                                        v-for="(trainType, index) in trainTypes.data"
-                                        :key="'trainType' + trainType.id"
-                                    >
+                                    <tr class="odd" v-for="(trainType, index) in trainTypes.data"
+                                        :key="'trainType' + trainType.id">
                                         <td>
                                             {{
                                                 trainType.from
-                                                    ? trainType.from + index
-                                                    : index + 1
+                                                ? trainType.from + index
+                                                : index + 1
                                             }}
                                         </td>
                                         <td>{{ trainType.name }}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
-                                                <Link
-                                                    :href="
-                                                        route(
-                                                            'admin.trainTypes.edit',
-                                                            trainType
-                                                        )
-                                                    "
-                                                    class="btn btn-primary"
-                                                    title="Изменить"
-                                                >
-                                                    <i class="fas fa-edit"></i>
+                                                <Link :href="route(
+                                                    'admin.trainTypes.edit',
+                                                    trainType
+                                                )
+                                                    " class="btn btn-primary" title="Изменить">
+                                                <i class="fas fa-edit"></i>
                                                 </Link>
 
-                                                <button
-                                                @click.prevent="deleteData(trainType.id)"
-                                                    class="btn btn-danger"
-                                                    title="Жою"
-                                                >
-                                                    <i
-                                                        class="fas fa-times"
-                                                    ></i>
+                                                <button @click.prevent="deleteData(trainType.id)" class="btn btn-danger"
+                                                    title="Жою">
+                                                    <i class="fas fa-times"></i>
                                                 </button>
                                             </div>
                                         </td>
@@ -129,15 +98,12 @@ export default {
     props: ["trainTypes"],
     data() {
         return {
-            filter: {
-                name: route().params.name ? route().params.name: null,
-            },
             loading: 0,
         };
     },
     methods: {
         deleteData(id) {
-                    Swal.fire({
+            Swal.fire({
                 title: "Жоюға сенімдісіз бе?",
                 text: "Қайтып қалпына келмеуі мүмкін!",
                 icon: "warning",
@@ -148,16 +114,11 @@ export default {
                 cancelButtonText: "Жоқ",
             }).then((result) => {
                 if (result.isConfirmed) {
-               this.$inertia.delete(route('admin.trainTypes.destroy', id))
+                    this.$inertia.delete(route('admin.trainTypes.destroy', id))
                 }
             });
 
 
-        },
-        search() {
-            this.loading = 1
-            const params = this.clearParams(this.filter);
-            this.$inertia.get(route('admin.trainTypes.index'),params)
         },
     }
 };

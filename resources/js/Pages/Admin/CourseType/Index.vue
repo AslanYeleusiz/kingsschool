@@ -28,10 +28,6 @@
                 <Link class="btn btn-primary mr-2" :href="route('admin.courseTypes.create')">
                     <i class="fa fa-plus"></i> Қосу
                 </Link>
-
-                <Link class="btn btn-danger" :href="route('admin.courseTypes.index')">
-                    <i class="fa fa-trash"></i> Фильтрді тазалау
-                </Link>
                 <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
                   <span class="sr-only">Loading...</span>
                 </div>
@@ -50,18 +46,6 @@
                                         <th>№</th>
                                         <th>Аты</th>
                                         <th>Әрекет</th>
-                                    </tr>
-                                    <tr class="filters">
-                                        <td></td>
-                                        <td>
-                                            <input
-                                                v-model="filter.name"
-                                                class="form-control"
-                                                placeholder="Аты"
-                                                @keyup.enter="search"
-                                            />
-                                        </td>
-                                        <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -129,9 +113,6 @@ export default {
     props: ["courseTypes"],
     data() {
         return {
-            filter: {
-                name: route().params.name ? route().params.name: null,
-            },
             loading: 0,
         };
     },
@@ -151,13 +132,6 @@ export default {
                this.$inertia.delete(route('admin.courseTypes.destroy', id))
                 }
             });
-
-
-        },
-        search() {
-            this.loading = 1
-            const params = this.clearParams(this.filter);
-            this.$inertia.get(route('admin.courseTypes.index'),params)
         },
     }
 };

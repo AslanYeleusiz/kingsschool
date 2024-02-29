@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Helpers\Date;
 use App\Models\PaidHistory;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class StudentsController extends Controller
 {
@@ -25,6 +26,10 @@ class StudentsController extends Controller
     {
         $user = auth()->guard('web')->user();
         $teacher_id = $request->teacher_id;
+        $studFio = $request->studFio;
+        $subj = $request->subj;
+        $prepodFio = $request->prepodFio;
+        $phone = $request->phone;
         $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'group', 'subject']);
         $query->when($user->role_id == 3 || $user->role_id == 2, function ($query) use ($user) {
             if ($user->role_id == 3)
@@ -34,6 +39,11 @@ class StudentsController extends Controller
         $query->when($teacher_id, function ($query) use ($teacher_id) {
             return $query->where('teacher_id', $teacher_id);
         });
+        $query
+            ->when($studFio, fn ($q) => $q->whereHas('user', fn ($q) => $q->where('fio', 'like', "%$studFio%")))
+            ->when($subj, fn ($q) => $q->whereHas('subject', fn ($q) => $q->where('name', 'like', "%$subj%")))
+            ->when($prepodFio, fn ($q) => $q->whereHas('teacher', fn ($q) => $q->where('fio', 'like', "%$prepodFio%")))
+            ->when($phone, fn ($q) => $q->whereHas('user', fn ($q) => $q->where('tel_num', 'like', "%$phone%")));
         $orders = $query->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));
 
@@ -41,17 +51,16 @@ class StudentsController extends Controller
         foreach ($orders as $order) {
             $order['lastEduPaid'] = $order->lastEduPaid;
             $percent = $order->percent;
-            if($percent) $order->newPrice = $order->price / 100 * $percent->percent;
+            if ($percent) $order->newPrice = $order->price / 100 * $percent->percent;
             if ($order['lastEduPaid']) {
                 $orderDate = Carbon::parse($order['lastEduPaid']->date);
-                if($orderDate->month === $now->month) {
+                if ($orderDate->month === $now->month) {
                     $endDate = Carbon::parse($order->end_date);
                     $startDate = Carbon::parse($order->start_date);
                     $daysDifference = $endDate->diffInDays($startDate);
                     $order['lastEduPaid']->date = $orderDate->addDays($daysDifference)->format('d.m.Y');
                     $order['lastEduPaid']->status = 2;
                 } else $order['lastEduPaid']->date = $orderDate->format('d.m.Y');
-                
             } else {
                 $endDate = Carbon::parse($order->end_date);
                 $status = $endDate->gt($now) ? 2 : 3;
@@ -68,10 +77,10 @@ class StudentsController extends Controller
             $groups = Group::where('teacher_id', $user->id)->get();
         if ($teacher_id)
             $groups = Group::where('teacher_id', $teacher_id)->get();
-        
+
         $teacher = null;
-        if($teacher_id) $teacher = User::findOrFail($teacher_id);
-        
+        if ($teacher_id) $teacher = User::findOrFail($teacher_id);
+
         return Inertia::render('Admin/Students/Index', [
             'orders' => $orders,
             'groups' => $groups,
@@ -218,7 +227,7 @@ class StudentsController extends Controller
         EduOrder::where('group_id', $group_id)->update(['group_id' => null]);
         return redirect()->back()->withSuccess('Успешно удалено');
     }
-    
+
     public function destroyOrder($order_id)
     {
         EduOrder::findOrFail($order_id)->update([
@@ -226,6 +235,4 @@ class StudentsController extends Controller
         ]);
         return redirect()->back()->withSuccess('Успешно удалено');
     }
-    
-    
 }

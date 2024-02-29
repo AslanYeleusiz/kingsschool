@@ -289,8 +289,6 @@
                                 </div>
                             </div>
                         </template>
-
-
                         <div class="card-footer mt-5">
                             <button type="submit" class="btn btn-success mr-1">
                                 Сақтау

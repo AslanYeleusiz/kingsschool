@@ -23,7 +23,10 @@ class ScheduleContorller extends Controller
      */
     public function index(Request $request)
     {
-        return Inertia::render('Admin/Schedule/Index');
+        $user = auth()->guard('web')->user();
+        return Inertia::render('Admin/Schedule/Index', [
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -33,10 +36,15 @@ class ScheduleContorller extends Controller
      */
     public function create(Request $request)
     {
+        $user = auth()->guard('web')->user();
         $filial_id = $request->filial_id ?? 2;
         $day = $request->day;
         $date = Carbon::parse($request->date)->addDays($day - 1);
-        $schedules = Schedule::with(['subject', 'teacher:id,fio', 'group'])->whereDate('date', $date)->orderBy('start_time')->get();
+        $schedules = Schedule::with(['subject', 'teacher:id,fio', 'group'])
+            ->whereHas('teacher', function ($q) use ($user) {
+                $q->where('filial_id', $user->filial_id);
+            })
+            ->whereDate('date', $date)->orderBy('start_time')->get();
 
         $subjects = Subject::get();
         $teachers = User::where('filial_id', $filial_id)->where('role_id', 3)->get();
@@ -103,15 +111,18 @@ class ScheduleContorller extends Controller
         $date = Carbon::parse($request->date);
         $startweekdate = $date->copy()->startOfWeek();
         $endweekdate = $date->copy()->endOfWeek();
-        // $schedules = Schedule::with(['subject','teacher:id,fio','group'])->whereDate('date', '>=',$startweekdate)->whereDate('date','<=',$endweekdate)->orderBy('date')->get();
+        $teacher_id = $request->teacher_id;
         $schedules = Schedule::with(['subject', 'teacher:id,fio,filial_id', 'group'])
             ->whereDate('date', '>=', $startweekdate)
             ->whereDate('date', '<=', $endweekdate)
             ->whereHas('teacher', function ($q) use ($user) {
                 $q->where('filial_id', $user->filial_id);
             })
-            ->when($user->role_id == 3, function($q) use ($user) {
+            ->when($user->role_id == 3, function ($q) use ($user) {
                 return $q->where('teacher_id', $user->id);
+            })
+            ->when($teacher_id, function ($q) use ($teacher_id) {
+                return $q->where('teacher_id', $teacher_id);
             })
             ->orderBy('date')
             ->get();
@@ -163,8 +174,7 @@ class ScheduleContorller extends Controller
      */
     public function destroy($id)
     {
-        Schedule
-            ::findOrFail($id)->delete();
+        Schedule::findOrFail($id)->delete();
         return redirect()->back();
     }
 }
