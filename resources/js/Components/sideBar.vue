@@ -99,6 +99,13 @@ export default {
         return {
             menu_items: [
                 {
+                    name: "Главная страница",
+                    font: "fa-home",
+                    route_name: "admin.index",
+                    menu_active: ["admin.index"],
+                    role: [1, 2],
+                },
+                {
                     name: "Қолданушылар",
                     font: "fa-users",
                     route_name: "admin.users.index",

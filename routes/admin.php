@@ -81,6 +81,3 @@ Route::group(['prefix' => '/schedule', 'as' => 'schedule.'], function () {
 });
 
 Route::get('/check-iin', [UserController::class, 'checkIin']);
-
-//Route::middleware('adminAuth')->group(function () {
-//});

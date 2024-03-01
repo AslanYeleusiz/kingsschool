@@ -18,7 +18,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Admin/home');
+    return Inertia::render('home');
 })->name('index')->middleware('miniAdmin');
 
 Route::middleware('guest')->group(function () {

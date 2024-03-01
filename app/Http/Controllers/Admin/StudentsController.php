@@ -54,7 +54,7 @@ class StudentsController extends Controller
             if ($percent) $order->newPrice = $order->price / 100 * $percent->percent;
             if ($order['lastEduPaid']) {
                 $orderDate = Carbon::parse($order['lastEduPaid']->date);
-                if ($orderDate->month === $now->month) {
+                if ($orderDate < $now) {
                     $endDate = Carbon::parse($order->end_date);
                     $startDate = Carbon::parse($order->start_date);
                     $daysDifference = $endDate->diffInDays($startDate);

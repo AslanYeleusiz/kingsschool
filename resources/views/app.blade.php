@@ -21,6 +21,7 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script src="{{ asset('js/Chart.min.js') }}"></script>
     @vite('resources/sass/app.scss')
     @inertiaHead
 </head>

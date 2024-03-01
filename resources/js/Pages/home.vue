@@ -1,16 +1,16 @@
 <template>
-    <layout>
+    <AdminLayout>
     
-    </layout>
+    </AdminLayout>
 </template>
 
 
 <script>
-    import layout from '@/Layouts/layout.vue'
+    import AdminLayout from '@/Layouts/AdminLayout.vue'
 
     export default {
         components: {
-            layout,
+            AdminLayout,
         },
     }
 

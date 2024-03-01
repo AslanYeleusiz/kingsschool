@@ -32,7 +32,11 @@ class TeacherController extends Controller
         foreach ($teachers as $teacher) {
             $teacher['lastEduPaid'] = $teacher->lastEduPaid;
             if ($teacher['lastEduPaid']) {
-                $teacher['lastEduPaid']->date = Carbon::parse($teacher['lastEduPaid']->date)->format('d.m.Y');
+                $teacher['lastEduPaid']->date = Carbon::parse($teacher['lastEduPaid']->date);
+                if($teacher['lastEduPaid']->date < $now) {
+                    $teacher['lastEduPaid']->date = $teacher['lastEduPaid']->date->addMonths(1)->format('d.m.Y');
+                    $teacher['lastEduPaid']->status = 2;
+                } else $teacher['lastEduPaid']->date = $teacher['lastEduPaid']->date->format('d.m.Y');
             } else {
                 $endDate = Carbon::parse($teacher->start_edu_date)->addMonth();
                 $status = $endDate->gt($now) ? 2 : 3;
@@ -83,7 +87,7 @@ class TeacherController extends Controller
             if ($percent) $order->newPrice = $order->price / 100 * $percent->percent;
             if ($order['lastEduPaid']) {
                 $orderDate = Carbon::parse($order['lastEduPaid']->date);
-                if ($orderDate->month === $now->month) {
+                if ($orderDate < $now) {
                     $endDate = Carbon::parse($order->end_date);
                     $startDate = Carbon::parse($order->start_date);
                     $daysDifference = $endDate->diffInDays($startDate);
