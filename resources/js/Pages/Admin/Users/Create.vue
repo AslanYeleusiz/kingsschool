@@ -265,7 +265,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label for="">Дата начало обучения</label>
+                                        <label for="">Дата начала обучения</label>
                                         <input type="date" class="form-control" v-model="user.start_edu_date" required />
                                     </div>
                                 </div>

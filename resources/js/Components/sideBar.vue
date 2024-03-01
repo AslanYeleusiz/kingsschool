@@ -134,6 +134,13 @@ export default {
                     role: [1, 2],
                 },
                 {
+                    name: "Расходы",
+                    font: "fa-file-invoice-dollar",
+                    route_name: "admin.expenses.index",
+                    menu_active: ["admin.expenses"],
+                    role: [1, 2],
+                },
+                {
                     name: "Пәндер",
                     font: "fa-book",
                     route_name: "admin.subjects.index",
