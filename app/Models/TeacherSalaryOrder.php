@@ -10,4 +10,9 @@ class TeacherSalaryOrder extends Model
     use HasFactory;
     protected $guarded=[];
     public $timestamps=false;
+
+    public function trainType()
+    {
+        return $this->belongsTo(TrainType::class, 'train_type_id');
+    }
 }

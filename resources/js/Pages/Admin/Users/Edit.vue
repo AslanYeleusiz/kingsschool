@@ -155,14 +155,35 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Дата начало обучения</label>
-                                    <input type="date" class="form-control" v-model="user.start_edu_date" required />
+                        <template v-if="user.role_id == 3">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="">Дата начала обучения</label>
+                                        <input type="date" class="form-control" v-model="user.start_edu_date"
+                                            required />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="">Зарплата</label>
+                                        <div v-for="teacherOrder in user.salary_orders" class="input-group mt-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon3">{{ teacherOrder.train_type.name
+                                                    }}</span>
+                                            </div>
+                                            <input type="number" class="form-control" v-model="teacherOrder.percent"
+                                                aria-describedby="basic-addon3" style="text-align: right;" required />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary mr-1">
                                 Сақтау

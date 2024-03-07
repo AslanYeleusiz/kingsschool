@@ -180,6 +180,18 @@ class UserController extends Controller
         $auth_user = auth()->guard('web')->user();
         $roles = Role::get();
         $filials = Filial::get();
+        $user->load('salaryOrders.trainType');
+        if(count($user['salaryOrders']) == 0) {
+            $trainTypes = TrainType::get();
+            foreach($trainTypes as $trainType) {
+                TeacherSalaryOrder::create([
+                    'user_id' => $user->id,
+                    'train_type_id' => $trainType['id'],
+                    'percent' => 40,
+                ]);
+            }
+            $user->load('salaryOrders.trainType');
+        }
         return Inertia::render('Admin/Users/Edit', [
             'roles' => $roles,
             'filials' => $filials,
@@ -222,6 +234,14 @@ class UserController extends Controller
             'role_id' => $request->role_id,
             'start_edu_date' => $request->start_edu_date,
         ]);
+
+        if($user->role_id == 3) {
+            foreach($request['salary_orders'] as $order) {
+                TeacherSalaryOrder::find($order['id'])->update([
+                    'percent' => $order['percent']
+                ]);
+            }
+        }
 
         return redirect()->route('admin.users.index')->with('success', 'Успешно сохранено');
     }
