@@ -67,12 +67,13 @@ Route::resource('students', StudentsController::class)->only(['index', 'update']
 Route::group(['prefix' => '/students/{id}', 'as' => 'students.'], function () {
     Route::post('/paid', [StudentsController::class, 'paid'])->name('paid');
     Route::post('/deletePaid', [StudentsController::class, 'deletePaid'])->name('deletePaid');
+    Route::post('/setGroups', [StudentsController::class, 'setGroups'])->name('setGroups');
 });
 
 // Route::resource('users/{id}/edu_orders', EduOrderController::class)->except(['show'])->names('eduOrders');
 Route::group(['prefix' => '/groups/{id}', 'as' => 'groups.'], function () {
     Route::delete('/destroy', [StudentsController::class, 'destroyGroup'])->name('destroy');
-    Route::delete('/destroyOrder', [StudentsController::class, 'destroyOrder'])->name('destroyOrder');
+    Route::delete('/{groupId}/destroyOrder', [StudentsController::class, 'destroyOrder'])->name('destroyOrder');
 });
 
 Route::resource('schedule', ScheduleContorller::class)->except(['show', 'edit', 'update'])->names('schedule');

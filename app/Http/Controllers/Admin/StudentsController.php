@@ -7,6 +7,7 @@ use App\Models\EduOrder;
 use App\Models\EduPaidOrder;
 use App\Models\Group;
 use App\Models\User;
+use App\Models\GroupOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -32,7 +33,7 @@ class StudentsController extends Controller
         $subj = $request->subj;
         $prepodFio = $request->prepodFio;
         $phone = $request->phone;
-        $query = EduOrder::has('user')->with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'group', 'subject']);
+        $query = EduOrder::has('user')->with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'groups', 'subject']);
         $query->when($user->role_id == 2, function ($query) use ($user) {
             return $query->whereHas('teacher', fn ($q) => $q->where('filial_id', $user->filial_id));
         });
@@ -51,6 +52,8 @@ class StudentsController extends Controller
         foreach ($orders as $order) {
             $order['lastEduPaid'] = $order->lastEduPaid;
             $percent = $order->percent;
+            $order['group_ids'] = $order['groups']->pluck('id')->toArray();
+            $order['newGroup'] = 0;
             if ($percent) $order->newPrice = $order->price / 100 * $percent->percent;
             if ($order['lastEduPaid']) {
                 $orderDate = Carbon::parse($order['lastEduPaid']->date);
@@ -143,23 +146,13 @@ class StudentsController extends Controller
     {
         //
         $eduOrder = EduOrder::findOrFail($id);
-        $groupId = $request->groupId;
+        $newGroup = $request->name;
         DB::beginTransaction();
-        if (!$groupId) {
-            if (!$request->name) {
-                return redirect()->back();
-            }
-            $group = Group::create([
-                'name' => $request->name,
-                'teacher_id' => $eduOrder->teacher_id
-            ]);
-        } else {
-            $group = Group::findOrFail($groupId);
-        }
-
-        $eduOrder->group_id = $group->id;
-        $eduOrder->save();
-
+        $groups = Group::create([
+            'name' => $newGroup,
+            'teacher_id' => $eduOrder->teacher_id
+        ]);
+        $eduOrder->groups()->sync([$groups['id']]);
         DB::commit();
         return redirect()->back();
     }
@@ -224,15 +217,20 @@ class StudentsController extends Controller
     public function destroyGroup($group_id)
     {
         Group::findOrFail($group_id)->delete();
-        EduOrder::where('group_id', $group_id)->update(['group_id' => null]);
+        GroupOrder::where('group_id', $group_id)->delete();
         return redirect()->back()->withSuccess('Успешно удалено');
     }
 
-    public function destroyOrder($order_id)
+    public function destroyOrder($order_id, $groupId)
     {
-        EduOrder::findOrFail($order_id)->update([
-            'group_id' => null
-        ]);
+        GroupOrder::where('edu_order_id', $order_id)->where('group_id', $groupId)->delete();
         return redirect()->back()->withSuccess('Успешно удалено');
+    }
+
+    public function setGroups($order_id, Request $request){
+        $groupsIds = $request->group_ids;
+        $eduOrder = EduOrder::findOrFail($order_id);
+        $eduOrder->groups()->sync($groupsIds);
+        return response()->json($eduOrder['groups']->pluck('id')->toArray());
     }
 }

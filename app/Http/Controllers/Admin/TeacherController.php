@@ -63,7 +63,7 @@ class TeacherController extends Controller
         $subj = $request->subj;
         $prepodFio = $request->prepodFio;
         $phone = $request->phone;
-        $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'group', 'subject']);
+        $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'groups:id', 'subject']);
         $query->when($user->role_id == 3 || $user->role_id == 2, function ($query) use ($user) {
             if ($user->role_id == 3)
                 return $query->where('teacher_id', $user->id);
@@ -84,6 +84,8 @@ class TeacherController extends Controller
         foreach ($orders as $order) {
             $order['lastEduPaid'] = $order->lastEduPaid;
             $percent = $order->percent;
+            $order['group_ids'] = $order['groups']->pluck('id')->toArray();
+            $order['newGroup'] = 0;
             if ($percent) $order->newPrice = $order->price / 100 * $percent->percent;
             if ($order['lastEduPaid']) {
                 $orderDate = Carbon::parse($order['lastEduPaid']->date);

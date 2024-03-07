@@ -28,6 +28,11 @@ class EduOrder extends Model
         return $this->hasMany(EduPaidOrder::class, 'edu_order_id');
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, GroupOrder::class, 'edu_order_id', 'group_id');
+    }
+
 
     public function group()
     {

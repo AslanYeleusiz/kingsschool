@@ -37,7 +37,7 @@
                                                         }
                                                     )
                                                         " class="btn btn-primary" title="Өзгерту"
-                                                        v-if="user.role_id == 1 || user.role_id == 2">
+                                                        v-if="user.role_id == 1 || user.role_id == 2 || user.role_id == 3">
                                                     Изменить
                                                     </Link>
                                                 </div>
