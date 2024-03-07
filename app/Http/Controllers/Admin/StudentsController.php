@@ -27,7 +27,7 @@ class StudentsController extends Controller
         $user = auth()->guard('web')->user();
 
         $teacher_id = null;
-        if($user->role_id == 3) $teacher_id = $user->id;
+        if ($user->role_id == 3) $teacher_id = $user->id;
         $studFio = $request->studFio;
         $subj = $request->subj;
         $prepodFio = $request->prepodFio;
@@ -170,9 +170,10 @@ class StudentsController extends Controller
      * @param  \App\Models\EduOrder  $eduOrder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EduOrder $eduOrder)
+    public function destroy($id)
     {
-        //
+        EduOrder::findOrFail($id)->delete();
+        return redirect()->back()->withSuccess('Успешно удалено');
     }
 
     public function paid($id)

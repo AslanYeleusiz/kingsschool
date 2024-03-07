@@ -24,22 +24,23 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                     <template v-for="(menu_item, index) in menu_items" :key="'menu_item' + index">
                         <template v-if="menu_item.role.includes($page.props.auth.user.role_id)">
                             <li class="nav-item " v-if="menu_item.childs_items" :class="{
-                                'menu-open':
-                                    menu_item.menu_active.includes(
-                                        currentRoute
-                                    ),
-                            }">
+                        'menu-open':
+                            menu_item.menu_active.includes(
+                                currentRoute
+                            ),
+                    }">
                                 <a href="#" class="nav-link" :class="{
-                                    active: menu_item.menu_active.includes(
-                                        currentRoute
-                                    ),
-                                }">
+                        active: menu_item.menu_active.includes(
+                            currentRoute
+                        ),
+                    }">
                                     <i class="nav-icon fas fa-solid" :class="[menu_item.font]"></i>
                                     <p>
                                         {{ menu_item.name }}
@@ -51,10 +52,10 @@
                                         childs_item, child_index
                                     ) in menu_item.childs_items" :key="'child' + child_index">
                                         <Link :href="route(childs_item.route_name)" class="nav-link" :class="{
-                                            active: childs_item.menu_active.includes(
-                                                currentRoute
-                                            ),
-                                        }">
+                        active: childs_item.menu_active.includes(
+                            currentRoute
+                        ),
+                    }">
                                         <i class="nav-icon fas" :class="childs_item.font"></i>
                                         <p>{{ childs_item.name }}</p>
                                         </Link>
@@ -63,10 +64,10 @@
                             </li>
                             <li class="nav-item" v-else>
                                 <Link :href="route(menu_item.route_name)" class="nav-link" :class="{
-                                    active: menu_item.menu_active.includes(
-                                        currentRoute
-                                    ),
-                                }">
+                        active: menu_item.menu_active.includes(
+                            currentRoute
+                        ),
+                    }">
                                 <i class="nav-icon fas" :class="menu_item.font"></i>
                                 <p>{{ menu_item.name }}</p>
                                 </Link>
@@ -106,25 +107,38 @@ export default {
                     role: [1, 2],
                 },
                 {
-                    name: "Қолданушылар",
-                    font: "fa-users",
-                    route_name: "admin.users.index",
-                    menu_active: ["admin.users", "admin.eduOrders"],
-                    role: [1, 2],
-                },
-                {
-                    name: "Студенты",
-                    font: "fa-graduation-cap",
-                    route_name: "admin.students.index",
-                    menu_active: ["admin.students"],
+                    name: "Винтики",
+                    font: "fas fa-bars",
+                    menu_active: [
+                        "admin.users",
+                        "admin.students",
+                        "admin.teachers",
+                    ],
                     role: [1, 2, 3],
-                },
-                {
-                    name: "Преподаватели",
-                    font: "fa-chalkboard-teacher",
-                    route_name: "admin.teachers.index",
-                    menu_active: ["admin.teachers"],
-                    role: [1, 2],
+                    route_name: "",
+                    childs_items: [
+                        {
+                            name: "Қолданушылар",
+                            font: "fa-users",
+                            route_name: "admin.users.index",
+                            menu_active: ["admin.users", "admin.eduOrders"],
+                            role: [1, 2],
+                        },
+                        {
+                            name: "Студенты",
+                            font: "fa-graduation-cap",
+                            route_name: "admin.students.index",
+                            menu_active: ["admin.students"],
+                            role: [1, 2, 3],
+                        },
+                        {
+                            name: "Преподаватели",
+                            font: "fa-chalkboard-teacher",
+                            route_name: "admin.teachers.index",
+                            menu_active: ["admin.teachers"],
+                            role: [1, 2],
+                        },
+                    ],
                 },
                 {
                     name: "Расписания",
@@ -134,18 +148,30 @@ export default {
                     role: [1, 2, 3],
                 },
                 {
-                    name: "История платежей",
-                    font: "fa-file-invoice-dollar",
-                    route_name: "admin.paidHistories.index",
-                    menu_active: ["admin.paidHistories"],
+                    name: "ЗА ДЕНЬГИ ДА!!!",
+                    font: "fa-solid fa-credit-card",
+                    menu_active: [
+                        "admin.paidHistories",
+                        "admin.expenses",
+                    ],
                     role: [1, 2],
-                },
-                {
-                    name: "Расходы",
-                    font: "fa-file-invoice-dollar",
-                    route_name: "admin.expenses.index",
-                    menu_active: ["admin.expenses"],
-                    role: [1, 2],
+                    route_name: "",
+                    childs_items: [
+                        {
+                            name: "История платежей",
+                            font: "fa-file-invoice-dollar",
+                            route_name: "admin.paidHistories.index",
+                            menu_active: ["admin.paidHistories"],
+                            role: [1, 2],
+                        },
+                        {
+                            name: "Расходы",
+                            font: "fa-file-invoice-dollar",
+                            route_name: "admin.expenses.index",
+                            menu_active: ["admin.expenses"],
+                            role: [1, 2],
+                        },
+                    ],
                 },
                 {
                     name: "Пәндер",
@@ -169,18 +195,28 @@ export default {
                     role: [1],
                 },
                 {
-                    name: "Типы обучения",
-                    font: "fa-university",
-                    route_name: "admin.trainTypes.index",
-                    menu_active: ["admin.trainTypes"],
+                    name: "Типы",
+                    font: "fa-solid fa-list",
+                    menu_active: [
+                        "admin.trainTypes",
+                        "admin.courseTypes",
+                    ],
                     role: [1],
-                },
-                {
-                    name: "Типы Курсов",
-                    font: "fa-laptop-code",
-                    route_name: "admin.courseTypes.index",
-                    menu_active: ["admin.courseTypes"],
-                    role: [1],
+                    route_name: "",
+                    childs_items: [
+                        {
+                            name: "Типы Обучения",
+                            font: "fa-university",
+                            route_name: "admin.trainTypes.index",
+                            menu_active: ["admin.trainTypes"],
+                        },
+                        {
+                            name: "Типы Курсов",
+                            font: "fa-laptop-code",
+                            route_name: "admin.courseTypes.index",
+                            menu_active: ["admin.courseTypes"],
+                        }
+                    ],
                 },
             ],
         }

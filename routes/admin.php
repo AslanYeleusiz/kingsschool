@@ -63,7 +63,7 @@ Route::middleware('checkUserRole:1,2')->group(function () {
     Route::resource('expenses', ExpensesController::class)->except(['show'])->names('expenses');
 });
 
-Route::resource('students', StudentsController::class)->only(['index', 'update'])->names('students');
+Route::resource('students', StudentsController::class)->only(['index', 'update', 'destroy'])->names('students');
 Route::group(['prefix' => '/students/{id}', 'as' => 'students.'], function () {
     Route::post('/paid', [StudentsController::class, 'paid'])->name('paid');
     Route::post('/deletePaid', [StudentsController::class, 'deletePaid'])->name('deletePaid');

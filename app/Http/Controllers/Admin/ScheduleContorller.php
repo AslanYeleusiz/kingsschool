@@ -16,11 +16,6 @@ use Carbon\Carbon;
 
 class ScheduleContorller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $user = auth()->guard('web')->user();
@@ -28,12 +23,7 @@ class ScheduleContorller extends Controller
             'user' => $user,
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create(Request $request)
     {
         $user = auth()->guard('web')->user();
@@ -71,13 +61,7 @@ class ScheduleContorller extends Controller
             'shifts' => $shifts,
         ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $filial_id = $request->filial_id ?? 2;
@@ -97,13 +81,7 @@ class ScheduleContorller extends Controller
         ]);
         return redirect()->back()->withSuccess('Успешно сохранено');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
+    
     public function getSchedule(Request $request)
     {
         $user = auth()->guard('web')->user();
@@ -143,35 +121,6 @@ class ScheduleContorller extends Controller
         return response()->json($groups);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Schedule $schedule)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Schedule $schedule)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         Schedule::findOrFail($id)->delete();
