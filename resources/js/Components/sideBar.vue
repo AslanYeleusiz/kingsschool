@@ -114,7 +114,7 @@ export default {
                         "admin.students",
                         "admin.teachers",
                     ],
-                    role: [1, 2, 3],
+                    role: [1, 2],
                     route_name: "",
                     childs_items: [
                         {
@@ -139,6 +139,13 @@ export default {
                             role: [1, 2],
                         },
                     ],
+                },
+                {
+                    name: "Мои студенты",
+                    font: "fa-graduation-cap",
+                    route_name: "admin.students.index",
+                    menu_active: ["admin.students"],
+                    role: [3],
                 },
                 {
                     name: "Расписания",
@@ -174,6 +181,8 @@ export default {
                     menu_active: [
                         "admin.trainTypes",
                         "admin.courseTypes",
+                        "admin.roles",
+                        "admin.filials",
                     ],
                     role: [1],
                     route_name: "",
@@ -195,14 +204,12 @@ export default {
                             font: "fa-dice-four",
                             route_name: "admin.roles.index",
                             menu_active: ["admin.roles"],
-                            role: [1],
                         },
                         {
                             name: "Филиал",
                             font: "fa-hotel",
                             route_name: "admin.filials.index",
                             menu_active: ["admin.filials"],
-                            role: [1],
                         },
                     ],
                 },
