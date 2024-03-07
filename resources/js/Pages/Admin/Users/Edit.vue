@@ -1,4 +1,5 @@
 <template>
+
     <head>
         <title>Админ панель | Қолданушыны өзгерту</title>
     </head>
@@ -106,6 +107,16 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="">Айди карточки</label>
+                                    <input type="number" class="form-control" v-model="user.card_id" name="card_id"
+                                        placeholder="Айди" />
+                                    <validation-error :field="'card_id'" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="">Роль</label>
                                     <select class="form-control" @change.prevent="search" v-model="user.role_id"
                                         placeholder="Белсенді">
@@ -127,7 +138,8 @@
                                         <option :value="null" hidden>
                                             Филлиал таңдаңыз
                                         </option>
-                                        <option v-for="filial in filials" :key="'filial' + filial.id" :value="filial.id">
+                                        <option v-for="filial in filials" :key="'filial' + filial.id"
+                                            :value="filial.id">
                                             {{ filial.name }}
                                         </option>
                                     </select>
@@ -165,6 +177,7 @@
         </div>
     </AdminLayout>
 </template>
+
 <script>
 import AdminLayout from "../../../Layouts/AdminLayout.vue";
 import {
@@ -267,6 +280,7 @@ export default {
 };
 
 </script>
+
 <style lang="scss">
 .file-upload {
     .file {

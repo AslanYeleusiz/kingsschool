@@ -1,4 +1,5 @@
 <template>
+
     <head>
         <title>Админ панель | Қолданушы қосу</title>
     </head>
@@ -51,12 +52,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Филлиал</label>
-                                    <select class="form-control" v-model="user.filial_id" placeholder="Белсенді" required
-                                        @change.prevent="getTeachers(user.filial_id)">
+                                    <select class="form-control" v-model="user.filial_id" placeholder="Белсенді"
+                                        required @change.prevent="getTeachers(user.filial_id)">
                                         <option :value="null" hidden disabled selected>
                                             Филлиал таңдаңыз
                                         </option>
-                                        <option v-for="filial in filials" :key="'filial' + filial.id" :value="filial.id">
+                                        <option v-for="filial in filials" :key="'filial' + filial.id"
+                                            :value="filial.id">
                                             {{ filial.name }}
                                         </option>
                                     </select>
@@ -84,7 +86,6 @@
                             <div class="col-md-4">
                                 <div v-if="check_iin" class="spinner-border text-primary matop" role="status"></div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-md-4">
@@ -130,6 +131,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Айди карточки</label>
+                                    <input type="number" class="form-control" v-model="card_id" name="card_id"
+                                        placeholder="Айди" />
+                                    <validation-error :field="'card_id'" />
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group file-upload">
                             <label for="">Сурет</label>
                             <div class="ml-2">
@@ -147,6 +158,7 @@
                             <validation-error :field="'image'" />
                         </div>
                         <h2 v-if="user.role_id == 3 || user.role_id == 4" class="mt-5">Обучение</h2>
+
                         <template v-if="user.role_id == 4" v-for="(eduOrder, index) in eduOrders">
                             <hr>
                             <div class="row">
@@ -205,8 +217,8 @@
                                             <option :value="null" hidden>
                                                 Выбрать
                                             </option>
-                                            <option v-for="courseType in courseTypes" :key="'courseType' + courseType.id"
-                                                :value="courseType.id">
+                                            <option v-for="courseType in courseTypes"
+                                                :key="'courseType' + courseType.id" :value="courseType.id">
                                                 {{ courseType.name }}
                                             </option>
                                         </select>
@@ -266,7 +278,8 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="">Дата начала обучения</label>
-                                        <input type="date" class="form-control" v-model="user.start_edu_date" required />
+                                        <input type="date" class="form-control" v-model="user.start_edu_date"
+                                            required />
                                     </div>
                                 </div>
                             </div>
@@ -276,8 +289,8 @@
                                         <label for="">Зарплата</label>
                                         <div v-for="teacherOrder in teacherOrders" class="input-group mt-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"
-                                                    id="basic-addon3">{{ teacherOrder.name }}</span>
+                                                <span class="input-group-text" id="basic-addon3">{{ teacherOrder.name
+                                                    }}</span>
                                             </div>
                                             <input type="number" class="form-control" v-model="teacherOrder.percent"
                                                 aria-describedby="basic-addon3" style="text-align: right;" required />
@@ -303,6 +316,7 @@
         </div>
     </AdminLayout>
 </template>
+
 <script>
 import AdminLayout from "../../../Layouts/AdminLayout.vue";
 import {
@@ -350,6 +364,7 @@ export default {
             subjectOrders: null,
             iin: '',
             check_iin: false,
+            card_id: null,
         }
     },
     methods: {
@@ -416,6 +431,7 @@ export default {
 
         submit() {
             this.user.iin = this.iin
+            this.user.card_id = this.card_id
             if (this.image.file) {
                 this.user.image = this.image.file
             }
@@ -485,6 +501,7 @@ export default {
 };
 
 </script>
+
 <style lang="scss">
 .file-upload {
     .file {
@@ -516,4 +533,5 @@ export default {
 
 .matop {
     margin-top: 33px;
-}</style>
+}
+</style>

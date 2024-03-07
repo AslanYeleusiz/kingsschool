@@ -107,6 +107,7 @@ class UserController extends Controller
         DB::beginTransaction();
         $user = User::create([
             'iin' => $request->iin,
+            'card_id' => $request->card_id,
             'name' => $request->name,
             's_name' => $request->s_name,
             'fio' => $request->s_name . ' ' . $request->name,
@@ -207,6 +208,7 @@ class UserController extends Controller
 
         $user->update([
             'iin' => $request->iin,
+            'card_id' => $request->card_id,
             'name' => $request->name,
             's_name' => $request->s_name,
             'fio' => $request->s_name . ' ' . $request->name,
@@ -221,7 +223,7 @@ class UserController extends Controller
             'start_edu_date' => $request->start_edu_date,
         ]);
 
-        return redirect()->back()->withSuccess('Успешно сохранено');
+        return redirect()->route('admin.users.index')->with('success', 'Успешно сохранено');
     }
 
     /**
