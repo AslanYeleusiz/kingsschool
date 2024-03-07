@@ -1,0 +1,1 @@
+import{_ as r}from"./AdminLayout-e8e41296.js";import{o as t,e as s,a,t as i,h as n}from"./app-b12180b4.js";const c={props:["field"]},l={key:0,class:"help-block"},_={class:"invalid-feedback",style:{display:"block"}};function d(e,p,o,f,m,k){return e.error(o.field)?(t(),s("div",l,[a("b",_,i(e.error(o.field)),1)])):n("",!0)}const h=r(c,[["render",d]]);export{h as V};

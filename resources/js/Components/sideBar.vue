@@ -107,7 +107,7 @@ export default {
                     role: [1, 2],
                 },
                 {
-                    name: "Винтики",
+                    name: "Пользователи",
                     font: "fas fa-bars",
                     menu_active: [
                         "admin.users",
@@ -118,7 +118,7 @@ export default {
                     route_name: "",
                     childs_items: [
                         {
-                            name: "Қолданушылар",
+                            name: "Общий список",
                             font: "fa-users",
                             route_name: "admin.users.index",
                             menu_active: ["admin.users", "admin.eduOrders"],
@@ -148,30 +148,18 @@ export default {
                     role: [1, 2, 3],
                 },
                 {
-                    name: "ЗА ДЕНЬГИ ДА!!!",
-                    font: "fa-solid fa-credit-card",
-                    menu_active: [
-                        "admin.paidHistories",
-                        "admin.expenses",
-                    ],
+                    name: "История платежей",
+                    font: "fa-file-invoice-dollar",
+                    route_name: "admin.paidHistories.index",
+                    menu_active: ["admin.paidHistories"],
                     role: [1, 2],
-                    route_name: "",
-                    childs_items: [
-                        {
-                            name: "История платежей",
-                            font: "fa-file-invoice-dollar",
-                            route_name: "admin.paidHistories.index",
-                            menu_active: ["admin.paidHistories"],
-                            role: [1, 2],
-                        },
-                        {
-                            name: "Расходы",
-                            font: "fa-file-invoice-dollar",
-                            route_name: "admin.expenses.index",
-                            menu_active: ["admin.expenses"],
-                            role: [1, 2],
-                        },
-                    ],
+                },
+                {
+                    name: "Расходы",
+                    font: "fa-file-invoice-dollar",
+                    route_name: "admin.expenses.index",
+                    menu_active: ["admin.expenses"],
+                    role: [1, 2],
                 },
                 {
                     name: "Пәндер",
@@ -179,20 +167,6 @@ export default {
                     route_name: "admin.subjects.index",
                     menu_active: ["admin.subjects"],
                     role: [1, 2],
-                },
-                {
-                    name: "Рөлдер",
-                    font: "fa-dice-four",
-                    route_name: "admin.roles.index",
-                    menu_active: ["admin.roles"],
-                    role: [1],
-                },
-                {
-                    name: "Филиал",
-                    font: "fa-hotel",
-                    route_name: "admin.filials.index",
-                    menu_active: ["admin.filials"],
-                    role: [1],
                 },
                 {
                     name: "Типы",
@@ -215,7 +189,21 @@ export default {
                             font: "fa-laptop-code",
                             route_name: "admin.courseTypes.index",
                             menu_active: ["admin.courseTypes"],
-                        }
+                        },
+                        {
+                            name: "Рөлдер",
+                            font: "fa-dice-four",
+                            route_name: "admin.roles.index",
+                            menu_active: ["admin.roles"],
+                            role: [1],
+                        },
+                        {
+                            name: "Филиал",
+                            font: "fa-hotel",
+                            route_name: "admin.filials.index",
+                            menu_active: ["admin.filials"],
+                            role: [1],
+                        },
                     ],
                 },
             ],
