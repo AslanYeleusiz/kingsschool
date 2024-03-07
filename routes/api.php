@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\V1\RefitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +20,11 @@ use App\Http\Controllers\AuthController;
 //    return $request->user();
 //});
 
-Route::group(['middleware' => 'api'], function ($router) {
-    Route::group(['prefix' => 'auth'], function () {
-        Route::post('/login', [AuthController::class, 'login']);
-        Route::get('/user', [AuthController::class, 'me']);
-        Route::post('/refresh', [AuthController::class, 'refresh']);
-        Route::post('/logout', [AuthController::class, 'logout']);
-    });
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/user', [AuthController::class, 'me']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
+
+Route::get('/refit/token/{id}/create', [RefitController::class, 'create']);
