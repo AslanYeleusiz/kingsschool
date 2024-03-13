@@ -56,11 +56,6 @@
                                                                     <td>
                                                                         {{ schedule.start_time }} - {{ schedule.end_time }}
                                                                     </td>
-                                                                    <td>
-                                                                        {{
-                                                                            schedule.subject.name
-                                                                        }}
-                                                                    </td>
 
                                                                     <td>
                                                                         {{
@@ -73,8 +68,54 @@
                                                                             schedule.group ? schedule.group.name : 'Вне группы'
                                                                         }}
                                                                     </td>
-
-
+                                                                    <td v-if="!schedule.edit">
+                                                                        <span
+                                                                            class="badge badge-success"
+                                                                            :class="{
+                                                                                'badge-light':
+                                                                                    schedule.status ==
+                                                                                    0,
+                                                                                'badge-success':
+                                                                                    schedule.status ==
+                                                                                    1,
+                                                                                'badge-danger':
+                                                                                    schedule.status ==
+                                                                                    2,
+                                                                                
+                                                                                'badge-warning':
+                                                                                    schedule.status ==
+                                                                                    3,
+                                                                            }"
+                                                                        >
+                                                                            {{
+                                                                                getStatusText(
+                                                                                    schedule.status
+                                                                                )
+                                                                            }}
+                                                                        </span>
+                                                                    </td>
+                                                                    
+                                                                    <td v-else>
+                                                                        <select
+                                                                            class="form-control"
+                                                                            @change.prevent="changeStatus(schedule.id, schedule.status)"
+                                                                            v-model="schedule.status"
+                                                                            placeholder="Белсенді"
+                                                                        >
+                                                                            <option :value="0">
+                                                                                Урок не начался
+                                                                            </option>
+                                                                            <option :value="1">
+                                                                                Урок проведён
+                                                                            </option>
+                                                                            <option :value="2">
+                                                                                Урок не проведён
+                                                                            </option>
+                                                                            <option :value="3">
+                                                                                Ещё не пришел
+                                                                            </option>
+                                                                        </select>
+                                                                    </td>
                                                                     <td>
                                                                         <div class="btn-group btn-group-sm">
                                                                             <button @click.prevent="
@@ -84,6 +125,13 @@
                                                                                 " class="btn btn-danger" title="Жою">
                                                                                 <i class="fas fa-trash"></i>
                                                                             </button>
+                                                                            <button v-if="!schedule.edit" @click.prevent="schedule.edit = 1" class="btn btn-primary" title="Изменить">
+                                                                                <i class="fas fa-edit"></i>
+                                                                            </button>
+                                                                            <button v-else @click.prevent="schedule.edit = 0" class="btn btn-success" title="Применить изменения">
+                                                                                <i class="fas fa-check"></i>
+                                                                            </button>
+                                                                            
                                                                         </div>
                                                                     </td>
                                                                 </template>
@@ -154,6 +202,13 @@ export default {
         this.toggleCollapse(currentDate.toISOString().slice(0, 10))
     },
     methods: {
+        changeStatus(id, status) {
+            axios.post(route('admin.schedule.setStatus', id), {
+                status: status
+            }).then(res=>{
+                console.log(res)
+            });
+        },
         toggleCollapse(e) {
             console.log(e)
             this.currentDate = e
@@ -172,6 +227,15 @@ export default {
                 this.endweekdate = res.data.endweekdate
             });
         },
+        getStatusText(e){
+            switch(e){
+                case 0: return 'Урок не начался';
+                case 1: return 'Урок проведён';
+                case 2: return 'Урок не проведён';
+                case 3: return 'Ещё не пришел';
+            }
+        },
+        
         deleteData(id) {
             Swal.fire({
                 title: "Жоюға сенімдісіз бе",

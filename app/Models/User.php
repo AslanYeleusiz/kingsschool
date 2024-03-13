@@ -44,6 +44,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(TeacherSalary::class, 'teacher_id')->latest('id');
     }
 
+    public function refit(){
+        return $this->hasMany(CardOrder::class, 'card_id', 'card_id')->whereDate('datetime', now());
+    }
+
 
     // Rest omitted for brevity
 

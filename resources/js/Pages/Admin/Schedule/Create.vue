@@ -38,7 +38,6 @@
                             <thead>
                                 <tr>
                                     <th>Время</th>
-                                    <th>Предмет</th>
                                     <th>Учитель</th>
                                     <th>Группа</th>
                                     <th>Әрекет</th>
@@ -47,7 +46,6 @@
                             <tbody>
                                 <tr v-for="sch in schedules">
                                     <td>{{sch.start_time}} - {{sch.end_time}}</td>
-                                    <td>{{sch.subject.name}}</td>
                                     <td>{{sch.teacher.fio}}</td>
                                     <td>{{sch.group ? sch.group.name : 'Енгізілмеген'}}</td>
                                     <td>
@@ -73,20 +71,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Предмет <span class="red">*</span></label>
-                                    <select class="form-control" v-model="schedule.subject_id" placeholder="Белсенді">
-                                        <option :value="null" hidden>
-                                            Выбрать
-                                        </option>
-                                        <option v-for="subject in subjects" :value="subject.id">
-                                            {{subject.name}}
-                                        </option>
-                                    </select>
-
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Учитель <span class="red">*</span></label>
@@ -146,13 +130,12 @@
             ValidationError,
             Head
         },
-        props: ['schedules', 'date', 'day', 'subjects', 'teachers'],
+        props: ['schedules', 'date', 'day', 'teachers'],
         data() {
             return {
                 schedule: {
                     start_time: null,
                     end_time: null,
-                    subject_id: null,
                     teacher_id: null,
                     group_id: null,
                     date: this.date,

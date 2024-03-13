@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Schedule;
-use App\Models\Subject;
 use App\Models\User;
 use App\Models\CourseType;
 use App\Models\TrainType;
@@ -30,13 +29,11 @@ class ScheduleContorller extends Controller
         $filial_id = $request->filial_id ?? 2;
         $day = $request->day;
         $date = Carbon::parse($request->date)->addDays($day - 1);
-        $schedules = Schedule::with(['subject', 'teacher:id,fio', 'group'])
+        $schedules = Schedule::with(['teacher:id,fio', 'group'])
             ->whereHas('teacher', function ($q) use ($user) {
                 $q->where('filial_id', $user->filial_id);
             })
             ->whereDate('date', $date)->orderBy('start_time')->get();
-
-        $subjects = Subject::get();
         $teachers = User::where('filial_id', $filial_id)->where('role_id', 3)->get();
         $courseTypes = CourseType::get();
         $trainTypes = TrainType::get();
@@ -54,7 +51,6 @@ class ScheduleContorller extends Controller
             'schedules' => $schedules,
             'date' => $date->format('d.m.Y'),
             'day' => $day,
-            'subjects' => $subjects,
             'teachers' => $teachers,
             'courseTypes' => $courseTypes,
             'trainTypes' => $trainTypes,
@@ -69,12 +65,12 @@ class ScheduleContorller extends Controller
         $end_time = Carbon::parse($request->end_time);
         $minutes = $end_time->diffInMinutes($start_time);
         $date = Carbon::parse($request->date);
+
         Schedule::create([
             'start_time' => $start_time,
             'end_time' => $end_time,
             'date' => $date,
             'minutes' => $minutes,
-            'subject_id' => $request->subject_id,
             'teacher_id' => $request->teacher_id,
             'day' => $request->day,
             'group_id' => $request->group_id,
@@ -90,7 +86,7 @@ class ScheduleContorller extends Controller
         $startweekdate = $date->copy()->startOfWeek();
         $endweekdate = $date->copy()->endOfWeek();
         $teacher_id = $request->teacher_id;
-        $schedules = Schedule::with(['subject', 'teacher:id,fio,filial_id', 'group'])
+        $schedules = Schedule::with(['teacher:id,fio,filial_id', 'group'])
             ->whereDate('date', '>=', $startweekdate)
             ->whereDate('date', '<=', $endweekdate)
             ->whereHas('teacher', function ($q) use ($user) {
@@ -125,5 +121,39 @@ class ScheduleContorller extends Controller
     {
         Schedule::findOrFail($id)->delete();
         return redirect()->back();
+    }
+
+    public function setStatus($id, Request $request) {
+        Schedule::findOrFail($id)->update([
+            'status' => $request->status
+        ]);
+        return response()->json(200);
+    }
+
+    public function updateStatus(){
+        $now = Carbon::now();
+        Schedule::with('teacher.refit')
+            ->whereHas('teacher.refit')
+            ->where('status', 0)
+            ->where('date', $now->format('Y-m-d'))
+            ->whereRaw('HOUR(start_time) = ? AND MINUTE(start_time) = ?', [$now->hour, $now->minute])
+            ->update(['status'=>1]);
+
+        Schedule::with('teacher.refit')
+            ->doesntHave('teacher.refit')
+            ->where('status', 0)
+            ->where('date', $now->format('Y-m-d'))
+            ->whereRaw('HOUR(start_time) = ? AND MINUTE(start_time) = ?', [$now->hour, $now->minute])
+            ->update(['status'=>3]);
+
+        Schedule::with('teacher.refit')
+            ->doesntHave('teacher.refit')
+            ->where('status', 3)
+            ->where('date', $now->format('Y-m-d'))
+            ->whereRaw('HOUR(end_time) = ? AND MINUTE(end_time) = ?', [$now->hour, $now->minute])
+            ->update(['status'=>2]);
+
+
+        return response()->json(200);
     }
 }

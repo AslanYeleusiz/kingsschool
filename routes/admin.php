@@ -80,6 +80,7 @@ Route::resource('schedule', ScheduleContorller::class)->except(['show', 'edit', 
 Route::group(['prefix' => '/schedule', 'as' => 'schedule.'], function () {
     Route::get('/getSchedule', [ScheduleContorller::class, 'getSchedule'])->name('getSchedule');
     Route::get('/{id}/getGroups', [ScheduleContorller::class, 'getGroups'])->name('getGroups');
+    Route::post('/{id}/setStatus', [ScheduleContorller::class, 'setStatus'])->name('setStatus');
 });
 
 Route::get('/check-iin', [UserController::class, 'checkIin']);

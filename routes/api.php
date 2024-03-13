@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\ScheduleContorller;
 use App\Http\Controllers\Api\V1\RefitController;
 
 /*
@@ -28,3 +29,4 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::get('/refit/token/{id}/create', [RefitController::class, 'create']);
+Route::get('/schedule/updateStatus', [ScheduleContorller::class, 'updateStatus']);
