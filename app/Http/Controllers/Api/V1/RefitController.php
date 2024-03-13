@@ -23,7 +23,7 @@ class RefitController extends Controller
             ->where('date', $now->format('Y-m-d'))
             ->where('status', 3)
             ->whereHas('teacher', fn($q)=>$q->where('card_id', $id))
-            ->whereRaw('HOUR(start_time) <= ? AND HOUR(end_time) >= ? AND MINUTE(start_time) <= ? AND MINUTE(end_time) >= ?', [$hour, $hour, $minute, $minute])
+            ->whereRaw('HOUR(start_time) <= ? AND HOUR(end_time) >= ?', [$hour, $hour])
             ->update([
                 'status' => 1
             ]);
