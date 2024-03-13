@@ -63,7 +63,7 @@ class TeacherController extends Controller
         $subj = $request->subj;
         $prepodFio = $request->prepodFio;
         $phone = $request->phone;
-        $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'groups:id', 'subject']);
+        $query = EduOrder::with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'groups:id', 'subject'])->whereHas('user', fn($q)=>$q->where('is_deleted', 0))->where('enable', 1);
         $query->when($user->role_id == 3 || $user->role_id == 2, function ($query) use ($user) {
             if ($user->role_id == 3)
                 return $query->where('teacher_id', $user->id);

@@ -50,14 +50,9 @@
                                         <th>Тип обучения</th>
                                         <th>Цена</th>
                                         <th>Группа</th>
+                                        <th>Преподователь</th>
+                                        <th>Статус</th>
                                         <th>Әрекет</th>
-                                    </tr>
-                                    <tr class="filters">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,6 +78,25 @@
                                                 " class="block" title="Список студентов">
                                             Список студентов
                                             </Link>
+                                        </td>
+                                        <td>
+                                            <span
+                                                class="badge badge-success"
+                                                :class="{
+                                                    'badge-success':
+                                                        subject.enable ==
+                                                        1,
+                                                    'badge-danger':
+                                                        subject.enable ==
+                                                        0,
+                                                }"
+                                            >
+                                                {{
+                                                    getStatusText(
+                                                        subject.enable
+                                                    )
+                                                }}
+                                            </span>
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
@@ -149,6 +163,11 @@ export default {
 
 
         },
+        getStatusText(e){
+            if(e) return "Активен"
+            return "Не активен"
+        },
+        
         dublicate(id) {
             Swal.fire({
                 title: "Дубликатқа жасауға сенімдісіз бе?",

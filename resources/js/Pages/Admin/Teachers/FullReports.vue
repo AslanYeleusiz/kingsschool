@@ -76,10 +76,10 @@
                                             }}
                                                                 </td>
                                                                 <td class="d-f aj-c">
-                                                                    <div class="avatar" :style="{ backgroundImage: `url(/storage/files/${eduPaidOrder.edu_order.user.avatar})` }">
+                                                                    <div class="avatar" :style="{ backgroundImage: `url(/storage/files/${eduPaidOrder.edu_order.user?.avatar})` }">
                                                                     </div>
                                                                 </td>
-                                                                <td>{{ eduPaidOrder.edu_order.user.fio }}</td>
+                                                                <td>{{ eduPaidOrder.edu_order.user?.fio }}</td>
                                                                 <td>{{ eduPaidOrder.edu_order.subject ? eduPaidOrder.edu_order.subject.name : 'Нет данных' }}</td>
                                                                 <td>
                                                                     <div class="d-f j-c">

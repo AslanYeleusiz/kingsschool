@@ -33,7 +33,8 @@ class StudentsController extends Controller
         $subj = $request->subj;
         $prepodFio = $request->prepodFio;
         $phone = $request->phone;
-        $query = EduOrder::has('user')->with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'groups', 'subject']);
+        $query = EduOrder::has('user')->where('enable', 1)->whereHas('user', fn($q)=>$q->where('is_deleted', 0))
+            ->with(['user:id,avatar,fio,tel_num', 'teacher:id,fio', 'lastEduPaid', 'groups', 'subject']);
         $query->when($user->role_id == 2, function ($query) use ($user) {
             return $query->whereHas('teacher', fn ($q) => $q->where('filial_id', $user->filial_id));
         });

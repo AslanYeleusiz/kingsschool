@@ -107,6 +107,7 @@ class StudentSubjectController extends Controller
             'price' => $request['price'],
             'start_date' => $request['start_date'],
             'end_date' => $request['end_date'],
+            'enable' => $request['enable'],
         ]);
         return redirect()->route('admin.studentsSubjects.index', $user_id)->with('success', 'Успешно добавлено');
     }
