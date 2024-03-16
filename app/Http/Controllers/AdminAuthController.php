@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\AdminLoginRequest;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,14 @@ class AdminAuthController extends Controller
             ]);
         }
         Auth::guard($this->guard)->login($user);
+
+        if (Log::log_status()) {
+            Log::create([
+                'name' => 'Авторизовался',
+                'type' => 1,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->route('admin.index');
         //        $token = Auth::attempt(['phone' => $phone, 'password' => $password])
         //        if (!$token) {
@@ -40,6 +49,13 @@ class AdminAuthController extends Controller
 
     public function logout()
     {
+        if (Log::log_status()) {
+            Log::create([
+                'name' => 'Разлогинился',
+                'type' => 6,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         Auth::guard($this->guard)->logout();
         return redirect()->route('adminLoginShow');
     }

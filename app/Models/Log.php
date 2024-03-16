@@ -10,19 +10,18 @@ class Log extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public $log_status = true;
 
-    public function log_status()
+    public static function log_status()
     {
-        return $this->log_status;
+        return true;
     }
-
+    
     public function types()
     {
         return [
             [
                 'id' => 1,
-                'name' => 'Авторизованные'
+                'name' => 'Авторизовался'
             ],
             [
                 'id' => 2,
@@ -39,6 +38,10 @@ class Log extends Model
             [
                 'id' => 5,
                 'name' => 'Выдал зарплату'
+            ],
+            [
+                'id' => 6,
+                'name' => 'Разлогинился'
             ],
         ];
     }

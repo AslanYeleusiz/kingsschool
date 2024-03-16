@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Filial;
+use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,7 +19,7 @@ class FilialController extends Controller
     public function index(Request $request)
     {
         $filials = Filial::paginate($request->input('per_page', 20))
-                    ->appends($request->except('page'));
+            ->appends($request->except('page'));
         return Inertia::render('Admin/Filial/Index', [
             'filials' => $filials
         ]);
@@ -45,8 +46,14 @@ class FilialController extends Controller
         Filial::create([
             'name' => $request->name
         ]);
-        return redirect()->route('admin.filials.index')->with('success','Успешно добавлено');
-        
+        if (Log::log_status()) {
+            Log::create([
+                'name' => 'Добавил новый филил ' . $request->name,
+                'type' => 2,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
+        return redirect()->route('admin.filials.index')->with('success', 'Успешно добавлено');
     }
 
     /**
@@ -71,7 +78,6 @@ class FilialController extends Controller
         return Inertia::render('Admin/Filial/Edit', [
             'filial' => $filial
         ]);
-        
     }
 
     /**
@@ -83,11 +89,18 @@ class FilialController extends Controller
      */
     public function update(Request $request, Filial $filial)
     {
+        $current_name = $filial->name;
         $filial->update([
             'name' => $request->name
         ]);
+        if (Log::log_status()) {
+            Log::create([
+                'name' => 'Изменил название филила из ' . $current_name . ' в ' . $request->name,
+                'type' => 3,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно сохранено');
-        
     }
 
     /**
@@ -101,7 +114,8 @@ class FilialController extends Controller
         //
     }
 
-    public function getTeachers($filial_id) {
+    public function getTeachers($filial_id)
+    {
         $teachers = User::where('filial_id', $filial_id)->where('role_id', 3)->get();
         return response()->json($teachers);
     }

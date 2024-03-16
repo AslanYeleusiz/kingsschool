@@ -10,6 +10,7 @@ use App\Models\Subject;
 use App\Models\CourseType;
 use App\Models\TrainType;
 use App\Models\EduOrder;
+use App\Models\Log;
 use App\Models\TeacherSalaryOrder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -153,7 +154,13 @@ class UserController extends Controller
         }
         DB::commit();
 
-
+        if (Log::log_status()) {
+            Log::create([
+                'name' => 'Добавил нового пользователя ' . $request->s_name . ' ' . $request->name,
+                'type' => 2,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
 
         return redirect()->route('admin.users.index')->with('success', 'Успешно добавлено');
     }
@@ -181,9 +188,9 @@ class UserController extends Controller
         $roles = Role::get();
         $filials = Filial::get();
         $user->load('salaryOrders.trainType');
-        if(count($user['salaryOrders']) == 0) {
+        if (count($user['salaryOrders']) == 0) {
             $trainTypes = TrainType::get();
-            foreach($trainTypes as $trainType) {
+            foreach ($trainTypes as $trainType) {
                 TeacherSalaryOrder::create([
                     'user_id' => $user->id,
                     'train_type_id' => $trainType['id'],
@@ -217,7 +224,7 @@ class UserController extends Controller
         }
 
         $real_password = $request->real_password ?? 'password';
-
+        $current_user_fio = $user->fio;
         $user->update([
             'iin' => $request->iin,
             'card_id' => $request->card_id,
@@ -234,11 +241,27 @@ class UserController extends Controller
             'role_id' => $request->role_id,
             'start_edu_date' => $request->start_edu_date,
         ]);
-
-        if($user->role_id == 3) {
-            foreach($request['salary_orders'] as $order) {
+        $log_text1 = 'Изменил ФИО пользователя и данные из ' . $current_user_fio . ' в ' . $user->fio;
+        $log_text2 = 'Изменил данные пользователя ' . $current_user_fio;
+        if (Log::log_status()) {
+            Log::create([
+                'name' => $current_user_fio == $user->fio ? $log_text2 : $log_text1,
+                'type' => 3,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
+        if ($user->role_id == 3) {
+            foreach ($request['salary_orders'] as $order) {
                 TeacherSalaryOrder::find($order['id'])->update([
                     'percent' => $order['percent']
+                ]);
+            }
+
+            if (Log::log_status()) {
+                Log::create([
+                    'name' => 'Изменил данные о ставках пользователя ' . $request->s_name . ' ' . $request->name,
+                    'type' => 3,
+                    'user_id' => auth()->guard('web')->id(),
                 ]);
             }
         }
@@ -256,6 +279,13 @@ class UserController extends Controller
     {
         $user->is_deleted = 1;
         $user->save();
+        if (Log::log_status()) {
+            Log::create([
+                'name' => 'Добавил пользователя ' . $user->fio . ' в корзину ',
+                'type' => 4,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно удалено');
     }
 
@@ -264,6 +294,13 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $user->delete();
+        if (Log::log_status()) {
+            Log::create([
+                'name' => 'Удалил данные пользователя ' . $user->fio,
+                'type' => 4,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно удалено');
     }
 
@@ -301,6 +338,13 @@ class UserController extends Controller
         User::findOrFail($user_id)->update([
             'is_deleted' => 0
         ]);
+        if (Log::log_status()) {
+            Log::create([
+                'name' => 'Восстановил данные пользователя ' . User::findOrFail($user_id)->fio . ' из корзины ',
+                'type' => 2,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно обновлено');
     }
 

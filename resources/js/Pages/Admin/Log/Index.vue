@@ -30,7 +30,6 @@
                 <Link class="btn btn-danger mr-2" :href="route('admin.logs.index')">
                 <i class="fa fa-trash"></i> Фильтрді тазалау
                 </Link>
-                {{ log_status }}
                 <div class="btn btn-warning" v-if="log_status">
                     Отключить логгирование
                 </div>
@@ -50,11 +49,13 @@
                             <table class="table table-hover table-bordered table-striped dataTable dtr-inline">
                                 <thead>
                                     <tr role="row">
+                                        <th>№</th>
                                         <th>Пользователь</th>
                                         <th>Әрекет</th>
                                         <th>Дата</th>
                                     </tr>
                                     <tr class="filters">
+                                        <td></td>
                                         <td>
                                             <input v-model="filter.fio" class="form-control"
                                                 placeholder="ФИО пользователя" @keyup.enter="search" />
@@ -76,6 +77,13 @@
                                 </thead>
                                 <tbody>
                                     <tr class="odd" v-for="(role, index) in logs.data" :key="'role' + role.id">
+                                        <td>
+                                            {{
+                                role.from
+                                    ? role.from + index
+                                    : index + 1
+                            }}
+                                        </td>
                                         <td>{{ role.user.fio }}</td>
                                         <td>{{ role.name }}</td>
                                         <td>{{ formatDateTime(role.created_at) }}</td>

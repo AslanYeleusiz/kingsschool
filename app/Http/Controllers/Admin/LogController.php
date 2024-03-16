@@ -16,13 +16,12 @@ class LogController extends Controller
             ->when($fio, fn ($q) => $q->whereHas('user', fn ($q) => $q->where('fio', 'like', "%$fio%")))
             ->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));
-            
+
         $log = new Log();
-        $log_status = $log->log_status();
         $types = $log->types();
         return Inertia::render('Admin/Log/Index', [
             'logs' => $logs,
-            'log_status' => $log_status,
+            'log_status' => Log::log_status(),
             'types' => $types,
         ]);
     }
