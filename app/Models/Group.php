@@ -15,4 +15,8 @@ class Group extends Model
     {
         return $this->hasMany(EduOrder::class, 'group_id');
     }
+
+    public function teacher(){
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
 }

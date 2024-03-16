@@ -10,11 +10,10 @@ class Log extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public $log_status = true;
-
-    public function log_status()
+    
+    public static function log_status()
     {
-        return $this->log_status;
+        return true;
     }
 
     public function types()
@@ -46,4 +45,6 @@ class Log extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    
 }

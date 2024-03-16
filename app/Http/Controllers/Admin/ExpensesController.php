@@ -55,11 +55,13 @@ class ExpensesController extends Controller
             'filial_id' => $user->filial_id,
             'type_id' => $request->type_id,
         ]);
-        Log::create([
-            'name' => 'Добавлен расход',
-            'type' => 2,
-            'user_id' => $user->id,
-        ]);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Добавил расход',
+                'type' => 2,
+                'user_id' => auth()->guard('web')->id()
+            ]);
+        }
         return redirect()->route('admin.expenses.index')->with('success', 'Успешно добавлено');
     }
 
@@ -83,12 +85,26 @@ class ExpensesController extends Controller
             'date' => Carbon::now(),
             'type_id' => $request->type_id,
         ]);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Изменил расход',
+                'type' => 3,
+                'user_id' => auth()->guard('web')->id()
+            ]);
+        }
         return redirect()->route('admin.expenses.index')->withSuccess('Успешно сохранено');
     }
 
     public function destroy($id)
     {
         Expenses::findOrFail($id)->delete();
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Удалил расход',
+                'type' => 4,
+                'user_id' => auth()->guard('web')->id()
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно удалено');
     }
 }

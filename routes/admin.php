@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\FilialController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TrainTypeController;
+
 use App\Http\Controllers\Admin\CourseTypeController;
 use App\Http\Controllers\Admin\EduOrderController;
 use App\Http\Controllers\Admin\ExpensesController;

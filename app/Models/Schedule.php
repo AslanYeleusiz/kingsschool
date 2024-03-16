@@ -23,6 +23,10 @@ class Schedule extends Model
     public function group(){
         return $this->belongsTo(Group::class, 'group_id');
     }
+
+    public static function getStatus($index){
+        return $this->statuses[$index];
+    } 
     
     protected $appends = ['edit']; // Attribute to append
 
