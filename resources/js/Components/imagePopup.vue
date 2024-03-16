@@ -3,9 +3,9 @@
                backgroundSize: 'calc(100% + ' + (zoomLevel - 100) + '%)',
                backgroundPosition: backgroundPositionX + '% ' + backgroundPositionY + '%' }" ref="modal" @mousedown="startDrag" @mousemove="drag" @mouseup="endDrag">
         <div class="navbar">
-            <button @click="toggleFullscreen" class="btn"><img src="/images/svg/expand.svg" alt=""></button>
-            <button @click="zoomIn" class="btn"><img src="/images/svg/zoom_in.svg" alt=""></button>
-            <button @click="zoomOut" class="btn"><img src="/images/svg/zoom_out.svg" alt=""></button>
+            <button @click="toggleFullscreen" class="btn"><img src="../../../public/images/svg/expand.svg" alt=""></button>
+            <button @click="zoomIn" class="btn"><img src="../../../public/images/svg/zoom_in.svg" alt=""></button>
+            <button @click="zoomOut" class="btn"><img src="../../../public/images/svg/zoom_out.svg" alt=""></button>
             <exitBtn @click.native="closeModal()" />
         </div>
     </div>
