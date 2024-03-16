@@ -169,7 +169,7 @@ export default {
                     role: [1, 2],
                 },
                 {
-                    name: "Пәндер",
+                    name: "Предметы",
                     font: "fa-book",
                     route_name: "admin.subjects.index",
                     menu_active: ["admin.subjects"],
@@ -200,7 +200,7 @@ export default {
                             menu_active: ["admin.courseTypes"],
                         },
                         {
-                            name: "Рөлдер",
+                            name: "Роли",
                             font: "fa-dice-four",
                             route_name: "admin.roles.index",
                             menu_active: ["admin.roles"],
@@ -212,6 +212,13 @@ export default {
                             menu_active: ["admin.filials"],
                         },
                     ],
+                },
+                {
+                    name: "Логи",
+                    font: "fa-solid fa-list",
+                    route_name: "admin.logs.index",
+                    menu_active: ["admin.logs"],
+                    role: [1],
                 },
             ],
         }

@@ -87,7 +87,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input v-model="filter.name" class="form-control" placeholder="Дата"
+                                            <input v-model="filter.date" class="form-control" placeholder="Дата"
                                                 @keyup.enter="search" />
                                         </td>
                                         <td></td>
@@ -161,6 +161,7 @@ export default {
                 type_id: route().params.type_id ? route().params.type_id : null,
                 fio: route().params.fio ? route().params.fio : null,
                 filial_id: route().params.filial_id ? route().params.filial_id : null,
+                date: route().params.date ? route().params.date : null,
             },
             loading: 0,
         };

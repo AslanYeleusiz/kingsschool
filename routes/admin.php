@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\TrainTypeController;
 use App\Http\Controllers\Admin\CourseTypeController;
 use App\Http\Controllers\Admin\EduOrderController;
 use App\Http\Controllers\Admin\ExpensesController;
+use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Admin\PaidController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\ScheduleContorller;
@@ -35,6 +36,7 @@ Route::middleware('checkUserRole:1')->group(function () {
     Route::resource('filials', FilialController::class)->except(['show'])->names('filials');
     Route::resource('train-types', TrainTypeController::class)->except(['show'])->names('trainTypes');
     Route::resource('course-types', CourseTypeController::class)->except(['show'])->names('courseTypes');
+    Route::resource('logs', LogController::class)->only(['index'])->names('logs');
 });
 Route::middleware('checkUserRole:1,2')->group(function () {
     Route::resource('users', UserController::class)->except(['show'])->names('users');

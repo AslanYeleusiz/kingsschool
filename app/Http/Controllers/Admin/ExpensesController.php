@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Expenses;
 use App\Models\Filial;
+use App\Models\Log;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -53,6 +54,11 @@ class ExpensesController extends Controller
             'user_id' => $user->id,
             'filial_id' => $user->filial_id,
             'type_id' => $request->type_id,
+        ]);
+        Log::create([
+            'name' => 'Добавлен расход',
+            'type' => 2,
+            'user_id' => $user->id,
         ]);
         return redirect()->route('admin.expenses.index')->with('success', 'Успешно добавлено');
     }
