@@ -112,7 +112,7 @@
                                         </td>
                                         <td class="d-f aj-c">
                                             <div class="avatar"
-                                                :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }">
+                                                :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }"  @click="$page.props.flash.image = order.user?.avatar">
                                             </div>
                                         </td>
                                         <td>{{ order.user.fio }}</td>
@@ -319,7 +319,7 @@
                                                     </td>
                                                     <td class="d-f aj-c">
                                                         <div class="avatar"
-                                                            :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }">
+                                                            :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }" @click="$page.props.flash.image = order.user?.avatar">
                                                         </div>
                                                     </td>
                                                     <td>{{ order.user.fio }}</td>

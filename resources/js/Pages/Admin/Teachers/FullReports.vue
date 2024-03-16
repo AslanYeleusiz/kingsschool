@@ -76,7 +76,7 @@
                                             }}
                                                                 </td>
                                                                 <td class="d-f aj-c">
-                                                                    <div class="avatar" :style="{ backgroundImage: `url(/storage/files/${eduPaidOrder.edu_order.user?.avatar})` }">
+                                                                    <div class="avatar" :style="{ backgroundImage: `url(/storage/files/${eduPaidOrder.edu_order.user?.avatar})` }" @click="$page.props.flash.image = eduPaidOrder.edu_order.user?.avatar" >
                                                                     </div>
                                                                 </td>
                                                                 <td>{{ eduPaidOrder.edu_order.user?.fio }}</td>

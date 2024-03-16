@@ -86,7 +86,7 @@
                                         <td>
                                             <div class="d-flex gap-20">
                                                 <div class="avatar"
-                                                    :style="{ backgroundImage: `url(/storage/files/${teacher.avatar})` }">
+                                                    :style="{ backgroundImage: `url(/storage/files/${teacher.avatar})` }" @click="$page.props.flash.image = teacher?.avatar">
                                                 </div>
                                                 {{ teacher.fio }}
                                             </div>

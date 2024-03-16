@@ -5,6 +5,7 @@
         </Transition>
         <NavBar />
         <SideBar />
+        <imagePopup />
         <div class="content-wrapper">
             <ResultMessage></ResultMessage>
             <div class="content-header">
@@ -36,6 +37,7 @@
     import SideBar from "../Components/SideBar.vue";
     import ResultMessage from '../Components/ResultMessage.vue';
     import LoadingSpinner from '../components/LoadingSpinner.vue';
+    import imagePopup from "../Components/imagePopup.vue";
     import {
         ref
     } from 'vue';
@@ -49,6 +51,7 @@
             SideBar,
             ResultMessage,
             LoadingSpinner,
+            imagePopup,
         },
         mounted() {
             this.init()

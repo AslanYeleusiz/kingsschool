@@ -10,6 +10,7 @@ class Schedule extends Model
     use HasFactory;
     protected $guarded=[];
     public $timestamps=false;
+    public const statuses = ['Урок не начался', 'Урок проведён', 'Урок не проведён', 'Ещё не пришел'];
     
     public function teacher(){
         return $this->belongsTo(User::class, 'teacher_id');
