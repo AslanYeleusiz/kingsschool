@@ -99,7 +99,7 @@
                                     <tr class="odd" v-for="(user, index) in users.data" :key="'user' + user.id">
                                         <td>
                                             <div class="avatar"
-                                                :style="{ backgroundImage: `url(/storage/files/${user.avatar})` }"></div>
+                                                :style="{ backgroundImage: `url(/storage/files/${user.avatar})` }" @click="$page.props.flash.image = user?.avatar"></div>
                                         </td>
                                         <td>{{ user.fio }}</td>
                                         <td>{{ user.tel_num }}</td>
@@ -143,6 +143,7 @@
 import AdminLayout from "../../../Layouts/AdminLayout.vue";
 import { Link, Head } from "@inertiajs/inertia-vue3";
 import Pagination from "../../../Components/Pagination.vue";
+
 export default {
     components: {
         AdminLayout,
@@ -160,6 +161,8 @@ export default {
                 filial_id: route().params.filial_id ? route().params.filial_id : null,
             },
             loading: 0,
+            showModal: 0,
+            modalImageSrc: '',
         };
     },
     methods: {

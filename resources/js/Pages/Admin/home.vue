@@ -105,7 +105,7 @@
                 // $('#revenue-chart').get(0).getContext('2d');
 
                 var salesGraphChartData = {
-                    labels: ['2011 Q1', '2011 Q2', '2011 Q3', '2011 Q4', '2012 Q1', '2012 Q2', '2012 Q3', '2012 Q4', '2013 Q1', '2013 Q2'],
+                    labels: ['2023 Q1', '2023 Q2', '2023 Q3', '2023 Q4', '2014 Q1', '2014 Q2', '2014 Q3', '2014 Q4'],
                     datasets: [{
                         label: 'Digital Goods',
                         fill: false,
@@ -117,7 +117,7 @@
                         pointHoverRadius: 7,
                         pointColor: '#efefef',
                         pointBackgroundColor: '#efefef',
-                        data: [2666, 2778, 4912, 3767, 6810, 5670, 4820, 15073, 10687, 8432]
+                        data: [2666, 2778, 4912, 3767, 6810, 5670, 4820, 15073]
                     }]
                 }
 

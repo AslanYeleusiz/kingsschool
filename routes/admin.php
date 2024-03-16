@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\FilialController;
 use App\Http\Controllers\Admin\UserController;
@@ -28,9 +29,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Admin/home');
-})->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::middleware('checkUserRole:1')->group(function () {
     Route::resource('roles', RoleController::class)->except(['show'])->names('roles');
     Route::resource('filials', FilialController::class)->except(['show'])->names('filials');

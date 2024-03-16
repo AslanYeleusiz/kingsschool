@@ -77,10 +77,10 @@
                                         </td>
                                         <td class="d-f aj-c">
                                             <div class="avatar"
-                                                :style="{ backgroundImage: `url(/storage/files/${order.paid_student.user.avatar})` }">
+                                                :style="{ backgroundImage: `url(/storage/files/${order.paid_student.user?.avatar})` }" @click="$page.props.flash.image = order.paid_student.user?.avatar">
                                             </div>
                                         </td>
-                                        <td>{{ order.paid_student.user.fio }}</td>
+                                        <td>{{ order.paid_student.user?.fio }}</td>
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="paidBlock">
@@ -111,7 +111,7 @@
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="tablemask" title="Написать по Whatsapp">
-                                                    {{ order.paid_student.user.tel_num }}
+                                                    {{ order.paid_student.user?.tel_num }}
                                                 </div>
                                             </div>
                                         </td>

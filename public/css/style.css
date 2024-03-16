@@ -85,7 +85,9 @@ h5 {
 .f-wrap {
     flex-wrap: wrap;
 }
-
+.avatar {
+    cursor: pointer;
+}
 .btn {
     display: inline-block;
     font-weight: 400;
