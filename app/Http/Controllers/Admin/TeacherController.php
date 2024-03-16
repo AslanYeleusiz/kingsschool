@@ -9,6 +9,7 @@ use App\Models\Filial;
 use App\Models\EduPaidOrder;
 use App\Models\TeacherSalary;
 use App\Models\Group;
+use App\Models\Log;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Helpers\Date;
@@ -167,6 +168,14 @@ class TeacherController extends Controller
             'penalty' => $request->penalty ?? 0,
             'bonus' => $request->bonus ?? 0
         ]);
+        $TeacherSalary->load('teacher');
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Отдал зарплату преподавателю ' . $TeacherSalary['teacher']->fio,
+                'type' => 5,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         EduPaidOrder::whereHas('eduOrder', fn($q)=>$q->where('teacher_id', $teacher_id))->where('is_paid', 0)->update([
             'is_paid' => 1,
             'teacher_salary_id' => $TeacherSalary->id

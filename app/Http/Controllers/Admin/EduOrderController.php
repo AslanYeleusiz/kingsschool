@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\EduOrder;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

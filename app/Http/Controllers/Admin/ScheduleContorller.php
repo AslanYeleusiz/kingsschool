@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\CourseType;
 use App\Models\TrainType;
 use App\Models\Group;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -75,6 +76,14 @@ class ScheduleContorller extends Controller
             'day' => $request->day,
             'group_id' => $request->group_id,
         ]);
+        $teacher = User::findOrFail($request->teacher_id);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Добавил расписания преподавателю ' . $teacher->fio,
+                'type' => 2,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно сохранено');
     }
     
@@ -124,8 +133,18 @@ class ScheduleContorller extends Controller
     }
 
     public function setStatus($id, Request $request) {
-        Schedule::findOrFail($id)->update([
-            'status' => $request->status
+        $status = $request->status;
+        $schedule = Schedule::with('teacher')->findOrFail($id);
+        if(Log::log_status()) {
+            $statuses = ['Урок не начался', 'Урок проведён', 'Урок не проведён', 'Ещё не пришел'];
+            Log::create([
+                'name' => 'Изменил статус в расписании преподавателя ' . $schedule['teacher']->fio . ' на ' . $statuses[$status],
+                'type' => 3,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
+        $schedule->update([
+            'status' => $status
         ]);
         return response()->json(200);
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CourseType;
 use Illuminate\Http\Request;
+use App\Models\Log;
 use Inertia\Inertia;
 
 class CourseTypeController extends Controller
@@ -46,6 +47,13 @@ class CourseTypeController extends Controller
         CourseType::create([
             'name' => $request->name
         ]);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Создал тип курса',
+                'type' => 2,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->route('admin.courseTypes.index')->with('success','Успешно добавлено');
         
     }
@@ -87,6 +95,13 @@ class CourseTypeController extends Controller
         $courseType->update([
             'name' => $request->name
         ]);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Изменил тип курса',
+                'type' => 3,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно сохранено');
         
     }
@@ -100,6 +115,13 @@ class CourseTypeController extends Controller
     public function destroy(CourseType $courseType)
     {
         $courseType->delete();
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Удалил тип курса',
+                'type' => 4,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно удалено');
         
     }

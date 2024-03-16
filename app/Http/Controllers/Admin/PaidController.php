@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\PaidHistory;
 use Illuminate\Http\Request;
+use App\Models\Log;
 use Inertia\Inertia;
 
 class PaidController extends Controller
@@ -34,6 +35,13 @@ class PaidController extends Controller
         PaidHistory::find($id)->update([
             'status' => 2,
         ]);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Подтвердил историю платежа',
+                'type' => 3,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
 
         return redirect()->back();
     }
@@ -41,6 +49,13 @@ class PaidController extends Controller
     public function destroy($id)
     {
         PaidHistory::findOrFail($id)->delete();
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Удалил историю платежа',
+                'type' => 4,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно удалено');
     }
 }

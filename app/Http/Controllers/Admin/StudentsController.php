@@ -8,6 +8,7 @@ use App\Models\EduPaidOrder;
 use App\Models\Group;
 use App\Models\User;
 use App\Models\GroupOrder;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -154,6 +155,13 @@ class StudentsController extends Controller
             'teacher_id' => $eduOrder->teacher_id
         ]);
         $eduOrder->groups()->sync([$groups['id']]);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Создал группу ' . $newGroup . ' и распределил студентов',
+                'type' => 2,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         DB::commit();
         return redirect()->back();
     }
@@ -166,13 +174,21 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        EduOrder::findOrFail($id)->delete();
+        $eduOrder = EduOrder::with(['user'])->findOrFail($id);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Удалил студента ' . $eduOrder['user']->fio,
+                'type' => 4,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
+        $eduOrder->delete();
         return redirect()->back()->withSuccess('Успешно удалено');
     }
 
     public function paid($id)
     {
-        $eduOrder = EduOrder::with('lastEduPaid', 'user')->findOrFail($id);
+        $eduOrder = EduOrder::with(['lastEduPaid', 'user', 'teacher'])->findOrFail($id);
         $date = null;
         if ($eduOrder->lastEduPaid) {
             $endDate = Carbon::parse($eduOrder->end_date);
@@ -199,6 +215,14 @@ class StudentsController extends Controller
             'late_date' => $late_date
         ]);
 
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Подтвердил оплату студента ' . $eduOrder['user']->fio . ' преподавателя ' . $eduOrder['teacher']->fio,
+                'type' => 2,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
+
         PaidHistory::create([
             'edu_paid_order_id' => $eduOrder->id,
         ]);
@@ -209,16 +233,31 @@ class StudentsController extends Controller
 
     public function deletePaid($id)
     {
-        $order = EduOrder::with('lastEduPaid')->findOrFail($id);
+        $order = EduOrder::with(['lastEduPaid','user','teacher'])->findOrFail($id);
         if ($order->lastEduPaid) {
             $order->lastEduPaid->delete();
+            if(Log::log_status()) {
+                Log::create([
+                    'name' => 'Отменил оплату студента ' . $order['user']->fio . ' преподавателя ' . $order['teacher']->fio,
+                    'type' => 4,
+                    'user_id' => auth()->guard('web')->id(),
+                ]);
+            }
         }
         return redirect()->back();
     }
 
     public function destroyGroup($group_id)
     {
-        Group::findOrFail($group_id)->delete();
+        $group = Group::with('teacher')->findOrFail($group_id);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Удалил группу ' . $group->name . ' преподавателя ' . $group['teacher']->fio,
+                'type' => 4,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
+        $group->delete();
         GroupOrder::where('group_id', $group_id)->delete();
         return redirect()->back()->withSuccess('Успешно удалено');
     }
@@ -226,13 +265,29 @@ class StudentsController extends Controller
     public function destroyOrder($order_id, $groupId)
     {
         GroupOrder::where('edu_order_id', $order_id)->where('group_id', $groupId)->delete();
+        $group = Group::with('teacher')->findOrFail($groupId);
+        $order = EduOrder::with('user')->findOrFail($order_id);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Выгнал(а) студента ' . $order['user']->fio . ' из группу ' . $group->name . ' преподавателя ' . $group['teacher']->fio,
+                'type' => 4,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->back()->withSuccess('Успешно удалено');
     }
 
     public function setGroups($order_id, Request $request){
         $groupsIds = $request->group_ids;
-        $eduOrder = EduOrder::findOrFail($order_id);
+        $eduOrder = EduOrder::with(['user','teacher'])->findOrFail($order_id);
         $eduOrder->groups()->sync($groupsIds);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Изменил группу студента ' . $eduOrder['user']->fio . ' преподавателя ' . $eduOrder['teacher']->fio,
+                'type' => 3,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return response()->json($eduOrder['groups']->pluck('id')->toArray());
     }
 }

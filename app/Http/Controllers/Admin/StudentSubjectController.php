@@ -8,6 +8,7 @@ use App\Models\EduOrder;
 use App\Models\Subject;
 use App\Models\TrainType;
 use App\Models\User;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -54,7 +55,7 @@ class StudentSubjectController extends Controller
 
     public function store(Request $request, $user_id)
     {
-        EduOrder::create([
+        $eduOrde = EduOrder::create([
             'user_id' => $user_id,
             'subject_id' => $request['subject_id'],
             'teacher_id' => $request['teacher_id'],
@@ -65,6 +66,15 @@ class StudentSubjectController extends Controller
             'start_date' => $request['start_date'],
             'end_date' => $request['end_date'],
         ]);
+
+        $eduOrde->load('user');
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Зарегистрировал предмет студенту ' . $eduOrde['user']->fio,
+                'type' => 2,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
         return redirect()->route('admin.studentsSubjects.index', $user_id)->with('success', 'Успешно добавлено');
     }
 
@@ -98,7 +108,15 @@ class StudentSubjectController extends Controller
 
     public function update(Request $request, $user_id, $edu_order_id)
     {
-        EduOrder::find($edu_order_id)->update([
+        $eduOrder = EduOrder::with('user')->find($edu_order_id);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Изменил предмет студента ' . $eduOrder['user']->fio,
+                'type' => 3,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
+        $eduOrder->update([
             'subject_id' => $request['subject_id'],
             'teacher_id' => $request['teacher_id'],
             'shift_id' => $request['shift_id'],
@@ -113,7 +131,15 @@ class StudentSubjectController extends Controller
     }
     public function destroy($user_id, $edu_order_id)
     {
-        EduOrder::findOrFail($edu_order_id)->delete();
+        $eduOrder = EduOrder::with('user')->findOrFail($edu_order_id);
+        if(Log::log_status()) {
+            Log::create([
+                'name' => 'Удалил предмет студента ' . $eduOrder['user']->fio,
+                'type' => 4,
+                'user_id' => auth()->guard('web')->id(),
+            ]);
+        }
+        $eduOrder->delete();
         return redirect()->back()->withSuccess('Успешно удалено');
     }
 }

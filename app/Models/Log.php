@@ -15,7 +15,7 @@ class Log extends Model
     {
         return true;
     }
-    
+
     public function types()
     {
         return [
