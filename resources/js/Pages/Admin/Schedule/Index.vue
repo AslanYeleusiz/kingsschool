@@ -1,7 +1,7 @@
 <template>
     <AdminLayout>
         <!-- Calendar -->
-        <div class="card bg-gradient-success">
+        <div class="card">
             <div class="card-header border-0">
                 <h3 class="card-title">
                     <i class="far fa-calendar-alt"></i>
@@ -24,7 +24,7 @@
                             <table class="table table-hover">
                                 <tbody>
                                     <template v-for="(day, index) in days">
-                                        <tr data-widget="expandable-table" aria-expanded="true">
+                                        <tr data-widget="expandable-table" aria-expanded="false">
                                             <td>
                                                 <div class="d-flex justify-content-between">
                                                     {{ day }}
@@ -44,7 +44,7 @@
 
                                             </td>
                                         </tr>
-                                        <tr class="expandable-body">
+                                        <tr class="expandable-body d-none">
                                             <td>
                                                 <div class="p-0" style="">
                                                     <table
@@ -182,9 +182,15 @@ export default {
         this.$nextTick(() => {
             console.log('Next tick executed');
             const $calendar = $(this.$refs.calendar);
+            moment.updateLocale('en', {
+                week: {
+                  dow: 1 // Monday
+                }
+              });
 
             $calendar.datetimepicker({
-                format: 'L',
+                locale: 'en',
+                format: 'YYYY-MM-DD',
                 inline: true
             });
             $calendar.on("change.datetimepicker", (e) => {

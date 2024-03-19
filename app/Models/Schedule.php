@@ -12,6 +12,10 @@ class Schedule extends Model
     public $timestamps=false;
     public const statuses = ['Урок не начался', 'Урок проведён', 'Урок не проведён', 'Ещё не пришел'];
     
+    public static function getStatus($index){
+        return $this->statuses[$index];
+    } 
+    
     public function teacher(){
         return $this->belongsTo(User::class, 'teacher_id');
     }
@@ -24,9 +28,6 @@ class Schedule extends Model
         return $this->belongsTo(Group::class, 'group_id');
     }
 
-    public static function getStatus($index){
-        return $this->statuses[$index];
-    } 
     
     protected $appends = ['edit']; // Attribute to append
 
