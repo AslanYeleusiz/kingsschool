@@ -57,7 +57,7 @@ class ExpensesController extends Controller
         ]);
         if (Log::log_status()) {
             Log::create([
-                'name' => 'Добавил расход',
+                'name' => 'Добавил расход ' . $request->name,
                 'type' => 2,
                 'user_id' => auth()->guard('web')->id(),
             ]);
@@ -79,15 +79,18 @@ class ExpensesController extends Controller
     public function update(Request $request, $id)
     {
         $expenses = Expenses::find($id);
+        $current_name = $expenses->name;
         $expenses->update([
             'name' => $request->name,
             'summa' => $request->summa,
             'date' => Carbon::now(),
             'type_id' => $request->type_id,
         ]);
+        $log_text1 = 'Изменил название и данные расхода из ' . $current_name . ' в ' . $expenses->name;
+        $log_text2 = 'Изменил данные расхода ' . $current_name;
         if (Log::log_status()) {
             Log::create([
-                'name' => 'Изменил расход',
+                'name' => $current_name == $expenses->name ? $log_text2 : $log_text1,
                 'type' => 3,
                 'user_id' => auth()->guard('web')->id(),
             ]);
@@ -97,10 +100,11 @@ class ExpensesController extends Controller
 
     public function destroy($id)
     {
-        Expenses::findOrFail($id)->delete();
+        $expense = Expenses::findOrFail($id);
+        $expense->delete();
         if (Log::log_status()) {
             Log::create([
-                'name' => 'Удалил расход',
+                'name' => 'Удалил расход ' . $expense->name,
                 'type' => 4,
                 'user_id' => auth()->guard('web')->id(),
             ]);

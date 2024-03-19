@@ -64,12 +64,13 @@ class TrainTypeController extends Controller
 
     public function update(Request $request, TrainType $trainType)
     {
+        $current_name = $trainType->name;
         $trainType->update([
             'name' => $request->name
         ]);
         if (Log::log_status()) {
             Log::create([
-                'name' => 'Изменил тип обучения ' . $request->name,
+                'name' => 'Изменил тип обучения из ' . $current_name . ' в ' . $request->name,
                 'type' => 3,
                 'user_id' => auth()->guard('web')->id(),
             ]);
