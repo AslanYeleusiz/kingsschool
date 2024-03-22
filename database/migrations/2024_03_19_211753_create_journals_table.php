@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('teacher_id')->on('users')->cascadeOnDelete();
             $table->foreignId('edu_order_id')->on('edu_orders')->cascadeOnDelete();
             $table->foreignId('schedule_id')->on('schedules')->cascadeOnDelete();
+            $table->foreignId('group_id')->on('groups')->cascadeOnDelete();
+            $table->integer('type');
             $table->date('date');
         });
     }

@@ -28,17 +28,9 @@
                                             <td>
                                                 <div class="d-flex justify-content-between">
                                                     {{ day }}
-                                                    <Link :href="route(
-                                                        'admin.schedule.create',
-                                                        {
-                                                            date:
-                                                                startweekdate,
-                                                            day: index + 1
-                                                        }
-                                                    )
-                                                        " class="btn btn-primary" title="Өзгерту"
+                                                    <Link :href="route( 'admin.schedule.create', { date: startweekdate,  day: index + 1 } ) " class="btn btn-primary" title="Өзгерту"
                                                         v-if="user.role_id == 1 || user.role_id == 2 || user.role_id == 3">
-                                                    Изменить
+                                                    Изменить 
                                                     </Link>
                                                 </div>
 
@@ -96,12 +88,7 @@
                                                                     </td>
                                                                     
                                                                     <td v-else>
-                                                                        <select
-                                                                            class="form-control"
-                                                                            @change.prevent="changeStatus(schedule.id, schedule.status)"
-                                                                            v-model="schedule.status"
-                                                                            placeholder="Белсенді"
-                                                                        >
+                                                                        <select class="form-control"  @change.prevent="changeStatus(schedule.id, schedule.status)" v-model="schedule.status"  placeholder="Белсенді" >
                                                                             <option :value="0">
                                                                                 Урок не начался
                                                                             </option>
@@ -118,11 +105,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <div class="btn-group btn-group-sm">
-                                                                            <button @click.prevent="
-                                                                            deleteData(
-                                                                                schedule.id
-                                                                            )
-                                                                                " class="btn btn-danger" title="Жою">
+                                                                            <button @click.prevent="deleteData( schedule.id ) " class="btn btn-danger" title="Жою">
                                                                                 <i class="fas fa-trash"></i>
                                                                             </button>
                                                                             <button v-if="!schedule.edit" @click.prevent="schedule.edit = 1" class="btn btn-primary" title="Изменить">
@@ -132,6 +115,10 @@
                                                                                 <i class="fas fa-check"></i>
                                                                             </button>
                                                                             
+                                                                            <Link :href="route( 'admin.journal.index', schedule.id ) " class="btn btn-success" title="Журнал"
+                                                                                v-if="user.role_id == 1 || user.role_id == 2 || user.role_id == 3">
+                                                                                <i class="fas fa-list"></i>
+                                                                            </Link>
                                                                         </div>
                                                                     </td>
                                                                 </template>

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\TrainTypeController;
 use App\Http\Controllers\Admin\CourseTypeController;
 use App\Http\Controllers\Admin\EduOrderController;
 use App\Http\Controllers\Admin\ExpensesController;
+use App\Http\Controllers\Admin\JournalController;
 use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Admin\PaidController;
 use App\Http\Controllers\Admin\StudentsController;
@@ -86,3 +87,6 @@ Route::group(['prefix' => '/schedule', 'as' => 'schedule.'], function () {
 });
 
 Route::get('/check-iin', [UserController::class, 'checkIin']);
+
+Route::get('students/{schedule_id}/journal', [JournalController::class, 'index'])->name('journal.index');
+Route::post('/students/journal/store', [JournalController::class, 'store'])->name('journal.store');
