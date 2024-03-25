@@ -134,6 +134,13 @@
                                         required />
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Количество часов</label>
+                                    <input type="number" class="form-control" v-model="eduOrder.hours"
+                                        name="hours" required />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -178,6 +185,7 @@ export default {
                 price: 0,
                 start_date: null,
                 end_date: null,
+                hours: null,
             },
             teacherOrders: this.trainTypes,
             subjectOrders: null,

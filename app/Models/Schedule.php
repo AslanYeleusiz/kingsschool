@@ -28,6 +28,14 @@ class Schedule extends Model
         return $this->belongsTo(Group::class, 'group_id');
     }
 
+    public function groupOrders(){
+        return $this->hasMany(GroupOrder::class, 'group_id', 'group_id');
+    }
+
+    public function journals(){
+        return $this->hasMany(Journal::class, 'id', 'schedule_id');
+    }
+
     
     protected $appends = ['edit']; // Attribute to append
 

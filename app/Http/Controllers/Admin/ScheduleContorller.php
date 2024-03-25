@@ -12,6 +12,7 @@ use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use App\Helpers\Date;
 use Carbon\Carbon;
 
 class ScheduleContorller extends Controller
@@ -114,9 +115,11 @@ class ScheduleContorller extends Controller
             $schedule->end_time = Carbon::parse($schedule->end_time)->format('H:i');
         }
         return response()->json([
-            'schedules' => $schedules,
             'startweekdate' => $startweekdate->copy()->format('d.m.Y'),
-            'endweekdate' => $endweekdate->copy()->format('d.m.Y')
+            'endweekdate' => $endweekdate->copy()->format('d.m.Y'),
+            'schedules' => $schedules,
+            'currentDate' => Date::dmYKZ($date),
+            'dayOfWeek' => $date->dayOfWeekIso,
         ]);
     }
 

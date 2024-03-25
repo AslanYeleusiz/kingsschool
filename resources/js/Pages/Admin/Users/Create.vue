@@ -262,6 +262,14 @@
                                             name="eduOrderPrice" required />
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Количество часов</label>
+                                        <input type="number" class="form-control" v-model="eduOrder.hours"
+                                            name="hours" required />
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="d-flex justify-content-end"><button @click.prevent="deleteOrder(index)"
                                     class="btn btn-danger mt-4">
@@ -356,6 +364,7 @@ export default {
                 course_type_id: 1,
                 train_type_id: 1,
                 price: 0,
+                hours: null,
                 start_date: null,
                 end_date: null,
             }],
@@ -423,6 +432,7 @@ export default {
                 train_type_id: 1,
                 shift_id: 1,
                 price: 0,
+                hours: null,
                 start_date: null,
                 end_date: null,
             }

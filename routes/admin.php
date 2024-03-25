@@ -88,5 +88,4 @@ Route::group(['prefix' => '/schedule', 'as' => 'schedule.'], function () {
 
 Route::get('/check-iin', [UserController::class, 'checkIin']);
 
-Route::get('students/{schedule_id}/journal', [JournalController::class, 'index'])->name('journal.index');
-Route::post('/students/journal/store', [JournalController::class, 'store'])->name('journal.store');
+Route::resource('students/{schedule_id}/journal', JournalController::class)->except(['show', 'edit', 'create'])->names('journal');
