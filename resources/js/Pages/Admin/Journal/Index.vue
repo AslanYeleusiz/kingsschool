@@ -8,7 +8,7 @@
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Журнал группы {{ group_name }}</h1>
+                    <h1 class="m-0">Журнал группы {{ schedule.group.name }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -44,7 +44,7 @@
                                         :key="'student' + student.id">
                                         <td>{{ student.user.fio }}</td>
                                         <td v-for="day in lastDayOfMonth" :key="day"
-                                            @click="openPopup(student.id, day, statusByStudentId(student.id, day))"
+                                            @click.prevent="submit(student.id, day, statusByStudentId(student.id, day))"
                                             :class="[day == schedule_day ? 'c-p bg' : '']">
                                             <div v-if="statusByStudentId(student.id, day) == 1">
                                                 <i class="fas fa-solid fa-plus"></i>
@@ -56,27 +56,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div v-if="isPopupOpen"
-                                class="overlay w-100 h-100 d-flex align-items-center justify-content-center"
-                                @click="closePopup()">
-                                <div class="popup position-relative text-center d-block" @click.stop>
-                                    <img src="/images/svg/close.svg" class="close-ico position-absolute"
-                                        @click="closePopup()">
-                                    <h5 class="end_title">
-                                        Выберите действие
-                                    </h5>
-                                    <div class="btn btn-success mr-3" @click.prevent="submit(1)">
-                                        Был(-а)
-                                    </div>
-                                    <div class="btn btn-danger" @click.prevent="submit(2)">
-                                        Не был(-а)
-                                    </div>
-                                    <div class="cancelBtn mt-3 endBtn d-flex align-items-center justify-content-center"
-                                        @click="closePopup()">
-                                        Отмена
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <Pagination :links="student.links" />
@@ -101,18 +80,11 @@ export default {
         'journal_students',
         'schedule_day',
         'lastDayOfMonth',
-        'schedule_id',
-        'teacher_id',
-        'group_id',
-        'group_name',
-        'date',
+        'schedule',
     ],
     data() {
         return {
             loading: 0,
-            isPopupOpen: false,
-            student_id: null,
-            status: null,
         };
     },
     computed: {
@@ -127,32 +99,19 @@ export default {
         }
     },
     methods: {
-        submit(type) {
-            if (this.status != type) {
+        submit(student_id, day, type) {
+            if (day == this.schedule_day) {
+                type = type == 0 ? 1 : type == 1 ? 2 : type == 2 ? 0 : 3;
                 this.$inertia.post(
                     route("admin.journal.store"),
                     {
-                        teacher_id: this.teacher_id,
-                        student_id: this.student_id,
-                        schedule_id: this.schedule_id,
-                        group_id: this.group_id,
+                        schedule: this.schedule,
+                        student_id: student_id,
                         type: type,
-                        date: this.date,
                         status: this.status,
                     }
                 );
             }
-            this.closePopup();
-        },
-        openPopup(student_id, day, status) {
-            if (day == this.schedule_day) {
-                this.isPopupOpen = true;
-                this.student_id = student_id;
-            }
-            this.status = status;
-        },
-        closePopup() {
-            this.isPopupOpen = false;
         },
         deleteData(id) {
             Swal.fire({

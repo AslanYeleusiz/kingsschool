@@ -16,40 +16,37 @@ class JournalController extends Controller
 {
     public function index(Request $request, $schedule_id)
     {
-        $student = Schedule::find($schedule_id)->group->groupStudents()->with('user')->paginate($request->input('per_page', 20))
+        $schedule = Schedule::find($schedule_id);
+        $student = $schedule->group->groupStudents()->with('user')->paginate($request->input('per_page', 20))
             ->appends($request->except('page'));
-        $date = Carbon::parse(Schedule::find($schedule_id)->date);
+        $date = Carbon::parse($schedule->date);
         $schedule_day = $date->day;
         $endOfMonth = $date->copy()->endOfMonth();
         $lastDayOfMonth = $endOfMonth->day;
-        $schedule_date = Schedule::find($schedule_id)->date;
-        $teacher_id = Schedule::find($schedule_id)->teacher_id;
-        $group_id = Schedule::find($schedule_id)->group_id;
-        $group_name = Schedule::find($schedule_id)->group->name;
+
+        $group_id = $schedule->group_id;
+
         $journal_students = Journal::where('group_id', $group_id)->get();
         return Inertia::render('Admin/Journal/Index', [
             'student' => $student,
             'journal_students' => $journal_students,
             'schedule_day' => $schedule_day,
             'lastDayOfMonth' => $lastDayOfMonth,
-            'schedule_id' => $schedule_id,
-            'teacher_id' => $teacher_id,
-            'group_id' => $group_id,
-            'group_name' => $group_name,
-            'date' => $schedule_date,
+            'schedule' => $schedule,
         ]);
     }
 
 
     public function store(Request $request)
     {
+        $schedule = $request->schedule;
         Journal::updateOrCreate(
-            ['edu_order_id' => $request->student_id, 'schedule_id' => $request->schedule_id],
+            ['edu_order_id' => $request->student_id, 'schedule_id' => $schedule['id']],
             [
-                'teacher_id' => $request->teacher_id,
-                'group_id' => $request->group_id,
+                'teacher_id' => $schedule['teacher_id'],
+                'group_id' => $schedule['group_id'],
                 'type' => $request->type,
-                'date' => $request->date,
+                'date' => $schedule['date'],
             ]
         );
         $student_name = EduOrder::find($request->student_id)->user->fio;
