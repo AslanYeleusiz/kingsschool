@@ -134,6 +134,13 @@
                                         name="eduOrderPrice" required />
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Количество часов</label>
+                                    <input type="number" class="form-control" v-model="edu_order.hours"
+                                        name="hours" required />
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-switch">

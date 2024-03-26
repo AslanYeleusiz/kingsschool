@@ -137,6 +137,7 @@ class UserController extends Controller
                         'price' => $eduOrder['price'],
                         'start_date' => $eduOrder['start_date'],
                         'end_date' => $eduOrder['end_date'],
+                        'end_date' => $eduOrder['hours'],
                     ]);
                 }
             }

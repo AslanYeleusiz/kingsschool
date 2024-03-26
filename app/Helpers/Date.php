@@ -22,40 +22,40 @@ class Date
         $month = date('m',$date);
         switch ($month){
             case 1:
-                $month = 'Қаңтар';
+                $month = 'Январь';
                 break;
             case 2:
-                $month = 'Ақпан';
+                $month = 'Февраль';
                 break;
             case 3:
-                $month = 'Наурыз';
+                $month = 'Март';
                 break;
             case 4:
-                $month = 'Сәуір';
+                $month = 'Апрель';
                 break;
             case 5:
-                $month = 'Мамыр';
+                $month = 'Май';
                 break;
             case 6:
-                $month = 'Маусым';
+                $month = 'Июнь';
                 break;
             case 7:
-                $month = 'Шілде';
+                $month = 'Июль';
                 break;
             case 8:
-                $month = 'Тамыз';
+                $month = 'Август';
                 break;
             case 9:
-                $month = 'Қырқүйек';
+                $month = 'Сентябрь';
                 break;
             case 10:
-                $month = 'Қазан';
+                $month = 'Октябрь';
                 break;
             case 11:
-                $month = 'Қараша';
+                $month = 'Ноябрь';
                 break;
             case 12:
-                $month = 'Желтоқсан';
+                $month = 'Декабрь';
                 break;
         }
         return "{$day} {$month} {$year}";

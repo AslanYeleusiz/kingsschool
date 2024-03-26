@@ -20,9 +20,4 @@ class Group extends Model
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
-
-    public function groupStudents()
-    {
-        return $this->belongsToMany(EduOrder::class, 'group_orders', 'group_id', 'edu_order_id');
-    }
 }

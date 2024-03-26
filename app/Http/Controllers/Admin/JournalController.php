@@ -16,32 +16,29 @@ class JournalController extends Controller
 {
     public function index(Request $request, $schedule_id)
     {
-        $schedule = Schedule::find($schedule_id);
-        $student = $schedule->group->groupStudents()->with('user')->paginate($request->input('per_page', 20))
-            ->appends($request->except('page'));
-        $date = Carbon::parse($schedule->date);
-        $schedule_day = $date->day;
-        $endOfMonth = $date->copy()->endOfMonth();
-        $lastDayOfMonth = $endOfMonth->day;
-
-        $group_id = $schedule->group_id;
-
-        $journal_students = Journal::where('group_id', $group_id)->get();
+        $schedule = Schedule::with(['groupOrders.eduOrder.user', 'journals', 'group', 'teacher'])->findOrFail($schedule_id);
+        $likeThisDate = false;
+        $now = Carbon::now();
+        $scheduleDate = Carbon::parse($schedule->date);
+        if($now->month == $scheduleDate->month && $now->year == $scheduleDate->year){
+            $likeThisDate = true;
+        }
+        $journal_students = Journal::where('schedule_id', $schedule->id)->get();
         return Inertia::render('Admin/Journal/Index', [
-            'student' => $student,
-            'journal_students' => $journal_students,
-            'schedule_day' => $schedule_day,
-            'lastDayOfMonth' => $lastDayOfMonth,
             'schedule' => $schedule,
+            'schedule_day' => $now->copy()->day,
+            'lastDayOfMonth' => $scheduleDate->copy()->endOfMonth()->day,
+            'journals' => $journal_students,
+            'likeThisDate' => $likeThisDate,
         ]);
     }
 
 
-    public function store(Request $request)
+    public function store($schedule_id, Request $request)
     {
         $schedule = $request->schedule;
         Journal::updateOrCreate(
-            ['edu_order_id' => $request->student_id, 'schedule_id' => $schedule['id']],
+            ['edu_order_id' => $request->edu_order_id, 'schedule_id' => $schedule_id],
             [
                 'teacher_id' => $schedule['teacher_id'],
                 'group_id' => $schedule['group_id'],
@@ -49,16 +46,19 @@ class JournalController extends Controller
                 'date' => $schedule['date'],
             ]
         );
-        $student_name = EduOrder::find($request->student_id)->user->fio;
-        $log_name1 = 'Отметил, как пришел студента ' . $student_name;
-        $log_name2 = 'Поставил нб студенту ' . $student_name;
-        if (Log::log_status()) {
-            Log::create([
-                'name' => $request->type == 1 ? $log_name1 : $log_name2,
-                'type' => 2,
-                'user_id' => auth()->guard('web')->id(),
-            ]);
-        }
-        // return redirect()->route('admin.roles.index')->with('success', 'Успешно добавлено');
+        $journal_students = Journal::where('schedule_id', $schedule_id)->get();
+        // $student_name = EduOrder::find($request->student_id)->user->fio;
+        // $log_name1 = 'Отметил, как пришел студента ' . $student_name;
+        // $log_name2 = 'Поставил нб студенту ' . $student_name;
+        // if (Log::log_status()) {
+        //     Log::create([
+        //         'name' => $request->type == 1 ? $log_name1 : $log_name2,
+        //         'type' => 2,
+        //         'user_id' => auth()->guard('web')->id(),
+        //     ]);
+        // }
+        return response()->json([
+            'journals' => $journal_students
+        ]);
     }
 }

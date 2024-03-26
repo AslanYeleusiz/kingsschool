@@ -10,4 +10,9 @@ class Journal extends Model
     use HasFactory;
     protected $guarded = [];
     public $timestamps = false;
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id');
+    }
 }
