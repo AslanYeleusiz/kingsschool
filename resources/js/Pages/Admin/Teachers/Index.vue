@@ -1,23 +1,23 @@
 <template>
     <head>
-        <title>Админ панель | Мұғалімдер</title>
+        <title>Админ панель | Преподаватели</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Мұғалімдер тізімі</h1>
+                    <h1 class="m-0">Список преподавателей</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Мұғалімдер тізімі
+                            Список преподавателей
                         </li>
                     </ol>
                 </div>
@@ -26,11 +26,11 @@
         <template #header>
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-primary mr-2" :href="route('admin.users.create')">
-                <i class="fa fa-plus"></i> Қосу
+                <i class="fa fa-plus"></i> Добавить
                 </Link>
 
                 <Link class="btn btn-danger" :href="route('admin.teachers.index')">
-                <i class="fa fa-trash"></i> Фильтрді тазалау
+                <i class="fa fa-trash"></i> Очистить фильтр
                 </Link>
             </div>
         </template>
@@ -48,7 +48,7 @@
                                         <th>Режим работы</th>
                                         <th>Отчет</th>
                                         <th v-if="user.role_id < 3">Филиал</th>
-                                        <th>Әрекет</th>
+                                        <th>Действия</th>
                                     </tr>
                                     <tr class="filters">
                                         <td></td>
@@ -63,7 +63,7 @@
                                             <select class="form-control" @change.prevent="search" v-model="filter.filial_id"
                                                 placeholder="Белсенді">
                                                 <option :value="null">
-                                                    Барлығы
+                                                    Все
                                                 </option>
                                                 <option v-for="filial in filials" :value="filial.id">
                                                     {{ filial.name }}
@@ -168,42 +168,6 @@ export default {
         };
     },
     methods: {
-        deleteData(id) {
-            Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.$inertia.delete(route('admin.teachers.destroy', id))
-                }
-            });
-
-
-        },
-        dublicate(id) {
-            Swal.fire({
-                title: "Дубликатқа жасауға сенімдісіз бе?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.$inertia.get(route('admin.teachers.dublicate', id))
-                }
-            });
-
-
-        },
-
         search() {
             this.loading = 1
             const params = this.clearParams(this.filter);

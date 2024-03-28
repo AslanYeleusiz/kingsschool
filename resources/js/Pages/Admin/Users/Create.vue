@@ -1,30 +1,30 @@
 <template>
 
     <head>
-        <title>Админ панель | Қолданушы қосу</title>
+        <title>Админ панель | Добавить пользователя</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Қолданушы қосу</h1>
+                    <h1 class="m-0">Добавить пользователя</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a :href="route('admin.users.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Қолданушы тізімі
+                                Список пользователей
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Қолданушы қосу
+                            Добавить пользователя
                         </li>
                     </ol>
                 </div>
@@ -40,7 +40,7 @@
                                     <label for="">Роль</label>
                                     <select class="form-control" v-model="user.role_id" placeholder="Белсенді" required>
                                         <option value="" hidden>
-                                            Роль таңдаңыз
+                                            Выберите роль
                                         </option>
                                         <option v-for="role in roles" :key="'role' + role.id" :value="role.id">
                                             {{ role.name }}
@@ -51,11 +51,11 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Филлиал</label>
+                                    <label for="">Филиал</label>
                                     <select class="form-control" v-model="user.filial_id" placeholder="Белсенді"
                                         required @change.prevent="getTeachers(user.filial_id)">
                                         <option :value="null" hidden disabled selected>
-                                            Филлиал таңдаңыз
+                                            Выберите филиал
                                         </option>
                                         <option v-for="filial in filials" :key="'filial' + filial.id"
                                             :value="filial.id">
@@ -67,9 +67,9 @@
                             </div>
                             <div v-if="user.role_id != 4" class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Құпия сөз</label>
+                                    <label for="">Пароль</label>
                                     <input type="text" class="form-control" v-model="user.real_password"
-                                        name="real_password" placeholder="Құпия сөз" />
+                                        name="real_password" placeholder="Пароль" />
                                     <validation-error :field="'real_password'" />
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                             </div>
                         </div>
                         <div class="form-group file-upload">
-                            <label for="">Сурет</label>
+                            <label for="">Аватар</label>
                             <div class="ml-2">
                                 <img v-if="user.image && !image.file"
                                     :src="route('index') + '/storage/images/' + user.image" height="300" alt="image"
@@ -312,10 +312,10 @@
                         </template>
                         <div class="card-footer mt-5">
                             <button type="submit" class="btn btn-success mr-1">
-                                Сақтау
+                                Сохранить
                             </button>
                             <button type="button" class="btn btn-danger" @click.prevent="back()">
-                                Артқа
+                                Назад
                             </button>
                         </div>
                     </div>

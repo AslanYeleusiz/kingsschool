@@ -15,11 +15,11 @@
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Отчет тізімі
+                            Отчет
                         </li>
                     </ol>
                 </div>

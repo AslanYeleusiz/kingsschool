@@ -1,30 +1,30 @@
 <template>
 
     <head>
-        <title>Админ панель | Қолданушыны өзгерту</title>
+        <title>Админ панель | Изменить пользователя</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Қолданушыны өзгерту</h1>
+                    <h1 class="m-0">Изменить пользователя</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a :href="route('admin.users.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Қолданушылар тізімі
+                                Список пользователей
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Қолданушыны өзгерту
+                            Изменить пользователя
                         </li>
                     </ol>
                 </div>
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="form-group file-upload">
-                            <label for="">Сурет</label>
+                            <label for="">Аватар</label>
                             <div class="ml-2">
                                 <img v-if="user.avatar && !image.file"
                                     :src="route('index') + '/storage/files/' + user.avatar" height="300" alt="image"
@@ -121,7 +121,7 @@
                                     <select class="form-control" @change.prevent="search" v-model="user.role_id"
                                         placeholder="Белсенді">
                                         <option :value="null" hidden>
-                                            Роль таңдаңыз
+                                            Выберите роль
                                         </option>
                                         <option v-for="role in roles" :key="'role' + role.id" :value="role.id">
                                             {{ role.name }}
@@ -132,11 +132,11 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Филлиал</label>
+                                    <label for="">Филиал</label>
                                     <select class="form-control" @change.prevent="search" v-model="user.filial_id"
                                         placeholder="Белсенді">
                                         <option :value="null" hidden>
-                                            Филлиал таңдаңыз
+                                            Выберите филиал
                                         </option>
                                         <option v-for="filial in filials" :key="'filial' + filial.id"
                                             :value="filial.id">
@@ -148,9 +148,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Құпия сөз</label>
+                                    <label for="">Пароль</label>
                                     <input :type="auth_user.role_id != 1 ? 'password' : 'text'" class="form-control"
-                                        v-model="user.real_password" name="real_password" placeholder="Құпия сөз" />
+                                        v-model="user.real_password" name="real_password" placeholder="Пароль" />
                                     <validation-error :field="'real_password'" />
                                 </div>
                             </div>
@@ -186,10 +186,10 @@
                         </template>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary mr-1">
-                                Сақтау
+                                Сохранить
                             </button>
                             <button type="button" class="btn btn-danger" @click.prevent="back()">
-                                Артқа
+                                Назад
                             </button>
                         </div>
                     </div>
@@ -228,7 +228,7 @@ export default {
         }
     },
     methods: {
-        warningText(text, desc = "Барлық бағандар толтыру қажет!") {
+        warningText(text, desc = "Все поля должны быть заполнены!") {
             Swal.fire({
                 title: text,
                 text: desc,
@@ -245,8 +245,8 @@ export default {
                 this.user.image = this.image.file
             }
             //                if(this.$auth.user.role_id == 1) {
-            if (!this.user.role_id) return this.warningText('Роль тандалмады!')
-            if (!this.user.filial_id) return this.warningText('Филиал тандалмады!')
+            if (!this.user.role_id) return this.warningText('Роль не выбран!')
+            if (!this.user.filial_id) return this.warningText('Филиал не выбран!')
 
             //                }
             this.user['_method'] = 'put';
@@ -282,7 +282,7 @@ export default {
                 }
             }).then((res) => {
                 if (res.data.status == true) {
-                    this.warningText('Бұндай ИИН бұрын тіркелген', null)
+                    this.warningText('Такой ИИН уже был зарегестрирован', null)
                 }
                 console.log(res.data)
                 this.check_iin = 0

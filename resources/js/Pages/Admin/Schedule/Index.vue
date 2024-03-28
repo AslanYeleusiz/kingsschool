@@ -296,14 +296,14 @@
 
             deleteData(id) {
                 Swal.fire({
-                    title: "Жоюға сенімдісіз бе",
-                    text: "Қайтып қалпына келмеуі мүмкін!",
+                    title: "Уверены, что хотите удалить?",
+                    text: "Возможно, что нельзя будет восстановить!",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Иә, жоямын!",
-                    cancelButtonText: "Болдырмау",
+                    confirmButtonText: "Да, удалю!",
+                    cancelButtonText: "Отмена",
                 }).then((result) => {
                     if (result.isConfirmed) {
                         this.$inertia.delete(

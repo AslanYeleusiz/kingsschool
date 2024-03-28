@@ -82,7 +82,7 @@
                     <li class="nav-item">
                         <a class="nav-link" :href="route('logout')">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
-                            <p>Шығу</p>
+                            <p>Выйти</p>
                         </a>
                     </li>
                 </ul>
@@ -199,7 +199,7 @@ export default {
                             menu_active: ["admin.trainTypes"],
                         },
                         {
-                            name: "Типы Курсов",
+                            name: "Типы Курса",
                             font: "fa-laptop-code",
                             route_name: "admin.courseTypes.index",
                             menu_active: ["admin.courseTypes"],

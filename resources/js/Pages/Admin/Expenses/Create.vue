@@ -57,7 +57,7 @@
                         <div class="row mt-2">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Тип расхода</label>
+                                    <label for="">Типы расхода</label>
                                     <select class="form-control" v-model="expenses.type_id" required>
                                         <option :value="null" hidden disabled selected>
                                             Выберите тип расхода
@@ -72,10 +72,10 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary mr-1">
-                            Сақтау
+                            Сохранить
                         </button>
                         <button type="button" class="btn btn-danger" @click.prevent="back()">
-                            Артқа
+                            Назад
                         </button>
                     </div>
                 </form>

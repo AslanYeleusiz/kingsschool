@@ -42,20 +42,14 @@ class JournalController extends Controller
 
     public function store($schedule_id, Request $request)
     {
-        $schedule = $request->schedule;
         Journal::updateOrCreate(
             ['edu_order_id' => $request->edu_order_id, 'date' => $request->date],
             [
-<<<<<<< HEAD
-                'teacher_id' => $schedule['teacher_id'],
-                'group_id' => $schedule['group_id'],
-=======
                 'teacher_id' => $request->teacher_id,
                 'group_id' => $request->group_id,
                 'schedule_id' => $schedule_id,
->>>>>>> 9c767f9a66e3082e309750df82f1f0a369e7f5eb
                 'type' => $request->type,
-                'date' => $schedule['date'],
+                'date' => $request['date'],
             ]
         );
         $schedule = Schedule::findOrFail($schedule_id);

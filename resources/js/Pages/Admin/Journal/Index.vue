@@ -159,22 +159,6 @@
                 }
                 //                }
             },
-            deleteData(id) {
-                Swal.fire({
-                    title: "Жоюға сенімдісіз бе?",
-                    text: "Қайтып қалпына келмеуі мүмкін!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Иә, жоямын!",
-                    cancelButtonText: "Жоқ",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.$inertia.delete(route('admin.journal.destroy', id))
-                    }
-                });
-            },
         }
     };
 

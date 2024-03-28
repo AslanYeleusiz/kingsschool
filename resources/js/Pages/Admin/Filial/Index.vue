@@ -1,23 +1,24 @@
 <template>
-  <head>
+
+    <head>
         <title>Админ панель | Филиалы</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Филиалы тізімі</h1>
+                    <h1 class="m-0">Список филиалов</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Филиалы тізімі
+                            Список филиалов
                         </li>
                     </ol>
                 </div>
@@ -26,7 +27,7 @@
         <template #header>
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-primary mr-2" :href="route('admin.filials.create')">
-                    <i class="fa fa-plus"></i> Қосу
+                <i class="fa fa-plus"></i> Добавить
                 </Link>
             </div>
         </template>
@@ -35,50 +36,39 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table
-                                class="table table-hover table-bordered table-striped dataTable dtr-inline"
-                            >
+                            <table class="table table-hover table-bordered table-striped dataTable dtr-inline">
                                 <thead>
                                     <tr role="row">
                                         <th>№</th>
-                                        <th>Аты</th>
-                                        <th>Әрекет</th>
+                                        <th>Название</th>
+                                        <th>Действия</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        class="odd"
-                                        v-for="(filial, index) in filials.data"
-                                        :key="'filial' + filial.id"
-                                    >
+                                    <tr class="odd" v-for="(filial, index) in filials.data" :key="'filial' + filial.id">
                                         <td>
                                             {{
-                                                filial.from
-                                                    ? filial.from + index
-                                                    : index + 1
-                                            }}
+                                filial.from
+                                    ? filial.from + index
+                                    : index + 1
+                            }}
                                         </td>
                                         <td>{{ filial.name }}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
-                                                <Link
-                                                    :href="
-                                                        route(
-                                                            'admin.filials.edit',
-                                                            filial
-                                                        )
-                                                    "
-                                                    class="btn btn-primary"
-                                                    title="Изменить"
-                                                >
-                                                    <i class="fas fa-edit"></i>
+                                                <Link :href="route(
+                                'admin.filials.edit',
+                                filial
+                            )
+                                " class="btn btn-primary" title="Изменить">
+                                                <i class="fas fa-edit"></i>
                                                 </Link>
 
-<!--
+                                                <!--
                                                 <button
                                                 @click.prevent="deleteData(filial.id)"
                                                     class="btn btn-danger"
-                                                    title="Жою"
+                                                    title="Удалить"
                                                 >
                                                     <i
                                                         class="fas fa-times"
@@ -113,25 +103,25 @@ export default {
     data() {
         return {
             filter: {
-                name: route().params.name ? route().params.name: null,
+                name: route().params.name ? route().params.name : null,
             },
             loading: 0,
         };
     },
     methods: {
         deleteData(id) {
-                    Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
+            Swal.fire({
+                title: "Уверены, что хотите удалить?",
+                text: "Возможно, что нельзя будет восстановить!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
+                confirmButtonText: "Да, удалю!",
+                cancelButtonText: "Нет",
             }).then((result) => {
                 if (result.isConfirmed) {
-               this.$inertia.delete(route('admin.filials.destroy', id))
+                    this.$inertia.delete(route('admin.filials.destroy', id))
                 }
             });
 
@@ -140,7 +130,7 @@ export default {
         search() {
             this.loading = 1
             const params = this.clearParams(this.filter);
-            this.$inertia.get(route('admin.filials.index'),params)
+            this.$inertia.get(route('admin.filials.index'), params)
         },
     }
 };

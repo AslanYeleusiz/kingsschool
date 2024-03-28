@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
@@ -29,14 +29,15 @@
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-primary mr-2" :href="route('admin.users.create')"
                     v-if="user.role_id == 1 || user.role_id == 2">
-                <i class="fa fa-plus"></i> Қосу
+                <i class="fa fa-plus"></i> Добавить
                 </Link>
 
                 <Link class="btn btn-danger" :href="route('admin.students.index')">
-                <i class="fa fa-trash"></i> Фильтрді тазалау
+                <i class="fa fa-trash"></i> Очистить фильтр
                 </Link>
 
-                <Link v-if="groups && user.role_id < 3" class="btn btn-success ml-2" :href="route('admin.teachers.reports', teacher.id)">
+                <Link v-if="groups && user.role_id < 3" class="btn btn-success ml-2"
+                    :href="route('admin.teachers.reports', teacher.id)">
                 Отчёт для выдачи зарплаты
                 </Link>
 
@@ -112,7 +113,8 @@
                                         </td>
                                         <td class="d-f aj-c">
                                             <div class="avatar"
-                                                :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }"  @click="$page.props.flash.image = order.user?.avatar">
+                                                :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }"
+                                                @click="$page.props.flash.image = order.user?.avatar">
                                             </div>
                                         </td>
                                         <td>{{ order.user.fio }}</td>
@@ -166,10 +168,16 @@
                                                 <div class="dropdown">
                                                     <div class="tablemask">Выбрать группу</div>
                                                     <div class="dropdown-content">
-                                                        <div class="pb-3 px-2 newgroup item" @click="order.newGroup = 1">Добавить группу</div>
-                                                        <div v-for="(group, gindex) in groups" class="form-group form-check item">
-                                                            <input type="checkbox" class="form-check-input" :id="'group_'+gindex+'_'+index" :value="group.id" v-model="order.group_ids" @change.prevent="setGroup(order.id, order.group_ids)">
-                                                            <label class="form-check-label" :for="'group_'+gindex+'_'+index">{{group.name}}</label>
+                                                        <div class="pb-3 px-2 newgroup item"
+                                                            @click="order.newGroup = 1">Добавить группу</div>
+                                                        <div v-for="(group, gindex) in groups"
+                                                            class="form-group form-check item">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                :id="'group_' + gindex + '_' + index" :value="group.id"
+                                                                v-model="order.group_ids"
+                                                                @change.prevent="setGroup(order.id, order.group_ids)">
+                                                            <label class="form-check-label"
+                                                                :for="'group_' + gindex + '_' + index">{{ group.name }}</label>
                                                         </div>
                                                         <!-- Добавьте нужные пункты с чекбоксами -->
                                                     </div>
@@ -190,7 +198,9 @@
 -->
                                             </td>
                                             <td v-else>
-                                                <input type="text" class="form-control" v-model="newGroup" @keyup.enter="setNewGroup(order.id)" placeholder="Введите имя группы">
+                                                <input type="text" class="form-control" v-model="newGroup"
+                                                    @keyup.enter="setNewGroup(order.id)"
+                                                    placeholder="Введите имя группы">
                                             </td>
                                         </template>
                                         <td v-show="user.role_id == 1 || user.role_id == 2">
@@ -200,8 +210,8 @@
                                                 <i class="fas fa-edit"></i>
                                                 </Link>
 
-                                                <button @click.prevent="deleteDataStudent(order.id)" class="btn btn-danger"
-                                                    title="Жою">
+                                                <button @click.prevent="deleteDataStudent(order.id)"
+                                                    class="btn btn-danger" title="Жою">
                                                     <i class="fas fa-times"></i>
                                                 </button>
                                             </div>
@@ -312,14 +322,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="odd" v-for="(order, index) in orders.data" :key="'grouporder' + order.id">
+                                            <tr class="odd" v-for="(order, index) in orders.data"
+                                                :key="'grouporder' + order.id">
                                                 <template v-if="order.group_ids.includes(group.id)">
                                                     <td>
                                                         {{ order.from ? order.from + index : index + 1 }}
                                                     </td>
                                                     <td class="d-f aj-c">
                                                         <div class="avatar"
-                                                            :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }" @click="$page.props.flash.image = order.user?.avatar">
+                                                            :style="{ backgroundImage: `url(/storage/files/${order.user.avatar})` }"
+                                                            @click="$page.props.flash.image = order.user?.avatar">
                                                         </div>
                                                     </td>
                                                     <td>{{ order.user.fio }}</td>
@@ -344,7 +356,9 @@
                                                     <td>
                                                         <div class="d-f j-b">
                                                             <div></div>
-                                                            <button @click.prevent="deleteDataAtGroup(order.id,group.id )" class="btn btn-danger" title="Жою">
+                                                            <button
+                                                                @click.prevent="deleteDataAtGroup(order.id,group.id )"
+                                                                class="btn btn-danger" title="Жою">
                                                                 <i class="fas fa-times"></i>
                                                             </button>
                                                         </div>
@@ -412,108 +426,108 @@ export default {
             return sum;
         },
 
-            checkStudents() {
-                return this.user.role_id == 1 ? false : this.orders.data.every(student => student.group_id !== null) == false;
-            },
-            setNewGroup(order_id) {
-                this.$inertia.put(route('admin.students.update', order_id), {
-                    name: this.newGroup
-                })
-            },
-            setGroup(orderId, groupIds) {
-                axios.post(`/admin/students/${orderId}/setGroups`, {
-                    group_ids: groupIds
-                }).then(res=>{
-                    console.log(res.data)
-                })
-            },
+        checkStudents() {
+            return this.user.role_id == 1 ? false : this.orders.data.every(student => student.group_id !== null) == false;
+        },
+        setNewGroup(order_id) {
+            this.$inertia.put(route('admin.students.update', order_id), {
+                name: this.newGroup
+            })
+        },
+        setGroup(orderId, groupIds) {
+            axios.post(`/admin/students/${orderId}/setGroups`, {
+                group_ids: groupIds
+            }).then(res => {
+                console.log(res.data)
+            })
+        },
 
-            setPaid(id, e) {
-                if (e) {
-                    Swal.fire({
-                        title: "Подтвердите оплату",
-                        icon: "success",
-                        showCancelButton: true,
-                        confirmButtonColor: "#71DD37",
-                        cancelButtonColor: "#adb5bd",
-                        confirmButtonText: "Подтвердить",
-                        cancelButtonText: "Отклонить",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.$inertia.post(route('admin.students.paid', id))
-                        }
-                    });
-                } else {
-                    let order = this.orders.data.find(el => el.id == id);
-                    if (order.lastEduPaid.is_paid) {
-                        return Swal.fire({
-                            title: "Невозможно!",
-                            text: "Оплата не может быть отменена, так как зарплата была выдана учителю!",
-                            icon: "error",
-                        });
+        setPaid(id, e) {
+            if (e) {
+                Swal.fire({
+                    title: "Подтвердите оплату",
+                    icon: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#71DD37",
+                    cancelButtonColor: "#adb5bd",
+                    confirmButtonText: "Подтвердить",
+                    cancelButtonText: "Отклонить",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$inertia.post(route('admin.students.paid', id))
                     }
-                    Swal.fire({
-                        title: "Отменить оплату?",
+                });
+            } else {
+                let order = this.orders.data.find(el => el.id == id);
+                if (order.lastEduPaid.is_paid) {
+                    return Swal.fire({
+                        title: "Невозможно!",
+                        text: "Оплата не может быть отменена, так как зарплата была выдана учителю!",
                         icon: "error",
-                        showCancelButton: true,
-                        confirmButtonColor: "#71DD37",
-                        cancelButtonColor: "#adb5bd",
-                        confirmButtonText: "Подтвердить",
-                        cancelButtonText: "Отклонить",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.$inertia.post(route('admin.students.deletePaid', id))
-                        }
                     });
                 }
-            },
-            search() {
-                this.loading = 1
-                const params = this.clearParams(this.filter);
-                this.$inertia.get(route('admin.students.index'), params)
-            },
-            deleteData(id) {
                 Swal.fire({
-                    title: "Жоюға сенімдісіз бе?",
-                    text: "Қайтып қалпына келмеуі мүмкін!",
-                    icon: "warning",
+                    title: "Отменить оплату?",
+                    icon: "error",
                     showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Иә, жоямын!",
-                    cancelButtonText: "Жоқ",
+                    confirmButtonColor: "#71DD37",
+                    cancelButtonColor: "#adb5bd",
+                    confirmButtonText: "Подтвердить",
+                    cancelButtonText: "Отклонить",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        this.$inertia.delete(route('admin.groups.destroy', id))
+                        this.$inertia.post(route('admin.students.deletePaid', id))
                     }
                 });
-            },
-            deleteDataAtGroup(id, groupId) {
-                Swal.fire({
-                    title: "Удалить ученика из группы?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Да!",
-                    cancelButtonText: "Нет",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.$inertia.delete(route('admin.groups.destroyOrder', {id:id, groupId: groupId}))
-                    }
-                });
-            },
-
-        deleteDataStudent(id) {
+            }
+        },
+        search() {
+            this.loading = 1
+            const params = this.clearParams(this.filter);
+            this.$inertia.get(route('admin.students.index'), params)
+        },
+        deleteData(id) {
             Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
+                title: "Уверены, что хотите удалить?",
+                text: "Возможно, что нельзя будет восстановить!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
+                confirmButtonText: "Да, удалю!",
+                cancelButtonText: "Нет",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$inertia.delete(route('admin.groups.destroy', id))
+                }
+            });
+        },
+        deleteDataAtGroup(id, groupId) {
+            Swal.fire({
+                title: "Удалить ученика из группы?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Да!",
+                cancelButtonText: "Нет",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$inertia.delete(route('admin.groups.destroyOrder', { id: id, groupId: groupId }))
+                }
+            });
+        },
+
+        deleteDataStudent(id) {
+            Swal.fire({
+                title: "Уверены, что хотите удалить?",
+                text: "Возможно, что нельзя будет восстановить!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Да, удалю!",
+                cancelButtonText: "Нет",
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.$inertia.delete(route('admin.students.destroy', id))
@@ -574,46 +588,47 @@ export default {
     width: 100%;
 }
 
-    .gap-20 {
-        gap: 20px;
-    }
+.gap-20 {
+    gap: 20px;
+}
 
-    /* Стилизация для красивого вида */
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
+/* Стилизация для красивого вида */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        right: 0;
-        background-color: #fff;
-        min-width: 160px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        padding: 20px 20px 10px;
-        text-align: left;
-        z-index: 21;
-    }
-    
-    .dropdown-content .item {
-        white-space: nowrap;
-    }
-    
-    .dropdown .newgroup, .dropdown .form-check-label, .dropdown .form-check-input {
-        cursor: pointer;
-    }
-    
-    
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 20px 20px 10px;
+    text-align: left;
+    z-index: 21;
+}
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
+.dropdown-content .item {
+    white-space: nowrap;
+}
+
+.dropdown .newgroup,
+.dropdown .form-check-label,
+.dropdown .form-check-input {
+    cursor: pointer;
+}
+
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 /*
     input[type="checkbox"] {
         margin-right: 8px;
     }
 */
-
 </style>

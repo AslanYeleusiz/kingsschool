@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
@@ -26,7 +26,7 @@
         <template #header>
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-danger" :href="route('admin.paidHistories.index')">
-                <i class="fa fa-trash"></i> Фильтрді тазалау
+                <i class="fa fa-trash"></i> Очистить фильтр
                 </Link>
                 <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
                     <span class="sr-only">Loading...</span>
@@ -185,14 +185,14 @@ export default {
         },
         deleteData(id) {
             Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
+                title: "Уверены, что хотите удалить?",
+                text: "Возможно, что нельзя будет восстановить!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
+                confirmButtonText: "Да, удалю!",
+                cancelButtonText: "Нет",
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.$inertia.delete(route('admin.paidHistories.delete', id))

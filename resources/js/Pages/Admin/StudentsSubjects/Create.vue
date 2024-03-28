@@ -145,10 +145,10 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary mr-1">
-                            Сақтау
+                            Сохранить
                         </button>
                         <button type="button" class="btn btn-danger" @click.prevent="back()">
-                            Артқа
+                            Назад
                         </button>
                     </div>
                 </form>
@@ -211,7 +211,7 @@ export default {
                 })
             }
         },
-        warningText(text, desc = "Барлық бағандар толтыру қажет!") {
+        warningText(text, desc = "Все поля должны быть заполнены!") {
             Swal.fire({
                 title: text,
                 text: desc,

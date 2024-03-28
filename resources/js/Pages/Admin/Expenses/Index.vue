@@ -1,4 +1,5 @@
 <template>
+
     <head>
         <title>Админ панель | Расходы</title>
     </head>
@@ -13,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
@@ -26,11 +27,11 @@
         <template #header>
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-primary mr-2" :href="route('admin.expenses.create')">
-                <i class="fa fa-plus"></i> Қосу
+                <i class="fa fa-plus"></i> Добавить
                 </Link>
 
                 <Link class="btn btn-danger" :href="route('admin.expenses.index')">
-                <i class="fa fa-trash"></i> Фильтрді тазалау
+                <i class="fa fa-trash"></i> Очистить фильтр
                 </Link>
                 <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
                     <span class="sr-only">Loading...</span>
@@ -61,9 +62,10 @@
                                                 @keyup.enter="search" />
                                         </td>
                                         <td>
-                                            <select class="form-control" @change.prevent="search" v-model="filter.type_id">
+                                            <select class="form-control" @change.prevent="search"
+                                                v-model="filter.type_id">
                                                 <option :value="null">
-                                                    Барлығы
+                                                    Все
                                                 </option>
                                                 <option v-for="typee in types" :key="typee.id" :value="typee.id">
                                                     {{ typee.name }}
@@ -78,7 +80,7 @@
                                             <select class="form-control" @change.prevent="search"
                                                 v-model="filter.filial_id">
                                                 <option :value="null">
-                                                    Барлығы
+                                                    Все
                                                 </option>
                                                 <option v-for="filial in filials" :key="'filial' + filial.id"
                                                     :value="filial.id">
@@ -96,13 +98,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd" v-for="(expense, index) in expenses.data" :key="'expense' + expense.id">
+                                    <tr class="odd" v-for="(expense, index) in expenses.data"
+                                        :key="'expense' + expense.id">
                                         <td>
                                             {{
-                                                expense.from
-                                                ? expense.from + index
-                                                : index + 1
-                                            }}
+                                expense.from
+                                    ? expense.from + index
+                                    : index + 1
+                            }}
                                         </td>
                                         <td>{{ expense.name }}</td>
                                         <td>{{ types[expense.type_id - 1].name }}</td>
@@ -113,15 +116,15 @@
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                                 <Link :href="route(
-                                                    'admin.expenses.edit',
-                                                    expense
-                                                )
-                                                    " class="btn btn-primary" title="Изменить">
+                                'admin.expenses.edit',
+                                expense
+                            )
+                                " class="btn btn-primary" title="Изменить">
                                                 <i class="fas fa-edit"></i>
                                                 </Link>
 
                                                 <button @click.prevent="deleteData(expense.id)" class="btn btn-danger"
-                                                    title="Жою">
+                                                    title="Удалить">
                                                     <i class="fas fa-times"></i>
                                                 </button>
 
@@ -169,14 +172,14 @@ export default {
     methods: {
         deleteData(id) {
             Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
+                title: "Уверены, что хотите удалить?",
+                text: "Возможно, что нельзя будет восстановить!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
+                confirmButtonText: "Да, удалю!",
+                cancelButtonText: "Нет",
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.$inertia.delete(route('admin.expenses.destroy', id))

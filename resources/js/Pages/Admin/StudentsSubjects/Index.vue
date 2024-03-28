@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
@@ -28,7 +28,7 @@
                 <Link class="btn btn-primary mr-2" :href="route('admin.studentsSubjects.create',
                     subjects.data[0].user_id
                 )">
-                <i class="fa fa-plus"></i> Қосу
+                <i class="fa fa-plus"></i> Добавить
                 </Link>
 
                 <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
@@ -52,7 +52,7 @@
                                         <th>Группа</th>
                                         <th>Преподователь</th>
                                         <th>Статус</th>
-                                        <th>Әрекет</th>
+                                        <th>Действия</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -147,14 +147,14 @@ export default {
     methods: {
         deleteData(user_id, edu_order_id) {
             Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
+                title: "Уверены, что хотите удалить?",
+                text: "Возможно, что нельзя будет восстановить!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
+                confirmButtonText: "Да, удалю!",
+                cancelButtonText: "Нет",
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.$inertia.delete(route('admin.studentsSubjects.destroy', [user_id, edu_order_id]))
@@ -170,13 +170,13 @@ export default {
         
         dublicate(id) {
             Swal.fire({
-                title: "Дубликатқа жасауға сенімдісіз бе?",
+                title: "Уверены, что хотите сделать дубликат?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
+                confirmButtonText: "Да, уверен!",
+                cancelButtonText: "Нет",
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.$inertia.get(route('admin.subjects.dublicate', id))

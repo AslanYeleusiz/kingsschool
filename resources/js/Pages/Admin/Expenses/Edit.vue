@@ -1,29 +1,29 @@
 <template>
     <head>
-        <title>Админ панель | Тип обучения өзгерту</title>
+        <title>Админ панель | Изменить данные расхода</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Тип обучения өзгерту</h1>
+                    <h1 class="m-0">Изменить данные расхода</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a :href="route('admin.expenses.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Тип обучения тізімі
+                                Список расходов
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Тип обучения өзгерту
+                            Изменить данные расхода
                         </li>
                     </ol>
                 </div>
@@ -72,10 +72,10 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary mr-1">
-                            Сақтау
+                            Сохранить
                         </button>
                         <button type="button" class="btn btn-danger" @click.prevent="back()">
-                            Артқа
+                            Назад
                         </button>
                     </div>
                 </form>

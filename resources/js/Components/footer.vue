@@ -1,8 +1,8 @@
 <template>
     <footer class="main-footer">
-        <strong>Авторлық құқық &copy; {{ currentDate.getFullYear() }}
+        <strong>Авторское право &copy; {{ currentDate.getFullYear() }}
             <Link href="/">kingsschool.kz</Link>.</strong>
-            Барлық құқықтар қорғалған.
+            Все права защищены.
     </footer>
 </template>
 

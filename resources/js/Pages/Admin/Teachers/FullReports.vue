@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
@@ -258,24 +258,6 @@
                     return sum + (newPriceType ? element.newPrice : element.price);
                 }, 0);
                 return sum;
-            },
-            deleteData(id) {
-                Swal.fire({
-                    title: "Жоюға сенімдісіз бе?",
-                    text: "Қайтып қалпына келмеуі мүмкін!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Иә, жоямын!",
-                    cancelButtonText: "Жоқ",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.$inertia.delete(route('admin.teachers.destroy', id))
-                    }
-                });
-
-
             },
         }
     };

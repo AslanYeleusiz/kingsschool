@@ -28,7 +28,7 @@
             <div class="buttons d-flex align-items-center">
 
                 <Link class="btn btn-danger mr-2" :href="route('admin.logs.index')">
-                <i class="fa fa-trash"></i> Фильтрді тазалау
+                <i class="fa fa-trash"></i> Очистить фильтр
                 </Link>
                 <div class="btn btn-warning" v-if="log_status">
                     Отключить логгирование
@@ -51,7 +51,7 @@
                                     <tr role="row">
                                         <th>№</th>
                                         <th>Пользователь</th>
-                                        <th>Әрекет</th>
+                                        <th>Действия</th>
                                         <th>Дата</th>
                                     </tr>
                                     <tr class="filters">
@@ -64,7 +64,7 @@
                                             <select class="form-control" @change.prevent="search"
                                                 v-model="filter.type_id">
                                                 <option :value="null">
-                                                    Барлығы
+                                                    Все
                                                 </option>
                                                 <option v-for="typee in types" :key="'typee' + typee.id"
                                                     :value="typee.id">

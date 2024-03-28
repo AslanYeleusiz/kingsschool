@@ -1,30 +1,30 @@
 <template>
 
     <head>
-        <title>Админ панель | Пән қосу</title>
+        <title>Админ панель | Добавить предмет</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Пән қосу</h1>
+                    <h1 class="m-0">Добавить предмет</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a :href="route('admin.subjects.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Пән тізімі
+                                Список предметов
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Пән қосу
+                            Добавить предмет
                         </li>
                     </ol>
                 </div>
@@ -64,10 +64,10 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary mr-1">
-                            Сақтау
+                            Сохранить
                         </button>
                         <button type="button" class="btn btn-danger" @click.prevent="back()">
-                            Артқа
+                            Назад
                         </button>
                     </div>
                 </form>

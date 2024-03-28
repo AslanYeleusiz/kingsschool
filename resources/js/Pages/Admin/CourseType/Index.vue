@@ -6,18 +6,18 @@
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Типы курсов тізімі</h1>
+                    <h1 class="m-0">Список типов курса</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Типы курсов тізімі
+                            Список типов курса
                         </li>
                     </ol>
                 </div>
@@ -26,7 +26,7 @@
         <template #header>
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-primary mr-2" :href="route('admin.courseTypes.create')">
-                    <i class="fa fa-plus"></i> Қосу
+                    <i class="fa fa-plus"></i> Добавить
                 </Link>
                 <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
                   <span class="sr-only">Loading...</span>
@@ -44,8 +44,8 @@
                                 <thead>
                                     <tr role="row">
                                         <th>№</th>
-                                        <th>Аты</th>
-                                        <th>Әрекет</th>
+                                        <th>Название</th>
+                                        <th>Действия</th>
                                     </tr>
                                 </thead>
                                 <tbody>

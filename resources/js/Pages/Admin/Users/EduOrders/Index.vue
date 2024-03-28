@@ -1,23 +1,24 @@
 <template>
-  <head>
+
+    <head>
         <title>Админ панель | Обучения</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Обучения тізімі</h1>
+                    <h1 class="m-0">Список обучения</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Обучения тізімі
+                            Список обучения
                         </li>
                     </ol>
                 </div>
@@ -26,14 +27,14 @@
         <template #header>
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-primary mr-2" :href="route('admin.eduOrders.create')">
-                    <i class="fa fa-plus"></i> Қосу
+                <i class="fa fa-plus"></i> Добавить
                 </Link>
 
                 <Link class="btn btn-danger" :href="route('admin.eduOrders.index')">
-                    <i class="fa fa-trash"></i> Фильтрді тазалау
+                <i class="fa fa-trash"></i> Очистить фильтр
                 </Link>
                 <div v-if="loading" class="spinner-border text-primary mx-3" role="status">
-                  <span class="sr-only">Loading...</span>
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </template>
@@ -42,65 +43,46 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table
-                                class="table table-hover table-bordered table-striped dataTable dtr-inline"
-                            >
+                            <table class="table table-hover table-bordered table-striped dataTable dtr-inline">
                                 <thead>
                                     <tr role="row">
                                         <th>№</th>
-                                        <th>Аты</th>
-                                        <th>Әрекет</th>
+                                        <th>Название</th>
+                                        <th>Действия</th>
                                     </tr>
                                     <tr class="filters">
                                         <td></td>
                                         <td>
-                                            <input
-                                                v-model="filter.name"
-                                                class="form-control"
-                                                placeholder="Аты"
-                                                @keyup.enter="search"
-                                            />
+                                            <input v-model="filter.name" class="form-control" placeholder="Аты"
+                                                @keyup.enter="search" />
                                         </td>
                                         <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        class="odd"
-                                        v-for="(eduOrder, index) in eduOrders.data"
-                                        :key="'eduOrder' + eduOrder.id"
-                                    >
+                                    <tr class="odd" v-for="(eduOrder, index) in eduOrders.data"
+                                        :key="'eduOrder' + eduOrder.id">
                                         <td>
                                             {{
-                                                eduOrder.from
-                                                    ? eduOrder.from + index
-                                                    : index + 1
-                                            }}
+                                eduOrder.from
+                                    ? eduOrder.from + index
+                                    : index + 1
+                            }}
                                         </td>
                                         <td>{{ eduOrder.name }}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
-                                                <Link
-                                                    :href="
-                                                        route(
-                                                            'admin.eduOrders.edit',
-                                                            eduOrder
-                                                        )
-                                                    "
-                                                    class="btn btn-primary"
-                                                    title="Изменить"
-                                                >
-                                                    <i class="fas fa-edit"></i>
+                                                <Link :href="route(
+                                'admin.eduOrders.edit',
+                                eduOrder
+                            )
+                                " class="btn btn-primary" title="Изменить">
+                                                <i class="fas fa-edit"></i>
                                                 </Link>
 
-                                                <button
-                                                @click.prevent="deleteData(eduOrder.id)"
-                                                    class="btn btn-danger"
-                                                    title="Жою"
-                                                >
-                                                    <i
-                                                        class="fas fa-times"
-                                                    ></i>
+                                                <button @click.prevent="deleteData(eduOrder.id)" class="btn btn-danger"
+                                                    title="Удалить">
+                                                    <i class="fas fa-times"></i>
                                                 </button>
                                             </div>
                                         </td>
@@ -130,25 +112,25 @@ export default {
     data() {
         return {
             filter: {
-                name: route().params.name ? route().params.name: null,
+                name: route().params.name ? route().params.name : null,
             },
             loading: 0,
         };
     },
     methods: {
         deleteData(id) {
-                    Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
+            Swal.fire({
+                title: "Уверены, что хотите удалить?",
+                text: "Возможно, что нельзя будет восстановить!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
+                confirmButtonText: "Да, удалю!",
+                cancelButtonText: "Нет",
             }).then((result) => {
                 if (result.isConfirmed) {
-               this.$inertia.delete(route('admin.eduOrders.destroy', id))
+                    this.$inertia.delete(route('admin.eduOrders.destroy', id))
                 }
             });
 
@@ -157,7 +139,7 @@ export default {
         search() {
             this.loading = 1
             const params = this.clearParams(this.filter);
-            this.$inertia.get(route('admin.eduOrders.index'),params)
+            this.$inertia.get(route('admin.eduOrders.index'), params)
         },
     }
 };

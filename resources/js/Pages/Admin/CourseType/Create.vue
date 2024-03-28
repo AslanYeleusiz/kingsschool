@@ -1,29 +1,29 @@
 <template>
   <head>
-        <title>Админ панель | Курс типін қосу</title>
+        <title>Админ панель | Добавить тип курса</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Курс типін қосу</h1>
+                    <h1 class="m-0">Добавить тип курса</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a :href="route('admin.courseTypes.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Курс типін тізімі
+                                Типы курса
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Курс типін қосу
+                            Добавить тип курса
                         </li>
                     </ol>
                 </div>
@@ -34,23 +34,23 @@
                 <form method="post" @submit.prevent="submit">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="">Аты</label>
+                            <label for="">Название</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 v-model="courseType.name"
                                 name="name"
-                                placeholder="Аты"
+                                placeholder="Название"
                             />
                             <validation-error :field="'name'" />
                         </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary mr-1">
-                            Сақтау
+                            Сохранить
                         </button>
                         <button type="button" class="btn btn-danger" @click.prevent="back()">
-                            Артқа
+                            Назад
                         </button>
                     </div>
                 </form>

@@ -1,23 +1,24 @@
 <template>
+
     <head>
-        <title>Админ панель | Қолданушылар</title>
+        <title>Админ панель | Пользователи</title>
     </head>
     <AdminLayout>
         <template #breadcrumbs>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Қолданушылар тізімі</h1>
+                    <h1 class="m-0">Список пользователей</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a :href="route('admin.index')">
                                 <i class="fas fa-dashboard"></i>
-                                Басты бет
+                                Главная страница
                             </a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Қолданушылар тізімі
+                            Список пользователей
                         </li>
                     </ol>
                 </div>
@@ -26,12 +27,12 @@
         <template #header>
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-primary" :href="route('admin.users.create')">
-                <i class="fa fa-plus"></i> Қосу
+                <i class="fa fa-plus"></i> Добавить
                 </Link>
 
 
                 <Link class="btn btn-danger mx-2" :href="route('admin.users.index')">
-                <i class="fa fa-trash"></i> Фильтрді тазалау
+                <i class="fa fa-trash"></i> Очистить фильтр
                 </Link>
 
                 <Link class="btn btn-primary" :href="route('admin.users.deleted')">
@@ -52,29 +53,29 @@
                                 <thead>
                                     <tr role="row">
                                         <th></th>
-                                        <th>Толық аты-жөні</th>
-                                        <th>Телефон нөмірі</th>
+                                        <th>ФИО</th>
+                                        <th>Номер телефона</th>
                                         <th>Филиал</th>
                                         <th>Роль</th>
-                                        <th>Әрекет</th>
+                                        <th>Действия</th>
                                     </tr>
                                     <tr class="filters">
                                         <td></td>
                                         <td>
-                                            <input v-model="filter.fio" class="form-control" placeholder="Толық аты-жөні"
+                                            <input v-model="filter.fio" class="form-control" placeholder="ФИО"
                                                 @keyup.enter="search" />
                                         </td>
                                         <td>
                                             <input v-model="filter.tel_num" class="form-control"
-                                                placeholder="Телефон нөмірі" @keyup.enter="search" />
+                                                placeholder="Номер телефона" @keyup.enter="search" />
                                         </td>
 
 
                                         <td>
-                                            <select class="form-control" @change.prevent="search" v-model="filter.filial_id"
-                                                placeholder="Филиал">
+                                            <select class="form-control" @change.prevent="search"
+                                                v-model="filter.filial_id" placeholder="Филиал">
                                                 <option :value="null">
-                                                    Барлығы
+                                                    Все
                                                 </option>
                                                 <option v-for="filial in filials" :key="'filial' + filial.id"
                                                     :value="filial.id">
@@ -83,10 +84,10 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select class="form-control" @change.prevent="search" v-model="filter.role_id"
-                                                placeholder="Филиал">
+                                            <select class="form-control" @change.prevent="search"
+                                                v-model="filter.role_id" placeholder="Филиал">
                                                 <option :value="null">
-                                                    Барлығы
+                                                    Все
                                                 </option>
                                                 <option v-for="role in roles" :key="'role' + role.id" :value="role.id">
                                                     {{ role.name }}
@@ -99,7 +100,8 @@
                                     <tr class="odd" v-for="(user, index) in users.data" :key="'user' + user.id">
                                         <td>
                                             <div class="avatar"
-                                                :style="{ backgroundImage: `url(/storage/files/${user.avatar})` }" @click="$page.props.flash.image = user?.avatar"></div>
+                                                :style="{ backgroundImage: `url(/storage/files/${user.avatar})` }"
+                                                @click="$page.props.flash.image = user?.avatar"></div>
                                         </td>
                                         <td>{{ user.fio }}</td>
                                         <td>{{ user.tel_num }}</td>
@@ -108,17 +110,18 @@
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                                 <Link :href="route(
-                                                    'admin.studentsSubjects.index',
-                                                    user.id
-                                                )
-                                                    " class="btn btn-success" title="Предметы" v-if="user.role_id == 4">
+                                'admin.studentsSubjects.index',
+                                user.id
+                            )
+                                " class="btn btn-success" title="Предметы"
+                                                    v-if="user.role_id == 4">
                                                 <i class="fas fa-question"></i>
                                                 </Link>
                                                 <Link :href="route(
-                                                    'admin.users.edit',
-                                                    user
-                                                )
-                                                    " class="btn btn-primary" title="Изменить">
+                                'admin.users.edit',
+                                user
+                            )
+                                " class="btn btn-primary" title="Изменить">
                                                 <i class="fas fa-edit"></i>
                                                 </Link>
 
@@ -168,14 +171,14 @@ export default {
     methods: {
         deleteData(id) {
             Swal.fire({
-                title: "Жоюға сенімдісіз бе?",
-                text: "Қайтып қалпына келмеуі мүмкін!",
+                title: "Уверены, что хотите удалить?",
+                text: "Возможно, что нельзя будет восстановить!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Иә, жоямын!",
-                cancelButtonText: "Жоқ",
+                confirmButtonText: "Да, удалю!",
+                cancelButtonText: "Нет",
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.$inertia.delete(route('admin.users.destroy', id))
