@@ -45,7 +45,7 @@
                 Полный отчёт
                 </Link>
 
-                <div v-if="checkStudents()" class="ml-2 badge badge-danger">
+                <div v-if="!checkStudents()" class="ml-2 badge badge-danger">
                     <h3>{{ groups ? 'Ваши' : 'Некоторые' }} студенты не распределены по группам</h3>
                 </div>
 
@@ -127,7 +127,7 @@
                                                     <div v-else class="paid black" @click="setPaid(order.id, 1)">
                                                         Просрочено
                                                     </div>
-                                                    <div class="paid date">{{ order.lastEduPaid.date }}</div>
+                                                    <div class="paid date">до {{ order.lastEduPaid.date }}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -413,7 +413,7 @@ export default {
         },
 
             checkStudents() {
-                return this.user.role_id == 1 ? false : this.orders.data.every(student => student.group_id !== null) == false;
+                return this.orders.data.every(obj => obj.group_ids && obj.group_ids.length > 0);
             },
             setNewGroup(order_id) {
                 this.$inertia.put(route('admin.students.update', order_id), {

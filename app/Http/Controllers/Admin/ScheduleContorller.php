@@ -9,6 +9,7 @@ use App\Models\CourseType;
 use App\Models\TrainType;
 use App\Models\Group;
 use App\Models\Log;
+use App\Models\Journal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -36,7 +37,10 @@ class ScheduleContorller extends Controller
                 $q->where('filial_id', $user->filial_id);
             })
             ->whereDate('date', $date)->orderBy('start_time')->get();
-        $teachers = User::where('filial_id', $filial_id)->where('role_id', 3)->get();
+        $teachers = User::where('filial_id', $filial_id)
+            ->where('role_id', 3)
+            ->when($user->role_id == 3, fn($q)=>$q->where('id', $user->id))
+            ->get();
         $courseTypes = CourseType::get();
         $trainTypes = TrainType::get();
         $shifts = [];
@@ -64,8 +68,8 @@ class ScheduleContorller extends Controller
     {
         $filial_id = $request->filial_id ?? 2;
         $start_time = Carbon::parse($request->start_time);
-        $end_time = Carbon::parse($request->end_time);
-        $minutes = $end_time->diffInMinutes($start_time);
+        $minutes = $request->duration;
+        $end_time = Carbon::parse($request->start_time)->addMinutes($minutes);
         $date = Carbon::parse($request->date);
 
 
@@ -78,19 +82,6 @@ class ScheduleContorller extends Controller
             'day' => $request->day,
             'group_id' => $request->group_id,
         ]);
-
-        $startDate = $date->copy()->startOfWeek();
-        $endDate = $date->copy()->endOfWeek();
-        $schedules = Schedule::whereDate('date', '>=', $startDate)->whereDate('date', '<=', $endDate)->get();
-        Schedule::whereDate('date', '>', $endDate)->delete();
-        for($n=1; $n<4; $n++) {
-            foreach($schedules as $schedule) {
-                $newSchedule = $schedule->replicate();
-                $cstdate =  Carbon::parse($newSchedule->date)->addDays(7 * $n);
-                $newSchedule->date = $cstdate;
-                $newSchedule->save();
-            }
-        }
 
         $teacher = User::findOrFail($request->teacher_id);
         if(Log::log_status()) {
@@ -134,6 +125,7 @@ class ScheduleContorller extends Controller
             'endweekdate' => $endweekdate->copy()->format('d.m.Y'),
             'schedules' => $schedules,
             'currentDate' => Date::dmYKZ($date),
+            'date' => Carbon::parse($date)->format('d.m.Y'),
             'dayOfWeek' => $date->dayOfWeekIso,
         ]);
     }
@@ -147,20 +139,21 @@ class ScheduleContorller extends Controller
     public function destroy($id)
     {
         $sched = Schedule::findOrFail($id);
-        $date = Carbon::parse($sched->date);
+        Journal::where('schedule_id', $id)->delete();
+        // $date = Carbon::parse($sched->date);
         $sched->delete();
-        $startDate = $date->copy()->startOfWeek();
-        $endDate = $date->copy()->endOfWeek();
-        $schedules = Schedule::whereDate('date', '>=', $startDate)->whereDate('date', '<=', $endDate)->get();
-        Schedule::whereDate('date', '>', $endDate)->delete();
-        for($n=1; $n<4; $n++) {
-            foreach($schedules as $schedule) {
-                $newSchedule = $schedule->replicate();
-                $cstdate =  Carbon::parse($newSchedule->date)->addDays(7 * $n);
-                $newSchedule->date = $cstdate;
-                $newSchedule->save();
-            }
-        }
+        // $startDate = $date->copy()->startOfWeek();
+        // $endDate = $date->copy()->endOfWeek();
+        // $schedules = Schedule::whereDate('date', '>=', $startDate)->whereDate('date', '<=', $endDate)->get();
+        // Schedule::whereDate('date', '>', $endDate)->delete();
+        // for($n=1; $n<4; $n++) {
+        //     foreach($schedules as $schedule) {
+        //         $newSchedule = $schedule->replicate();
+        //         $cstdate =  Carbon::parse($newSchedule->date)->addDays(7 * $n);
+        //         $newSchedule->date = $cstdate;
+        //         $newSchedule->save();
+        //     }
+        // }
         return redirect()->back();
     }
 

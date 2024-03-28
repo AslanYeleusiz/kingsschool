@@ -90,8 +90,8 @@
                                                                 <td>
                                                                     <div class="d-f j-c">
                                                                         <div class="paidBlock">
-                                                                            <div class="paid success">Оплачено</div>
-                                                                            <div class="paid date">{{ eduPaidOrder.date }}</div>
+                                                                            <div class="paid success d-f aj-c">{{eduPaidOrder.edu_order.price.toLocaleString()}}</div>
+                                                                            <div class="paid date">до {{ eduPaidOrder.date }}</div>
                                                                         </div>
                                                                     </div>
                                                                 </td>

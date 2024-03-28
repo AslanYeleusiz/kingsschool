@@ -65,8 +65,19 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Конец <span class="red">*</span></label>
-                                    <input type="time" class="form-control" v-model="schedule.end_time" required />
+                                    <label for="">Длительность <span class="red">*</span></label>
+                                    <select
+                                        class="form-control"
+                                        @change.prevent="search"
+                                        v-model="schedule.duration"
+                                        placeholder="Белсенді"
+                                    >
+                                       <template v-for="n in 180">
+                                            <option v-if="!(n % 30)" :value="n">
+                                                {{n}} минут
+                                            </option>
+                                       </template>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -136,6 +147,7 @@
                 schedule: {
                     start_time: null,
                     end_time: null,
+                    duration: 60,
                     teacher_id: null,
                     group_id: null,
                     date: this.date,
