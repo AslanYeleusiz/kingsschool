@@ -65,8 +65,19 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Конец <span class="red">*</span></label>
-                                    <input type="time" class="form-control" v-model="schedule.end_time" required />
+                                    <label for="">Длительность <span class="red">*</span></label>
+                                    <select
+                                        class="form-control"
+                                        @change.prevent="search"
+                                        v-model="schedule.duration"
+                                        placeholder="Белсенді"
+                                    >
+                                       <template v-for="n in 180">
+                                            <option v-if="!(n % 30)" :value="n">
+                                                {{n}} минут
+                                            </option>
+                                       </template>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -124,64 +135,65 @@ import {
 import Pagination from "../../../Components/Pagination.vue";
 import ValidationError from "../../../Components/ValidationError.vue";
 
-export default {
-    components: {
-        AdminLayout,
-        Link,
-        Pagination,
-        ValidationError,
-        Head
-    },
-    props: ['schedules', 'date', 'day', 'teachers'],
-    data() {
-        return {
-            schedule: {
-                start_time: null,
-                end_time: null,
-                teacher_id: null,
-                group_id: null,
-                date: this.date,
-                day: route().params.day,
-            },
-            groups: [],
-            days: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресение'],
-        }
-    },
-    methods: {
-        getGroups(id) {
-            axios.get(route('admin.schedule.getGroups', id)).then((res) => {
-                this.groups = res.data
-            })
+    export default {
+        components: {
+            AdminLayout,
+            Link,
+            Pagination,
+            ValidationError,
+            Head
         },
-        submit() {
-            this.$inertia.post(
-                route("admin.schedule.store"),
-                this.schedule, {
-                onError: () => console.log("An error has occurred"),
-                onSuccess: () =>
-                    console.log("The new contact has been saved"),
+        props: ['schedules', 'date', 'day', 'teachers'],
+        data() {
+            return {
+                schedule: {
+                    start_time: null,
+                    end_time: null,
+                    duration: 60,
+                    teacher_id: null,
+                    group_id: null,
+                    date: this.date,
+                    day: route().params.day,
+                },
+                groups: [],
+                days: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресение'],
             }
-            );
         },
-        deleteData(id) {
-            Swal.fire({
-                title: "Уверены, что хотите удалить?",
-                text: "Возможно, что нельзя будет восстановить!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Да, удалю!",
-                cancelButtonText: "Отмена",
-            }).then((result) => {
-                if (result.isConfirmed && !length) {
-                    this.$inertia.delete(
-                        route("admin.schedule.destroy", id)
-                    );
-                }
-            });
+        methods: {
+            getGroups(id) {
+                axios.get(route('admin.schedule.getGroups', id)).then((res) => {
+                    this.groups = res.data
+                })
+            },
+            submit() {
+                this.$inertia.post(
+                    route("admin.schedule.store"),
+                    this.schedule, {
+                        onError: () => console.log("An error has occurred"),
+                        onSuccess: () =>
+                            console.log("The new contact has been saved"),
+                    }
+                );
+            },
+            deleteData(id) {
+                Swal.fire({
+                    title: "Жоюға сенімдісіз бе",
+                    text: "Қайтып қалпына келмеуі мүмкін!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Иә, жоямын!",
+                    cancelButtonText: "Болдырмау",
+                }).then((result) => {
+                    if (result.isConfirmed && !length) {
+                        this.$inertia.delete(
+                            route("admin.schedule.destroy", id)
+                        );
+                    }
+                });
+            },
         },
-    },
-};
+    };
 
 </script>

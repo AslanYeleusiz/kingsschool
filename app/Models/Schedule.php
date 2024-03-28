@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Schedule extends Model
 {
@@ -37,11 +38,16 @@ class Schedule extends Model
     }
 
     
-    protected $appends = ['edit']; // Attribute to append
+    protected $appends = ['edit', 'disable']; // Attribute to append
 
     // Accessor for the full_name attribute
     public function getEditAttribute()
     {
         return 0;
+    }
+
+    public function getDisableAttribute()
+    {
+        return Carbon::parse($this->date) < Carbon::now();
     }
 }

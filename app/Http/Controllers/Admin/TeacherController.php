@@ -128,12 +128,23 @@ class TeacherController extends Controller
     
     public function reports($teacher_id, Request $request){
         $teacher = User::findOrFail($teacher_id);
-        $eduPaidOrders = EduPaidOrder::with(['eduOrder' => fn($q)=>$q->with(['user','subject', 'journals.schedule:id,minutes'])])->whereHas('eduOrder', fn($q)=>$q->where('teacher_id', $teacher_id))->where('is_paid', 0)->get();
+        $eduPaidOrders = EduPaidOrder::with(['eduOrder' => fn($q)=>$q->with(['user','subject', 'journals.schedule:id,minutes'])])->whereHas('eduOrder', fn($q)=>$q->where('teacher_id', $teacher_id)->where('enable', 1))->where('is_paid', 0)->get();
+        $journalIds = [];
         foreach($eduPaidOrders as $eduPaidOrder) {
-            $hours = $eduPaidOrder->eduOrder['journals']->sum('schedule.minutes') / 60;
+            $needhours = $eduPaidOrder->eduOrder['hours'];
+            // Получаем список журналов, которые не были включены в $journalIds
+            $journals = $eduPaidOrder->eduOrder['journals']->reject(function ($journal) use ($journalIds) {
+                return in_array($journal->id, $journalIds);
+            });
+            // Ограничиваем количество журналов до необходимого числа часов
+            $selectedJournals = $journals->take($needhours);
+            // Суммируем часы из выбранных журналов
+            $hours = $selectedJournals->sum('schedule.minutes') / 60;
+            
+            // Добавляем идентификаторы выбранных журналов в массив $journalIds
+            $journalIds = array_merge($journalIds, $selectedJournals->pluck('id')->toArray());
             $eduPaidOrder['completed_hours'] = $hours;
             $percent = $eduPaidOrder->eduOrder['percent'];
-            $needhours = $eduPaidOrder->eduOrder['hours'];
             if($percent) $eduPaidOrder->newPrice = ($eduPaidOrder->price * $hours / $needhours) / 100 * $percent->percent;
         }
         return Inertia::render('Admin/EduPaidOrder/Index', [
@@ -192,12 +203,14 @@ class TeacherController extends Controller
                 if($hours >= $eduPaidOrder['remain_hours']) {
                     $hours -= $eduPaidOrder['remain_hours'];
                     Journal::where('edu_order_id', $eduPaidOrder->edu_order_id)->where('salary_check', null)->where('type', '>=', 1)->limit($eduPaidOrder['remain_hours'])->update(['salary_check' => $eduPaidOrder->id]);
+                    $eduPaidOrder['completed_hours'] = $eduPaidOrder['remain_hours'];
                     $eduPaidOrder['remain_hours'] = 0;
                     $eduPaidOrder['is_paid'] = 1;
                     $eduPaidOrder['teacher_salary_id'] = $TeacherSalary->id;
                     $eduPaidOrder->save();
                 } else if($hours < $eduPaidOrder['remain_hours']) {
                     $eduPaidOrder['remain_hours'] -= $hours;
+                    $eduPaidOrder['completed_hours'] = $hours;
                     $copiedOrder = $eduPaidOrder->replicate(); // Создаем копию объекта
                     $copiedOrder->save(); // Сохраняем копию в базе данных
                     $eduPaidOrder['teacher_salary_id'] = $TeacherSalary->id;

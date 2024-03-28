@@ -165,7 +165,7 @@
                                         </td>
                                         <td></td>
                                     </tr>
-                                    <tr class="odd">
+                                    <tr v-if="calculateAllPrice(1) + (bonus - penalty) > 0" class="odd">
                                         <td></td>
                                         <td></td>
                                         <td></td>

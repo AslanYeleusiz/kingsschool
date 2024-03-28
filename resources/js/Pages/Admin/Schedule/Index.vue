@@ -101,7 +101,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-between">
                                                     {{ day }}
-                                                    <Link :href="route( 'admin.schedule.create', { date: startweekdate,  day: index + 1 } ) " class="btn btn-primary" title="Өзгерту" v-if="user.role_id == 1 || user.role_id == 2 || user.role_id == 3">
+                                                    <Link :href="route( 'admin.schedule.create', { date: startweekdate,  day: index + 1 } ) " class="btn btn-primary" title="Өзгерту" v-if="user.role_id <= 3">
                                                     Изменить
                                                     </Link>
                                                 </div>
@@ -306,9 +306,12 @@
                     cancelButtonText: "Отмена",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        this.$inertia.delete(
+                        axios.delete(
                             route("admin.schedule.destroy", id)
-                        );
+                        ).catch((err)=>{
+                            var currentDate = new Date();
+                            this.toggleCollapse(currentDate.toLocaleString().slice(0, 10))
+                        });
                     }
                 });
             },
