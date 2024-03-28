@@ -2,26 +2,27 @@
     <AdminLayout>
         <!-- Calendar -->
         <div class="card">
-            <div class="card-header border-0">
-                <h3 class="card-title">
-                    <i class="far fa-calendar-alt"></i>
-                    Calendar
-                </h3>
-                <!-- /. tools -->
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body pt-0">
-                <div ref="calendar"></div>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <div v-if="schedules" class="container-fluid">
-            <div class="card">
-                <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card-header border-0">
+                        <h3 class="card-title">
+                            <i class="far fa-calendar-alt"></i>
+                            Calendar
+                        </h3>
+
+                        <!-- /. tools -->
+                    </div>
+                    <div class="card-body pt-0">
+                        <div ref="calendar"></div>
+                    </div>
+
+                </div>
+                <div v-if="schedules" class="col-md-8">
+                    <div class="card-body">
                     <div class="d-f a-c j-b">
                         <h3 class="mb-3">{{days[dayOfWeek - 1]}}, {{ currentDate }}</h3>
                         <Link :href="route( 'admin.schedule.create', { date: startweekdate,  day: dayOfWeek } ) " class="btn btn-primary" title="Өзгерту" v-if="user.role_id == 1 || user.role_id == 2 || user.role_id == 3">
-                            Изменить
+                        Изменить
                         </Link>
                     </div>
                     <div class="row">
@@ -86,9 +87,13 @@
                         </div>
                     </div>
                 </div>
+                </div>
+                <!-- /.card-header -->
+
             </div>
+            <!-- /.card-body -->
         </div>
-        <div v-if="schedules" class="container-fluid mt-5">
+        <div v-if="schedules" class="container-fluid mt-4">
             <div class="card">
                 <div class="card-body">
                     <h3 class="mb-3">Расписания недели {{ startweekdate + '-' + endweekdate }}</h3>
@@ -269,7 +274,7 @@
                     this.dayOfWeek = res.data.dayOfWeek
                 });
             },
-            getBadgeClass(e){
+            getBadgeClass(e) {
                 switch (e) {
                     case 0:
                         return 'badge-light';
@@ -308,7 +313,7 @@
                     if (result.isConfirmed) {
                         axios.delete(
                             route("admin.schedule.destroy", id)
-                        ).catch((err)=>{
+                        ).catch((err) => {
                             var currentDate = new Date();
                             this.toggleCollapse(currentDate.toLocaleString().slice(0, 10))
                         });

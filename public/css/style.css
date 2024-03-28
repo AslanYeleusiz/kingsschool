@@ -526,3 +526,49 @@ button {
     background-color: rgba(0, 0, 0, 0.5) !important;
     z-index: 1000;
 }
+
+.brand-link .brand-image {
+    width: 40px;
+    max-height: 106px;
+}
+
+/*
+.btn {
+    background-color: #ffffff;
+    box-shadow: none;
+    border-radius: 10px;
+    color: #000;
+}
+.btn .fa {
+    padding: 9px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 11px;
+    margin: 0 3px;
+}
+
+.btn-primary .fa {
+    background: #007bff;
+}
+
+.btn-danger .fa {
+    font-size: 17px;
+    color: #DD3737;
+    padding: 6px;
+    background: #fff;
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active, [class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link.active:hover {
+    background-color: rgba(0, 96, 242, 0.2);
+    color: #0060F2;
+    box-shadow: none;
+}
+.btn.btn-success.mr-1 {
+    color: #fff;
+    background-color: #71DD37;
+    border-color: #71DD37;
+    padding: 12px 48px !important;
+}
+
+
+*/
