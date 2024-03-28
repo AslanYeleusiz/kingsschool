@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EduOrder;
 use App\Models\User;
 use App\Models\Filial;
+use App\Models\Journal;
 use App\Models\EduPaidOrder;
 use App\Models\TeacherSalary;
 use App\Models\Group;
@@ -127,10 +128,13 @@ class TeacherController extends Controller
     
     public function reports($teacher_id, Request $request){
         $teacher = User::findOrFail($teacher_id);
-        $eduPaidOrders = EduPaidOrder::with(['eduOrder.user','eduOrder.subject'])->whereHas('eduOrder', fn($q)=>$q->where('teacher_id', $teacher_id))->where('is_paid', 0)->get();
+        $eduPaidOrders = EduPaidOrder::with(['eduOrder' => fn($q)=>$q->with(['user','subject', 'journals.schedule:id,minutes'])])->whereHas('eduOrder', fn($q)=>$q->where('teacher_id', $teacher_id))->where('is_paid', 0)->get();
         foreach($eduPaidOrders as $eduPaidOrder) {
+            $hours = $eduPaidOrder->eduOrder['journals']->sum('schedule.minutes') / 60;
+            $eduPaidOrder['completed_hours'] = $hours;
             $percent = $eduPaidOrder->eduOrder['percent'];
-            if($percent) $eduPaidOrder->newPrice = $eduPaidOrder->price / 100 * $percent->percent;
+            $needhours = $eduPaidOrder->eduOrder['hours'];
+            if($percent) $eduPaidOrder->newPrice = ($eduPaidOrder->price * $hours / $needhours) / 100 * $percent->percent;
         }
         return Inertia::render('Admin/EduPaidOrder/Index', [
             'eduPaidOrders' => $eduPaidOrders,
@@ -151,10 +155,14 @@ class TeacherController extends Controller
     }
 
     public function fullReportItem($id, $report_id) {
-        $salary = TeacherSalary::with(['orders.eduOrder' => fn($q)=>$q->with(['user', 'subject'])])->findOrFail($report_id);
+        $salary = TeacherSalary::with(['orders.eduOrder' => fn($q)=>$q->with(['user', 'subject']), 'orders.journals.schedule:id,minutes'])->findOrFail($report_id);
         foreach($salary['orders'] as $eduPaidOrder) {
+            $hours = $eduPaidOrder->journals->sum('schedule.minutes') / 60;
             $percent = $eduPaidOrder->eduOrder['percent'];
-            if($percent) $eduPaidOrder->newPrice = $eduPaidOrder->price / 100 * $percent->percent;
+            $needhours = $eduPaidOrder->eduOrder['hours'];
+            $eduPaidOrder['completed_hours'] = $hours;
+            if($percent) $eduPaidOrder->newPrice = ($eduPaidOrder->price * $hours / $needhours) / 100 * $percent->percent;
+            $eduPaidOrder->price = $eduPaidOrder->price * $hours / $needhours;
         }
         return response()->json($salary);
     }
@@ -176,10 +184,32 @@ class TeacherController extends Controller
                 'user_id' => auth()->guard('web')->id(),
             ]);
         }
-        EduPaidOrder::whereHas('eduOrder', fn($q)=>$q->where('teacher_id', $teacher_id))->where('is_paid', 0)->update([
-            'is_paid' => 1,
-            'teacher_salary_id' => $TeacherSalary->id
-        ]);
+        $eduPaidOrders = EduPaidOrder::with(['eduOrder' => fn($q)=>$q->with(['user','subject'])])->whereHas('eduOrder', fn($q)=>$q->where('teacher_id', $teacher_id))->where('is_paid', 0)->get();
+        foreach($eduPaidOrders as $eduPaidOrder) {
+            $eduPaidOrder->eduOrder->load('journals.schedule:id,minutes');
+            $hours = $eduPaidOrder->eduOrder['journals']->sum('schedule.minutes') / 60;
+            if($hours > 0) {
+                if($hours >= $eduPaidOrder['remain_hours']) {
+                    $hours -= $eduPaidOrder['remain_hours'];
+                    Journal::where('edu_order_id', $eduPaidOrder->edu_order_id)->where('salary_check', null)->where('type', '>=', 1)->limit($eduPaidOrder['remain_hours'])->update(['salary_check' => $eduPaidOrder->id]);
+                    $eduPaidOrder['remain_hours'] = 0;
+                    $eduPaidOrder['is_paid'] = 1;
+                    $eduPaidOrder['teacher_salary_id'] = $TeacherSalary->id;
+                    $eduPaidOrder->save();
+                } else if($hours < $eduPaidOrder['remain_hours']) {
+                    $eduPaidOrder['remain_hours'] -= $hours;
+                    $copiedOrder = $eduPaidOrder->replicate(); // Создаем копию объекта
+                    $copiedOrder->save(); // Сохраняем копию в базе данных
+                    $eduPaidOrder['teacher_salary_id'] = $TeacherSalary->id;
+                    $eduPaidOrder['is_paid'] = 1;
+                    $eduPaidOrder->save();
+
+                    foreach ($eduPaidOrder->eduOrder->journals as $journal) {
+                        $journal->update(['salary_check' => $eduPaidOrder->id]);
+                    }
+                }
+            }
+        }
         return redirect()->back()->withSuccess('Успешно сохранено');
     }
 }

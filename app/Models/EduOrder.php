@@ -33,6 +33,10 @@ class EduOrder extends Model
         return $this->belongsToMany(Group::class, GroupOrder::class, 'edu_order_id', 'group_id');
     }
 
+    public function journals()
+    {
+        return $this->hasMany(Journal::class, 'edu_order_id')->where('salary_check', null)->where('type', '>=', 1);
+    }
 
     public function group()
     {

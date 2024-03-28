@@ -30,3 +30,4 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::get('/refit/token/{id}/create', [RefitController::class, 'create']);
 Route::get('/schedule/updateStatus', [ScheduleContorller::class, 'updateStatus']);
+Route::get('/schedule/dublicateWeeks', [ScheduleContorller::class, 'dublicateWeeks']);

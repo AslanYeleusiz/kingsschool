@@ -23,13 +23,19 @@ class JournalController extends Controller
         if($now->month == $scheduleDate->month && $now->year == $scheduleDate->year){
             $likeThisDate = true;
         }
-        $journal_students = Journal::where('schedule_id', $schedule->id)->get();
+        $schedule['year'] = Carbon::parse($schedule->date)->year;
+        $schedule['month'] = Carbon::parse($schedule->date)->month;
+        $days = Schedule::whereDate('date', '>=', $scheduleDate->copy()->startOfMonth())->whereDate('date', '<=', $scheduleDate->copy()->endOfMonth())->get()->pluck('date')->map(function ($date) {
+                    return Carbon::parse($date)->day;
+                });
+        $journal_students = Journal::where('group_id', $schedule->group_id)->whereMonth('date', $now->month)->whereYear('date', $now->year)->get();
         return Inertia::render('Admin/Journal/Index', [
             'schedule' => $schedule,
             'schedule_day' => $now->copy()->day,
             'lastDayOfMonth' => $scheduleDate->copy()->endOfMonth()->day,
             'journals' => $journal_students,
             'likeThisDate' => $likeThisDate,
+            'days' => $days,
         ]);
     }
 
@@ -37,25 +43,18 @@ class JournalController extends Controller
     public function store($schedule_id, Request $request)
     {
         Journal::updateOrCreate(
-            ['edu_order_id' => $request->edu_order_id, 'schedule_id' => $schedule_id],
+            ['edu_order_id' => $request->edu_order_id, 'date' => $request->date],
             [
                 'teacher_id' => $request->teacher_id,
                 'group_id' => $request->group_id,
+                'schedule_id' => $schedule_id,
                 'type' => $request->type,
                 'date' => $request->date,
             ]
         );
-        $journal_students = Journal::where('schedule_id', $schedule_id)->get();
-        // $student_name = EduOrder::find($request->student_id)->user->fio;
-        // $log_name1 = 'Отметил, как пришел студента ' . $student_name;
-        // $log_name2 = 'Поставил нб студенту ' . $student_name;
-        // if (Log::log_status()) {
-        //     Log::create([
-        //         'name' => $request->type == 1 ? $log_name1 : $log_name2,
-        //         'type' => 2,
-        //         'user_id' => auth()->guard('web')->id(),
-        //     ]);
-        // }
+        $schedule = Schedule::findOrFail($schedule_id);
+        $now = Carbon::now();
+        $journal_students = Journal::where('group_id', $schedule->group_id)->whereMonth('date', $now->month)->whereYear('date', $now->year)->get();
         return response()->json([
             'journals' => $journal_students
         ]);

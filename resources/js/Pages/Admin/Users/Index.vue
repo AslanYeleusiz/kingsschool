@@ -111,7 +111,7 @@
                                                     'admin.studentsSubjects.index',
                                                     user.id
                                                 )
-                                                    " class="btn btn-success" title="Предметы" v-if="user.role_id == 4 || user.role_id == 3">
+                                                    " class="btn btn-success" title="Предметы" v-if="user.role_id == 4">
                                                 <i class="fas fa-question"></i>
                                                 </Link>
                                                 <Link :href="route(

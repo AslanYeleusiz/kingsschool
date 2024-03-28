@@ -36,11 +36,11 @@
                 <i class="fa fa-trash"></i> Фильтрді тазалау
                 </Link>
 
-                <Link v-if="groups" class="btn btn-success ml-2" :href="route('admin.teachers.reports', teacher.id)">
+                <Link v-if="groups && user.role_id < 3" class="btn btn-success ml-2" :href="route('admin.teachers.reports', teacher.id)">
                 Отчёт для выдачи зарплаты
                 </Link>
 
-                <Link v-if="groups" class="btn btn-success ml-2"
+                <Link v-if="groups && user.role_id < 3" class="btn btn-success ml-2"
                     :href="route('admin.teachers.fullReports', teacher.id)">
                 Полный отчёт
                 </Link>

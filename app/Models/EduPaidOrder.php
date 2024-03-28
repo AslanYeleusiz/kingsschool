@@ -13,4 +13,8 @@ class EduPaidOrder extends Model
     public function eduOrder(){
         return $this->belongsTo(EduOrder::class, 'edu_order_id');
     }
+
+    public function journals(){
+        return $this->hasMany(Journal::class, 'salary_check');
+    }
 }

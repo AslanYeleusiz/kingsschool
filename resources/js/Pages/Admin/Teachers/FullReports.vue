@@ -53,10 +53,16 @@
                                                                 <th>ФИО</th>
                                                                 <th>Предмет</th>
                                                                 <th class="t-c">Статус</th>
-                                                                <th class="t-c">Цена</th>
+                                                                <th class="t-c">Общ. кол-во занятий (часов)</th>
+                                                                <th class="t-c">Кол-во оств. занятий (часов)</th>
+                                                                <th class="t-c">Кол-во пройденных занятий (часов)</th>
+                                                                <th class="t-c">Оплата</th>
                                                                 <th class="t-c">Зарплата</th>
                                                             </tr>
                                                             <tr class="filters">
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                                 <td></td>
                                                                 <td></td>
                                                                 <td></td>
@@ -89,6 +95,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
+                                                                <td>{{ eduPaidOrder.edu_order.hours }}</td>
+                                                                <td>{{ eduPaidOrder.remain_hours }}</td>
+                                                                <td>{{ eduPaidOrder.completed_hours }}</td>
                                                                 <td>
                                                                     <div class="d-f j-c">
                                                                         <div class="paidBlock">
@@ -113,8 +122,14 @@
                                                                 <td></td>
                                                                 <td></td>
                                                                 <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                             </tr>
                                                             <tr class="odd">
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                                 <td></td>
                                                                 <td></td>
                                                                 <td></td>
@@ -135,6 +150,9 @@
                                                                 <td></td>
                                                                 <td></td>
                                                                 <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                                 <td class="t-r">Штраф</td>
                                                                 <td>
                                                                     <div class="d-f j-c">
@@ -150,6 +168,9 @@
                                                                 <td></td>
                                                                 <td></td>
                                                                 <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                                 <td class="t-r">Премия</td>
                                                                 <td>
                                                                     <div class="d-f j-c">
@@ -161,6 +182,9 @@
                                                                 <td></td>
                                                             </tr>
                                                             <tr class="odd">
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                                 <td></td>
                                                                 <td></td>
                                                                 <td></td>

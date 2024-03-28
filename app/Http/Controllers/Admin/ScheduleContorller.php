@@ -68,6 +68,7 @@ class ScheduleContorller extends Controller
         $minutes = $end_time->diffInMinutes($start_time);
         $date = Carbon::parse($request->date);
 
+
         Schedule::create([
             'start_time' => $start_time,
             'end_time' => $end_time,
@@ -77,6 +78,20 @@ class ScheduleContorller extends Controller
             'day' => $request->day,
             'group_id' => $request->group_id,
         ]);
+
+        $startDate = $date->copy()->startOfWeek();
+        $endDate = $date->copy()->endOfWeek();
+        $schedules = Schedule::whereDate('date', '>=', $startDate)->whereDate('date', '<=', $endDate)->get();
+        Schedule::whereDate('date', '>', $endDate)->delete();
+        for($n=1; $n<4; $n++) {
+            foreach($schedules as $schedule) {
+                $newSchedule = $schedule->replicate();
+                $cstdate =  Carbon::parse($newSchedule->date)->addDays(7 * $n);
+                $newSchedule->date = $cstdate;
+                $newSchedule->save();
+            }
+        }
+
         $teacher = User::findOrFail($request->teacher_id);
         if(Log::log_status()) {
             Log::create([
@@ -131,7 +146,21 @@ class ScheduleContorller extends Controller
 
     public function destroy($id)
     {
-        Schedule::findOrFail($id)->delete();
+        $sched = Schedule::findOrFail($id);
+        $date = Carbon::parse($sched->date);
+        $sched->delete();
+        $startDate = $date->copy()->startOfWeek();
+        $endDate = $date->copy()->endOfWeek();
+        $schedules = Schedule::whereDate('date', '>=', $startDate)->whereDate('date', '<=', $endDate)->get();
+        Schedule::whereDate('date', '>', $endDate)->delete();
+        for($n=1; $n<4; $n++) {
+            foreach($schedules as $schedule) {
+                $newSchedule = $schedule->replicate();
+                $cstdate =  Carbon::parse($newSchedule->date)->addDays(7 * $n);
+                $newSchedule->date = $cstdate;
+                $newSchedule->save();
+            }
+        }
         return redirect()->back();
     }
 
@@ -177,5 +206,21 @@ class ScheduleContorller extends Controller
 
 
         return response()->json(200);
+    }
+
+    public function dublicateWeeks(){
+        $date = Carbon::now();
+        $startDate = $date->copy()->startOfWeek();
+        $endDate = $date->copy()->endOfWeek();
+        $schedules = Schedule::whereDate('date', '>=', $startDate)->whereDate('date', '<=', $endDate)->get();
+        Schedule::whereDate('date', '>', $endDate)->delete();
+        for($n=1; $n<4; $n++) {
+            foreach($schedules as $schedule) {
+                $newSchedule = $schedule->replicate();
+                $cstdate =  Carbon::parse($newSchedule->date)->addDays(7 * $n);
+                $newSchedule->date = $cstdate;
+                $newSchedule->save();
+            }
+        }
     }
 }
