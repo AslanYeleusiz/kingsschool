@@ -212,7 +212,8 @@ class StudentsController extends Controller
             'date' => $date,
             'price' => $eduOrder->price,
             'late_days' => $late_days,
-            'late_date' => $late_date
+            'late_date' => $late_date,
+            'remain_hours' => $eduOrder->hours,
         ]);
 
         if(Log::log_status()) {

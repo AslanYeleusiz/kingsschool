@@ -38,17 +38,11 @@
                                         <th>ФИО</th>
                                         <th>Предмет</th>
                                         <th class="t-c">Статус</th>
-                                        <th class="t-c">Цена</th>
+                                        <th class="t-c">Общ. кол-во занятий (часов)</th>
+                                        <th class="t-c">Кол-во оств. занятий (часов)</th>
+                                        <th class="t-c">Кол-во пройденных занятий (часов)</th>
+                                        <th class="t-c">Оплата</th>
                                         <th class="t-c">Зарплата</th>
-                                    </tr>
-                                    <tr class="filters">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -70,10 +64,13 @@
                                             <div class="d-f j-c">
                                                 <div class="paidBlock">
                                                     <div class="paid success">Оплачено</div>
-                                                    <div class="paid date">{{ eduPaidOrder.date }}</div>
+                                                    <div class="paid date">до {{ eduPaidOrder.date }}</div>
                                                 </div>
                                             </div>
                                         </td>
+                                        <td class="t-c">{{eduPaidOrder.edu_order.hours}}</td>
+                                        <td class="t-c">{{eduPaidOrder.remain_hours - eduPaidOrder.completed_hours}}</td>
+                                        <td class="t-c">{{eduPaidOrder.completed_hours}}</td>
                                         <td>
                                             <div class="d-f j-c">
                                                 <div class="paidBlock">
@@ -98,8 +95,14 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr class="odd">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -120,6 +123,9 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td class="t-r">Штраф</td>
                                         <td>
                                             <input type="integer" class="form-control" v-model="penalty">
@@ -131,6 +137,9 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td class="t-r">Премия</td>
                                         <td>
                                             <input type="integer" class="form-control" v-model="bonus">
@@ -138,6 +147,9 @@
                                         <td></td>
                                     </tr>
                                     <tr class="odd">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -154,6 +166,9 @@
                                         <td></td>
                                     </tr>
                                     <tr class="odd">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>

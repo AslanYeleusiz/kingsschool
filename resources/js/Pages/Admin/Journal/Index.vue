@@ -45,9 +45,11 @@
                                         <th>№</th>
                                         <th>Аты</th>
                                         <template v-for="day in lastDayOfMonth" :key="day">
-                                            <th v-if="!hiddenOrio || (day == schedule_day && likeThisDate)" class="t-c">
-                                                {{ day }} {{hiddenOrio ? '(Сегодня)' : ''}}
-                                            </th>
+                                            <template v-if="parsedDays.includes(day)">
+                                                <th v-if="!hiddenOrio || (day == schedule_day && likeThisDate)" class="t-c">
+                                                    {{ day }} {{hiddenOrio ? '(Сегодня)' : ''}}
+                                                </th>
+                                            </template>
                                         </template>
                                     </tr>
                                 </thead>
@@ -60,14 +62,17 @@
                                             {{student.edu_order.user?.fio}}
                                         </td>
                                         <template v-for="day in lastDayOfMonth" :key="day">
-                                            <td v-if="!hiddenOrio || (day == schedule_day && likeThisDate)" @click="changeStatus(student.edu_order_id, day, statusByStudentId(student.edu_order_id, day))" :class="[day == schedule_day && likeThisDate ? 'c-p bg' : 'disabled']" class="square">
-                                                <template v-if="statusByStudentId(student.edu_order_id, day) == 1">
-                                                    <i class="fas fa-solid fa-plus"></i>
-                                                </template>
-                                                <template v-if="statusByStudentId(student.edu_order_id, day) == 2">
-                                                    <i class="fas fa-solid fa-minus"></i>
-                                                </template>
-                                            </td>
+                                            <template v-if="parsedDays.includes(day)">
+                                                <td v-if="!hiddenOrio || (day == schedule_day && likeThisDate)" @click="changeStatus(student.edu_order_id, day, statusByStudentId(student.edu_order_id, day))" :class="[day == schedule_day && likeThisDate ? 'c-p bg' : 'disabled']" class="square">
+                                                    <template v-if="statusByStudentId(student.edu_order_id, day) == 1">
+                                                        <i class="fas fa-solid fa-plus"></i>
+                                                    </template>
+                                                    <template v-if="statusByStudentId(student.edu_order_id, day) == 2">
+                                                        <i class="fas fa-solid fa-minus"></i>
+                                                    </template>
+                                                </td>
+
+                                            </template>
                                         </template>
                                     </tr>
                                 </tbody>
@@ -99,6 +104,7 @@
             'lastDayOfMonth',
             'journals',
             'likeThisDate',
+            'days',
         ],
         data() {
             return {
@@ -108,6 +114,7 @@
                 student_id: null,
                 status: null,
                 hiddenOrio: false,
+                parsedDays: [],
             };
         },
         computed: {
@@ -121,8 +128,11 @@
                 };
             }
         },
+        mounted() {
+            this.parsedDays = this.days;
+        },
         methods: {
-            submit(type, edu_order_id) {
+            submit(type, day, edu_order_id) {
                 axios.post(
                     route("admin.journal.store", {
                         schedule_id: this.schedule.id,
@@ -131,20 +141,23 @@
                         edu_order_id: edu_order_id,
                         group_id: this.schedule.group_id,
                         type: type,
-                        date: this.schedule.date,
+                        date: this.schedule.year + '-' + this.schedule.month + '-' + day,
                     }
                 ).then(res => {
                     this.journal_students = res.data.journals
                 });
             },
             changeStatus(edu_order_id, day, status) {
-                if(day == this.schedule_day && this.likeThisDate) {
-                    switch(status) {
-                        case 0: return this.submit(1, edu_order_id)
-                        case 1: return this.submit(2, edu_order_id)
-                        case 2: return this.submit(0, edu_order_id)
-                    }
+                //                if(day == this.schedule_day && this.likeThisDate) {
+                switch (status) {
+                    case 0:
+                        return this.submit(1, day, edu_order_id)
+                    case 1:
+                        return this.submit(2, day, edu_order_id)
+                    case 2:
+                        return this.submit(0, day, edu_order_id)
                 }
+                //                }
             },
             deleteData(id) {
                 Swal.fire({
