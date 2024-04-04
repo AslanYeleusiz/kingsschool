@@ -19,7 +19,7 @@ class ExpensesController extends Controller
         $fio = $request->fio;
         $filial_id = $request->filial_id;
         $expenses = Expenses::with(['user', 'filial'])
-            ->when($name, fn ($q) => $q->where('name', $name))
+            ->when($name, fn ($q) => $q->where('name', 'like', "%$name%"))
             ->when($type_id, fn ($q) => $q->where('type_id', $type_id))
             ->when($fio, fn ($q) => $q->whereHas('user', fn ($q) => $q->where('fio', 'like', "%$fio%")))
             ->when($filial_id, fn ($q) => $q->where('filial_id', $filial_id))
