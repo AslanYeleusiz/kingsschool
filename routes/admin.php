@@ -47,7 +47,6 @@ Route::middleware('checkUserRole:1,2')->group(function () {
         Route::delete('/{user_id}/activate', [UserController::class, 'activate'])->name('activate');
         Route::delete('/{user_id}/remove', [UserController::class, 'remove'])->name('remove');
     });
-    Route::get('/filials/{id}/getTeachers', [FilialController::class, 'getTeachers'])->name('filials.getTeachers');
     Route::resource('subjects', SubjectController::class)->except(['show'])->names('subjects');
     Route::get('subjects/{id}/dublicate', [SubjectController::class, 'dublicate'])->name('subjects.dublicate');
     Route::resource('paidHistories', PaidController::class)->only(['index', 'destroy'])->names('paidHistories');
@@ -68,6 +67,7 @@ Route::middleware('checkUserRole:1,2')->group(function () {
 });
 
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::get('/filials/{id}/getTeachers', [FilialController::class, 'getTeachers'])->name('filials.getTeachers');
 Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
 Route::resource('students', StudentsController::class)->only(['index', 'update', 'destroy'])->names('students');
 Route::group(['prefix' => '/students/{id}', 'as' => 'students.'], function () {
