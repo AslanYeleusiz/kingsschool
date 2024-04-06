@@ -28,7 +28,8 @@
         <template #header>
             <div class="buttons d-flex align-items-center">
                 <Link class="btn btn-primary mr-2" :href="route('admin.users.create')"
-                    v-if="user.role_id == 1 || user.role_id == 2">
+                    >
+<!--                    v-if="user.role_id == 1 || user.role_id == 2"-->
                 <i class="fa fa-plus"></i> Добавить
                 </Link>
 
