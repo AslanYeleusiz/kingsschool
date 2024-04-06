@@ -182,7 +182,9 @@ class StudentsController extends Controller
                 'user_id' => auth()->guard('web')->id(),
             ]);
         }
-        $eduOrder->delete();
+        $eduOrder->update([
+            'enable' => 0
+        ]);
         return redirect()->back()->withSuccess('Успешно удалено');
     }
 

@@ -144,8 +144,8 @@
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" v-model="edu_order.enable" class="custom-control-input" id="customSwitch1" true-value=1 false-value=0 />
-                                <label class="custom-control-label" for="customSwitch1">Активный предмет</label>
+                                <input type="checkbox" v-model="edu_order.enable" class="custom-control-input" id="customSwitchA" true-value=1 false-value=0 />
+                                <label class="custom-control-label" for="customSwitchA">Активный предмет</label>
                             </div>
                         </div>
                     </div>

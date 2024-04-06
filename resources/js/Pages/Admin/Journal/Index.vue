@@ -28,8 +28,8 @@
                 <div></div>
                 <div class="form-group">
                     <div class="custom-control custom-switch">
-                        <input type="checkbox" v-model="hiddenOrio" class="custom-control-input" id="customSwitch1" />
-                        <label class="custom-control-label" for="customSwitch1">Скрыть лишние дни</label>
+                        <input type="checkbox" v-model="hiddenOrio" class="custom-control-input" id="customSwitchB" />
+                        <label class="custom-control-label" for="customSwitchB">Скрыть лишние дни</label>
                     </div>
                 </div>
             </div>
