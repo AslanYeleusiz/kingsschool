@@ -9,6 +9,7 @@ use App\Models\Group;
 use App\Models\User;
 use App\Models\GroupOrder;
 use App\Models\Log;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -260,6 +261,7 @@ class StudentsController extends Controller
                 'user_id' => auth()->guard('web')->id(),
             ]);
         }
+        Schedule::where('group_id', $group-id)->delete();
         $group->delete();
         GroupOrder::where('group_id', $group_id)->delete();
         return redirect()->back()->withSuccess('Успешно удалено');
