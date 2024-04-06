@@ -85,9 +85,11 @@ h5 {
 .f-wrap {
     flex-wrap: wrap;
 }
+
 .avatar {
     cursor: pointer;
 }
+
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -253,9 +255,11 @@ h5 {
     color: inherit;
     text-decoration: none;
 }
+
 .no-hover {
     cursor: default !important;
 }
+
 .hover-text {
     cursor: text !important;
 }
@@ -321,7 +325,6 @@ h5 {
 }
 
 /*Стили для логин страинцы старт*/
-
 .login_intro {
     background-image: url('/images/login_bg.svg');
     background-size: cover;
@@ -433,68 +436,132 @@ button {
     background: #40b700;
 }
 
+
+@media only screen and (max-width: 1000px) {
+    .container_login {
+        width: 100%;
+        padding: 0 50px;
+    }
+
+    .login_body {
+        margin-left: 60px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+
+    .logo,
+    .login_body {
+        margin-left: 0;
+    }
+
+    .logo {
+        margin-top: 40px;
+    }
+
+    .login_body {
+        margin-top: 80px;
+    }
+
+    .label {
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .input {
+        height: 50px;
+        padding-left: 15px;
+    }
+
+    .input::placeholder {
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .login_btn {
+        height: 50px;
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .info_txt {
+        font-size: 12px;
+        line-height: 12px;
+        margin-bottom: 30px;
+    }
+}
+
 .table td {
     vertical-align: inherit;
 }
+
 .tablemask {
-        padding: 8px;
-        background: #fff;
-        width: 100%;
-        max-width: 175px;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-        outline: 1px solid #fff;
-    }
-    
-    .tablemask:hover {
-        box-shadow: rgb(214, 214, 214) 0px 5px 5px 0px;
-    }
-    .tablemask:active {
-        box-shadow: none;
-        outline: 1px solid rgb(214, 214, 214);
-    }
-    
-    
-    .paidBlock {
-        background: #fff;
-        display: flex;
-        border-radius: 10px;
-    }
-    .paidBlock .paid {
-        padding: 8px 20px;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
-        color: #000000;
-    }
-    .paidBlock .paid.pd {
-        padding: 8px 20px !important;
-    }
-    .paidBlock .success,
-    .paidBlock .danger,
-    .paidBlock .black,
-    .paidBlock .warning {
-        cursor: pointer;
-        border-radius: 10px;
-    }
-    .paidBlock .success {
-        background: #B9FF94;
-    }
-    .paidBlock .danger {
-        background: #FF6B6B;
-        padding: 8px;
-    }
-    .paidBlock .black {
-        background: #000000;
-        color: #fff;
-    }
-    .paidBlock .warning {
-        background-color: #ffc107;
-    }
-    
+    padding: 8px;
+    background: #fff;
+    width: 100%;
+    max-width: 175px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    outline: 1px solid #fff;
+}
+
+.tablemask:hover {
+    box-shadow: rgb(214, 214, 214) 0px 5px 5px 0px;
+}
+
+.tablemask:active {
+    box-shadow: none;
+    outline: 1px solid rgb(214, 214, 214);
+}
+
+
+.paidBlock {
+    background: #fff;
+    display: flex;
+    border-radius: 10px;
+}
+
+.paidBlock .paid {
+    padding: 8px 20px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+
+.paidBlock .paid.pd {
+    padding: 8px 20px !important;
+}
+
+.paidBlock .success,
+.paidBlock .danger,
+.paidBlock .black,
+.paidBlock .warning {
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.paidBlock .success {
+    background: #B9FF94;
+}
+
+.paidBlock .danger {
+    background: #FF6B6B;
+    padding: 8px;
+}
+
+.paidBlock .black {
+    background: #000000;
+    color: #fff;
+}
+
+.paidBlock .warning {
+    background-color: #ffc107;
+}
+
 
 /*Стили для логин страинцы енд*/
 
