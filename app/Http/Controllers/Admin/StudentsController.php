@@ -261,7 +261,7 @@ class StudentsController extends Controller
                 'user_id' => auth()->guard('web')->id(),
             ]);
         }
-        Schedule::where('group_id', $group-id)->delete();
+        Schedule::where('group_id', $group->id)->delete();
         $group->delete();
         GroupOrder::where('group_id', $group_id)->delete();
         return redirect()->back()->withSuccess('Успешно удалено');
