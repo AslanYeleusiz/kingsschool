@@ -5,8 +5,8 @@
         <a href="/admin" class="brand-link">
             <span class="d-flex justify-content-between">
                 <span class="d-flex align-items-center">
-                    <img src="../../../public/images/Logo_blue.svg" alt="Главная страница"
-                        class="brand-image" style="opacity: .8">
+                    <img src="../../../public/images/Logo_blue.svg" alt="Главная страница" class="brand-image"
+                        style="opacity: .8">
                 </span>
                 <a class="nav-link w-auto" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </span>
@@ -35,16 +35,16 @@
                     <template v-for="(menu_item, index) in menu_items" :key="'menu_item' + index">
                         <template v-if="menu_item.role.includes($page.props.auth.user.role_id)">
                             <li class="nav-item " v-if="menu_item.childs_items" :class="{
-                        'menu-open':
-                            menu_item.menu_active.includes(
-                                currentRoute
-                            ),
-                    }">
+                                'menu-open':
+                                    menu_item.menu_active.includes(
+                                        currentRoute
+                                    ),
+                            }">
                                 <a href="#" class="nav-link" :class="{
-                        active: menu_item.menu_active.includes(
-                            currentRoute
-                        ),
-                    }">
+                                    active: menu_item.menu_active.includes(
+                                        currentRoute
+                                    ),
+                                }">
                                     <i class="nav-icon fas fa-solid" :class="[menu_item.font]"></i>
                                     <p>
                                         {{ menu_item.name }}
@@ -56,10 +56,10 @@
                                         childs_item, child_index
                                     ) in menu_item.childs_items" :key="'child' + child_index">
                                         <Link :href="route(childs_item.route_name)" class="nav-link" :class="{
-                        active: childs_item.menu_active.includes(
-                            currentRoute
-                        ),
-                    }">
+                                            active: childs_item.menu_active.includes(
+                                                currentRoute
+                                            ),
+                                        }">
                                         <i class="nav-icon fas" :class="childs_item.font"></i>
                                         <p>{{ childs_item.name }}</p>
                                         </Link>
@@ -68,10 +68,10 @@
                             </li>
                             <li class="nav-item" v-else>
                                 <Link :href="route(menu_item.route_name)" class="nav-link" :class="{
-                        active: menu_item.menu_active.includes(
-                            currentRoute
-                        ),
-                    }">
+                                    active: menu_item.menu_active.includes(
+                                        currentRoute
+                                    ),
+                                }">
                                 <i class="nav-icon fas" :class="menu_item.font"></i>
                                 <p>{{ menu_item.name }}</p>
                                 </Link>
