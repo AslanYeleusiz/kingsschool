@@ -1,0 +1,1 @@
+import{_ as t,A as n}from"./AdminLayout-a3b7c70b.js";import{r as e,o as s,c}from"./app-d2a1545d.js";const r={components:{AdminLayout:n}};function a(m,p,_,i,d,f){const o=e("AdminLayout");return s(),c(o)}const A=t(r,[["render",a]]);export{A as default};

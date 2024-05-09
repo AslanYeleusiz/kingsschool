@@ -22,7 +22,7 @@
                     <div class="inner">
                         <h3 title="Прибыль с учетом данного филиала и удаленных пользователей за всё время">{{profit}}</h3>
 
-                        <p>Общий прибыль</p>
+                        <p>Общая прибыль</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -35,7 +35,7 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3><span title="Зарплата преподавателей">{{salaries}}<sup style="font-size: 20px">+<span title="Зарплата для персоналу">11000</span>+<span title="Мелкие расходы">5200</span></sup></span></h3>
+                        <h3><span title="Зарплата преподавателей">{{salaries}}<sup style="font-size: 20px">+<span title="Зарплата для персонала">11000</span>+<span title="Мелкие расходы">5200</span></sup></span></h3>
                         <p title="Зарплата для преподавателей, средний расход и мелкий расход за всё время данного филиала включая удалённых пользователей">Общий расход</p>
                     </div>
                     <div class="icon">
@@ -50,7 +50,7 @@
                     <div class="inner">
                         <h3>{{Number(profit) - Number(salaries) - 11000 - 5200 }}</h3>
 
-                        <p>Чистый прибыль</p>
+                        <p>Чистая прибыль</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>

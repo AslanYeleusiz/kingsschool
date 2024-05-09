@@ -14,13 +14,13 @@
            
        
         <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
+        <!-- <ul class="navbar-nav ml-auto">
             <div class="custom-control custom-switch">
                <input type="checkbox" v-model="darkmode" class="custom-control-input" id="customSwitch1" true-value=1 false-value=0 />
                <label class="custom-control-label" for="customSwitch1">Тема ({{darkmode}})</label>
             </div>
-        </ul>
-        <ul class="navbar-nav">
+        </ul> -->
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                     <i class="fas fa-expand-arrows-alt"></i>
